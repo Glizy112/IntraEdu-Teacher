@@ -45,7 +45,8 @@ const MPINVerification = props => {
     value,
     setValue,
   });
-  const {userinfo, userid, username, showmodal, useremail, userimage} = useSelector(state => state.userReducer);
+  const {userinfo, userid, username, showmodal, useremail, userimage} =
+    useSelector(state => state.userReducer);
 
   // const dispatch = useDispatch();
 
@@ -103,9 +104,14 @@ const MPINVerification = props => {
     let textChild = null;
 
     if (symbol) {
-      textChild = enableMask ? <Entypo name="dot-single" size={30} /> : symbol;
+      textChild = enableMask ? (
+        <Entypo name="dot-single" size={30} color={'black'} />
+      ) : (
+        symbol
+      );
+      //textChild = <Entypo name="dot-single" size={30} color={'black'} />;
     } else if (isFocused) {
-      textChild = <Cursor />;
+      textChild = null;
     }
     return (
       <View
@@ -129,7 +135,11 @@ const MPINVerification = props => {
         }}>
         <Text
           key={index}
-          style={[styles.cell, isFocused && styles.focusCell, paraGray.darklarge]}
+          style={[
+            styles.cell,
+            isFocused && styles.focusCell,
+            paraGray.darklarge,
+          ]}
           onLayout={getCellOnLayoutHandler(index)}>
           {/* {symbol || (isFocused ? <Cursor /> : null)} */}
           {textChild}
@@ -163,7 +173,7 @@ const MPINVerification = props => {
       {loading == true && <Spinner visible={load} />}
       <ScrollView>
         <View style={{flex: 1, alignItems: 'center', marginTop: '25%'}}>
-          <Text style={[paraGray.largebold, { fontSize: 30 }]}>MPIN Login</Text>
+          <Text style={[paraGray.largebold, {fontSize: 30}]}>MPIN Login</Text>
         </View>
         <View
           style={{
@@ -194,7 +204,10 @@ const MPINVerification = props => {
               backgroundColor: COLORS.white,
             }}>
             <Text
-              style={[paraGray.darklarge, {textAlign: 'center', marginTop: 20}]}>
+              style={[
+                paraGray.darklarge,
+                {textAlign: 'center', marginTop: 20},
+              ]}>
               Enter Your MPIN
             </Text>
             <View
@@ -236,10 +249,14 @@ const MPINVerification = props => {
                 }}
                 onPress={VerifyPIN}>
                 <Text
-                  style={[
-                    paraGray.largebold,
-                    { marginVertical: 10, marginHorizontal: 40, fontSize: 16 },
-                  ]}>
+                  style={{
+                    marginVertical: 10,
+                    marginHorizontal: 40,
+                    fontSize: 16,
+
+                    color: '#FFFFFF',
+                    fontFamily: 'Montserrat-SemiBold',
+                  }}>
                   Verify
                 </Text>
                 {/* <AntDesign

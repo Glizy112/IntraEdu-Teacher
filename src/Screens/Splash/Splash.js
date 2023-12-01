@@ -45,8 +45,8 @@ const Splash = props => {
 
             if (user_Id != null) {
                 if (Toggle != null) {
-                    //props.navigation.navigate('MPINVerification');
-                    props.navigation.navigate('SignIn');
+                    props.navigation.navigate('MPINVerification');
+                    //props.navigation.navigate('SignIn');
                 }
                 //else {
                 //     props.navigation.navigate("Home");

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -10,19 +10,19 @@ import {
   BackHandler,
   Alert,
   RefreshControl,
-  ScrollView
+  ScrollView,
 } from 'react-native';
-import { Avatar, Modal } from 'react-native-paper';
+import {Avatar, Modal} from 'react-native-paper';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { useSelector, useDispatch } from 'react-redux';
-import { FlatList } from 'react-native-gesture-handler';
+import {useSelector, useDispatch} from 'react-redux';
+import {FlatList} from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { btnStyles, container, paraGray } from '../theme/styles/Base';
+import {btnStyles, container, paraGray} from '../theme/styles/Base';
 import {
   setShowModal,
   setuserName,
@@ -39,33 +39,38 @@ import {
   setAcademicyear,
   setOtherinfo,
 } from '../Redux/Actions/actions';
-import { COLORS } from '../theme/Colors';
-import { useFocusEffect } from '@react-navigation/native';
-import { NavigationActions, StackActions } from 'react-navigation';
+import {COLORS} from '../theme/Colors';
+import {useFocusEffect} from '@react-navigation/native';
+import {NavigationActions, StackActions} from 'react-navigation';
+import Search from '../Components/Search';
 
 const categoryList = [
   {
     id: '1',
     categoryTitle: 'Mark Attendance',
-    categoryIcon: <Ionicons name="today" size={30} color={COLORS.primary}/>,
+    categoryIcon: <Ionicons name="today" size={30} color={COLORS.primary} />,
     categoryScreen: 'AttendanceShow',
   },
   {
     id: '2',
     categoryTitle: 'Documents',
-    categoryIcon: <Ionicons name="ios-document-text" size={30} color={COLORS.primary}/>,
+    categoryIcon: (
+      <Ionicons name="ios-document-text" size={30} color={COLORS.primary} />
+    ),
     categoryScreen: 'Document',
   },
   {
     id: '3',
     categoryTitle: 'PTM',
-    categoryIcon: <Ionicons name="person-add" size={30} color={COLORS.primary}/>,
+    categoryIcon: (
+      <Ionicons name="person-add" size={30} color={COLORS.primary} />
+    ),
     categoryScreen: 'Ptm',
   },
   {
     id: '4',
     categoryTitle: 'Gallery',
-    categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary}/>,
+    categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary} />,
     categoryScreen: 'Gallery',
   },
   // {
@@ -110,19 +115,19 @@ const categoryList = [
   //   categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary}/>,
   //   categoryScreen: 'Gallery',
   // },
-  
-]
+];
 
 const HomeScreen = props => {
   const dispatch = useDispatch();
-  const { userinfo, userid, username, showmodal } = useSelector(
-    state => state.userReducer
+  const {userinfo, userid, username, showmodal} = useSelector(
+    state => state.userReducer,
   );
   const [loading, setLoading] = useState(false);
   const [load, setLoad] = useState(true);
   const [refreshing, setRefreshing] = React.useState(false);
   const [greeting, setGreeting] = React.useState('');
   const [Notify, setNotify] = React.useState('0');
+  const [studentfilter, setStudentFilter] = useState();
 
   const Logout = async () => {
     setLoading(true);
@@ -207,7 +212,7 @@ const HomeScreen = props => {
             onPress: () => null,
             style: 'cancel',
           },
-          { text: 'YES', onPress: () => BackHandler.exitApp() },
+          {text: 'YES', onPress: () => BackHandler.exitApp()},
         ]);
         return true;
       };
@@ -233,8 +238,7 @@ const HomeScreen = props => {
         showsVerticalScrollIndicator={false}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-      >
+        }>
         <View>
           <StatusBar backgroundColor={'#fafef8'} barStyle={'dark-content'} />
           <View
@@ -247,11 +251,24 @@ const HomeScreen = props => {
               paddingBottom: 10,
               marginHorizontal: 8,
             }}>
-            <View style={{ flex: 1, marginHorizontal: 8, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-              <Text style={[paraGray.largebold, { fontSize: 18, paddingLeft: 4 }]}>
+            <View
+              style={{
+                flex: 1,
+                marginHorizontal: 8,
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}>
+              <Text
+                style={[paraGray.largebold, {fontSize: 18, paddingLeft: 4}]}>
                 👋 Hi, {username}
               </Text>
-              <Ionicons name="ios-exit-outline" size={28} color={COLORS.black} onPress={Logout}/>
+              <Ionicons
+                name="ios-exit-outline"
+                size={28}
+                color={COLORS.black}
+                onPress={Logout}
+              />
             </View>
             {/* <TouchableOpacity
               style={{
@@ -295,7 +312,7 @@ const HomeScreen = props => {
             <Text style={styles.headline}>{greeting}</Text>
           </View> */}
 
-          <View style={styles.search}>
+          {/* <View style={styles.search}>
             <View
               style={{
                 flexDirection: 'row',
@@ -321,9 +338,14 @@ const HomeScreen = props => {
                   fontSize: 16,
                 }}
               />
-              <Ionicons name="search" size={24} color={COLORS.black} style={{transform: [{rotate: '90deg'}], marginRight: 10}}/>
-            </View>
-            {/* <View
+              <Ionicons
+                name="search"
+                size={24}
+                color={COLORS.black}
+                style={{transform: [{rotate: '90deg'}], marginRight: 10}}
+              />
+            </View> */}
+          {/* <View
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
@@ -337,32 +359,45 @@ const HomeScreen = props => {
                 <Ionicons name="arrow-forward" size={35} color="#FFFFFF" />
               </TouchableOpacity>
             </View> */}
-          </View>
+          {/* </View> */}
+          <Search
+            getdata={categoryList}
+            KEYS_TO_FILTERS={['categoryTitle']}
+            filter={setStudentFilter}
+          />
 
           <View style={[styles.categoryContainer, {borderWidth: 0}]}>
             <FlatList
-              data={categoryList}
-              keyExtractor={(item)=> item.id}
+              data={studentfilter}
+              keyExtractor={item => item.id}
               numColumns={2}
-              renderItem={({item})=> (
-                <TouchableOpacity 
+              renderItem={({item}) => (
+                <TouchableOpacity
                   key={item.id}
                   style={{
                     paddingHorizontal: 16,
-                    paddingVertical: 24, 
-                    width: '45%', 
-                    borderRadius: 16, 
+                    paddingVertical: 24,
+                    width: '45%',
+                    borderRadius: 16,
                     backgroundColor: COLORS.white,
                     alignItems: 'center',
                     justifyContent: 'center',
                     elevation: 2,
                     margin: 10,
                   }}
-                  onPress={()=> {props.navigation.navigate(item.categoryScreen)}}
-                >
+                  onPress={() => {
+                    props.navigation.navigate(item.categoryScreen);
+                  }}>
                   {item.categoryIcon}
-                  <Text style={[paraGray.darkpara, { textAlign: 'center', paddingTop: 8}]}> {item.categoryTitle} </Text>
-                </TouchableOpacity>  
+                  <Text
+                    style={[
+                      paraGray.darkpara,
+                      {textAlign: 'center', paddingTop: 8},
+                    ]}>
+                    {' '}
+                    {item.categoryTitle}{' '}
+                  </Text>
+                </TouchableOpacity>
               )}
             />
           </View>
@@ -681,12 +716,12 @@ const HomeScreen = props => {
           borderRadius: 5,
         }}>
         <TouchableOpacity
-          style={{ flex: 1, justifyContent: 'center', paddingLeft: 15 }}
+          style={{flex: 1, justifyContent: 'center', paddingLeft: 15}}
           onPress={() => props.navigation.navigate('Settings')}>
           <Text style={[paraGray.darkpara]}>Settings</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={{ flex: 1, justifyContent: 'center', paddingLeft: 15 }}
+          style={{flex: 1, justifyContent: 'center', paddingLeft: 15}}
           onPress={() =>
             //  alert('Feature Coming Soon')
             props.navigation.navigate('PayRoll')
@@ -694,7 +729,7 @@ const HomeScreen = props => {
           <Text style={[paraGray.darkpara]}>My Pay Roll</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={{ flex: 1, justifyContent: 'center', paddingLeft: 15 }}
+          style={{flex: 1, justifyContent: 'center', paddingLeft: 15}}
           onPress={() =>
             //  alert('Feature Coming Soon')
             props.navigation.navigate('TeacherAttendance')
@@ -709,9 +744,9 @@ const HomeScreen = props => {
           }}
         />
         <TouchableOpacity
-          style={{ flex: 1, justifyContent: 'center', paddingLeft: 15 }}
+          style={{flex: 1, justifyContent: 'center', paddingLeft: 15}}
           onPress={Logout}>
-          <Text style={[paraGray.darkpara, { color: COLORS.lightblack }]}>
+          <Text style={[paraGray.darkpara, {color: COLORS.lightblack}]}>
             Log Out
           </Text>
         </TouchableOpacity>
@@ -725,7 +760,7 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FEFDF8',
+    backgroundColor: COLORS.bgColor,
   },
   header: {
     height: 50,

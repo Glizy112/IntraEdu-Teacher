@@ -14,7 +14,7 @@ import {
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Feather from 'react-native-vector-icons/Feather';
 import Entypo from 'react-native-vector-icons/Entypo';
-import SearchInput, { createFilter } from 'react-native-search-filter';
+// import SearchInput, { createFilter } from 'react-native-search-filter';
 import { DataTable, Avatar } from 'react-native-paper';
 import { COLORS } from '../../theme/Colors';
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -24,6 +24,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import FastImage from 'react-native-fast-image';
 import { useFocusEffect } from '@react-navigation/native';
 import { Shadow } from 'react-native-shadow-2';
+import Search from '../../Components/Search';
 const Student = props => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
@@ -33,14 +34,15 @@ const Student = props => {
         state => state.userReducer,
     );
     //----------Search filter-------------
-    const KEYS_TO_FILTERS = ['student_name'];
-    const [search, setSearch] = useState('');
+    const KEYS_TO_FILTERS = ['student_name', 'roll_no', "class_name"];
+    //const [search, setSearch] = useState('');
     const [getdata, setGetdata] = useState([]);
+    const [studentfilter, setStudentFilter] = useState();
 
-    const studentfilter = getdata.filter(createFilter(search, KEYS_TO_FILTERS));
-    const searchUpdated = term => {
-        setSearch(term);
-    };
+    //const studentfilter = getdata.filter(createFilter(search, KEYS_TO_FILTERS));
+    // const searchUpdated = term => {
+    //     setSearch(term);
+    // };
 
     useEffect(() => {
         getapiData();
@@ -97,7 +99,7 @@ const Student = props => {
                 efreshControl={
                     <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
                 }>
-                <View style={styles.search}>
+                {/* <View style={styles.search}>
                     <View
                         style={{
                             flexDirection: 'row',
@@ -128,9 +130,10 @@ const Student = props => {
                         />
                         <Feather name="search" size={29} color="#000000" />
                     </View>
-                </View>
+                </View> */}
+                <Search getdata={getdata} KEYS_TO_FILTERS={KEYS_TO_FILTERS} filter={setStudentFilter} />
 
-                {studentfilter.map((student, index) => (
+                {studentfilter && studentfilter.length > 0 ? studentfilter.map((student, index) => (
 
                     <View style={{ flex: 1 }} key={index}>
                         <TouchableOpacity
@@ -142,7 +145,7 @@ const Student = props => {
                                 })
                             }>
                             <DataTable>
-                                <Shadow distance={6} style={{ width: "100%", paddingVertical: 8, borderRadius: 15, }}>
+                                <Shadow distance={6} style={{ width: "100%", paddingVertical: 5, borderRadius: 15, }}>
                                     <DataTable.Row style={{ paddingVertical: 5, }} >
                                         <DataTable.Cell >
                                             {student.photo == '' ? (
@@ -172,9 +175,23 @@ const Student = props => {
                                         </DataTable.Cell>
                                         <DataTable.Cell style={{ flex: 3.5 }}>
                                             <View style={{}}>
-                                                <Text style={styles.label('black')}>{student.student_name}</Text>
-                                                <Text style={[styles.label('gray', '500', 12)]}>{student.class_name}</Text>
-                                                <Text style={styles.label("gray", '500', 12)}>{student.roll_no}</Text>
+
+                                                <View style={{ flexDirection: "row" }}>
+                                                    <Text style={styles.label('black')}>Name:{" "}</Text>
+                                                    <Text style={styles.label('black')}>{student.student_name}</Text>
+
+                                                </View>
+                                                <View style={{ flexDirection: "row" }}>
+                                                    <Text style={[styles.label('gray', '500', 12)]}>Class:{"  "}</Text>
+                                                    <Text style={[styles.label('gray', '500', 12)]}>{student.class_name}</Text>
+
+                                                </View>
+                                                <View style={{ flexDirection: "row" }}>
+                                                    <Text style={styles.label("gray", '500', 12)}>RollNo:{" "}</Text>
+
+                                                    <Text style={styles.label("gray", '500', 12)}>{student.roll_no}</Text>
+
+                                                </View>
                                             </View>
                                         </DataTable.Cell>
 
@@ -186,7 +203,76 @@ const Student = props => {
                             </DataTable>
                         </TouchableOpacity>
                     </View>
-                ))}
+                )) : getdata.map((student, index) => (
+
+                    <View style={{ flex: 1 }} key={index}>
+                        <TouchableOpacity
+                            style={styles.userinfo}
+                            key={index}
+                            onPress={() =>
+                                props.navigation.navigate('StudentProfile', {
+                                    student: studentfilter[index],
+                                })
+                            }>
+                            <DataTable>
+                                <Shadow distance={6} style={{ width: "100%", paddingVertical: 5, borderRadius: 15, }}>
+                                    <DataTable.Row style={{ paddingVertical: 5, }} >
+                                        <DataTable.Cell >
+                                            {student.photo == '' ? (
+                                                <ImageBackground
+                                                    style={{
+                                                        backgroundColor: COLORS.black,
+                                                        justifyContent: 'center',
+                                                        alignItems: 'center',
+                                                        width: 45,
+                                                        height: 45,
+                                                        borderRadius: 30,
+                                                    }}>
+                                                    <FontAwesome5
+                                                        name="user-alt"
+                                                        size={25}
+                                                        color="#FFFFFF"
+                                                    />
+                                                </ImageBackground>
+                                            ) : (
+                                                <FastImage
+                                                    style={{ width: 50, height: 50, borderRadius: 50 }}
+                                                    source={{ uri: Url.student_IMG + student.photo }}
+                                                    backgroundColor={COLORS.black}
+                                                />
+                                            )}
+
+                                        </DataTable.Cell>
+                                        <DataTable.Cell style={{ flex: 3.5 }}>
+                                            <View style={{}}>
+
+                                                <View style={{ flexDirection: "row" }}>
+                                                    <Text style={styles.label('black')}>Name:{" "}</Text>
+                                                    <Text style={styles.label('black')}>{student.student_name}</Text>
+
+                                                </View>
+                                                <View style={{ flexDirection: "row" }}>
+                                                    <Text style={[styles.label('gray', '500', 12)]}>Class:{"  "}</Text>
+                                                    <Text style={[styles.label('gray', '500', 12)]}>{student.class_name}</Text>
+
+                                                </View>
+                                                <View style={{ flexDirection: "row" }}>
+                                                    <Text style={styles.label("gray", '500', 12)}>RollNo:{" "}</Text>
+
+                                                    <Text style={styles.label("gray", '500', 12)}>{student.roll_no}</Text>
+
+                                                </View>
+                                            </View>
+                                        </DataTable.Cell>
+
+                                    </DataTable.Row>
+                                </Shadow>
+
+
+
+                            </DataTable>
+                        </TouchableOpacity>
+                    </View>))}
                 {getdata == '' && loading == false && (
                     <View
                         style={{
@@ -242,15 +328,15 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         borderWidth: 0,
         borderColor: '#E4E4E4',
-        paddingBottom: 10,
+        paddingBottom: 4,
     },
     userinfo: {
         flexDirection: 'row',
         width: '95%',
         alignItems: 'center',
-        marginTop: 15,
+        marginVertical: 5,
         marginHorizontal: 10,
-        marginBottom: 5,
+        //marginBottom: 5,
         paddingVertical: 5,
         // borderWidth: 1,
         // borderColor: "gray",
