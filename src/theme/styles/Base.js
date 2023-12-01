@@ -56,6 +56,13 @@ const paraGray = StyleSheet.create({
     // fontWeight: "500",
     // opacity: 0.71
   },
+  largeBoldLight: {
+    fontSize: 20,
+    color: '#FFFFFF',
+    fontFamily: 'Montserrat-SemiBold',
+    // fontWeight: "500",
+    // opacity: 0.71
+  },
   lightParaSmall: {
     color: '#999999',
     fontSize: 13,

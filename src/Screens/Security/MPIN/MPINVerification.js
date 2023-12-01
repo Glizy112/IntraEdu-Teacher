@@ -159,7 +159,7 @@ const MPINVerification = props => {
   };
 
   return (
-    <View style={[container.container, {backgroundColor: COLORS.lightactive}]}>
+    <View style={[container.container, {backgroundColor: COLORS.bgColor}]}>
       {loading == true && <Spinner visible={load} />}
       <ScrollView>
         <View style={{flex: 1, alignItems: 'center', marginTop: '25%'}}>
@@ -237,7 +237,7 @@ const MPINVerification = props => {
                 onPress={VerifyPIN}>
                 <Text
                   style={[
-                    paraGray.largebold,
+                    paraGray.largeBoldLight,
                     { marginVertical: 10, marginHorizontal: 40, fontSize: 16 },
                   ]}>
                   Verify
