@@ -7,11 +7,12 @@ import {
   StatusBar,
   TextInput,
   Image,
+  TouchableOpacity
 } from 'react-native';
 import {
   FlatList,
   ScrollView,
-  TouchableOpacity,
+  //TouchableOpacity,
 } from 'react-native-gesture-handler';
 import {Avatar} from 'react-native-paper';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -43,10 +44,10 @@ const Info = () => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState([
-    {label: 'Apple', value: 'apple'},
-    {label: 'Banana', value: 'banana'},
-    {label: 'cdd', value: 'cdd'},
-    {label: 'aaaa', value: 'aaaa'},
+    {label: '9th', value: '9th'},
+    {label: '10th', value: '10th'},
+    {label: '11th', value: '11th'},
+    {label: '12th', value: '12th'},
   ]);
   const [opens, setOpens] = useState(false);
   const [values, setValues] = useState(null);
@@ -128,33 +129,33 @@ const Info = () => {
         style={{
           flexDirection: 'row',
           alignItems: 'center',
-          height: 50,
-          justifyContent: 'space-between',
+          //height: 48,
+          justifyContent: 'center',
           paddingHorizontal: 15,
+          paddingBottom: 4
         }}>
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <Text
-            style={[paraGray.darklarge, {textAlign: 'center', marginTop: 5}]}>
-            INFO
+        <View style={{justifyContent: 'center', alignItems: 'center', borderWidth: 0}}>
+          <Text style={[paraGray.largebold, {textAlign: 'center', marginTop: 16}]}>
+            Add Student
           </Text>
         </View>
       </View>
-      <View
-        style={{flex: 1, borderBottomWidth: 1.5, borderColor: COLORS.section}}
-      />
+      <View style={{paddingTop: 12, borderBottomWidth: 0.8, borderColor: COLORS.primary}}/>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View>
           <TouchableOpacity
             style={{
               flexDirection: 'row',
               alignItems: 'center',
-              backgroundColor: '#C4C4C440',
-              width: '80%',
+              justifyContent: 'center',
+              //backgroundColor: '#C4C4C440',
+              backgroundColor: COLORS.bgColor,
+              width: '70%',
               height: 80,
-              borderRadius: 13,
+              borderRadius: 16,
               alignSelf: 'center',
               marginTop: 20,
-              paddingHorizontal: 20,
+              //paddingHorizontal: 20,
             }}
             onPress={SelectImage}>
             {student.image == null ? (
@@ -165,61 +166,67 @@ const Info = () => {
             <Text style={styles.label}>Add Profile Picture</Text>
           </TouchableOpacity>
 
-          <Text style={styles.formtxt}>Name:</Text>
+          <Text style={[styles.formtxt, {marginTop: 24}]}>Name</Text>
           <View style={styles.txtbox}>
             <TextInput
-              placeholder="ENTER NAME"
-              placeholderTextColor="#808080"
+              placeholder="Enter student name"
+              placeholderTextColor={COLORS.lightergray}
               value={student.name}
               onChangeText={value => {
-                setStudent({name: value});
+                setStudent({...student, name: value});
               }}
               style={{
                 marginLeft: 2,
                 backgroundColor: '#FFFFFF',
                 width: '90%',
                 height: 40,
+                color: COLORS.black,
                 fontFamily: 'Montserrat-Regular',
               }}
             />
           </View>
-          <Text style={styles.formtxt}>Mobile No:</Text>
+          <Text style={styles.formtxt}>Mobile No</Text>
           <View style={styles.txtbox}>
             <TextInput
-              placeholder="ENTER MOBILE NUMBER"
-              placeholderTextColor="#808080"
+              textContentType='number'
+              keyboardType='number-pad'
+              maxLength={10}
+              placeholder="Enter mobile number"
+              placeholderTextColor={COLORS.lightergray}
               value={student.mobileno}
               onChangeText={value => {
-                setStudent({mobileno: value});
+                setStudent({...student, mobileno: value});
               }}
               style={{
                 marginLeft: 2,
                 backgroundColor: '#FFFFFF',
                 width: '90%',
                 height: 40,
+                color: COLORS.black,
                 fontFamily: 'Montserrat-Regular',
               }}
             />
           </View>
-          <Text style={styles.formtxt}>Email ID:</Text>
+          <Text style={styles.formtxt}>Email ID</Text>
           <View style={styles.txtbox}>
             <TextInput
-              placeholder="EMAIL ID HERE"
-              placeholderTextColor="#808080"
+              placeholder="Enter email id"
+              placeholderTextColor={COLORS.lightergray}
               value={student.email}
               onChangeText={value => {
-                setStudent({email: value});
+                setStudent({...student, email: value});
               }}
               style={{
                 marginLeft: 2,
                 backgroundColor: '#FFFFFF',
                 width: '90%',
                 height: 40,
+                color: COLORS.black,
                 fontFamily: 'Montserrat-Regular',
               }}
             />
           </View>
-          <Text style={styles.formtxt}>Stream:</Text>
+          <Text style={styles.formtxt}>Stream</Text>
           <DropDownPicker
             open={open}
             value={value}
@@ -227,13 +234,14 @@ const Info = () => {
             setOpen={setOpen}
             setValue={setValue}
             setItems={setItems}
-            style={styles.txtbox}
-            placeholder="SELECT STREAM"
+            style={[styles.txtbox, {paddingHorizontal: 8}]}
+            placeholder="Select Stream"
+            placeholderStyle={{color: COLORS.lightergray, paddingLeft: 4}}
             dropDownDirection="TOP"
             dropDownContainerStyle={{
               width: '90%',
               alignSelf: 'center',
-              borderColor: '#C4C4C4',
+              borderColor: COLORS.primary,
             }}
             textStyle={{
               fontSize: 13,
@@ -241,7 +249,7 @@ const Info = () => {
               fontFamily: 'Montserrat-Regular',
             }}
           />
-          <Text style={styles.formtxt}>Gender:</Text>
+          <Text style={styles.formtxt}>Gender</Text>
           <DropDownPicker
             open={opens}
             value={values}
@@ -249,13 +257,14 @@ const Info = () => {
             setOpen={setOpens}
             setValue={setValues}
             setItems={setGenderItems}
-            style={styles.txtbox}
-            placeholder="SELECT GENDER"
+            style={[styles.txtbox, {paddingHorizontal: 8}]}
+            placeholder="Select Gender"
+            placeholderStyle={{color: COLORS.lightergray, paddingLeft: 4}}
             // dropDownDirection="Bottom"
             dropDownContainerStyle={{
               width: '90%',
               alignSelf: 'center',
-              borderColor: '#C4C4C4',
+              borderColor: COLORS.primary,
             }}
             textStyle={{
               fontSize: 13,
@@ -263,7 +272,7 @@ const Info = () => {
               fontFamily: 'Montserrat-Regular',
             }}
           />
-          <Text style={styles.formtxt}>DOB:</Text>
+          <Text style={styles.formtxt}>Date of Birth</Text>
           <View
             style={{
               flexDirection: 'row',
@@ -271,30 +280,34 @@ const Info = () => {
               backgroundColor: '#FFFFFF',
               width: '90%',
               height: 50,
-              borderColor: '#D3D3D3',
+              borderColor: COLORS.primary,
               paddingHorizontal: 0,
-              borderWidth: 2,
+              borderWidth: 0.8,
               marginTop: 15,
-              borderRadius: 10,
+              borderRadius: 12,
               alignSelf: 'center',
             }}>
             <TextInput
-              placeholder="SELECT DOB"
-              placeholderTextColor="#808080"
+              placeholder="Select D.O.B."
+              placeholderTextColor={COLORS.lightergray}
               style={{
-                marginLeft: 2,
+                marginLeft: 8,
                 backgroundColor: '#FFFFFF',
                 width: '90%',
                 height: 40,
+                color: COLORS.black,
                 fontFamily: 'Montserrat-Regular',
+                paddingLeft: 4,
               }}>
               {text}
             </TextInput>
             <MaterialCommunityIcons
               name="calendar-blank-outline"
               size={26}
-              color="#434b56"
+              //color="#434b56"
+              color={COLORS.primary}
               onPress={showDatepicker}
+              style={{marginLeft: -4}}
             />
 
             {show && (
@@ -308,128 +321,141 @@ const Info = () => {
               />
             )}
           </View>
-          <Text style={styles.formtxt}>Father Name:</Text>
+          <Text style={styles.formtxt}>Father Name</Text>
           <View style={styles.txtbox}>
             <TextInput
-              placeholder="ENTER NAME"
-              placeholderTextColor="#808080"
+              placeholder="Enter name"
+              placeholderTextColor={COLORS.lightergray}
               value={student.fathername}
               onChangeText={value => {
-                setStudent({fathername: value});
+                setStudent({...student, fathername: value});
               }}
               style={{
                 marginLeft: 2,
                 backgroundColor: '#FFFFFF',
                 width: '90%',
                 height: 40,
+                color: COLORS.black,
                 fontFamily: 'Montserrat-Regular',
               }}
             />
           </View>
-          <Text style={styles.formtxt}>Father Mobile No:</Text>
+          <Text style={styles.formtxt}>Father Mobile No.</Text>
           <View style={styles.txtbox}>
             <TextInput
-              placeholder="ENTER MOBILE NUMBER"
-              placeholderTextColor="#808080"
+              textContentType='telephoneNumber'
+              keyboardType='number-pad'
+              maxLength={10}
+              placeholder="Enter mobile number"
+              placeholderTextColor={COLORS.lightergray}
               value={student.fathermobileno}
               onChangeText={value => {
-                setStudent({fathermobileno: value});
+                setStudent({...student, fathermobileno: value});
               }}
               style={{
                 marginLeft: 2,
                 backgroundColor: '#FFFFFF',
                 width: '90%',
                 height: 40,
+                color: COLORS.black,
                 fontFamily: 'Montserrat-Regular',
               }}
             />
           </View>
-          <Text style={styles.formtxt}>Father Email Id:</Text>
+          <Text style={styles.formtxt}>Father Email Id</Text>
           <View style={styles.txtbox}>
             <TextInput
-              placeholder="ENTER EMAIL ID HERE"
-              placeholderTextColor="#808080"
+              placeholder="Enter email id"
+              placeholderTextColor={COLORS.lightergray}
               value={student.fatheremail}
               onChangeText={value => {
-                setStudent({fatheremail: value});
+                setStudent({...student, fatheremail: value});
               }}
               style={{
                 marginLeft: 2,
                 backgroundColor: '#FFFFFF',
                 width: '90%',
                 height: 40,
+                color: COLORS.black,
                 fontFamily: 'Montserrat-Regular',
               }}
             />
           </View>
-          <Text style={styles.formtxt}>Mother Name:</Text>
+          <Text style={styles.formtxt}>Mother Name</Text>
           <View style={styles.txtbox}>
             <TextInput
-              placeholder="ENTER NAME"
-              placeholderTextColor="#808080"
+              placeholder="Enter Name"
+              placeholderTextColor={COLORS.lightergray}
               value={student.mothername}
               onChangeText={value => {
-                setStudent({mothername: value});
+                setStudent({...student, mothername: value});
               }}
               style={{
                 marginLeft: 2,
                 backgroundColor: '#FFFFFF',
                 width: '90%',
                 height: 40,
+                color: COLORS.black,
                 fontFamily: 'Montserrat-Regular',
               }}
             />
           </View>
-          <Text style={styles.formtxt}>Mother Mobile No:</Text>
+          <Text style={styles.formtxt}>Mother Mobile No.</Text>
           <View style={styles.txtbox}>
             <TextInput
-              placeholder="ENTER MOBILE NUMBER"
-              placeholderTextColor="#808080"
+              textContentType='telephoneNumber'
+              keyboardType='number-pad'
+              maxLength={10}
+              placeholder="Enter mobile number"
+              placeholderTextColor={COLORS.lightergray}
               value={student.mothermobileno}
               onChangeText={value => {
-                setStudent({mothermobileno: value});
+                setStudent({...student, mothermobileno: value});
               }}
               style={{
                 marginLeft: 2,
                 backgroundColor: '#FFFFFF',
                 width: '90%',
                 height: 40,
+                color: COLORS.black,
                 fontFamily: 'Montserrat-Regular',
               }}
             />
           </View>
-          <Text style={styles.formtxt}>Mother Email Id:</Text>
+          <Text style={styles.formtxt}>Mother Email Id</Text>
           <View style={styles.txtbox}>
             <TextInput
-              placeholder="ENTER EMAIL HERE"
-              placeholderTextColor="#808080"
+              placeholder="Enter email id"
+              placeholderTextColor={COLORS.lightergray}
               value={student.motheremail}
               onChangeText={value => {
-                setStudent({motheremail: value});
+                setStudent({...student, motheremail: value});
               }}
               style={{
                 marginLeft: 2,
                 backgroundColor: '#FFFFFF',
                 width: '90%',
                 height: 40,
+                color: COLORS.black,
                 fontFamily: 'Montserrat-Regular',
               }}
             />
           </View>
-          <Text style={styles.formtxt}>Parmanent Add:</Text>
+          <Text style={styles.formtxt}>Permanent Address</Text>
           <View style={styles.txtbox}>
             <TextInput
-              placeholder="Parmanent Add"
-              placeholderTextColor="#808080"
+              placeholder="Enter Permanent Address"
+              placeholderTextColor={COLORS.lightergray}
               value={student.Address}
               onChangeText={value => {
-                setStudent({Address: value});
+                setStudent({...student, Address: value});
               }}
               style={{
-                marginLeft: 2,
+                marginLeft: 4,
                 backgroundColor: '#FFFFFF',
-                width: '90%',
+                width: '98%',
                 height: 40,
+                color: COLORS.black,
                 fontFamily: 'Montserrat-Regular',
               }}
             />
@@ -481,28 +507,30 @@ const Info = () => {
               flex: 1,
               flexDirection: 'row',
               justifyContent: 'center',
+              alignItems: 'center',
+              marginTop: 12,
               marginBottom: 60,
             }}>
             <TouchableOpacity
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                backgroundColor: '#FFFFFF',
-                width: '80%',
-                height: 60,
-                borderColor: '#000000',
+                backgroundColor: COLORS.red,
+                width: '42%',
+                height: 56,
+                borderColor: COLORS.red,
                 alignSelf: 'center',
-                borderWidth: 2,
+                borderWidth: 1.2,
                 marginTop: 15,
-                borderRadius: 10,
+                borderRadius: 12,
                 justifyContent: 'center',
-                elevation: 3,
+                //elevation: 3,
               }}>
               <Text
                 style={{
-                  color: '#000000',
-                  fontSize: 12,
-                  fontFamily: 'Montserrat-Regular',
+                  color: COLORS.white,
+                  fontSize: 14,
+                  fontFamily: 'Montserrat-Medium',
                 }}>
                 Cancel
               </Text>
@@ -512,28 +540,54 @@ const Info = () => {
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                backgroundColor: '#000000',
-                width: '80%',
-                height: 60,
-                borderColor: '#D3D3D3',
+                backgroundColor: COLORS.primary,
+                width: '42%',
+                height: 56,
+                borderColor: COLORS.primary,
                 alignSelf: 'center',
-                borderWidth: 2,
+                borderWidth: 1.2,
                 marginTop: 15,
-                borderRadius: 10,
+                borderRadius: 12,
                 justifyContent: 'center',
-                elevation: 3,
+                marginLeft: 16
+                //elevation: 3,
               }}
-              onPress={{}}>
+              onPress={()=> console.log('Saved')}>
               <Text
                 style={{
-                  color: '#FFFFFF',
-                  fontSize: 12,
-                  fontFamily: 'Montserrat-Regular',
+                  color: COLORS.white,
+                  fontSize: 14,
+                  fontFamily: 'Montserrat-Medium',
                 }}>
                 Save
               </Text>
             </TouchableOpacity>
           </View>
+          {/* <TouchableOpacity
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                backgroundColor: COLORS.primary,
+                width: '80%',
+                height: 56,
+                borderColor: COLORS.primary,
+                alignSelf: 'center',
+                borderWidth: 1.2,
+                //marginTop: 15,
+                borderRadius: 12,
+                justifyContent: 'center',
+                //elevation: 3,
+              }}
+              onPress={()=> console.log('Student Detail->', student)}>
+              <Text
+                style={{
+                  color: COLORS.white,
+                  fontSize: 14,
+                  fontFamily: 'Montserrat-Medium',
+                }}>
+                Check
+              </Text>
+            </TouchableOpacity> */}
         </View>
       </ScrollView>
     </View>
@@ -554,7 +608,7 @@ const styles = StyleSheet.create({
     textAlign: 'center', // <-- The magic
     fontFamily: 'Montserrat-SemiBold',
     fontSize: 14,
-    paddingHorizontal: '10%',
+    paddingHorizontal: '4%',
   },
   txtbox: {
     flexDirection: 'row',
@@ -562,23 +616,26 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     width: '90%',
     height: 50,
-    borderColor: '#D3D3D3',
+    paddingHorizontal: 4,
+    //borderColor: '#D3D3D3',
+    borderColor: COLORS.primary,
     alignSelf: 'center',
-    borderWidth: 2,
+    borderWidth: 0.8,
     marginTop: 15,
-    borderRadius: 10,
+    borderRadius: 12,
   },
   formtxt: {
-    marginTop: 10,
-    paddingHorizontal: 20,
+    marginTop: 14,
+    paddingHorizontal: 24,
     marginBottom: -10,
-    fontSize: 12,
-    fontFamily: 'Montserrat-Regular',
-    color: '#000000',
+    fontSize: 14,
+    fontFamily: 'Montserrat-Medium',
+    color: COLORS.black,
   },
   dropdown: {
     height: 50,
-    borderColor: 'gray',
+    //borderColor: 'gray',
+    borderColor: COLORS.primary,
     borderWidth: 1,
     borderRadius: 8,
     paddingHorizontal: 8,

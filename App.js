@@ -225,6 +225,7 @@ import UpdateAss from './src/Screens/Assignments/UpdateAss';
 import EditEvent from './src/Screens/Events/EditEvent';
 import HistoryuserAssignmentDetail from './src/Screens/Assignments/HistoryuserAssignmentDetail';
 import { paraGray } from './src/theme/styles/Base';
+import ConfirmMPIN from './src/Screens/Security/MPIN/ConfirmMPIN';
 
 const HomeStack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -2094,6 +2095,18 @@ function App({navigation}) {
           }}
         />
         <HomeStack.Screen
+          name="ConfirmMPIN"
+          component={ConfirmMPIN}
+          options={{
+              title: 'Change MPIN',
+
+              headerStyle: {
+                  backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+          }}
+        />
+        <HomeStack.Screen
           name="MPINSet"
           component={MPINSet}
           options={{
@@ -2471,9 +2484,9 @@ const BottomNavigator =({navigation})=> {
         },
         headerTitle: '',
         headerStyle: {backgroundColor: '#FEFDF8', borderWidth: 0, elevation: 0},
-        headerStatusBarHeight: 8,
+        headerStatusBarHeight: 16,
         headerLeft: () => (
-          <View style={{flexDirection: 'row', paddingLeft: 20}}>
+          <View style={{flexDirection: 'row', paddingLeft: 20, marginBottom: 12}}>
             {/* <Icon.Button
               name="ios-menu"
               size={25}
@@ -2492,7 +2505,7 @@ const BottomNavigator =({navigation})=> {
         headerRight: () => (
           <View style={{flexDirection: 'row'}}>
             <TouchableOpacity
-              style={{marginTop: 5, marginRight: 20}}
+              style={{marginRight: 20, marginTop: 5, marginBottom: 12}}
               onPress={() => {
                 // alert('Feature Coming Soon');
                 navigation.navigate('Chat');
@@ -2519,6 +2532,7 @@ const BottomNavigator =({navigation})=> {
             <TouchableOpacity
               style={{
                 marginRight: 16,
+                marginBottom: 14,
                 justifyContent: 'center',
               }}
               onPress={() =>

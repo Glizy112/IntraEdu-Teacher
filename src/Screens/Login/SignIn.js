@@ -158,11 +158,11 @@ const SignIn = props => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{justifyContent: 'flex-end'}}>
         <StatusBar backgroundColor={'whitesmoke'} barStyle={'dark-content'} />
-        <View style={{alignItems: 'flex-start', marginTop: 24, paddingHorizontal: 12}}>
-          <Text style={[paraGray.parahome, {color: COLORS.black}]}>Welcome Back!</Text>
-          <Text style={[paraGray.largebold, {color: COLORS.primary, marginTop: 12}]}> Login to Continue </Text>
+        <View style={{alignItems: 'flex-start', marginTop: 32}}>
+          <Text style={[paraGray.parahome, {color: COLORS.black, paddingHorizontal: 14}]}>Welcome Back!</Text>
+          <Text style={[paraGray.largebold, {color: COLORS.primary, marginTop: 8, paddingHorizontal: 12}]}> Login to Continue </Text>
         </View>
-        <View style={{alignItems: 'flex-end', borderWidth: 0}}>
+        <View style={{alignItems: 'flex-end', borderWidth: 0, marginTop: 24}}>
           <Image
             style={{height: 200, width: 320}}
             resizeMode={'contain'}
@@ -226,7 +226,7 @@ const SignIn = props => {
           <View 
             style={{
               flex: 1,
-              marginTop: 24,
+              marginTop: 48,
               //flexDirection: 'row',
               //alignItems: 'center',
               //backgroundColor: '#FFFFFF',
@@ -249,22 +249,36 @@ const SignIn = props => {
               style={{
                 flex: 1,
                 height: 56,
-                paddingHorizontal: 24,
+                paddingHorizontal: 16,
                 marginHorizontal: 4,
                 marginTop: 15,
                 marginBottom: 20,
                 borderRadius: 12,
-                //borderWidth: 1,
-                elevation: 6,
+                borderWidth: 1,
+                borderColor: COLORS.primary,
+                //elevation: 2,
                 fontSize: 16,
-                fontFamily: 'Montserrat-Regular',
-                backgroundColor: COLORS.bg,
+                fontFamily: 'Montserrat-Medium',
+                //backgroundColor: COLORS.bgColor,
                 color: COLORS.black,
               }}
             />
-            <View style={{borderWidth: 0}}>
+            <View style={{borderWidth: 0, paddingHorizontal: 4}}>
               <Text style={[paraGray.largebold, {fontSize: 16}]}> Password </Text>
-              <View style={{flexDirection: 'row', justifyContent: 'space-between', borderWidth: 0}}>
+              <View 
+                style={{
+                  width: '100%',
+                  height: 56, 
+                  flexDirection: 'row', 
+                  alignItems: 'center',
+                  justifyContent: 'space-between', 
+                  borderRadius: 12,
+                  borderWidth: 1,
+                  borderColor: COLORS.primary,
+                  marginTop: 15,
+                  marginBottom: 12,
+                }}
+              >
                 <TextInput
                   placeholder="Password"
                   placeholderTextColor="#B9BCC5"
@@ -273,50 +287,49 @@ const SignIn = props => {
                   onChangeText={value => setPassword(value)}
                   secureTextEntry={eye == false ? true : false}
                   style={{
-                    flex: 1,
-                    height: 56,
-                    paddingHorizontal: 24,
-                    marginHorizontal: 4,
-                    marginTop: 15,
-                    marginBottom: 20,
-                    borderRadius: 12,
-                    //borderWidth: 1,
-                    elevation: 6,
+                    //flex: 1,
+                    width: '80%',
+                    //paddingHorizontal: 16,
+                    marginLeft: 12,
+                    //elevation: 2,
                     fontSize: 16,
-                    fontFamily: 'Montserrat-Regular',
-                    backgroundColor: COLORS.bg,
+                    fontFamily: 'Montserrat-Medium',
+                    //backgroundColor: COLORS.bgColor,
                     color: COLORS.black,
                   }}
                 />
                 <TouchableOpacity
                   style={{
                     //zIndex: 999,
-                    marginLeft: -30,
+                    marginRight: 10,
                     justifyContent: 'center',
                     alignItems: 'flex-start',
                     //marginRight: 10,
                   }}
                   onPress={() => eyeShow(!eye)}>
                   {eye == false ? (
-                    <Entypo name="eye" size={28} color={COLORS.primary} />
+                    <AntDesign name="eye" size={26} color={COLORS.primary} />
                   ) : (
-                    <Entypo name="eye-with-line" size={28} color={COLORS.primary} />
+                    <AntDesign name="eyeo" size={26} color={COLORS.primary} />
                   )}
                 </TouchableOpacity>
               </View>
             </View>
-            <Text
-              onPress={() => props.navigation.navigate('ForgetPassword')}
-              style={[
-                paraGray.darkpara,
-                {
-                  alignSelf: 'flex-end',
-                  fontSize: 15,
-                  paddingHorizontal: 10,
-                },
-              ]}>
-              Forgot Password?
-            </Text>
+            <TouchableOpacity style={{alignSelf: 'flex-end'}} onPress={() => props.navigation.navigate('ForgetPassword')}>
+              <Text
+                style={[
+                  //paraGray.darkpara,
+                  {
+                    alignSelf: 'flex-end',
+                    fontSize: 15,
+                    fontFamily: 'Montserrat-Medium',
+                    color: COLORS.black,
+                    paddingHorizontal: 10,
+                  },
+                ]}>
+                Forgot Password?
+              </Text>
+            </TouchableOpacity>
           </View>
         </KeyboardAvoidingView>
         <View style={{marginTop: 32, marginBottom: 10, paddingHorizontal: 20}}>
@@ -325,11 +338,11 @@ const SignIn = props => {
               flex: 1,
               height: 56,
               //alignSelf: 'center',
-              alignItems: 'center',
+              //alignItems: 'center',
               justifyContent: 'center',
               backgroundColor: COLORS.primary,
               borderRadius: 12,
-              elevation: 2,
+              //elevation: 2,
             }}
             // onPress={() => props.navigation.navigate('CheckMPIN')}
             onPress={onLogin}>
@@ -337,10 +350,11 @@ const SignIn = props => {
               style={[
                 paraGray.largebold,
                 {
-                  color: COLORS.black,
-                  marginHorizontal: 70,
+                  textAlign: 'center',
+                  color: COLORS.white,
+                  //marginHorizontal: 70,
                   marginVertical: 5,
-                  fontSize: 18,
+                  fontSize: 16,
                 },
               ]}>
               Login
@@ -353,7 +367,7 @@ const SignIn = props => {
             flexDirection: 'row',
             justifyContent: 'center',
             marginBottom: 10,
-            marginTop: 5,
+            marginTop: 12,
           }}>
           <Text style={[paraGray.darkpara, {fontSize: 14}]}>
             By login, I accept the {''}
@@ -361,13 +375,13 @@ const SignIn = props => {
           <Text
             style={[
               paraGray.darkpara,
-              {fontSize: 14, color: COLORS.dotgreen},
+              {fontSize: 14, color: COLORS.green},
             ]}>
             Terms & Conditions
           </Text>
         </View>
 
-        <View
+        {/* <View
           style={{
             flex: 1,
             flexDirection: 'row',
@@ -412,7 +426,7 @@ const SignIn = props => {
               source={require('../../../assets/Pincode.png')}
             />
           </TouchableOpacity>
-        </View>
+        </View> */}
         {/* <View
         style={{
           marginBottom: 20,

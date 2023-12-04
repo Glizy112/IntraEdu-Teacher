@@ -10,7 +10,8 @@ import {
   BackHandler,
   Alert,
   RefreshControl,
-  ScrollView
+  ScrollView,
+  Dimensions
 } from 'react-native';
 import { Avatar, Modal } from 'react-native-paper';
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -42,76 +43,75 @@ import {
 import { COLORS } from '../theme/Colors';
 import { useFocusEffect } from '@react-navigation/native';
 import { NavigationActions, StackActions } from 'react-navigation';
+import Search from '../Components/Search';
 
-const categoryList = [
+const categoryList01 = [
+  {
+    categoryHeading: 'Quick Actions',
+  },
   {
     id: '1',
     categoryTitle: 'Mark Attendance',
-    categoryIcon: <Ionicons name="today" size={30} color={COLORS.primary}/>,
+    categoryIcon: <Ionicons name="today" size={30} color={COLORS.primary} />,
     categoryScreen: 'AttendanceShow',
   },
   {
     id: '2',
     categoryTitle: 'Documents',
-    categoryIcon: <Ionicons name="ios-document-text" size={30} color={COLORS.primary}/>,
+    categoryIcon: (
+      <Ionicons name="ios-document-text" size={30} color={COLORS.primary} />
+    ),
     categoryScreen: 'Document',
   },
   {
     id: '3',
     categoryTitle: 'PTM',
-    categoryIcon: <Ionicons name="person-add" size={30} color={COLORS.primary}/>,
+    categoryIcon: (
+      <Ionicons name="person-add" size={30} color={COLORS.primary} />
+    ),
     categoryScreen: 'Ptm',
   },
   {
     id: '4',
     categoryTitle: 'Gallery',
-    categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary}/>,
+    categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary} />,
     categoryScreen: 'Gallery',
   },
-  // {
-  //   id: '5',
-  //   categoryTitle: 'Gallery',
-  //   categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary}/>,
-  //   categoryScreen: 'Gallery',
-  // },
-  // {
-  //   id: '6',
-  //   categoryTitle: 'Gallery',
-  //   categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary}/>,
-  //   categoryScreen: 'Gallery',
-  // },
-  // {
-  //   id: '7',
-  //   categoryTitle: 'Gallery',
-  //   categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary}/>,
-  //   categoryScreen: 'Gallery',
-  // },
-  // {
-  //   id: '8',
-  //   categoryTitle: 'Gallery',
-  //   categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary}/>,
-  //   categoryScreen: 'Gallery',
-  // },
-  // {
-  //   id: '9',
-  //   categoryTitle: 'Gallery',
-  //   categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary}/>,
-  //   categoryScreen: 'Gallery',
-  // },
-  // {
-  //   id: '10',
-  //   categoryTitle: 'Gallery',
-  //   categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary}/>,
-  //   categoryScreen: 'Gallery',
-  // },
-  // {
-  //   id: '11',
-  //   categoryTitle: 'Gallery',
-  //   categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary}/>,
-  //   categoryScreen: 'Gallery',
-  // },
-  
-]
+];
+
+const categoryList02 = [
+  {
+    categoryHeading: 'My Activities'
+  },
+  {
+    id: '1',
+    categoryTitle: 'Mark Attendance',
+    categoryIcon: <Ionicons name="today" size={30} color={COLORS.primary} />,
+    categoryScreen: 'AttendanceShow',
+  },
+  {
+    id: '2',
+    categoryTitle: 'Documents',
+    categoryIcon: (
+      <Ionicons name="ios-document-text" size={30} color={COLORS.primary} />
+    ),
+    categoryScreen: 'Document',
+  },
+  {
+    id: '3',
+    categoryTitle: 'PTM',
+    categoryIcon: (
+      <Ionicons name="person-add" size={30} color={COLORS.primary} />
+    ),
+    categoryScreen: 'Ptm',
+  },
+  {
+    id: '4',
+    categoryTitle: 'Gallery',
+    categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary} />,
+    categoryScreen: 'Gallery',
+  },
+];
 
 const HomeScreen = props => {
   const dispatch = useDispatch();
@@ -123,6 +123,7 @@ const HomeScreen = props => {
   const [refreshing, setRefreshing] = React.useState(false);
   const [greeting, setGreeting] = React.useState('');
   const [Notify, setNotify] = React.useState('0');
+  const [studentFilter, setStudentFilter] = useState();
 
   const Logout = async () => {
     setLoading(true);
@@ -231,9 +232,7 @@ const HomeScreen = props => {
       {loading == true && <Spinner visible={load} />}
       <ScrollView
         showsVerticalScrollIndicator={false}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}
       >
         <View>
           <StatusBar backgroundColor={'#fafef8'} barStyle={'dark-content'} />
@@ -295,76 +294,102 @@ const HomeScreen = props => {
             <Text style={styles.headline}>{greeting}</Text>
           </View> */}
 
-          <View style={styles.search}>
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                backgroundColor: '#FFFFFF',
-                width: '100%',
-                height: 50,
-                borderRadius: 12,
-                paddingHorizontal: 10,
-                elevation: 4,
-              }}>
-              <TextInput
-                placeholder="Search"
-                placeholderTextColor="#000000"
-                style={{
-                  marginLeft: 15,
-                  backgroundColor: COLORS.white,
-                  width: '80%',
-                  height: 45,
-                  color: '#000000',
-                  fontFamily: 'Montserrat-Medium',
-                  fontSize: 16,
-                }}
-              />
-              <Ionicons name="search" size={24} color={COLORS.black} style={{transform: [{rotate: '90deg'}], marginRight: 10}}/>
-            </View>
-            {/* <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                backgroundColor: '#262630',
-                width: '15%',
-                height: 45,
-                borderRadius: 13,
-                justifyContent: 'center',
-              }}>
-              <TouchableOpacity>
-                <Ionicons name="arrow-forward" size={35} color="#FFFFFF" />
-              </TouchableOpacity>
-            </View> */}
-          </View>
-
+          <Search
+            getdata={categoryList01}
+            KEYS_TO_FILTERS={['categoryTitle']}
+            filter={setStudentFilter}
+          />
           <View style={[styles.categoryContainer, {borderWidth: 0}]}>
-            <FlatList
-              data={categoryList}
-              keyExtractor={(item)=> item.id}
-              numColumns={2}
-              renderItem={({item})=> (
-                <TouchableOpacity 
-                  key={item.id}
-                  style={{
-                    paddingHorizontal: 16,
-                    paddingVertical: 24, 
-                    width: '45%', 
-                    borderRadius: 16, 
-                    backgroundColor: COLORS.white,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    elevation: 2,
-                    margin: 10,
-                  }}
-                  onPress={()=> {props.navigation.navigate(item.categoryScreen)}}
-                >
-                  {item.categoryIcon}
-                  <Text style={[paraGray.darkpara, { textAlign: 'center', paddingTop: 8}]}> {item.categoryTitle} </Text>
-                </TouchableOpacity>  
-              )}
-            />
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} pagingEnabled>
+              <View style={{flex: 1, marginRight: 16, paddingHorizontal: 8, width: Dimensions.get('screen').width/1.05, marginLeft: 4}}>
+                <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddinLeft: 8, marginLeft: 4}}>
+                  <Text style={[paraGray.largebold, {fontSize: 16}]}> {categoryList01[0].categoryHeading} </Text>
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <Text style={{fontSize: 14, fontFamily: 'Montserrat-Medium', color: COLORS.secondary}}> Swipe Left</Text>
+                    <Ionicons name="chevron-forward" size={28} color={COLORS.secondary}/>
+                  </View>
+                </View>
+                <FlatList
+                  //data={studentfilter}
+                  data={categoryList01.slice(1)}
+                  keyExtractor={item => item.id}
+                  numColumns={2}
+                  contentContainerStyle={{alignSelf: 'center', paddingRight: 8}}
+                  renderItem={({item}) => (
+                    <TouchableOpacity
+                      key={item.id}
+                      style={{
+                        paddingHorizontal: 16,
+                        paddingVertical: 24,
+                        width: '46%',
+                        borderRadius: 16,
+                        backgroundColor: COLORS.white,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        elevation: 2,
+                        margin: 10,
+                      }}
+                      onPress={() => {
+                        props.navigation.navigate(item.categoryScreen);
+                      }}>
+                      {item.categoryIcon}
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {textAlign: 'center', paddingTop: 8},
+                        ]}>
+                        {' '}
+                        {item.categoryTitle}{' '}
+                      </Text>
+                    </TouchableOpacity>
+                  )}
+                />
+              </View>
+              <View style={{flex: 1, paddingRight: 12, paddingLeft: 4, width: Dimensions.get('screen').width/1.05, marginLeft: -12}}>
+                <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingRight: 8, marginLeft: 0}}>
+                  <Text style={[paraGray.largebold, {fontSize: 16}]}> {categoryList02[0].categoryHeading} </Text>
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <Ionicons name="chevron-back" size={28} color={COLORS.secondary}/>
+                    <Text style={{fontSize: 14, fontFamily: 'Montserrat-Medium', color: COLORS.secondary}}> Swipe Right</Text>
+                  </View>
+                </View>
+                <FlatList
+                  //data={studentfilter}
+                  data={categoryList02.slice(1)}
+                  keyExtractor={item => item.id}
+                  numColumns={2}
+                  contentContainerStyle={{alignSelf: 'center', paddingRight: 8}}
+                  renderItem={({item}) => (
+                    <TouchableOpacity
+                      key={item.id}
+                      style={{
+                        paddingHorizontal: 16,
+                        paddingVertical: 24,
+                        width: '46%',
+                        borderRadius: 16,
+                        backgroundColor: COLORS.white,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        elevation: 2,
+                        margin: 10,
+                      }}
+                      onPress={() => {
+                        props.navigation.navigate(item.categoryScreen);
+                      }}>
+                      {item.categoryIcon}
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {textAlign: 'center', paddingTop: 8},
+                        ]}>
+                        {' '}
+                        {item.categoryTitle}{' '}
+                      </Text>
+                    </TouchableOpacity>
+                  )}
+                />
+              </View>
+            </ScrollView>
           </View>
 
           {/* <View style={[styles.categoryContainer, { marginTop: 20 }]}>
@@ -759,7 +784,7 @@ const styles = StyleSheet.create({
     flex: 1,
     //flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 16,
+    paddingHorizontal: 4,
     marginTop: 20,
   },
   categoryBtn: {

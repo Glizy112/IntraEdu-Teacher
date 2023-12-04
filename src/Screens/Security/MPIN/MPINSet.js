@@ -59,36 +59,35 @@ const MPINSet = props => {
           <View style={{alignItems: 'center', marginBottom: 10}}>
             <View 
               style={{
-                width: 90, 
-                height: 90, 
-                borderRadius: 45, 
+                width: 84, 
+                height: 84, 
+                borderRadius: 42, 
                 backgroundColor: COLORS.primary, 
                 justifyContent: 'center', 
                 alignItems: 'center'
               }}
             >
-              <AntDesign name="check" size={56} color={COLORS.black} />
+              <AntDesign name="check" size={48} color={COLORS.white} />
             </View>
           </View>
           <View style={{alignItems: 'center'}}>
             <Text style={[paraGray.parahome]}>PIN Setup Successful</Text>
           </View>
-          <Text style={[paraGray.darkpara, {textAlign: 'center', marginTop: 8}]}>
-            You have successfully set your PIN.
+          <Text style={[paraGray.darkpara, {textAlign: 'center', marginTop: 12}]}>
+            Congrats! You've set your PIN.
           </Text>
-          <View style={{paddingHorizontal: 20}}>
+          <View style={{paddingHorizontal: 20, marginTop: 40}}>
             <TouchableOpacity
               style={{
                 // flex: 1,
-                height: 50,
+                height: 56,
                 justifyContent: 'center',
                 alignItems: 'center',
                 backgroundColor: COLORS.primary,
-                borderRadius: 10,
-                marginTop: 20,
+                borderRadius: 12,
               }}
               onPress={() => props.navigation.navigate('MPINVerification')}>
-              <Text style={[paraGray.largebold, { fontSize: 16 }]}>
+              <Text style={[paraGray.largebold, { fontSize: 16, color: COLORS.white }]}>
                 Login
               </Text>
             </TouchableOpacity>

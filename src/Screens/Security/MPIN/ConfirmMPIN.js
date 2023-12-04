@@ -31,8 +31,10 @@ import { Header } from '../../../Components/Header';
 import { setIsSwitchOn } from '../../../Redux/Actions/actions';
 import { useSelector, useDispatch } from 'react-redux';
 
-const CreateMPIN = props => {
+const ConfirmMPIN = props => {
     const dispatch = useDispatch();
+    const { params: checkConformationPin } = props.route;
+
     const { userinfo, userid, username, userimage, isSwitchOn } = useSelector(
         state => state.userReducer,
     );
@@ -144,23 +146,20 @@ const CreateMPIN = props => {
 
     const CreatePIN = async () => {
         setLoading(true);
-        if ((value == '')) {
+        if ((value == '', checkConformationPin.pin == '')) {
             alert('Please Enter PIN');
             setLoading(false);
         } else if ((value.length != 4)) {
             alert('MPIN Should be 4digit');
             setLoading(false);
-        }
-        // else if (value.length == 4) {
-        //     //AsyncStorage.setItem('pin', value);
-        //     //AsyncStorage.setItem('toggle', 'true');
-
-        // } 
-        else {
-            props.navigation.navigate('ConfirmMPIN', { pin: value });
+        } else if (value == checkConformationPin.pin) {
+            AsyncStorage.setItem('pin', value);
+            AsyncStorage.setItem('toggle', 'true');
+            props.navigation.navigate('MPINSet');
             setLoading(false);
-            // alert('Please check MPIN');
-            // setLoading(false);
+        } else {
+            alert('Please check MPIN');
+            setLoading(false);
         }
     };
     useFocusEffect(
@@ -209,7 +208,7 @@ const CreateMPIN = props => {
                     backPress={GoBack}
                     color={COLORS.black}
                     backbutton
-                    headerFirstName="Create MPIN"
+                    headerFirstName="Confirm MPIN"
                     marginLeft
                 />
             </View>
@@ -228,9 +227,9 @@ const CreateMPIN = props => {
                         source={require('../../../../assets/passlock.png')}
                     />
                     <Text style={[paraGray.parahome, { marginTop: 16, marginBottom: 8 }]}>
-                        Set New PIN
+                        Confirm PIN
                     </Text>
-                    <Text style={[paraGray.darkpara]}>Create a 4-digit PIN for easy access</Text>
+                    <Text style={[paraGray.darkpara]}>Confirm your 4-digit PIN for easy access</Text>
                 </View>
                 <View style={{ justifyContent: 'center', marginTop: 48 }}>
                     <View
@@ -241,10 +240,9 @@ const CreateMPIN = props => {
                             paddingHorizontal: 24
                         }}
                     >
-                        <Text style={[paraGray.largebold, { fontSize: 16 }]}>Enter New Pin</Text>
+                        <Text style={[paraGray.largebold, { fontSize: 16 }]}>Confirm Pin</Text>
                     </View>
-                    <View
-                        style={{ marginVertical: 24, paddingHorizontal: 20, borderWidth: 0 }}>
+                    <View style={{marginVertical: 24, paddingHorizontal: 20, borderWidth: 0}}>
                         <CodeField
                             autoFocus
                             ref={ref}
@@ -280,14 +278,14 @@ const CreateMPIN = props => {
                                 paraGray.largebold, 
                                 { fontSize: 14, color: COLORS.white, textAlign: 'center' }
                             ]}
-                        >Create PIN</Text>
+                        >CONFIRM PIN</Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>
         </View>
     );
 };
-export default CreateMPIN;
+export default ConfirmMPIN;
 
 const styles = StyleSheet.create({
     cell: {

@@ -120,11 +120,12 @@ const MPINVerification = props => {
           backgroundColor: COLORS.white,
           width: 56,
           height: 56,
-          marginLeft: 12,
+          marginLeft: 20,
           justifyContent: 'center',
           alignItems: 'center',
-          borderWidth: 1,
+          borderWidth: 0.6,
           borderColor: COLORS.black,
+          paddingTop: 4,
           // ...include most of View/Layout styles
         }}>
         <Text
@@ -174,6 +175,7 @@ const MPINVerification = props => {
           }}>
           <Avatar.Image
             style={{marginTop: 10, alignSelf: 'center'}}
+            size={72}
             source={{uri: Url.profile_IMG + userimage}}
           />
         </View>
@@ -187,32 +189,43 @@ const MPINVerification = props => {
           <View
             style={{
               flex: 1,
-              paddingHorizontal: 15,
+              //paddingHorizontal: 15,
               paddingVertical: 15,
+              alignItems: 'center',
+              justifyContent: 'center',
               //borderWidth: 1,
-              borderRadius: 10,
+              borderRadius: 12,
               backgroundColor: COLORS.white,
             }}>
             <Text
-              style={[paraGray.darklarge, {textAlign: 'center', marginTop: 20}]}>
-              Enter Your MPIN
-            </Text>
+              style={{
+                fontFamily: 'Montserrat-Medium', 
+                fontSize: 18, 
+                color: COLORS.secondary, 
+                textAlign: 'center', 
+                marginTop: 20
+              }}
+            > Enter Your MPIN </Text>
             <View
               style={{
                 flex: 1,
                 flexDirection: 'row',
+                alignSelf: 'center',
                 justifyContent: 'center',
-                marginTop: 20,
+                marginTop: 24,
+                marginLeft: -16,
+                borderWidth: 0
               }}>
               <CodeField
                 autoFocus
                 ref={ref}
-                {...props1}
+                //{...props1}
                 // Use `caretHidden={false}` when users can't paste a text value, because context menu doesn't appear
+                caretHidden={true}
                 value={value}
                 onChangeText={setValue}
                 cellCount={CELL_COUNT}
-                rootStyle={{}}
+                //rootStyle={{}}
                 keyboardType="number-pad"
                 textContentType="oneTimeCode"
                 renderCell={renderCell}
@@ -224,15 +237,17 @@ const MPINVerification = props => {
                 flexDirection: 'row',
                 justifyContent: 'center',
                 marginBottom: 10,
-                marginTop: 32,
+                marginTop: 40,
               }}>
               <TouchableOpacity
                 style={{
-                  height: 50,
+                  //flex: 1,
+                  height: 56,
                   justifyContent: 'center',
                   alignItems: 'center',
                   backgroundColor: COLORS.primary,
                   borderRadius: 12,
+                  paddingHorizontal: 32,
                 }}
                 onPress={VerifyPIN}>
                 <Text
