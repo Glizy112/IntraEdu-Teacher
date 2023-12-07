@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
 import {
   View,
   Text,
@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   Image,
   FlatList,
+  RefreshControl,
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Carousel from 'react-native-reanimated-carousel';
@@ -18,6 +19,9 @@ import {COLORS} from '../../theme/Colors';
 import {BlurView, VibrancyView} from '@react-native-community/blur';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {ScrollView} from 'react-native-gesture-handler';
+import { paraGray } from '../../theme/styles/Base';
+import HistoryEvent from './HistoryEvent';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 const entries = [
   {
@@ -38,6 +42,15 @@ const entries = [
 ];
 
 const Event = props => {
+
+  const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    //getapiData();
+  }, []);
+
   const renderItem = ({item, index}) => {
     return (
       <Image
@@ -62,6 +75,11 @@ const Event = props => {
 
   return (
     <View style={styles.container}>
+      {loading == true && <Spinner visible={load} />}
+      <ScrollView
+        showsVerticalScrollIndicator={false} 
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+      >
       {/* <TouchableOpacity
         onPress={() => {
           props.navigation.navigate('CreateEvent');
@@ -74,26 +92,30 @@ const Event = props => {
       {/* <View style={styles.divline} /> */}
 
       <View style={styles.arrow}>
-        <Text style={styles.headerText}>Open Event</Text>
+        <Text style={paraGray.largebold}>Current Events (2)</Text>
       </View>
+      
       <FlatList
         showsHorizontalScrollIndicator={false}
         horizontal={true}
-        style={{height: 150, marginLeft: 10}}
+        style={{height: 400, marginLeft: 10}}
         data={[{}, {}]}
         renderItem={({item}) => (
           <View
             style={{
               //paddingHorizontal: '6%',
-              marginTop: 10,
+              marginTop: 16,
               //borderWidth: 1,
               //borderColor: 'red',
-              height: 350,
-
+              height: 370,
+              marginHorizontal: 8,
+              backgroundColor: COLORS.white,
+              borderRadius: 12,
+              elevation: 2,
               // width: '100%',
             }}>
-            <Shadow style={{width: '95%', borderRadius: 10}}>
-              <View
+            {/* <Shadow style={{width: '100%', borderRadius: 16}}> */}
+              {/* <View
                 style={{
                   //width: '100%',
                   //height: 300,
@@ -102,16 +124,16 @@ const Event = props => {
                   // paddingLeft: 15,
                   overflow: 'hidden',
                   backgroundColor: 'white',
-                }}>
-                <View style={{borderRadius: 10}}>
+                }}> */}
+                {/* <View style={{borderRadius: 16}}> */}
                   <View
                     style={{
-                      backgroundColor: 'black',
+                      backgroundColor: 'rgba(0,0,0,0.8)',
                       position: 'absolute',
-                      bottom: 150,
+                      bottom: 170,
                       left: 0,
                       right: 0,
-                      height: 30,
+                      height: 48,
                       opacity: 0.6,
                       //   borderWidth: 10,
                       //   borderColor: 'white',
@@ -126,20 +148,21 @@ const Event = props => {
                       flexDirection: 'row',
                       position: 'absolute',
                       zIndex: 10,
-                      marginLeft: 10,
-                      bottom: 155,
+                      marginLeft: 8,
+                      bottom: 180,
+                      alignItems: 'center',
                     }}>
                     <Ionicons
                       name="location-outline"
                       color={'white'}
-                      size={20}
+                      size={24}
                     />
                     <Text
                       style={{
                         fontFamily: 'Montserrat-Medium',
                         fontSize: 16,
                         color: 'white',
-                        marginLeft: 20,
+                        marginLeft: 8,
                       }}>
                       Virtual
                     </Text>
@@ -159,43 +182,43 @@ const Event = props => {
                     //onSnapToItem={(index) => console.log('current index:', index)}
                     renderItem={renderItem}
                   />
-                </View>
+                {/* </View> */}
 
                 <View
                   style={{
                     position: 'absolute',
-                    bottom: 120,
+                    bottom: 140,
                     //right: 50,
                     left: 15,
                   }}>
                   <View style={{flexDirection: 'row', alignItems: 'center'}}>
                     <Text
                       style={{
-                        fontFamily: 'Montserrat-Medium',
+                        fontFamily: 'Montserrat-Regular',
                         fontSize: 16,
-                        color: 'black',
+                        color: COLORS.black,
                       }}>
-                      June 6th 2016
+                      December 1st 2023
                     </Text>
 
                     <Text
                       style={{
-                        backgroundColor: 'gray',
-                        width: 2,
-                        height: 25,
+                        backgroundColor: COLORS.txtGray,
+                        width: 1.5,
+                        height: 20,
                         borderRadius: 5,
-                        marginLeft: 15,
+                        marginHorizontal: 8,
                         //marginTop: 5,
                       }}
                     />
                     <Text
                       style={{
-                        fontFamily: 'Montserrat-Medium',
+                        fontFamily: 'Montserrat-Regular',
                         fontSize: 16,
-                        color: 'black',
-                        marginLeft: 15,
+                        color: COLORS.black,
+                        //marginLeft: 8,
                       }}>
-                      8 PM to 11 PM
+                      6 PM - 9 PM
                     </Text>
                   </View>
                 </View>
@@ -203,19 +226,23 @@ const Event = props => {
                 <View
                   style={{
                     position: 'absolute',
-                    bottom: 60,
+                    bottom: 72,
                     left: 15,
                   }}>
                   <Text
                     style={{
-                      fontFamily: 'Montserrat-Medium',
-                      fontSize: 16,
+                      fontFamily: 'Montserrat-SemiBold',
+                      fontSize: 20,
                       color: COLORS.black,
                     }}>
-                    Festival of Happiness
+                    Festival of the Year
                   </Text>
-                  <Text style={{fontFamily: 'Montserrat-Medium', fontSize: 16}}>
-                    Best Wester Plus Resort Trea Hotel
+                  <Text 
+                    numberOfLines={1} 
+                    ellipsizeMode='tail'
+                    style={{fontFamily: 'Montserrat-Regular', fontSize: 14, color: COLORS.black, marginTop: 8}}
+                  >
+                    Once again, relish those perfect moments together
                   </Text>
                 </View>
                 <View
@@ -223,50 +250,52 @@ const Event = props => {
                     position: 'absolute',
                     bottom: 20,
                     left: 15,
-
+                    
                     flexDirection: 'row',
                   }}>
                   <Text
                     style={{
-                      fontFamily: 'Montserrat-Medium',
-                      fontSize: 16,
-                      color: 'gray',
+                      fontFamily: 'Montserrat-Regular',
+                      fontSize: 14,
+                      color: COLORS.secondary,
                       borderWidth: 1,
-                      borderColor: 'gray',
-                      paddingHorizontal: 4,
-                      borderRadius: 5,
+                      borderColor: COLORS.secondary,
+                      paddingVertical: 6,
+                      paddingHorizontal: 10,
+                      borderRadius: 16,
                     }}>
-                    #happiness
+                    #newevent
                   </Text>
                   <Text
                     style={{
-                      fontFamily: 'Montserrat-Medium',
-                      fontSize: 16,
-                      color: 'gray',
+                      fontFamily: 'Montserrat-Regular',
+                      fontSize: 14,
+                      color: COLORS.secondary,
                       borderWidth: 1,
-                      borderColor: 'gray',
-                      paddingHorizontal: 4,
-                      borderRadius: 5,
-                      marginLeft: 5,
+                      borderColor: COLORS.secondary,
+                      paddingVertical: 6,
+                      paddingHorizontal: 10,
+                      borderRadius: 16,
+                      marginHorizontal: 8
                     }}>
-                    #france
+                    #created
                   </Text>
                   <Text
                     style={{
-                      fontFamily: 'Montserrat-Medium',
-                      fontSize: 16,
-                      color: 'gray',
+                      fontFamily: 'Montserrat-Regular',
+                      fontSize: 14,
+                      color: COLORS.secondary,
                       borderWidth: 1,
-                      borderColor: 'gray',
-                      paddingHorizontal: 4,
-                      borderRadius: 5,
-                      marginLeft: 5,
+                      borderColor: COLORS.secondary,
+                      paddingVertical: 6,
+                      paddingHorizontal: 10,
+                      borderRadius: 16,
                     }}>
-                    #2016 event
+                    #2023
                   </Text>
                 </View>
-              </View>
-            </Shadow>
+              {/* </View> */}
+            {/* </Shadow> */}
           </View>
         )}
       />
@@ -274,36 +303,45 @@ const Event = props => {
       {/* <View style={styles.divline} /> */}
       <TouchableOpacity
         onPress={() => {
-          props.navigation.navigate('HistoryEvent');
+          //props.navigation.navigate('HistoryEvent');
         }}>
         <View style={styles.arrow}>
-          <Text style={styles.headerText}>History</Text>
-          <FontAwesome name="angle-right" size={25} color="#000000" />
+          <Text style={paraGray.largebold}>History</Text>
+          {/* <FontAwesome name="angle-right" size={25} color="#000000" /> */}
         </View>
       </TouchableOpacity>
+      <View style={{paddingVertical: 0}}>
+        <HistoryEvent navigation={props.navigation}/>
+      </View>
 
+     </ScrollView>
       <View
         style={{
           flexDirection: 'row',
           justifyContent: 'flex-end',
-
           flex: 1,
-        }}>
+        }}
+      >
         <TouchableOpacity
           style={{
             position: 'absolute',
             bottom: 10,
             right: 10,
             height: 60,
-            width: 60,
+            //width: 120,
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: '#000000',
-            borderRadius: 60,
+            backgroundColor: COLORS.primary,
+            borderRadius: 30,
             marginTop: 20,
+            flexDirection: 'row',
+            paddingHorizontal: 16,
+            elevation: 4,
           }}
-          onPress={() => props.navigation.navigate('CreateEvent')}>
+          onPress={() => props.navigation.navigate('CreateEvent')}
+        >
           <Feather name="plus" size={30} color="white" />
+          {/* <Text style={[paraGray.largebold, {fontSize: 14, color: COLORS.white}]}> Create Event </Text> */}
         </TouchableOpacity>
       </View>
     </View>
@@ -319,8 +357,8 @@ const styles = StyleSheet.create({
   },
 
   arrow: {
-    paddingHorizontal: '6%',
-    marginTop: 20,
+    paddingHorizontal: 20,
+    marginTop: 24,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },

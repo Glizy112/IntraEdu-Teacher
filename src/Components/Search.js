@@ -53,12 +53,12 @@ const Search = ({ KEYS_TO_FILTERS, getdata, filter }) => {
                     flexDirection: 'row',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    backgroundColor: '#FFFFFF',
+                    backgroundColor: COLORS.white,
                     width: '100%',
                     height: 50,
                     borderRadius: 12,
-                    paddingHorizontal: 10,
-                    elevation: 4,
+                    paddingHorizontal: 4,
+                    elevation: 2,
                 }}>
                 <TextInput
                     placeholder="Search"
@@ -76,7 +76,15 @@ const Search = ({ KEYS_TO_FILTERS, getdata, filter }) => {
                         searchUpdated(term)
                     }
                 />
-                <Ionicons name="search" size={24} color={COLORS.black} style={{ transform: [{ rotate: '90deg' }], marginRight: 10 }} />
+                <Ionicons 
+                    name="search-outline" 
+                    size={24} 
+                    color={COLORS.black} 
+                    style={{ 
+                        //transform: [{ rotate: '90deg' }], 
+                        marginRight: 10 
+                    }} 
+                />
             </View>
         </View>
     );
@@ -89,7 +97,7 @@ const styles = StyleSheet.create({
         width: '100%',
         flexDirection: 'row',
         alignItems: 'center',
-        paddingHorizontal: 15,
+        paddingHorizontal: 20,
         justifyContent: 'space-between',
         borderWidth: 0,
         borderColor: '#E4E4E4',

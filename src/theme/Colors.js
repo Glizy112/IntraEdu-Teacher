@@ -1,9 +1,15 @@
 // import { store } from '../store/index'
 export const COLORS = {
   bg: '#FFFFFF',
+  
+  //primary: '#F9D32A', initial
   primary: '#275CE0',
-  bgColor: '#EEF2FD',
   secondary: '#385AB1',
+  //txtColor: '#000000',
+  bgColor: '#EEF2FD',
+  txtWhite: '#FFFFFF',
+  txtBlack: '#000000',
+
   txtBlu: '#193566',
   txtGray: '#97a7c3',
   bluBg: '#1652F0',

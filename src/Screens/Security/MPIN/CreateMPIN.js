@@ -74,13 +74,14 @@ const CreateMPIN = props => {
                 style={{
                     borderRadius: 16,
                     backgroundColor: COLORS.white,
-                    width: 56,
-                    height: 56,
+                    width: 64,
+                    height: 64,
                     marginLeft: 2,
-                    justifyContent: 'center',
+                    justifyContent: 'flex-start',
                     alignItems: 'center',
-                    borderWidth: 1.2,
-                    borderColor: COLORS.primary,
+                    borderWidth: 0.6,
+                    borderColor: COLORS.black,
+                    paddingTop: 16,
                     // ...include most of View/Layout styles
                 }}>
                 <Text
@@ -201,7 +202,7 @@ const CreateMPIN = props => {
     };
     return (
         <View style={container.container}>
-            <StatusBar backgroundColor={'whitesmoke'} barStyle={'dark-content'} />
+            <StatusBar backgroundColor={'#fafef8'} barStyle={'dark-content'} />
             <View style={{ paddingHorizontal: 15, backgroundColor: COLORS.white }}>
                 <Header
                     backgroundColor
@@ -226,12 +227,12 @@ const CreateMPIN = props => {
                         resizeMode={'contain'}
                         source={require('../../../../assets/passlock.png')}
                     />
-                    <Text style={[paraGray.parahome, { marginTop: 24, marginBottom: 8 }]}>
+                    <Text style={[paraGray.parahome, { marginTop: 16, marginBottom: 8 }]}>
                         Set New PIN
                     </Text>
                     <Text style={[paraGray.darkpara]}>Create a 4-digit PIN for easy access</Text>
                 </View>
-                <View style={{ justifyContent: 'center', marginTop: 40 }}>
+                <View style={{ justifyContent: 'center', marginTop: 48 }}>
                     <View
                         style={{
                             flexDirection: 'row',
@@ -240,10 +241,10 @@ const CreateMPIN = props => {
                             paddingHorizontal: 24
                         }}
                     >
-                        <Text style={[paraGray.largebold, { fontSize: 16 }]}>New Pin</Text>
+                        <Text style={[paraGray.largebold, { fontSize: 16 }]}>Enter New Pin</Text>
                     </View>
                     <View
-                        style={{ marginTop: 16, marginBottom: 20, paddingHorizontal: 20, borderWidth: 0 }}>
+                        style={{ marginVertical: 24, paddingHorizontal: 20, borderWidth: 0 }}>
                         <CodeField
                             autoFocus
                             ref={ref}
@@ -264,17 +265,22 @@ const CreateMPIN = props => {
                     <TouchableOpacity
                         style={{
                             flexDirection: 'row',
-                            height: 50,
+                            height: 56,
                             backgroundColor: COLORS.primary,
-                            borderRadius: 15,
+                            borderRadius: 12,
                             justifyContent: 'center',
                             alignItems: 'center',
-                            paddingVertical: 12,
+                            //paddingVertical: 12,
                             //paddingBottom: 10,
                             marginBottom: 10,
                         }}
                         onPress={CreatePIN}>
-                        <Text style={[paraGray.largebold, { fontSize: 14 }]}>CREATE PIN</Text>
+                        <Text 
+                            style={[
+                                paraGray.largebold, 
+                                { fontSize: 14, color: COLORS.white, textAlign: 'center' }
+                            ]}
+                        >Create PIN</Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>

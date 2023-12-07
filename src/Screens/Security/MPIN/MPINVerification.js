@@ -45,8 +45,7 @@ const MPINVerification = props => {
     value,
     setValue,
   });
-  const {userinfo, userid, username, showmodal, useremail, userimage} =
-    useSelector(state => state.userReducer);
+  const {userinfo, userid, username, showmodal, useremail, userimage} = useSelector(state => state.userReducer);
 
   // const dispatch = useDispatch();
 
@@ -104,14 +103,9 @@ const MPINVerification = props => {
     let textChild = null;
 
     if (symbol) {
-      textChild = enableMask ? (
-        <Entypo name="dot-single" size={30} color={'black'} />
-      ) : (
-        symbol
-      );
-      //textChild = <Entypo name="dot-single" size={30} color={'black'} />;
+      textChild = enableMask ? <Entypo name="dot-single" size={30} /> : symbol;
     } else if (isFocused) {
-      textChild = null;
+      textChild = <Cursor />;
     }
     return (
       <View
@@ -126,20 +120,17 @@ const MPINVerification = props => {
           backgroundColor: COLORS.white,
           width: 56,
           height: 56,
-          marginLeft: 12,
+          marginLeft: 20,
           justifyContent: 'center',
           alignItems: 'center',
-          borderWidth: 1,
+          borderWidth: 0.6,
           borderColor: COLORS.black,
+          paddingTop: 4,
           // ...include most of View/Layout styles
         }}>
         <Text
           key={index}
-          style={[
-            styles.cell,
-            isFocused && styles.focusCell,
-            paraGray.darklarge,
-          ]}
+          style={[styles.cell, isFocused && styles.focusCell, paraGray.darklarge]}
           onLayout={getCellOnLayoutHandler(index)}>
           {/* {symbol || (isFocused ? <Cursor /> : null)} */}
           {textChild}
@@ -169,11 +160,11 @@ const MPINVerification = props => {
   };
 
   return (
-    <View style={[container.container, {backgroundColor: COLORS.lightactive}]}>
+    <View style={[container.container, {backgroundColor: COLORS.bgColor}]}>
       {loading == true && <Spinner visible={load} />}
       <ScrollView>
         <View style={{flex: 1, alignItems: 'center', marginTop: '25%'}}>
-          <Text style={[paraGray.largebold, {fontSize: 30}]}>MPIN Login</Text>
+          <Text style={[paraGray.largebold, { fontSize: 30 }]}>MPIN Login</Text>
         </View>
         <View
           style={{
@@ -184,6 +175,7 @@ const MPINVerification = props => {
           }}>
           <Avatar.Image
             style={{marginTop: 10, alignSelf: 'center'}}
+            size={72}
             source={{uri: Url.profile_IMG + userimage}}
           />
         </View>
@@ -197,35 +189,43 @@ const MPINVerification = props => {
           <View
             style={{
               flex: 1,
-              paddingHorizontal: 15,
+              //paddingHorizontal: 15,
               paddingVertical: 15,
+              alignItems: 'center',
+              justifyContent: 'center',
               //borderWidth: 1,
-              borderRadius: 10,
+              borderRadius: 12,
               backgroundColor: COLORS.white,
             }}>
             <Text
-              style={[
-                paraGray.darklarge,
-                {textAlign: 'center', marginTop: 20},
-              ]}>
-              Enter Your MPIN
-            </Text>
+              style={{
+                fontFamily: 'Montserrat-Medium', 
+                fontSize: 18, 
+                color: COLORS.secondary, 
+                textAlign: 'center', 
+                marginTop: 20
+              }}
+            > Enter Your MPIN </Text>
             <View
               style={{
                 flex: 1,
                 flexDirection: 'row',
+                alignSelf: 'center',
                 justifyContent: 'center',
-                marginTop: 20,
+                marginTop: 24,
+                marginLeft: -16,
+                borderWidth: 0
               }}>
               <CodeField
                 autoFocus
                 ref={ref}
-                {...props1}
+                //{...props1}
                 // Use `caretHidden={false}` when users can't paste a text value, because context menu doesn't appear
+                caretHidden={true}
                 value={value}
                 onChangeText={setValue}
                 cellCount={CELL_COUNT}
-                rootStyle={{}}
+                //rootStyle={{}}
                 keyboardType="number-pad"
                 textContentType="oneTimeCode"
                 renderCell={renderCell}
@@ -237,26 +237,24 @@ const MPINVerification = props => {
                 flexDirection: 'row',
                 justifyContent: 'center',
                 marginBottom: 10,
-                marginTop: 32,
+                marginTop: 40,
               }}>
               <TouchableOpacity
                 style={{
-                  height: 50,
+                  //flex: 1,
+                  height: 56,
                   justifyContent: 'center',
                   alignItems: 'center',
                   backgroundColor: COLORS.primary,
                   borderRadius: 12,
+                  paddingHorizontal: 32,
                 }}
                 onPress={VerifyPIN}>
                 <Text
-                  style={{
-                    marginVertical: 10,
-                    marginHorizontal: 40,
-                    fontSize: 16,
-
-                    color: '#FFFFFF',
-                    fontFamily: 'Montserrat-SemiBold',
-                  }}>
+                  style={[
+                    paraGray.largeBoldLight,
+                    { marginVertical: 10, marginHorizontal: 40, fontSize: 16 },
+                  ]}>
                   Verify
                 </Text>
                 {/* <AntDesign

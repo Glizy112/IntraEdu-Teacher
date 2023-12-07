@@ -76,13 +76,14 @@ const ConfirmMPIN = props => {
                 style={{
                     borderRadius: 16,
                     backgroundColor: COLORS.white,
-                    width: 56,
-                    height: 56,
+                    width: 64,
+                    height: 64,
                     marginLeft: 2,
-                    justifyContent: 'center',
+                    justifyContent: 'flex-start',
                     alignItems: 'center',
-                    borderWidth: 1.2,
-                    borderColor: COLORS.primary,
+                    borderWidth: 0.6,
+                    borderColor: COLORS.black,
+                    paddingTop: 16,
                     // ...include most of View/Layout styles
                 }}>
                 <Text
@@ -200,7 +201,7 @@ const ConfirmMPIN = props => {
     };
     return (
         <View style={container.container}>
-            <StatusBar backgroundColor={'whitesmoke'} barStyle={'dark-content'} />
+            <StatusBar backgroundColor={'#fafef8'} barStyle={'dark-content'} />
             <View style={{ paddingHorizontal: 15, backgroundColor: COLORS.white }}>
                 <Header
                     backgroundColor
@@ -225,12 +226,12 @@ const ConfirmMPIN = props => {
                         resizeMode={'contain'}
                         source={require('../../../../assets/passlock.png')}
                     />
-                    <Text style={[paraGray.parahome, { marginTop: 24, marginBottom: 8 }]}>
+                    <Text style={[paraGray.parahome, { marginTop: 16, marginBottom: 8 }]}>
                         Confirm PIN
                     </Text>
-                    <Text style={[paraGray.darkpara]}>Confirm a 4-digit PIN for easy access</Text>
+                    <Text style={[paraGray.darkpara]}>Confirm your 4-digit PIN for easy access</Text>
                 </View>
-                <View style={{ justifyContent: 'center', marginTop: 40 }}>
+                <View style={{ justifyContent: 'center', marginTop: 48 }}>
                     <View
                         style={{
                             flexDirection: 'row',
@@ -241,8 +242,7 @@ const ConfirmMPIN = props => {
                     >
                         <Text style={[paraGray.largebold, { fontSize: 16 }]}>Confirm Pin</Text>
                     </View>
-                    <View
-                        style={{ marginTop: 16, marginBottom: 20, paddingHorizontal: 20, borderWidth: 0 }}>
+                    <View style={{marginVertical: 24, paddingHorizontal: 20, borderWidth: 0}}>
                         <CodeField
                             autoFocus
                             ref={ref}
@@ -263,17 +263,22 @@ const ConfirmMPIN = props => {
                     <TouchableOpacity
                         style={{
                             flexDirection: 'row',
-                            height: 50,
+                            height: 56,
                             backgroundColor: COLORS.primary,
-                            borderRadius: 15,
+                            borderRadius: 12,
                             justifyContent: 'center',
                             alignItems: 'center',
-                            paddingVertical: 12,
+                            //paddingVertical: 12,
                             //paddingBottom: 10,
                             marginBottom: 10,
                         }}
                         onPress={CreatePIN}>
-                        <Text style={[paraGray.largebold, { fontSize: 14 }]}>CONFIRM PIN</Text>
+                        <Text 
+                            style={[
+                                paraGray.largebold, 
+                                { fontSize: 14, color: COLORS.white, textAlign: 'center' }
+                            ]}
+                        >CONFIRM PIN</Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>

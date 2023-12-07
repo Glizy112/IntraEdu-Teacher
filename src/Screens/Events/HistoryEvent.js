@@ -79,7 +79,7 @@ const HistoryEvent = props => {
     }
   };
   const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
+    setRefreshing(false);
     getapiData();
   }, []);
 
@@ -90,29 +90,30 @@ const HistoryEvent = props => {
   );
 
   return (
-    <View style={styles.container}>
-      {loading == true && <Spinner visible={load} />}
-      <ScrollView
+    <View style={{}}>
+      {loading == true && <Spinner visible={load}/>}
+      {/* <ScrollView
         showsVerticalScrollIndicator={false}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }>
+        }> */}
         <View style={styles.search}>
           <View
             style={{
               flexDirection: 'row',
               alignItems: 'center',
-              backgroundColor: '#FFFFFF',
+              backgroundColor: COLORS.white,
               width: '100%',
               height: 50,
-              borderColor: '#D3D3D3',
+              borderColor: COLORS.white,
               paddingHorizontal: 2,
               borderWidth: 1,
               marginTop: 15,
               borderRadius: 10,
+              elevation: 2,
             }}>
             <TextInput
-              placeholder="Search by Names./Contact number"
+              placeholder="Search by Name or Mobile Number"
               placeholderTextColor="#808080"
               onChangeText={term => {
                 searchUpdated(term);
@@ -120,26 +121,37 @@ const HistoryEvent = props => {
               style={{
                 marginLeft: 0,
                 backgroundColor: '#FFFFFF',
+                color: COLORS.black,
                 width: '90%',
                 height: 40,
-                fontSize: 12,
+                fontSize: 14,
+                paddingHorizontal: 12,
                 fontFamily: 'Montserrat-Regular',
               }}
             />
-            <Feather name="search" size={29} color="#000000" />
+            <Feather name="search" size={24} color="#000000" />
           </View>
         </View>
-        <View style={{ marginBottom: 20 }}>
-          {filterevents.map((event, index) => (
+        <View style={{ marginBottom: 20, marginTop: 4, paddingHorizontal: 2 }}>
+          <View style={{paddingHorizontal: 12, paddingTop: 12}}>
+            <Text 
+              style={{
+                fontSize: 14, 
+                fontFamily: 'Montserrat-Medium',
+                color: COLORS.secondary,
+              }}
+            > Results ({filterevents?.length}) </Text>
+          </View>
+          {filterevents?.map((event, index) => (
             <View key={index}>
               <TouchableOpacity
                 style={{
                   flex: 1,
-                  backgroundColor: COLORS.bg,
+                  backgroundColor: COLORS.white,
                   borderRadius: 10,
                   paddingHorizontal: 10,
-                  borderWidth: 1,
-                  borderColor: COLORS.border,
+                  borderWidth: 0.6,
+                  borderColor: COLORS.primary,
                   marginVertical: 5,
                   marginHorizontal: 15,
                 }}
@@ -154,7 +166,7 @@ const HistoryEvent = props => {
                     justifyContent: 'space-between',
                     marginTop: 10,
                   }}>
-                  <Text style={[paraGray.darkpara]}>{event.title}</Text>
+                  <Text style={[paraGray.largebold, {fontSize: 16}]}>{event.title}</Text>
                   <View>
                     <TouchableOpacity onPress={() => props.navigation.navigate('EditEvent', {
                       eventdata: getdata[index]
@@ -254,7 +266,7 @@ const HistoryEvent = props => {
             </View>
           )}
         </View>
-      </ScrollView>
+      {/* </ScrollView> */}
     </View>
   );
 };
@@ -270,7 +282,7 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 15,
+    paddingHorizontal: 16,
     justifyContent: 'space-between',
     borderWidth: 0,
     borderColor: '#E4E4E4',

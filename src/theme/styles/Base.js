@@ -38,9 +38,10 @@ const paraGray = StyleSheet.create({
     opacity: 0.71,
   },
   darkpara: {
-    fontSize: 15,
+    fontSize: 12,
     color: '#000000',
-    fontFamily: 'Montserrat-Regular',
+    fontFamily: 'Montserrat-Medium',
+    //lineHeight: 18,
   },
   parahome: {
     fontSize: 25,
@@ -52,6 +53,13 @@ const paraGray = StyleSheet.create({
   largebold: {
     fontSize: 20,
     color: '#000000',
+    fontFamily: 'Montserrat-SemiBold',
+    // fontWeight: "500",
+    // opacity: 0.71
+  },
+  largeBoldLight: {
+    fontSize: 20,
+    color: '#FFFFFF',
     fontFamily: 'Montserrat-SemiBold',
     // fontWeight: "500",
     // opacity: 0.71

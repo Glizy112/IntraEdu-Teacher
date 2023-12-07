@@ -17,6 +17,9 @@ import Url from '../../Config/Api/Url';
 import Spinner from 'react-native-loading-spinner-overlay';
 import FastImage from 'react-native-fast-image';
 import { useFocusEffect } from '@react-navigation/native';
+import { Header } from '../../Components/Header';
+import { COLORS } from '../../theme/Colors';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 
 let deviceHeight = Dimensions.get('window').height;
@@ -90,36 +93,70 @@ const Gallery = props => {
   return (
     <View style={[container.container]}>
       {loading == true && <Spinner visible={load} />}
+      {/* <View style={{paddingLeft: 12}}>
+        <Header
+          backgroundColor
+          navigation={props.navigation}
+          color={COLORS.black}
+          headerFirstName="Gallery"
+          //marginLeft
+          isGallery
+          back
+          time
+          // onPresss={() =>
+          //   props.navigation.navigate('PTMHistory')
+          // }
+        />
+      </View> */}
+
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          //height: 30,
+          justifyContent: 'space-between',
+          paddingHorizontal: 15,
+          paddingTop: 8,
+          //borderWidth: 1
+        }}>
+        <TouchableOpacity onPress={()=> props.navigation.goBack()}>
+          <AntDesign name="arrowleft" size={24} color={COLORS.black}/>
+        </TouchableOpacity>
+        {/* <View style={{justifyContent: 'center', alignItems: 'center', borderWidth: 0}}> */}
+        <Text style={[paraGray.largebold, {textAlign: 'center'}]}> Gallery </Text>
+        <Text>Text</Text>
+        {/* </View> */}
+      </View>
+      <View style={{paddingTop: 12, borderBottomWidth: 0.6, borderColor: COLORS.primary}}/>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }>
-        <View style={{ flex: 1 }} />
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+      >
+        {/* <View style={{ flex: 1 }} /> */}
         <View
           style={{
             display: 'flex',
             flexDirection: 'row',
             flexWrap: 'wrap',
-            marginBottom: 20,
+            marginVertical: 20,
+            //marginBottom: 20,
+            paddingHorizontal: 10
           }}>
           {getdata.map((image, index) => (
             <TouchableOpacity
               key={index}
               style={{ marginTop: 10 }}
               onPress={() =>
-                props.navigation.navigate('ImageDetail', {
-                  Images: getdata[index],
-
-                })
-              }>
+                props.navigation.navigate('ImageDetail', {Images: getdata[index]})
+              }
+            >
               <FastImage
                 source={{ uri: Url.gallery_IMG + JSON.parse(image.image)[0] }}
                 style={{
-                  height: deviceHeight / 3,
-                  width: deviceWidth / 2 - 6,
+                  height: deviceHeight / 3.5,
+                  width: deviceWidth / 2.15 - 6,
                   borderRadius: 10,
-                  marginLeft: 4,
+                  marginLeft: 8,
                 }}
               />
             </TouchableOpacity>
@@ -135,7 +172,7 @@ const Gallery = props => {
               marginTop: 120,
             }}>
             <Text style={[paraGray.darklarge, { textAlign: 'center' }]}>
-              NO Data Found
+              No Data Found
             </Text>
           </View>
         )}
