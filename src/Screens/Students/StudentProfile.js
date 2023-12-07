@@ -695,6 +695,7 @@ const StudentProfile = props => {
                           onChangeText={value => {
                             setStudentAadhar(value);
                           }}
+                          editable={false}
                         />
                       </View>
                     </View>
@@ -715,6 +716,7 @@ const StudentProfile = props => {
                             setStudentRollNO(value);
                           }}
                           style={styles.textInput}
+                          editable={false}
                         />
                       </View>
                     </View>
@@ -737,6 +739,7 @@ const StudentProfile = props => {
                             setStudentMobileno(value);
                           }}
                           style={styles.textInput}
+                          editable={false}
                         />
                       </View>
                     </View>
@@ -757,6 +760,7 @@ const StudentProfile = props => {
                             setStudentEmail(value);
                           }}
                           style={styles.textInput}
+                          editable={false}
                         />
                       </View>
                     </View>
@@ -778,6 +782,7 @@ const StudentProfile = props => {
                           setStudentAddress(value);
                         }}
                         style={styles.textInput}
+                        editable={false}
                       />
                     </View>
                   </View>
@@ -821,6 +826,7 @@ const StudentProfile = props => {
                             setStudentSchoolBusNo(value);
                           }}
                           style={styles.textInput}
+                          editable={false}
                         />
                       </View>
                     </View>
@@ -837,6 +843,7 @@ const StudentProfile = props => {
                             setStudentRouteNO(value);
                           }}
                           style={styles.textInput}
+                          editable={false}
                         />
                       </View>
                     </View>
@@ -860,6 +867,7 @@ const StudentProfile = props => {
                             setStudentSchoolNo(value);
                           }}
                           style={styles.textInput}
+                          editable={false}
                         />
                       </View>
                     </View>
@@ -879,6 +887,7 @@ const StudentProfile = props => {
                             dispatch(setuserName(value));
                           }}
                           style={styles.textInput}
+                          editable={false}
                         />
                       </View>
                     </View>
@@ -919,6 +928,7 @@ const StudentProfile = props => {
                             setStudentMotherName(value);
                           }}
                           style={styles.textInput}
+                          editable={false}
                         />
                       </View>
                     </View>
@@ -939,6 +949,7 @@ const StudentProfile = props => {
                             setStudentMotherMobileNo(value);
                           }}
                           style={styles.textInput}
+                          editable={false}
                         />
                       </View>
                     </View>
@@ -957,6 +968,7 @@ const StudentProfile = props => {
                             setStudentMotherEmail(value);
                           }}
                           style={styles.textInput}
+                          editable={false}
                         />
                       </View>
                     </View>
@@ -973,6 +985,7 @@ const StudentProfile = props => {
                             setStudentFatherName(value);
                           }}
                           style={styles.textInput}
+                          editable={false}
                         />
                       </View>
                     </View>
@@ -991,6 +1004,7 @@ const StudentProfile = props => {
                             setStudentMotherName(value);
                           }}
                           style={styles.textInput}
+                          editable={false}
                         />
                       </View>
                     </View>
@@ -1007,6 +1021,7 @@ const StudentProfile = props => {
                             setStudentFatherEmail(value);
                           }}
                           style={styles.textInput}
+                          editable={false}
                         />
                       </View>
                     </View>
