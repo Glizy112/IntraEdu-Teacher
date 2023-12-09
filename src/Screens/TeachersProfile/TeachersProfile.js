@@ -15,6 +15,7 @@ import {container, paraGray} from '../../theme/styles/Base';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {useSelector, useDispatch} from 'react-redux';
@@ -58,11 +59,10 @@ const TeachersProfile = props => {
         <View
           style={{
             flex: 1,
-            backgroundColor: COLORS.bg,
-            borderTopLeftRadius: 30,
-            borderTopRightRadius: 30,
-            paddingHorizontal: 15,
             paddingBottom: 30,
+            width: '90%',
+            alignSelf: 'center',
+            backgroundColor: COLORS.bg,
           }}>
           {/* <View
             style={{
@@ -440,10 +440,7 @@ const TeachersProfile = props => {
               height: 50,
               justifyContent: 'space-between',
             }}>
-            <View
-              style={{
-                alignItems: 'flex-start',
-              }}>
+            <View style={{}}>
               <TouchableOpacity
                 style={{
                   backgroundColor: COLORS.white,
@@ -456,22 +453,26 @@ const TeachersProfile = props => {
                   props.navigation.goBack()
                 }>
                 <Ionicons
-                  style={{marginVertical: 5}}
+                  style={{marginVertical: 0}}
                   name="arrow-back"
-                  size={25}
+                  size={20}
                   color={COLORS.black}
                 />
               </TouchableOpacity>
             </View>
             <View
-              style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+              style={{
+                position: 'absolute',
+                left: 0,
+                right: 0,
+                textAlign: 'center',
+              }}>
               <Text
                 style={[
                   // paraGray.darkpara,
                   {
                     textAlign: 'center',
                     //marginLeft: 30,
-                    marginLeft: -15,
                     fontFamily: 'Montserrat-Medium',
                     fontSize: 16,
                     color: COLORS.black,
@@ -535,14 +536,14 @@ const TeachersProfile = props => {
                 <Text
                   style={[
                     paraGray.parahome,
-                    {fontSize: 14, textAlign: 'center'},
+                    {fontSize: 16, textAlign: 'center'},
                   ]}>
                   {username}
                 </Text>
               </View>
             </View>
           </View>
-          <View
+          {/* <View
             style={{
               width: 'auto',
               width: 326,
@@ -736,6 +737,193 @@ const TeachersProfile = props => {
                   </View>
                 </View>
 
+                
+              </View>
+            </View>
+          </View> */}
+          <View style={{}}>
+            <View
+              style={{
+                width: '90%',
+                alignSelf: 'center',
+                height: 60,
+                elevation: 4,
+                backgroundColor: 'white',
+                borderRadius: 10,
+
+                justifyContent: 'center',
+                paddingHorizontal: 10,
+              }}>
+              <View
+                style={{
+                  width: '100%',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                }}>
+                <View
+                  style={{
+                    width: 80,
+                    justifyContent: 'center',
+                    alignItems: 'flex-start',
+                    //alignSelf: 'center',
+                    marginLeft: 10,
+                  }}>
+                  <Text
+                    style={{
+                      fontFamily: 'Montserrat-Medium',
+                      fontSize: 12,
+
+                      textAlign: 'center',
+                      color: '#97A7C3D6',
+                    }}>
+                    Gender
+                  </Text>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      //alignSelf: 'center',
+                      marginTop: 5,
+                    }}>
+                    <Text
+                      style={{
+                        fontFamily: 'Montserrat-Medium',
+                        fontSize: 13,
+
+                        lineHeight: 15,
+                        color: COLORS.primary,
+                        textAlign: 'center',
+                      }}>
+                      Female
+                    </Text>
+                    <FontAwesome
+                      size={16}
+                      name="user"
+                      color={COLORS.primary}
+                      style={{textAlign: 'right', marginLeft: 5}}
+                    />
+                  </View>
+                </View>
+                <View
+                  style={{
+                    width: 1,
+                    height: 36,
+                    //borderWidth: 1,
+                    backgroundColor: '#97A7C3D6',
+
+                    //marginHorizontal: 10,
+                    marginVertical: 10,
+                  }}
+                />
+                <View
+                  style={{
+                    width: 100,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    //alignSelf: 'center',
+                    marginHorizontal: 10,
+                    //borderWidth: 1,
+                  }}>
+                  <Text
+                    style={{
+                      fontFamily: 'Montserrat-Medium',
+                      fontSize: 12,
+                      textAlign: 'center',
+                      lineHeight: 15,
+
+                      color: '#97A7C3D6',
+                    }}>
+                    Experience
+                  </Text>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      //alignSelf: 'center',
+                      marginTop: 5,
+                    }}>
+                    <Text
+                      style={{
+                        fontFamily: 'Montserrat-Medium',
+                        fontSize: 13,
+
+                        lineHeight: 15,
+                        color: COLORS.primary,
+                        textAlign: 'center',
+                      }}>
+                      2 Years
+                    </Text>
+                    <Ionicons
+                      size={16}
+                      name="briefcase"
+                      color={COLORS.primary}
+                      style={{textAlign: 'right', marginLeft: 5}}
+                    />
+                  </View>
+                </View>
+                <View
+                  style={{
+                    width: 1,
+                    height: 36,
+                    backgroundColor: '#97A7C3D6',
+                    //marginHorizontal: 10,
+                    //marginVertical: 10,
+                  }}
+                />
+
+                <View
+                  style={{
+                    width: 70,
+                    //justifyContent: 'center',
+                    alignItems: 'flex-start',
+                    //alignSelf: 'center',
+                    marginLeft: 20,
+                  }}>
+                  <Text
+                    style={{
+                      fontFamily: 'Montserrat-Medium',
+                      fontSize: 12,
+                      textAlign: 'center',
+                      lineHeight: 15,
+                      color: '#97A7C3D6',
+                    }}>
+                    City
+                  </Text>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      //alignSelf: 'center',
+                      //marginLeft: 28,
+                      marginTop: 5,
+                    }}>
+                    <Text
+                      style={{
+                        fontFamily: 'Montserrat-Medium',
+                        fontSize: 13,
+
+                        lineHeight: 15,
+                        color: COLORS.primary,
+                        textAlign: 'center',
+                      }}>
+                      Pune
+                    </Text>
+                    <Ionicons
+                      size={16}
+                      name="location"
+                      color={COLORS.primary}
+                      style={{textAlign: 'right', marginLeft: 5}}
+                    />
+                  </View>
+                </View>
+
                 {/* <Text
                   style={[
                     paraGray.darkpara,
@@ -746,7 +934,13 @@ const TeachersProfile = props => {
               </View>
             </View>
           </View>
-          <View style={{marginTop: 25, alignSelf: 'center'}}>
+          <View
+            style={{
+              marginTop: 25,
+              alignSelf: 'center',
+
+              width: '100%',
+            }}>
             <Text
               style={{
                 fontFamily: 'Montserrat-Medium',
@@ -764,96 +958,112 @@ const TeachersProfile = props => {
                 borderWidth: 1,
                 borderColor: COLORS.primary,
                 borderRadius: 12,
-                width: 316,
-                height: 262,
+                width: '100%',
+                height: 242,
                 alignSelf: 'center',
+                justifyContent: 'center',
               }}>
               <View
-                style={{
-                  justifyContent: 'center',
-                  width: 270,
-                  height: 232,
-                  alignItems: 'center',
-                  alignSelf: 'center',
-                  paddingLeft: 10,
-                }}>
-                <View style={[styles.mainViewContainer, {marginTop: 10}]}>
-                  <View style={styles.mainView}>
-                    <Text style={[paraGray.darkpara, {color: COLORS.txtGray}]}>
-                      Mobile No
-                    </Text>
-                    <View style={styles.inputTextView}>
-                      <Text style={[paraGray.darkpara, styles.userText]}>
-                        {userphone}
+                style={
+                  {
+                    //justifyContent: 'center',
+                    //alignItems: 'center',
+                    //  alignSelf: 'center',
+                  }
+                }>
+                <View style={[styles.mainViewContainer, {marginTop: -15}]}>
+                  <View
+                    style={{
+                      width: '45%',
+                    }}>
+                    <View style={styles.mainView}>
+                      <Text
+                        style={[paraGray.darkpara, {color: COLORS.txtGray}]}>
+                        Mobile No
                       </Text>
+                      <View style={styles.inputTextView}>
+                        <Text style={[paraGray.darkpara, styles.userText]}>
+                          {userphone}
+                        </Text>
+                      </View>
+                    </View>
+                    <View style={styles.mainView}>
+                      <Text
+                        style={[paraGray.darkpara, {color: COLORS.txtGray}]}>
+                        Class Incharge
+                      </Text>
+                      <View style={styles.inputTextView}>
+                        <Text style={[paraGray.darkpara, styles.userText]}>
+                          null
+                        </Text>
+                      </View>
+                    </View>
+                    <View style={styles.mainView}>
+                      <Text
+                        style={[paraGray.darkpara, {color: COLORS.txtGray}]}>
+                        ID Card
+                      </Text>
+                      <View style={styles.inputTextView}>
+                        <Text style={[paraGray.darkpara, styles.userText]}>
+                          {userid}
+                        </Text>
+                      </View>
                     </View>
                   </View>
-                  <View style={styles.mainView}>
-                    <Text
-                      style={[
-                        paraGray.darkpara,
-                        {color: COLORS.txtGray, fontSize: 11},
-                      ]}>
-                      E-Mail ID
-                    </Text>
-                    <View style={styles.inputTextView}>
-                      <Text style={[paraGray.darkpara, styles.userText]}>
-                        {useremail}
+                  <View
+                    style={{
+                      //alignSelf: 'flex-start',
+                      width: '45%',
+                    }}>
+                    <View style={styles.mainView}>
+                      <Text
+                        style={[paraGray.darkpara, {color: COLORS.txtGray}]}>
+                        E-Mail ID
                       </Text>
+                      <View style={styles.inputTextView}>
+                        <Text style={[paraGray.darkpara, styles.userText]}>
+                          {useremail ? useremail : 'surekha@gmail.com'}
+                        </Text>
+                      </View>
+                    </View>
+                    <View style={styles.mainView}>
+                      <Text
+                        style={[paraGray.darkpara, {color: COLORS.txtGray}]}>
+                        Date of Birth
+                      </Text>
+                      <View style={styles.inputTextView}>
+                        <Text style={[paraGray.darkpara, styles.userText]}>
+                          {userdob}
+                        </Text>
+                      </View>
+                    </View>
+
+                    <View style={styles.mainView}>
+                      <Text
+                        style={[paraGray.darkpara, {color: COLORS.txtGray}]}>
+                        Aadhar No
+                      </Text>
+                      <View style={styles.inputTextView}>
+                        <Text style={[paraGray.darkpara, styles.userText]}>
+                          {username}
+                        </Text>
+                      </View>
                     </View>
                   </View>
                 </View>
-                <View style={styles.mainViewContainer}>
-                  <View style={styles.mainView}>
-                    <Text style={[paraGray.darkpara, {color: COLORS.txtGray}]}>
-                      Class Incharge
-                    </Text>
-                    <View style={styles.inputTextView}>
-                      <Text style={[paraGray.darkpara, styles.userText]}>
-                        null
-                      </Text>
-                    </View>
-                  </View>
-                  <View style={styles.mainView}>
-                    <Text style={[paraGray.darkpara, {color: COLORS.txtGray}]}>
-                      Date of Birth
-                    </Text>
-                    <View style={styles.inputTextView}>
-                      <Text style={[paraGray.darkpara, styles.userText]}>
-                        {userdob}
-                      </Text>
-                    </View>
-                  </View>
-                </View>
-                <View style={styles.mainViewContainer}>
-                  <View style={styles.mainView}>
-                    <Text style={[paraGray.darkpara, {color: COLORS.txtGray}]}>
-                      ID Card
-                    </Text>
-                    <View style={styles.inputTextView}>
-                      <Text style={[paraGray.darkpara, styles.userText]}>
-                        {userid}
-                      </Text>
-                    </View>
-                  </View>
-                  <View style={styles.mainView}>
-                    <Text style={[paraGray.darkpara, {color: COLORS.txtGray}]}>
-                      Aadhar No
-                    </Text>
-                    <View style={styles.inputTextView}>
-                      <Text style={[paraGray.darkpara, styles.userText]}>
-                        {username}
-                      </Text>
-                    </View>
-                  </View>
-                </View>
-                <View style={[styles.mainView, {width: '100%', marginTop: 15}]}>
+                <View
+                  style={[
+                    styles.mainView,
+                    {width: '85%', alignSelf: 'center'},
+                  ]}>
                   <Text style={[paraGray.darkpara, {color: COLORS.txtGray}]}>
                     Parmanent Address
                   </Text>
                   <View style={styles.inputTextView}>
                     <Text style={[paraGray.darkpara, styles.userText]}>
-                      {useraddress ? useraddress : 'N / A'}
+                      {useraddress
+                        ? useraddress
+                        : 'St. 10, XYZ Colony, ABC City'}
                     </Text>
                   </View>
                 </View>
@@ -869,34 +1079,38 @@ const TeachersProfile = props => {
 export default TeachersProfile;
 const styles = StyleSheet.create({
   mainViewContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
-    alignSelf: 'center',
+    // flexDirection: 'row',
+    // justifyContent: 'space-between',
+    // width: '90%',
+    // alignSelf: 'center',
+    // borderWidth: 1,
     //marginVertical: 5,
+    flexDirection: 'row',
+
+    justifyContent: 'space-between',
+    width: '85%',
+    alignSelf: 'center',
   },
   mainView: {
-    alignSelf: 'center',
-
-    width: 140,
-    heigth: 62,
+    //alignSelf: 'center',
     backgroundColor: 'white',
-    marginTop: 20,
+    marginTop: 10,
     //marginRight: 10,
+
+    width: '100%',
   },
   inputTextView: {
-    width: '60%',
-
+    //width: '60%',
     //height: 40,
-    borderRadius: 12,
-    justifyContent: 'center',
-    alignItems: 'flex-start',
+    //justifyContent: 'center',
+    //alignItems: 'flex-start',
     //paddingLeft: 10,
-    marginTop: 10,
+    marginTop: 5,
     //borderWidth: 1,
   },
   userText: {
     color: COLORS.primary,
+    fontSize: 12,
     //textAlign: 'left',
     //borderWidth: 1,
   },

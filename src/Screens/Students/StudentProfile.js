@@ -28,7 +28,7 @@ import ImagePicker from 'react-native-image-crop-picker';
 
 const StudentProfile = props => {
   const {studentdetail} = props.route.params;
-  console.log(studentdetail);
+
   const {userinfo, userid, username, showmodal} = useSelector(
     state => state.userReducer,
   );
@@ -460,188 +460,192 @@ const StudentProfile = props => {
               <View style={{}}>
                 <View
                   style={{
-                    width: 316,
-
                     height: 60,
                     elevation: 4,
                     backgroundColor: 'white',
                     borderRadius: 10,
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    //justifyContent: 'center',
-                    alignItems: 'center',
-                    paddingHorizontal: 25,
+
+                    justifyContent: 'center',
+                    paddingHorizontal: 10,
                   }}>
                   <View
                     style={{
-                      width: 70,
-                      justifyContent: 'center',
-                      alignItems: 'flex-start',
-                      // alignSelf: 'center',
-                    }}>
-                    <Text
-                      style={{
-                        fontFamily: 'Montserrat-Medium',
-                        fontSize: 10,
-
-                        lineHeight: 15,
-                        textAlign: 'center',
-                        color: '#97A7C3D6',
-                      }}>
-                      Class
-                    </Text>
-                    <View
-                      style={{
-                        flexDirection: 'row',
-
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        //alignSelf: 'center',
-                        marginTop: 5,
-                      }}>
-                      <Text
-                        style={{
-                          fontFamily: 'Montserrat-Medium',
-                          fontSize: 12,
-
-                          lineHeight: 15,
-                          color: COLORS.primary,
-                          textAlign: 'center',
-                        }}>
-                        {studentclassname}
-                      </Text>
-                      <Ionicons
-                        size={15}
-                        name="book"
-                        color={COLORS.primary}
-                        style={{textAlign: 'right', marginLeft: 5}}
-                      />
-                    </View>
-                  </View>
-                  <View
-                    style={{
-                      width: 1,
-                      height: 36,
-                      //borderWidth: 1,
-                      backgroundColor: '#97A7C3D6',
-
-                      //marginHorizontal: 10,
-                      marginVertical: 10,
-                    }}
-                  />
-                  <View
-                    style={{
-                      width: 100,
-                      justifyContent: 'center',
+                      width: '100%',
+                      flexDirection: 'row',
                       alignItems: 'center',
-                      //alignSelf: 'center',
-                      marginHorizontal: 10,
-                      //borderWidth: 1,
+                      justifyContent: 'space-between',
                     }}>
-                    <Text
-                      style={{
-                        fontFamily: 'Montserrat-Medium',
-                        fontSize: 10,
-                        textAlign: 'center',
-                        lineHeight: 15,
-
-                        color: '#97A7C3D6',
-                      }}>
-                      Academic Yr.
-                    </Text>
                     <View
                       style={{
-                        flexDirection: 'row',
-
-                        alignItems: 'center',
+                        width: 70,
                         justifyContent: 'center',
+                        alignItems: 'flex-start',
                         //alignSelf: 'center',
-                        marginTop: 5,
+                        marginLeft: 10,
                       }}>
                       <Text
                         style={{
                           fontFamily: 'Montserrat-Medium',
                           fontSize: 12,
 
-                          lineHeight: 15,
-                          color: COLORS.primary,
                           textAlign: 'center',
+                          color: '#97A7C3D6',
                         }}>
-                        2020-21
+                        Class
                       </Text>
-                      <FontAwesome5
-                        size={15}
-                        name="calendar-week"
-                        color={COLORS.primary}
-                        style={{textAlign: 'right', marginLeft: 5}}
-                      />
-                    </View>
-                  </View>
-                  <View
-                    style={{
-                      width: 1,
-                      height: 36,
-                      backgroundColor: '#97A7C3D6',
-                      //marginHorizontal: 10,
-                      //marginVertical: 10,
-                    }}
-                  />
+                      <View
+                        style={{
+                          flexDirection: 'row',
 
-                  <View
-                    style={{
-                      width: 70,
-                      //justifyContent: 'center',
-                      alignItems: 'flex-start',
-                      //alignSelf: 'center',
-                      marginLeft: 20,
-                    }}>
-                    <Text
-                      style={{
-                        fontFamily: 'Montserrat-Medium',
-                        fontSize: 10,
-                        textAlign: 'center',
-                        lineHeight: 15,
-                        color: '#97A7C3D6',
-                      }}>
-                      D.O.B
-                    </Text>
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          //alignSelf: 'center',
+                          marginTop: 5,
+                        }}>
+                        <Text
+                          style={{
+                            fontFamily: 'Montserrat-Medium',
+                            fontSize: 13,
+
+                            lineHeight: 15,
+                            color: COLORS.primary,
+                            textAlign: 'center',
+                          }}>
+                          {studentclassname}
+                        </Text>
+                        <Ionicons
+                          size={18}
+                          name="book"
+                          color={COLORS.primary}
+                          style={{textAlign: 'right', marginLeft: 5}}
+                        />
+                      </View>
+                    </View>
                     <View
                       style={{
-                        flexDirection: 'row',
+                        width: 1,
+                        height: 36,
+                        //borderWidth: 1,
+                        backgroundColor: '#97A7C3D6',
 
-                        alignItems: 'center',
+                        //marginHorizontal: 10,
+                        marginVertical: 10,
+                      }}
+                    />
+                    <View
+                      style={{
+                        width: 100,
                         justifyContent: 'center',
+                        alignItems: 'center',
                         //alignSelf: 'center',
-                        //marginLeft: 28,
-                        marginTop: 5,
+                        marginHorizontal: 10,
+                        //borderWidth: 1,
                       }}>
                       <Text
                         style={{
                           fontFamily: 'Montserrat-Medium',
                           fontSize: 12,
-
-                          lineHeight: 15,
-                          color: COLORS.primary,
                           textAlign: 'center',
-                        }}>
-                        {studentdob}
-                      </Text>
-                      <MaterialCommunityIcons
-                        size={15}
-                        name="clock"
-                        color={COLORS.primary}
-                        style={{textAlign: 'right', marginLeft: 5}}
-                      />
-                    </View>
-                  </View>
+                          lineHeight: 15,
 
-                  {/* <Text
+                          color: '#97A7C3D6',
+                        }}>
+                        Academic Yr.
+                      </Text>
+                      <View
+                        style={{
+                          flexDirection: 'row',
+
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          //alignSelf: 'center',
+                          marginTop: 5,
+                        }}>
+                        <Text
+                          style={{
+                            fontFamily: 'Montserrat-Medium',
+                            fontSize: 13,
+
+                            lineHeight: 15,
+                            color: COLORS.primary,
+                            textAlign: 'center',
+                          }}>
+                          2020-21
+                        </Text>
+                        <FontAwesome5
+                          size={18}
+                          name="calendar-week"
+                          color={COLORS.primary}
+                          style={{textAlign: 'right', marginLeft: 5}}
+                        />
+                      </View>
+                    </View>
+                    <View
+                      style={{
+                        width: 1,
+                        height: 36,
+                        backgroundColor: '#97A7C3D6',
+                        //marginHorizontal: 10,
+                        //marginVertical: 10,
+                      }}
+                    />
+
+                    <View
+                      style={{
+                        width: 70,
+                        //justifyContent: 'center',
+                        alignItems: 'flex-start',
+                        //alignSelf: 'center',
+                        marginLeft: 20,
+                      }}>
+                      <Text
+                        style={{
+                          fontFamily: 'Montserrat-Medium',
+                          fontSize: 12,
+                          textAlign: 'center',
+                          lineHeight: 15,
+                          color: '#97A7C3D6',
+                        }}>
+                        D.O.B
+                      </Text>
+                      <View
+                        style={{
+                          flexDirection: 'row',
+
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          //alignSelf: 'center',
+                          //marginLeft: 28,
+                          marginTop: 5,
+                        }}>
+                        <Text
+                          style={{
+                            fontFamily: 'Montserrat-Medium',
+                            fontSize: 13,
+
+                            lineHeight: 15,
+                            color: COLORS.primary,
+                            textAlign: 'center',
+                          }}>
+                          {studentdob}
+                        </Text>
+                        <MaterialCommunityIcons
+                          size={18}
+                          name="clock"
+                          color={COLORS.primary}
+                          style={{textAlign: 'right', marginLeft: 5}}
+                        />
+                      </View>
+                    </View>
+
+                    {/* <Text
                   style={[
                     paraGray.darkpara,
                     {color: COLORS.lightblack, fontSize: 12},
                   ]}>
                   Class {student.class_name} | Roll no: {student.roll_no}
                 </Text> */}
+                  </View>
                 </View>
               </View>
 
@@ -695,11 +699,11 @@ const StudentProfile = props => {
                           onChangeText={value => {
                             setStudentAadhar(value);
                           }}
-                          editable={false}
+                          editable={saveChanges}
                         />
                       </View>
                     </View>
-                    <View style={[styles.mainView, {width: 160}]}>
+                    <View style={[styles.mainView, {width: '52%'}]}>
                       <Text
                         style={[
                           paraGray.darkpara,
@@ -716,13 +720,13 @@ const StudentProfile = props => {
                             setStudentRollNO(value);
                           }}
                           style={styles.textInput}
-                          editable={false}
+                          editable={saveChanges}
                         />
                       </View>
                     </View>
                   </View>
                   <View style={styles.mainViewContainer}>
-                    <View style={[styles.mainView, {width: 120}]}>
+                    <View style={[styles.mainView, {width: '40%'}]}>
                       <Text
                         style={[
                           paraGray.darkpara,
@@ -739,7 +743,7 @@ const StudentProfile = props => {
                             setStudentMobileno(value);
                           }}
                           style={styles.textInput}
-                          editable={false}
+                          editable={saveChanges}
                         />
                       </View>
                     </View>
@@ -760,7 +764,7 @@ const StudentProfile = props => {
                             setStudentEmail(value);
                           }}
                           style={styles.textInput}
-                          editable={false}
+                          editable={saveChanges}
                         />
                       </View>
                     </View>
@@ -782,7 +786,7 @@ const StudentProfile = props => {
                           setStudentAddress(value);
                         }}
                         style={styles.textInput}
-                        editable={false}
+                        editable={saveChanges}
                       />
                     </View>
                   </View>
@@ -814,7 +818,11 @@ const StudentProfile = props => {
                   }}>
                   <View style={[styles.mainViewContainer, {marginTop: -10}]}>
                     <View style={[styles.mainView, {width: 120}]}>
-                      <Text style={[paraGray.darkpara, {color: COLORS.black}]}>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.black, opacity: 0.5},
+                        ]}>
                         School Bus NO
                       </Text>
                       <View style={[styles.inputTextView, {width: 120}]}>
@@ -826,12 +834,16 @@ const StudentProfile = props => {
                             setStudentSchoolBusNo(value);
                           }}
                           style={styles.textInput}
-                          editable={false}
+                          editable={saveChanges}
                         />
                       </View>
                     </View>
                     <View style={styles.mainView}>
-                      <Text style={[paraGray.darkpara, {color: COLORS.black}]}>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.black, opacity: 0.5},
+                        ]}>
                         Route No
                       </Text>
                       <View style={[styles.inputTextView, {width: 60}]}>
@@ -843,7 +855,7 @@ const StudentProfile = props => {
                             setStudentRouteNO(value);
                           }}
                           style={styles.textInput}
-                          editable={false}
+                          editable={saveChanges}
                         />
                       </View>
                     </View>
@@ -855,7 +867,11 @@ const StudentProfile = props => {
                           width: 120,
                         },
                       ]}>
-                      <Text style={[paraGray.darkpara, {color: COLORS.black}]}>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.black, opacity: 0.5},
+                        ]}>
                         School No
                       </Text>
                       <View style={[styles.inputTextView, {borderWidth: 1}]}>
@@ -867,14 +883,18 @@ const StudentProfile = props => {
                             setStudentSchoolNo(value);
                           }}
                           style={styles.textInput}
-                          editable={false}
+                          editable={saveChanges}
                         />
                       </View>
                     </View>
                   </View>
                   <View style={styles.mainViewContainer}>
                     <View style={[styles.mainView, {width: '100%'}]}>
-                      <Text style={[paraGray.darkpara, {color: COLORS.black}]}>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.black, opacity: 0.5},
+                        ]}>
                         Class Teacher Name
                       </Text>
                       <View style={styles.inputTextView}>
@@ -887,7 +907,7 @@ const StudentProfile = props => {
                             dispatch(setuserName(value));
                           }}
                           style={styles.textInput}
-                          editable={false}
+                          editable={saveChanges}
                         />
                       </View>
                     </View>
@@ -912,14 +932,19 @@ const StudentProfile = props => {
                   width: '100%',
                   backgroundColor: 'white',
                   elevation: 4,
+                  paddingHorizontal: 10,
                 }}>
                 <View style={{paddingTop: 15, paddingBottom: 20}}>
                   <View style={[styles.mainViewContainer, {marginTop: -10}]}>
                     <View style={styles.mainView}>
-                      <Text style={[paraGray.darkpara, {color: COLORS.black}]}>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.black, opacity: 0.5},
+                        ]}>
                         Mother Name
                       </Text>
-                      <View style={styles.inputTextView}>
+                      <View style={[styles.inputTextView]}>
                         <TextInput
                           placeholder="Enter Mother Name"
                           placeholderTextColor={COLORS.lightergray}
@@ -928,7 +953,7 @@ const StudentProfile = props => {
                             setStudentMotherName(value);
                           }}
                           style={styles.textInput}
-                          editable={false}
+                          editable={saveChanges}
                         />
                       </View>
                     </View>
@@ -936,11 +961,11 @@ const StudentProfile = props => {
                       <Text
                         style={[
                           paraGray.darkpara,
-                          {color: COLORS.black, width: 500},
+                          {color: COLORS.black, width: 500, opacity: 0.5},
                         ]}>
                         Mother Mobile No.
                       </Text>
-                      <View style={styles.inputTextView}>
+                      <View style={[styles.inputTextView]}>
                         <TextInput
                           placeholder="Enter Mother Mobile No"
                           placeholderTextColor={COLORS.lightergray}
@@ -949,14 +974,18 @@ const StudentProfile = props => {
                             setStudentMotherMobileNo(value);
                           }}
                           style={styles.textInput}
-                          editable={false}
+                          editable={saveChanges}
                         />
                       </View>
                     </View>
                   </View>
                   <View style={styles.mainViewContainer}>
                     <View style={styles.mainView}>
-                      <Text style={[paraGray.darkpara, {color: COLORS.black}]}>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.black, opacity: 0.5},
+                        ]}>
                         Mother Email ID
                       </Text>
                       <View style={styles.inputTextView}>
@@ -968,12 +997,16 @@ const StudentProfile = props => {
                             setStudentMotherEmail(value);
                           }}
                           style={styles.textInput}
-                          editable={false}
+                          editable={saveChanges}
                         />
                       </View>
                     </View>
                     <View style={styles.mainView}>
-                      <Text style={[paraGray.darkpara, {color: COLORS.black}]}>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.black, opacity: 0.5},
+                        ]}>
                         Father Name
                       </Text>
                       <View style={styles.inputTextView}>
@@ -985,14 +1018,18 @@ const StudentProfile = props => {
                             setStudentFatherName(value);
                           }}
                           style={styles.textInput}
-                          editable={false}
+                          editable={saveChanges}
                         />
                       </View>
                     </View>
                   </View>
                   <View style={styles.mainViewContainer}>
                     <View style={styles.mainView}>
-                      <Text style={[paraGray.darkpara, {color: COLORS.black}]}>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.black, opacity: 0.5},
+                        ]}>
                         Father Mobile No.
                       </Text>
                       <View style={styles.inputTextView}>
@@ -1004,12 +1041,16 @@ const StudentProfile = props => {
                             setStudentMotherName(value);
                           }}
                           style={styles.textInput}
-                          editable={false}
+                          editable={saveChanges}
                         />
                       </View>
                     </View>
                     <View style={styles.mainView}>
-                      <Text style={[paraGray.darkpara, {color: COLORS.black}]}>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.black, opacity: 0.5},
+                        ]}>
                         Father Email ID
                       </Text>
                       <View style={styles.inputTextView}>
@@ -1021,7 +1062,7 @@ const StudentProfile = props => {
                             setStudentFatherEmail(value);
                           }}
                           style={styles.textInput}
-                          editable={false}
+                          editable={saveChanges}
                         />
                       </View>
                     </View>
