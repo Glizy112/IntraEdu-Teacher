@@ -55,392 +55,21 @@ const TeachersProfile = props => {
   };
   return (
     <View style={container.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View
-          style={{
-            flex: 1,
-            paddingBottom: 30,
-            width: '90%',
-            alignSelf: 'center',
-            backgroundColor: COLORS.bg,
-          }}>
-          {/* <View
-            style={{
-              flex: 1,
-              marginTop: 20,
-              borderWidth: 1,
-              borderRadius: 10,
-              borderColor: COLORS.outline,
-              alignItems: 'center',
-              justifyContent: 'center',
-              paddingHorizontal: 10,
-            }}>
-            <View
-              style={{
-                flex: 1,
-                flexDirection: 'row',
-                alignItems: 'center',
-                marginTop: 10,
-                marginBottom: 10,
-              }}>
-              {userimage == null ? (
-                <Avatar.Image
-                  size={70}
-                  // source={{uri: Url.student_IMG + student.photo}}
-                  source={require('../../../assets/user.jpg')}
-                  backgroundColor={COLORS.black}
-                />
-              ) : image == null ? (
-                <Avatar.Image
-                  size={70}
-                  source={{uri: Url.profile_IMG + userimage}}
-                  backgroundColor={COLORS.black}
-                />
-              ) : (
-                <Avatar.Image
-                  size={70}
-                  // source={{uri: Url.student_IMG + student.photo}}
-                  source={{uri: image}}
-                  backgroundColor={COLORS.black}
-                />
-              )}
-              <View style={{marginLeft: 10}}>
-                <Text style={[paraGray.parahome, {fontSize: 15}]}>
-                  {username}
-                </Text>
-                <Text style={[paraGray.darkpara, {color: COLORS.lightblack}]}>
-                  Class V | ID Card: 123456
-                </Text>
-              </View>
-              <TouchableOpacity
-                style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                  justifyContent: 'flex-end',
-                  marginTop: -30,
-                  // marginRight: 25,
-                }}
-                onPress={SelectImage}>
-                <Feather name="camera" size={25} color={COLORS.lightblack} />
-              </TouchableOpacity>
-            </View>
-          </View> */}
-          {/* <View>
-            <View
-              style={{
-                width: '100%',
-                heigth: 150,
-                backgroundColor: 'white',
-                marginBottom: 25,
-                marginTop: 20,
-              }}>
-              <Text
-                style={[
-                  paraGray.darkpara,
-                  {color: COLORS.label, marginBottom: 5},
-                ]}>
-                Name
-              </Text>
-              <View style={{flex: 1, flexDirection: 'row'}}>
-                <Text
-                  style={[
-                    paraGray.darklarge,
-                    {
-                      borderBottomColor: COLORS.bottom,
-                      borderBottomWidth: 1,
-                      width: '90%',
-                      marginTop: 5,
-                    },
-                  ]}>
-                  {username}
-                </Text>
-                <View
-                  style={{
-                    flex: 1,
-                    position: 'relative',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  <Entypo name="lock" size={15} color={COLORS.label} />
-                </View>
-              </View>
-            </View>
-            <View
-              style={{
-                width: '100%',
-                heigth: 150,
-                backgroundColor: 'white',
-                marginBottom: 25,
-              }}>
-              <Text
-                style={[
-                  paraGray.darkpara,
-                  {color: COLORS.label, marginBottom: 5},
-                ]}>
-                Phone Number
-              </Text>
-              <View style={{flex: 1, flexDirection: 'row'}}>
-                <Text
-                  style={[
-                    paraGray.darklarge,
-                    {
-                      borderBottomColor: COLORS.bottom,
-                      borderBottomWidth: 1,
-                      width: '90%',
-                      marginTop: 5,
-                    },
-                  ]}>
-                  {userphone}
-                </Text>
-                <View
-                  style={{
-                    flex: 1,
-                    position: 'relative',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  <Entypo name="lock" size={15} color={COLORS.label} />
-                </View>
-              </View>
-            </View>
-            <View
-              style={{
-                width: '100%',
-                heigth: 150,
-                backgroundColor: 'white',
-                marginBottom: 25,
-              }}>
-              <Text
-                style={[
-                  paraGray.darkpara,
-                  {color: COLORS.label, marginBottom: 5},
-                ]}>
-                E-mail ID
-              </Text>
-              <View style={{flex: 1, flexDirection: 'row'}}>
-                <Text
-                  style={[
-                    paraGray.darklarge,
-                    {
-                      borderBottomColor: COLORS.bottom,
-                      borderBottomWidth: 1,
-                      width: '90%',
-                      marginTop: 5,
-                    },
-                  ]}>
-                  {useremail}
-                </Text>
-                <View
-                  style={{
-                    flex: 1,
-                    position: 'relative',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  <Entypo name="lock" size={15} color={COLORS.label} />
-                </View>
-              </View>
-            </View>
-            <View
-              style={{
-                width: '100%',
-                heigth: 150,
-                backgroundColor: 'white',
-                marginBottom: 25,
-              }}>
-              <Text
-                style={[
-                  paraGray.darkpara,
-                  {color: COLORS.label, marginBottom: 5},
-                ]}>
-                Classroom
-              </Text>
-              <View style={{flex: 1, flexDirection: 'row'}}>
-                <Text
-                  style={[
-                    paraGray.darklarge,
-                    {
-                      borderBottomColor: COLORS.bottom,
-                      borderBottomWidth: 1,
-                      width: '90%',
-                      marginTop: 5,
-                    },
-                  ]}>
-                  V
-                </Text>
-                <View
-                  style={{
-                    flex: 1,
-                    position: 'relative',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  <Entypo name="lock" size={15} color={COLORS.label} />
-                </View>
-              </View>
-            </View>
-            <View
-              style={{
-                width: '100%',
-                heigth: 150,
-                backgroundColor: 'white',
-                marginBottom: 25,
-              }}>
-              <Text
-                style={[
-                  paraGray.darkpara,
-                  {color: COLORS.label, marginBottom: 5},
-                ]}>
-                Date of Birth
-              </Text>
-              <View style={{flex: 1, flexDirection: 'row'}}>
-                <Text
-                  style={[
-                    paraGray.darklarge,
-                    {
-                      borderBottomColor: COLORS.bottom,
-                      borderBottomWidth: 1,
-                      width: '90%',
-                      marginTop: 5,
-                    },
-                  ]}>
-                  {userdob}
-                </Text>
-                <View
-                  style={{
-                    flex: 1,
-                    position: 'relative',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  <Entypo name="lock" size={15} color={COLORS.label} />
-                </View>
-              </View>
-            </View>
-            <View
-              style={{
-                width: '100%',
-                heigth: 150,
-                backgroundColor: 'white',
-                marginBottom: 25,
-              }}>
-              <Text
-                style={[
-                  paraGray.darkpara,
-                  {color: COLORS.label, marginBottom: 5},
-                ]}>
-                ID Card
-              </Text>
-              <View style={{flex: 1, flexDirection: 'row'}}>
-                <Text
-                  style={[
-                    paraGray.darklarge,
-                    {
-                      borderBottomColor: COLORS.bottom,
-                      borderBottomWidth: 1,
-                      width: '90%',
-                      marginTop: 5,
-                    },
-                  ]}>
-                  9082111479
-                </Text>
-                <View
-                  style={{
-                    flex: 1,
-                    position: 'relative',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  <Entypo name="lock" size={15} color={COLORS.label} />
-                </View>
-              </View>
-            </View>
-            <View
-              style={{
-                width: '100%',
-                heigth: 150,
-                backgroundColor: 'white',
-                marginBottom: 25,
-              }}>
-              <Text
-                style={[
-                  paraGray.darkpara,
-                  {color: COLORS.label, marginBottom: 5},
-                ]}>
-                Aadharcard No
-              </Text>
-              <View style={{flex: 1, flexDirection: 'row'}}>
-                <Text
-                  style={[
-                    paraGray.darklarge,
-                    {
-                      borderBottomColor: COLORS.bottom,
-                      borderBottomWidth: 1,
-                      width: '90%',
-                      marginTop: 5,
-                    },
-                  ]}>
-                  1212-1211-1211
-                </Text>
-                <View
-                  style={{
-                    flex: 1,
-                    position: 'relative',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  <Entypo name="lock" size={15} color={COLORS.label} />
-                </View>
-              </View>
-            </View>
-
-            <View
-              style={{
-                width: '100%',
-                heigth: 150,
-                backgroundColor: 'white',
-                marginBottom: 25,
-                //   paddingHorizontal: 15,
-              }}>
-              <Text
-                style={[
-                  paraGray.darkpara,
-                  {color: COLORS.label, marginBottom: 5},
-                ]}>
-                Parmanent Add.
-              </Text>
-              <View style={{flex: 1, flexDirection: 'row'}}>
-                <Text
-                  style={[
-                    paraGray.darklarge,
-                    {
-                      borderBottomColor: COLORS.bottom,
-                      borderBottomWidth: 1,
-                      width: '90%',
-                    },
-                  ]}>
-                  {useraddress}
-                </Text>
-                <View
-                  style={{
-                    flex: 1,
-                    position: 'relative',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  <Entypo name="lock" size={15} color={COLORS.label} />
-                </View>
-              </View>
-            </View>
-          </View> */}
+      {/* <ScrollView showsVerticalScrollIndicator={false}> */}
           <View
             style={{
               flexDirection: 'row',
               alignItems: 'center',
-              height: 50,
+              //height: 50,
               justifyContent: 'space-between',
+              paddingHorizontal: 15,
+              paddingTop: 12,
             }}>
-            <View style={{}}>
+            <View
+              style={{
+                alignItems: 'flex-start',
+              }}
+            >
               <TouchableOpacity
                 style={{
                   backgroundColor: COLORS.white,
@@ -453,86 +82,92 @@ const TeachersProfile = props => {
                   props.navigation.goBack()
                 }>
                 <Ionicons
-                  style={{marginVertical: 0}}
+                  style={{marginVertical: 5, marginHorizontal: 8}}
                   name="arrow-back"
-                  size={20}
+                  size={24}
                   color={COLORS.black}
                 />
               </TouchableOpacity>
             </View>
-            <View
-              style={{
-                position: 'absolute',
-                left: 0,
-                right: 0,
-                textAlign: 'center',
-              }}>
+            <View style={{justifyContent: 'center', alignItems: 'center'}}>
               <Text
                 style={[
-                  // paraGray.darkpara,
+                  paraGray.largebold,
                   {
                     textAlign: 'center',
-                    //marginLeft: 30,
-                    fontFamily: 'Montserrat-Medium',
-                    fontSize: 16,
-                    color: COLORS.black,
                   },
-                ]}>
-                My Profile
-              </Text>
+                ]}
+              > My Profile </Text>
+            </View>
+            <View>
+              <Text style={{fontSize: 9}}> My Profile </Text>
             </View>
           </View>
           <View
             style={{
-              // flexDirection: 'row',
-              //   alignItems: 'center',
-              //   justifyContent: 'center',
-              //backgroundColor: '#C4C4C440',
-
-              width: '70%',
-
-              borderRadius: 16,
+              paddingTop: 12,
+              borderBottomWidth: 0.8,
+              borderColor: COLORS.primary,
+            }}
+          />
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: COLORS.bg,
+              paddingBottom: 30,
+              width: '90%',
               alignSelf: 'center',
-              marginTop: 20,
-            }}>
+            }}
+          >
+            <View
+              style={{
+                width: '70%',
+                borderRadius: 16,
+                alignSelf: 'center',
+                marginTop: 20,
+              }}
+            >
             <View
               style={{
                 flex: 1,
-
                 alignItems: 'center',
-                // marginTop: 10,
-                // marginBottom: 10,
                 justifyContent: 'center',
                 alignSelf: 'center',
+              }}
+            >
+              <View>
+                {userimage == null ? (
+                  <ImageBackground
+                    style={{
+                      backgroundColor: COLORS.black,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      width: 50,
+                      height: 50,
+                      borderRadius: 30,
+                    }}>
+                    <FontAwesome5 name="user-alt" size={25} color="#FFFFFF" />
+                  </ImageBackground>
+                ) : (
+                  // <Avatar.Image
+                  //   size={70}
 
-                // alignContent: 'center',
-              }}>
-              {userimage == null ? (
-                <Avatar.Image
-                  size={70}
-                  // source={{uri: Url.student_IMG + student.photo}}
-                  source={require('../../../assets/user.jpg')}
-                  backgroundColor={COLORS.black}
-                />
-              ) : image == null ? (
-                <FastImage
-                  style={{
-                    width: 108,
-                    height: 108,
-                    borderRadius: 12,
-                  }}
-                  source={{uri: Url.profile_IMG + userimage}}
-                  backgroundColor={COLORS.black}
-                />
-              ) : (
-                <Avatar.Image
-                  size={70}
-                  // source={{uri: Url.student_IMG + student.photo}}
-                  source={{uri: image}}
-                  backgroundColor={COLORS.black}
-                />
-              )}
-              <View style={{marginVertical: 10}}>
+                  //   source={{uri: Url.student_IMG + student.photo}}
+                  //   backgroundColor={COLORS.black}
+                  // />
+                  <FastImage
+                    style={{
+                      width: 128,
+                      height: 128,
+                      borderRadius: 12,
+                    }}
+                    source={{uri: Url.profile_IMG + userimage}}
+                  />
+                )}
+              </View>
+
+              <View style={{marginVertical: 16}}>
                 <Text
                   style={[
                     paraGray.parahome,
@@ -541,412 +176,201 @@ const TeachersProfile = props => {
                   {username}
                 </Text>
               </View>
-            </View>
-          </View>
-          {/* <View
-            style={{
-              width: 'auto',
-              width: 326,
-              alignSelf: 'center',
-              marginTop: 10,
-              elevation: 4,
-              borderRadius: 12,
-              backgroundColor: 'white',
-            }}>
-            <View
-              style={{
-                width: '100%',
-                alignSelf: 'center',
-
-                //borderWidth: 0.1,
-              }}
-              distance={0}>
-              <View
-                style={{
-                  height: 60,
-                  //backgroundColor: 'black',
-                  borderRadius: 10,
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  //justifyContent: 'center',
-                  alignItems: 'center',
-                  paddingHorizontal: 25,
-                }}>
+              <View style={{}}>
                 <View
                   style={{
-                    width: 70,
+                    height: 64,
+                    elevation: 4,
+                    backgroundColor: 'white',
+                    borderRadius: 10,
                     justifyContent: 'center',
-                    alignItems: 'flex-start',
-                    // alignSelf: 'center',
-                    marginRight: 15,
+                    paddingHorizontal: 12,
                   }}>
-                  <Text
-                    style={{
-                      fontFamily: 'Montserrat-Medium',
-                      fontSize: 10,
-                      color: COLORS.txtGray,
-                      lineHeight: 15,
-                      textAlign: 'center',
-                    }}>
-                    Gender
-                  </Text>
                   <View
                     style={{
+                      width: '100%',
                       flexDirection: 'row',
-
                       alignItems: 'center',
-                      justifyContent: 'center',
-                      //alignSelf: 'center',
-                      marginTop: 5,
+                      justifyContent: 'space-between',
                     }}>
-                    <Text
+                    <View
                       style={{
-                        fontFamily: 'Montserrat-Medium',
-                        fontSize: 12,
-
-                        lineHeight: 15,
-                        color: COLORS.primary,
-                        textAlign: 'center',
+                        width: 70,
+                        justifyContent: 'center',
+                        alignItems: 'flex-start',
+                        //alignSelf: 'center',
+                        marginLeft: 10,
                       }}>
-                      Female
-                    </Text>
-                    <FontAwesome
-                      size={15}
-                      name="user"
-                      color={COLORS.primary}
-                      style={{textAlign: 'right', marginLeft: 5}}
-                    />
-                  </View>
-                </View>
-                <View
-                  style={{
-                    width: 1,
-                    height: 36,
-                    //borderWidth: 1,
-                    backgroundColor: COLORS.primary,
-
-                    //marginHorizontal: 10,
-                    marginVertical: 10,
-                  }}
-                />
-                <View
-                  style={{
-                    width: 100,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    //alignSelf: 'center',
-                    marginHorizontal: 10,
-                    //borderWidth: 1,
-                  }}>
-                  <Text
-                    style={{
-                      fontFamily: 'Montserrat-Medium',
-                      fontSize: 10,
-                      textAlign: 'left',
-                      //lineHeight: 15,
-                      color: COLORS.txtGray,
-                      marginLeft: -10,
-                    }}>
-                    Experience
-                  </Text>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      //alignSelf: 'center',
-                      marginLeft: 0,
-                      marginTop: 5,
-                    }}>
-                    <Text
+                      <Text
+                        style={{
+                          fontFamily: 'Montserrat-Medium',
+                          fontSize: 14,
+                          textAlign: 'center',
+                          color: '#97A7C3D6',
+                        }}>
+                        Gender
+                      </Text>
+                      <View
+                        style={{
+                          flexDirection: 'row',
+                          alignItems: 'baseline',
+                          justifyContent: 'center',
+                          //alignSelf: 'center',
+                          marginTop: 5,
+                        }}>
+                        <Text
+                          style={{
+                            fontFamily: 'Montserrat-Medium',
+                            fontSize: 13,
+                            lineHeight: 15,
+                            color: COLORS.primary,
+                            textAlign: 'center',
+                          }}>
+                          Female
+                        </Text>
+                        <FontAwesome
+                          size={16}
+                          name="user"
+                          color={COLORS.primary}
+                          style={{textAlign: 'right', marginLeft: 5}}
+                        />
+                      </View>
+                    </View>
+                    <View
                       style={{
-                        fontFamily: 'Montserrat-Medium',
-                        fontSize: 12,
-
-                        lineHeight: 15,
-                        color: COLORS.primary,
-                        textAlign: 'center',
-                        marginLeft: -5,
-                      }}>
-                      2 Years
-                    </Text>
-                    <Ionicons
-                      size={15}
-                      name="briefcase"
-                      color={COLORS.primary}
-                      style={{textAlign: 'right', marginLeft: 5}}
+                        //width: 1,
+                        height: 40,
+                        borderWidth: 0.6,
+                        borderColor: '#97A7C3D6',
+                        marginLeft: 12,
+                        marginVertical: 10,
+                      }}
                     />
-                  </View>
-                </View>
-                <View
-                  style={{
-                    width: 1,
-                    height: 36,
-                    backgroundColor: COLORS.primary,
-                    //marginHorizontal: 10,
-                    //marginVertical: 10,
-                  }}
-                />
-
-                <View
-                  style={{
-                    width: 70,
-                    //justifyContent: 'center',
-                    alignItems: 'flex-start',
-                    //alignSelf: 'center',
-                    marginLeft: 20,
-                  }}>
-                  <Text
-                    style={{
-                      fontFamily: 'Montserrat-Medium',
-                      fontSize: 10,
-                      textAlign: 'center',
-                      lineHeight: 15,
-                      color: COLORS.txtGray,
-                    }}>
-                    City
-                  </Text>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      //alignSelf: 'center',
-                      //marginLeft: 28,
-                      marginTop: 5,
-                    }}>
-                    <Text
+                    <View
                       style={{
-                        fontFamily: 'Montserrat-Medium',
-                        fontSize: 12,
-
-                        //lineHeight: 15,
-                        color: COLORS.primary,
-                        textAlign: 'center',
+                        width: 100,
+                        justifyContent: 'center',
+                        alignItems: 'flex-start',
+                        //alignSelf: 'center',
+                        marginHorizontal: 12,
+                        //borderWidth: 1,
                       }}>
-                      Pune
-                    </Text>
-                    <Ionicons
-                      size={15}
-                      name="location"
-                      color={COLORS.primary}
-                      style={{textAlign: 'right', marginLeft: 5}}
-                    />
-                  </View>
-                </View>
-
-                
-              </View>
-            </View>
-          </View> */}
-          <View style={{}}>
-            <View
-              style={{
-                width: '90%',
-                alignSelf: 'center',
-                height: 60,
-                elevation: 4,
-                backgroundColor: 'white',
-                borderRadius: 10,
-
-                justifyContent: 'center',
-                paddingHorizontal: 10,
-              }}>
-              <View
-                style={{
-                  width: '100%',
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                }}>
-                <View
-                  style={{
-                    width: 80,
-                    justifyContent: 'center',
-                    alignItems: 'flex-start',
-                    //alignSelf: 'center',
-                    marginLeft: 10,
-                  }}>
-                  <Text
-                    style={{
-                      fontFamily: 'Montserrat-Medium',
-                      fontSize: 12,
-
-                      textAlign: 'center',
-                      color: '#97A7C3D6',
-                    }}>
-                    Gender
-                  </Text>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      //alignSelf: 'center',
-                      marginTop: 5,
-                    }}>
-                    <Text
+                      <Text
+                        style={{
+                          fontFamily: 'Montserrat-Medium',
+                          fontSize: 14,
+                          textAlign: 'center',
+                          alignSelf: 'center',
+                          lineHeight: 15,
+                          color: '#97A7C3D6',
+                        }}>
+                        Experience
+                      </Text>
+                      <View
+                        style={{
+                          flexDirection: 'row',
+                          alignItems: 'baseline',
+                          justifyContent: 'center',
+                          //alignSelf: 'center',
+                          marginTop: 5,
+                          marginHorizontal: 10,
+                        }}>
+                        <Text
+                          style={{
+                            fontFamily: 'Montserrat-Medium',
+                            fontSize: 13,
+                            lineHeight: 15,
+                            color: COLORS.primary,
+                            textAlign: 'center',
+                          }}>
+                          2 Years
+                        </Text>
+                        <FontAwesome5
+                          size={16}
+                          name="briefcase"
+                          color={COLORS.primary}
+                          style={{textAlign: 'right', marginLeft: 5}}
+                        />
+                      </View>
+                    </View>
+                    <View
                       style={{
-                        fontFamily: 'Montserrat-Medium',
-                        fontSize: 13,
-
-                        lineHeight: 15,
-                        color: COLORS.primary,
-                        textAlign: 'center',
-                      }}>
-                      Female
-                    </Text>
-                    <FontAwesome
-                      size={16}
-                      name="user"
-                      color={COLORS.primary}
-                      style={{textAlign: 'right', marginLeft: 5}}
+                        //width: 1,
+                        height: 40,
+                        borderWidth: 0.6,
+                        borderColor: '#97A7C3D6',
+                        marginVertical: 10,
+                      }}
                     />
-                  </View>
-                </View>
-                <View
-                  style={{
-                    width: 1,
-                    height: 36,
-                    //borderWidth: 1,
-                    backgroundColor: '#97A7C3D6',
 
-                    //marginHorizontal: 10,
-                    marginVertical: 10,
-                  }}
-                />
-                <View
-                  style={{
-                    width: 100,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    //alignSelf: 'center',
-                    marginHorizontal: 10,
-                    //borderWidth: 1,
-                  }}>
-                  <Text
-                    style={{
-                      fontFamily: 'Montserrat-Medium',
-                      fontSize: 12,
-                      textAlign: 'center',
-                      lineHeight: 15,
-
-                      color: '#97A7C3D6',
-                    }}>
-                    Experience
-                  </Text>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      //alignSelf: 'center',
-                      marginTop: 5,
-                    }}>
-                    <Text
+                    <View
                       style={{
-                        fontFamily: 'Montserrat-Medium',
-                        fontSize: 13,
+                        width: 70,
+                        alignItems: 'flex-start',
+                        marginLeft: 20,
+                      }}
+                    >
+                      <Text
+                        style={{
+                          fontFamily: 'Montserrat-Medium',
+                          fontSize: 14,
+                          textAlign: 'center',
+                          lineHeight: 15,
+                          color: '#97A7C3D6',
+                        }}>
+                        City
+                      </Text>
+                      <View
+                        style={{
+                          flexDirection: 'row',
+                          alignItems: 'baseline',
+                          justifyContent: 'center',
+                          marginTop: 5,
+                        }}>
+                        <Text
+                          style={{
+                            fontFamily: 'Montserrat-Medium',
+                            fontSize: 13,
+                            lineHeight: 15,
+                            color: COLORS.primary,
+                            textAlign: 'center',
+                          }}>
+                          Pune
+                        </Text>
+                        <Ionicons
+                          size={16}
+                          name="location"
+                          color={COLORS.primary}
+                          style={{textAlign: 'right', marginLeft: 5}}
+                        />
+                      </View>
+                    </View>
 
-                        lineHeight: 15,
-                        color: COLORS.primary,
-                        textAlign: 'center',
-                      }}>
-                      2 Years
-                    </Text>
-                    <Ionicons
-                      size={16}
-                      name="briefcase"
-                      color={COLORS.primary}
-                      style={{textAlign: 'right', marginLeft: 5}}
-                    />
-                  </View>
-                </View>
-                <View
-                  style={{
-                    width: 1,
-                    height: 36,
-                    backgroundColor: '#97A7C3D6',
-                    //marginHorizontal: 10,
-                    //marginVertical: 10,
-                  }}
-                />
-
-                <View
-                  style={{
-                    width: 70,
-                    //justifyContent: 'center',
-                    alignItems: 'flex-start',
-                    //alignSelf: 'center',
-                    marginLeft: 20,
-                  }}>
-                  <Text
-                    style={{
-                      fontFamily: 'Montserrat-Medium',
-                      fontSize: 12,
-                      textAlign: 'center',
-                      lineHeight: 15,
-                      color: '#97A7C3D6',
-                    }}>
-                    City
-                  </Text>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      //alignSelf: 'center',
-                      //marginLeft: 28,
-                      marginTop: 5,
-                    }}>
-                    <Text
-                      style={{
-                        fontFamily: 'Montserrat-Medium',
-                        fontSize: 13,
-
-                        lineHeight: 15,
-                        color: COLORS.primary,
-                        textAlign: 'center',
-                      }}>
-                      Pune
-                    </Text>
-                    <Ionicons
-                      size={16}
-                      name="location"
-                      color={COLORS.primary}
-                      style={{textAlign: 'right', marginLeft: 5}}
-                    />
-                  </View>
-                </View>
-
-                {/* <Text
+                    {/* <Text
                   style={[
                     paraGray.darkpara,
                     {color: COLORS.lightblack, fontSize: 12},
                   ]}>
                   Class {student.class_name} | Roll no: {student.roll_no}
                 </Text> */}
+                  </View>
+                </View>
               </View>
             </View>
           </View>
+          
           <View
             style={{
-              marginTop: 25,
+              marginTop: 40,
               alignSelf: 'center',
-
               width: '100%',
             }}>
             <Text
               style={{
-                fontFamily: 'Montserrat-Medium',
-                color: COLORS.txtGray,
-                fontSize: 14,
-                lineHeight: 17,
+                fontFamily: 'Montserrat-SemiBold',
+                color: 'rgba(0,0,0,0.8)',
+                fontSize: 16,
+                lineHeight: 16,
                 marginBottom: 10,
                 textAlign: 'left',
               }}>
@@ -959,27 +383,21 @@ const TeachersProfile = props => {
                 borderColor: COLORS.primary,
                 borderRadius: 12,
                 width: '100%',
-                height: 242,
+                //height: 242,
                 alignSelf: 'center',
                 justifyContent: 'center',
+                paddingVertical: 24,
               }}>
-              <View
-                style={
-                  {
-                    //justifyContent: 'center',
-                    //alignItems: 'center',
-                    //  alignSelf: 'center',
-                  }
-                }>
+              <View>
                 <View style={[styles.mainViewContainer, {marginTop: -15}]}>
                   <View
                     style={{
                       width: '45%',
                     }}>
-                    <View style={styles.mainView}>
+                    <View style={[styles.mainView, {marginTop: 12}]}>
                       <Text
-                        style={[paraGray.darkpara, {color: COLORS.txtGray}]}>
-                        Mobile No
+                        style={[paraGray.darkpara, {fontSize: 15, color: COLORS.txtGray}]}>
+                        Mobile No.
                       </Text>
                       <View style={styles.inputTextView}>
                         <Text style={[paraGray.darkpara, styles.userText]}>
@@ -989,18 +407,18 @@ const TeachersProfile = props => {
                     </View>
                     <View style={styles.mainView}>
                       <Text
-                        style={[paraGray.darkpara, {color: COLORS.txtGray}]}>
+                        style={[paraGray.darkpara, {fontSize: 15, color: COLORS.txtGray}]}>
                         Class Incharge
                       </Text>
                       <View style={styles.inputTextView}>
                         <Text style={[paraGray.darkpara, styles.userText]}>
-                          null
+                          Fifth
                         </Text>
                       </View>
                     </View>
                     <View style={styles.mainView}>
                       <Text
-                        style={[paraGray.darkpara, {color: COLORS.txtGray}]}>
+                        style={[paraGray.darkpara, {fontSize: 15, color: COLORS.txtGray}]}>
                         ID Card
                       </Text>
                       <View style={styles.inputTextView}>
@@ -1015,9 +433,9 @@ const TeachersProfile = props => {
                       //alignSelf: 'flex-start',
                       width: '45%',
                     }}>
-                    <View style={styles.mainView}>
+                    <View style={[styles.mainView, {marginTop: 12}]}>
                       <Text
-                        style={[paraGray.darkpara, {color: COLORS.txtGray}]}>
+                        style={[paraGray.darkpara, {fontSize: 15, color: COLORS.txtGray}]}>
                         E-Mail ID
                       </Text>
                       <View style={styles.inputTextView}>
@@ -1028,20 +446,20 @@ const TeachersProfile = props => {
                     </View>
                     <View style={styles.mainView}>
                       <Text
-                        style={[paraGray.darkpara, {color: COLORS.txtGray}]}>
+                        style={[paraGray.darkpara, {fontSize: 15, color: COLORS.txtGray}]}>
                         Date of Birth
                       </Text>
                       <View style={styles.inputTextView}>
                         <Text style={[paraGray.darkpara, styles.userText]}>
-                          {userdob}
+                          {userdob.split('-').reverse().join('-')}
                         </Text>
                       </View>
                     </View>
 
                     <View style={styles.mainView}>
                       <Text
-                        style={[paraGray.darkpara, {color: COLORS.txtGray}]}>
-                        Aadhar No
+                        style={[paraGray.darkpara, {fontSize: 15, color: COLORS.txtGray}]}>
+                        Aadhaar No.
                       </Text>
                       <View style={styles.inputTextView}>
                         <Text style={[paraGray.darkpara, styles.userText]}>
@@ -1054,10 +472,10 @@ const TeachersProfile = props => {
                 <View
                   style={[
                     styles.mainView,
-                    {width: '85%', alignSelf: 'center'},
+                    {width: '90%', alignSelf: 'center'},
                   ]}>
-                  <Text style={[paraGray.darkpara, {color: COLORS.txtGray}]}>
-                    Parmanent Address
+                  <Text style={[paraGray.darkpara, {fontSize: 15, color: COLORS.txtGray}]}>
+                    Permanent Address
                   </Text>
                   <View style={styles.inputTextView}>
                     <Text style={[paraGray.darkpara, styles.userText]}>
@@ -1071,6 +489,7 @@ const TeachersProfile = props => {
             </View>
           </View>
         </View>
+        {/* </View> */}
       </ScrollView>
     </View>
   );
@@ -1079,39 +498,21 @@ const TeachersProfile = props => {
 export default TeachersProfile;
 const styles = StyleSheet.create({
   mainViewContainer: {
-    // flexDirection: 'row',
-    // justifyContent: 'space-between',
-    // width: '90%',
-    // alignSelf: 'center',
-    // borderWidth: 1,
-    //marginVertical: 5,
     flexDirection: 'row',
-
     justifyContent: 'space-between',
-    width: '85%',
+    width: '90%',
     alignSelf: 'center',
   },
   mainView: {
-    //alignSelf: 'center',
     backgroundColor: 'white',
-    marginTop: 10,
-    //marginRight: 10,
-
+    marginTop: 16,
     width: '100%',
   },
   inputTextView: {
-    //width: '60%',
-    //height: 40,
-    //justifyContent: 'center',
-    //alignItems: 'flex-start',
-    //paddingLeft: 10,
     marginTop: 5,
-    //borderWidth: 1,
   },
   userText: {
     color: COLORS.primary,
-    fontSize: 12,
-    //textAlign: 'left',
-    //borderWidth: 1,
+    fontSize: 14,
   },
 });

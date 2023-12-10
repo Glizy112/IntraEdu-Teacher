@@ -304,9 +304,10 @@ const StudentProfile = props => {
         style={{
           flexDirection: 'row',
           alignItems: 'center',
-          height: 50,
+          //height: 50,
           justifyContent: 'space-between',
           paddingHorizontal: 15,
+          paddingTop: 12,
         }}>
         <View
           style={{
@@ -326,7 +327,7 @@ const StudentProfile = props => {
             <Ionicons
               style={{marginVertical: 5, marginHorizontal: 7}}
               name="arrow-back"
-              size={20}
+              size={24}
               color={COLORS.black}
             />
           </TouchableOpacity>
@@ -334,13 +335,13 @@ const StudentProfile = props => {
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
           <Text
             style={[
-              // paraGray.darkpara,
+              paraGray.largebold,
               {
                 textAlign: 'center',
                 //marginLeft: 30,
-                fontFamily: 'Montserrat-Medium',
-                fontSize: 16,
-                color: COLORS.black,
+                // fontFamily: 'Montserrat-Medium',
+                // fontSize: 16,
+                // color: COLORS.black,
               },
             ]}>
             Student Profile
@@ -367,12 +368,19 @@ const StudentProfile = props => {
             <Ionicons
               style={{marginVertical: 5, marginHorizontal: 7}}
               name="pencil-sharp"
-              size={15}
+              size={20}
               color={COLORS.black}
             />
           </TouchableOpacity>
         </View>
       </View>
+      <View
+        style={{
+          paddingTop: 12,
+          borderBottomWidth: 0.8,
+          borderColor: COLORS.primary,
+        }}
+      />
       {/* <View
         style={{flex: 1, borderBottomWidth: 1.5, borderColor: COLORS.section}}
       /> */}
@@ -380,39 +388,28 @@ const StudentProfile = props => {
         <View
           style={{
             flex: 1,
-            backgroundColor: COLORS.bg,
-            // borderTopLeftRadius: 30,
-            // borderTopRightRadius: 30,
-            // paddingHorizontal: 15,
+            backgroundColor: COLORS.white,
             paddingBottom: 30,
             width: '90%',
             alignSelf: 'center',
-          }}>
+          }}
+        >
           <View
             style={{
-              // flexDirection: 'row',
-              //   alignItems: 'center',
-              //   justifyContent: 'center',
-              //backgroundColor: '#C4C4C440',
-
               width: '70%',
-
               borderRadius: 16,
               alignSelf: 'center',
               marginTop: 20,
-            }}>
+            }}
+          >
             <View
               style={{
                 flex: 1,
-
                 alignItems: 'center',
-                // marginTop: 10,
-                // marginBottom: 10,
                 justifyContent: 'center',
                 alignSelf: 'center',
-
-                // alignContent: 'center',
-              }}>
+              }}
+            >
               <TouchableOpacity onPress={SelectImage}>
                 {studentimage == null ? (
                   <ImageBackground
@@ -435,8 +432,8 @@ const StudentProfile = props => {
                   // />
                   <FastImage
                     style={{
-                      width: 108,
-                      height: 108,
+                      width: 128,
+                      height: 128,
                       borderRadius: 12,
                     }}
                     source={{
@@ -448,11 +445,11 @@ const StudentProfile = props => {
                 )}
               </TouchableOpacity>
 
-              <View style={{marginVertical: 10}}>
+              <View style={{marginVertical: 20}}>
                 <Text
                   style={[
                     paraGray.parahome,
-                    {fontSize: 14, textAlign: 'center'},
+                    {fontSize: 16, textAlign: 'center'},
                   ]}>
                   {studentdetail.student_name}
                 </Text>
@@ -460,13 +457,12 @@ const StudentProfile = props => {
               <View style={{}}>
                 <View
                   style={{
-                    height: 60,
+                    height: 64,
                     elevation: 4,
                     backgroundColor: 'white',
                     borderRadius: 10,
-
                     justifyContent: 'center',
-                    paddingHorizontal: 10,
+                    paddingHorizontal: 16,
                   }}>
                   <View
                     style={{
@@ -486,8 +482,7 @@ const StudentProfile = props => {
                       <Text
                         style={{
                           fontFamily: 'Montserrat-Medium',
-                          fontSize: 12,
-
+                          fontSize: 14,
                           textAlign: 'center',
                           color: '#97A7C3D6',
                         }}>
@@ -496,7 +491,6 @@ const StudentProfile = props => {
                       <View
                         style={{
                           flexDirection: 'row',
-
                           alignItems: 'center',
                           justifyContent: 'center',
                           //alignSelf: 'center',
@@ -505,8 +499,7 @@ const StudentProfile = props => {
                         <Text
                           style={{
                             fontFamily: 'Montserrat-Medium',
-                            fontSize: 13,
-
+                            fontSize: 14,
                             lineHeight: 15,
                             color: COLORS.primary,
                             textAlign: 'center',
@@ -523,31 +516,30 @@ const StudentProfile = props => {
                     </View>
                     <View
                       style={{
-                        width: 1,
-                        height: 36,
-                        //borderWidth: 1,
-                        backgroundColor: '#97A7C3D6',
-
+                        //width: 1,
+                        height: 40,
+                        borderWidth: 0.6,
+                        borderColor: '#97A7C3D6',
                         //marginHorizontal: 10,
                         marginVertical: 10,
                       }}
                     />
                     <View
                       style={{
-                        width: 100,
+                        width: 110,
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'flex-start',
                         //alignSelf: 'center',
-                        marginHorizontal: 10,
+                        marginHorizontal: 12,
                         //borderWidth: 1,
                       }}>
                       <Text
                         style={{
                           fontFamily: 'Montserrat-Medium',
-                          fontSize: 12,
+                          fontSize: 14,
                           textAlign: 'center',
+                          alignSelf: 'center',
                           lineHeight: 15,
-
                           color: '#97A7C3D6',
                         }}>
                         Academic Yr.
@@ -555,17 +547,16 @@ const StudentProfile = props => {
                       <View
                         style={{
                           flexDirection: 'row',
-
-                          alignItems: 'center',
+                          alignItems: 'baseline',
                           justifyContent: 'center',
                           //alignSelf: 'center',
                           marginTop: 5,
+                          marginHorizontal: 10,
                         }}>
                         <Text
                           style={{
                             fontFamily: 'Montserrat-Medium',
-                            fontSize: 13,
-
+                            fontSize: 14,
                             lineHeight: 15,
                             color: COLORS.primary,
                             textAlign: 'center',
@@ -582,17 +573,17 @@ const StudentProfile = props => {
                     </View>
                     <View
                       style={{
-                        width: 1,
-                        height: 36,
-                        backgroundColor: '#97A7C3D6',
-                        //marginHorizontal: 10,
-                        //marginVertical: 10,
+                        //width: 1,
+                        height: 40,
+                        borderWidth: 0.6,
+                        borderColor: '#97A7C3D6',
+                        marginVertical: 10,
                       }}
                     />
 
                     <View
                       style={{
-                        width: 70,
+                        width: 74,
                         //justifyContent: 'center',
                         alignItems: 'flex-start',
                         //alignSelf: 'center',
@@ -601,18 +592,17 @@ const StudentProfile = props => {
                       <Text
                         style={{
                           fontFamily: 'Montserrat-Medium',
-                          fontSize: 12,
+                          fontSize: 14,
                           textAlign: 'center',
                           lineHeight: 15,
                           color: '#97A7C3D6',
                         }}>
-                        D.O.B
+                        D.O.B.
                       </Text>
                       <View
                         style={{
                           flexDirection: 'row',
-
-                          alignItems: 'center',
+                          alignItems: 'baseline',
                           justifyContent: 'center',
                           //alignSelf: 'center',
                           //marginLeft: 28,
@@ -621,8 +611,7 @@ const StudentProfile = props => {
                         <Text
                           style={{
                             fontFamily: 'Montserrat-Medium',
-                            fontSize: 13,
-
+                            fontSize: 14,
                             lineHeight: 15,
                             color: COLORS.primary,
                             textAlign: 'center',
@@ -668,9 +657,9 @@ const StudentProfile = props => {
                 style={{
                   fontFamily: 'Montserrat-Medium',
                   color: COLORS.primary,
-                  fontSize: 14,
-                  lineHeight: 17,
-                  marginBottom: 10,
+                  fontSize: 16,
+                  lineHeight: 16,
+                  marginBottom: 12,
                 }}>
                 Basic Info
               </Text>
@@ -688,14 +677,14 @@ const StudentProfile = props => {
                           paraGray.darkpara,
                           {color: COLORS.black, opacity: 0.5},
                         ]}>
-                        Aadhar No
+                        Aadhar No.
                       </Text>
                       <View style={styles.inputTextView}>
                         <TextInput
                           placeholder="Enter Aadhar No"
                           placeholderTextColor={COLORS.lightergray}
                           value={studentAddress}
-                          style={styles.textInput}
+                          style={[styles.textInput, saveChanges ? {color: COLORS.black} : {color: COLORS.lightergray}]}
                           onChangeText={value => {
                             setStudentAadhar(value);
                           }}
@@ -709,9 +698,9 @@ const StudentProfile = props => {
                           paraGray.darkpara,
                           {color: COLORS.black, opacity: 0.5},
                         ]}>
-                        RollNo
+                        Roll No.
                       </Text>
-                      <View style={[styles.inputTextView, {width: 55}]}>
+                      <View style={[styles.inputTextView, {width: 60}]}>
                         <TextInput
                           placeholder="Enter RollNo"
                           placeholderTextColor={COLORS.lightergray}
@@ -719,7 +708,7 @@ const StudentProfile = props => {
                           onChangeText={value => {
                             setStudentRollNO(value);
                           }}
-                          style={styles.textInput}
+                          style={[styles.textInput, saveChanges ? {color: COLORS.black} : {color: COLORS.lightergray}]}
                           editable={saveChanges}
                         />
                       </View>
@@ -730,7 +719,7 @@ const StudentProfile = props => {
                       <Text
                         style={[
                           paraGray.darkpara,
-                          {color: COLORS.black, opacity: 0.5},
+                          {fontSize: 13, color: COLORS.black, opacity: 0.5},
                         ]}>
                         Student Mobile No
                       </Text>
@@ -742,7 +731,7 @@ const StudentProfile = props => {
                           onChangeText={value => {
                             setStudentMobileno(value);
                           }}
-                          style={styles.textInput}
+                          style={[styles.textInput, saveChanges ? {color: COLORS.black} : {color: COLORS.lightergray}]}
                           editable={saveChanges}
                         />
                       </View>
@@ -763,7 +752,7 @@ const StudentProfile = props => {
                           onChangeText={value => {
                             setStudentEmail(value);
                           }}
-                          style={styles.textInput}
+                          style={[styles.textInput, saveChanges ? {color: COLORS.black} : {color: COLORS.lightergray}]}
                           editable={saveChanges}
                         />
                       </View>
@@ -775,7 +764,7 @@ const StudentProfile = props => {
                         paraGray.darkpara,
                         {color: COLORS.black, opacity: 0.5},
                       ]}>
-                      Parmanent Add.
+                      Permanent Address
                     </Text>
                     <View style={styles.inputTextView}>
                       <TextInput
@@ -785,7 +774,7 @@ const StudentProfile = props => {
                         onChangeText={value => {
                           setStudentAddress(value);
                         }}
-                        style={styles.textInput}
+                        style={[styles.textInput, saveChanges ? {color: COLORS.black} : {color: COLORS.lightergray}]}
                         editable={saveChanges}
                       />
                     </View>
@@ -793,13 +782,13 @@ const StudentProfile = props => {
                 </View>
               </View>
             </View>
-            <View style={{marginTop: 25}}>
+            <View style={{marginTop: 30}}>
               <Text
                 style={{
                   fontFamily: 'Montserrat-Medium',
                   color: COLORS.primary,
-                  fontSize: 14,
-                  lineHeight: 17,
+                  fontSize: 16,
+                  lineHeight: 16,
                   marginBottom: 10,
                 }}>
                 School Info
@@ -817,15 +806,15 @@ const StudentProfile = props => {
                     paddingBottom: 20,
                   }}>
                   <View style={[styles.mainViewContainer, {marginTop: -10}]}>
-                    <View style={[styles.mainView, {width: 120}]}>
+                    <View style={[styles.mainView, {width: 110}]}>
                       <Text
                         style={[
                           paraGray.darkpara,
                           {color: COLORS.black, opacity: 0.5},
                         ]}>
-                        School Bus NO
+                        School Bus No.
                       </Text>
-                      <View style={[styles.inputTextView, {width: 120}]}>
+                      <View style={[styles.inputTextView, {width: 100}]}>
                         <TextInput
                           placeholder="Enter School Bus No"
                           placeholderTextColor={COLORS.lightergray}
@@ -833,20 +822,20 @@ const StudentProfile = props => {
                           onChangeText={value => {
                             setStudentSchoolBusNo(value);
                           }}
-                          style={styles.textInput}
+                          style={[styles.textInput, saveChanges ? {color: COLORS.black} : {color: COLORS.lightergray}]}
                           editable={saveChanges}
                         />
                       </View>
                     </View>
-                    <View style={styles.mainView}>
+                    <View style={[styles.mainView, {width: 160}]}>
                       <Text
                         style={[
                           paraGray.darkpara,
                           {color: COLORS.black, opacity: 0.5},
                         ]}>
-                        Route No
+                        Route No.
                       </Text>
-                      <View style={[styles.inputTextView, {width: 60}]}>
+                      <View style={[styles.inputTextView, {width: 70}]}>
                         <TextInput
                           //placeholder="Enter Route"
                           placeholderTextColor={COLORS.lightergray}
@@ -854,7 +843,7 @@ const StudentProfile = props => {
                           onChangeText={value => {
                             setStudentRouteNO(value);
                           }}
-                          style={styles.textInput}
+                          style={[styles.textInput, saveChanges ? {color: COLORS.black} : {color: COLORS.lightergray}]}
                           editable={saveChanges}
                         />
                       </View>
@@ -872,7 +861,7 @@ const StudentProfile = props => {
                           paraGray.darkpara,
                           {color: COLORS.black, opacity: 0.5},
                         ]}>
-                        School No
+                        School No.
                       </Text>
                       <View style={[styles.inputTextView, {borderWidth: 1}]}>
                         <TextInput
@@ -882,7 +871,7 @@ const StudentProfile = props => {
                           onChangeText={value => {
                             setStudentSchoolNo(value);
                           }}
-                          style={styles.textInput}
+                          style={[styles.textInput, saveChanges ? {color: COLORS.black} : {color: COLORS.lightergray}]}
                           editable={saveChanges}
                         />
                       </View>
@@ -906,7 +895,7 @@ const StudentProfile = props => {
                             // setStudentSchoolNo(value);
                             dispatch(setuserName(value));
                           }}
-                          style={styles.textInput}
+                          style={[styles.textInput, saveChanges ? {color: COLORS.black} : {color: COLORS.lightergray}]}
                           editable={saveChanges}
                         />
                       </View>
@@ -915,13 +904,13 @@ const StudentProfile = props => {
                 </View>
               </View>
             </View>
-            <View style={{marginTop: 25}}>
+            <View style={{marginTop: 30}}>
               <Text
                 style={{
                   fontFamily: 'Montserrat-Medium',
                   color: COLORS.primary,
-                  fontSize: 14,
-                  lineHeight: 17,
+                  fontSize: 16,
+                  lineHeight: 16,
                   marginBottom: 10,
                 }}>
                 Guardian Info
@@ -932,11 +921,11 @@ const StudentProfile = props => {
                   width: '100%',
                   backgroundColor: 'white',
                   elevation: 4,
-                  paddingHorizontal: 10,
+                  //paddingHorizontal: 10,
                 }}>
                 <View style={{paddingTop: 15, paddingBottom: 20}}>
                   <View style={[styles.mainViewContainer, {marginTop: -10}]}>
-                    <View style={styles.mainView}>
+                    <View style={[styles.mainView, {width: 156}]}>
                       <Text
                         style={[
                           paraGray.darkpara,
@@ -952,12 +941,12 @@ const StudentProfile = props => {
                           onChangeText={value => {
                             setStudentMotherName(value);
                           }}
-                          style={styles.textInput}
+                          style={[styles.textInput, saveChanges ? {color: COLORS.black} : {color: COLORS.lightergray}]}
                           editable={saveChanges}
                         />
                       </View>
                     </View>
-                    <View style={styles.mainView}>
+                    <View style={[styles.mainView, {width: 156}]}>
                       <Text
                         style={[
                           paraGray.darkpara,
@@ -967,20 +956,20 @@ const StudentProfile = props => {
                       </Text>
                       <View style={[styles.inputTextView]}>
                         <TextInput
-                          placeholder="Enter Mother Mobile No"
+                          placeholder="Enter Mother Mobile No."
                           placeholderTextColor={COLORS.lightergray}
                           value={studentmothermobileno}
                           onChangeText={value => {
                             setStudentMotherMobileNo(value);
                           }}
-                          style={styles.textInput}
+                          style={[styles.textInput, saveChanges ? {color: COLORS.black} : {color: COLORS.lightergray}]}
                           editable={saveChanges}
                         />
                       </View>
                     </View>
                   </View>
                   <View style={styles.mainViewContainer}>
-                    <View style={styles.mainView}>
+                    <View style={[styles.mainView, {width: 156}]}>
                       <Text
                         style={[
                           paraGray.darkpara,
@@ -990,18 +979,18 @@ const StudentProfile = props => {
                       </Text>
                       <View style={styles.inputTextView}>
                         <TextInput
-                          placeholder="Enter Mother Email-ID"
+                          placeholder="Enter Mother Email ID"
                           placeholderTextColor={COLORS.lightergray}
                           value={studentmotheremail}
                           onChangeText={value => {
                             setStudentMotherEmail(value);
                           }}
-                          style={styles.textInput}
+                          style={[styles.textInput, saveChanges ? {color: COLORS.black} : {color: COLORS.lightergray}]}
                           editable={saveChanges}
                         />
                       </View>
                     </View>
-                    <View style={styles.mainView}>
+                    <View style={[styles.mainView, {width: 156}]}>
                       <Text
                         style={[
                           paraGray.darkpara,
@@ -1017,14 +1006,14 @@ const StudentProfile = props => {
                           onChangeText={value => {
                             setStudentFatherName(value);
                           }}
-                          style={styles.textInput}
+                          style={[styles.textInput, saveChanges ? {color: COLORS.black} : {color: COLORS.lightergray}]}
                           editable={saveChanges}
                         />
                       </View>
                     </View>
                   </View>
                   <View style={styles.mainViewContainer}>
-                    <View style={styles.mainView}>
+                    <View style={[styles.mainView, {width: 156}]}>
                       <Text
                         style={[
                           paraGray.darkpara,
@@ -1040,12 +1029,12 @@ const StudentProfile = props => {
                           onChangeText={value => {
                             setStudentMotherName(value);
                           }}
-                          style={styles.textInput}
+                          style={[styles.textInput, saveChanges ? {color: COLORS.black} : {color: COLORS.lightergray}]}
                           editable={saveChanges}
                         />
                       </View>
                     </View>
-                    <View style={styles.mainView}>
+                    <View style={[styles.mainView, {width: 156}]}>
                       <Text
                         style={[
                           paraGray.darkpara,
@@ -1055,13 +1044,13 @@ const StudentProfile = props => {
                       </Text>
                       <View style={styles.inputTextView}>
                         <TextInput
-                          placeholder="Enter Father Email-ID"
+                          placeholder="Enter Father Email ID"
                           placeholderTextColor={COLORS.lightergray}
                           value={studentfatheremail}
                           onChangeText={value => {
                             setStudentFatherEmail(value);
                           }}
-                          style={styles.textInput}
+                          style={[styles.textInput, saveChanges ? {color: COLORS.black} : {color: COLORS.lightergray}]}
                           editable={saveChanges}
                         />
                       </View>
@@ -1121,7 +1110,7 @@ const StudentProfile = props => {
                 alignItems: 'center',
                 alignSelf: 'center',
                 marginTop: 12,
-                marginBottom: 60,
+                marginBottom: 30,
               }}>
               <TouchableOpacity
                 style={{
@@ -1137,7 +1126,9 @@ const StudentProfile = props => {
                   borderRadius: 12,
                   justifyContent: 'center',
                   //elevation: 3,
-                }}>
+                }}
+                onPress={()=> setSaveChanges(false)}
+              >
                 <Text
                   style={{
                     color: COLORS.white,
@@ -1194,25 +1185,27 @@ const styles = StyleSheet.create({
   },
   mainView: {
     alignSelf: 'center',
-    marginTop: 10,
+    marginTop: 12,
     width: 140,
-    heigth: 62,
+    heigth: 60,
     backgroundColor: 'white',
   },
   inputTextView: {
     borderWidth: 1,
     borderColor: COLORS.primary,
     width: '100%',
-    height: 36,
+    height: 42,
     borderRadius: 12,
     justifyContent: 'center',
     alignItems: 'flex-start',
     paddingHorizontal: 5,
-    marginTop: 5,
+    paddingTop: 2,
+    marginTop: 8,
   },
   textInput: {
-    fontSize: 12,
+    fontSize: 13,
     fontFamily: 'Montserrat-Medium',
-    lineHeight: 16,
+    //lineHeight: 16,
+    //color: COLORS.lightergray,
   },
 });
