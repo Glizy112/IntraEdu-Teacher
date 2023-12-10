@@ -7,7 +7,7 @@ import {
   StatusBar,
   TextInput,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
 import {
   FlatList,
@@ -122,7 +122,7 @@ const Info = () => {
     //   setSelectedImage(image.path);
     // });
   };
-
+  console.log(student.image);
   return (
     <View style={styles.container}>
       <View
@@ -132,15 +132,27 @@ const Info = () => {
           //height: 48,
           justifyContent: 'center',
           paddingHorizontal: 15,
-          paddingBottom: 4
+          paddingBottom: 4,
         }}>
-        <View style={{justifyContent: 'center', alignItems: 'center', borderWidth: 0}}>
-          <Text style={[paraGray.largebold, {textAlign: 'center', marginTop: 16}]}>
+        <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderWidth: 0,
+          }}>
+          <Text
+            style={[paraGray.largebold, {textAlign: 'center', marginTop: 16}]}>
             Add Student
           </Text>
         </View>
       </View>
-      <View style={{paddingTop: 12, borderBottomWidth: 0.8, borderColor: COLORS.primary}}/>
+      <View
+        style={{
+          paddingTop: 12,
+          borderBottomWidth: 0.8,
+          borderColor: COLORS.primary,
+        }}
+      />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View>
           <TouchableOpacity
@@ -188,8 +200,8 @@ const Info = () => {
           <Text style={styles.formtxt}>Mobile No</Text>
           <View style={styles.txtbox}>
             <TextInput
-              textContentType='number'
-              keyboardType='number-pad'
+              textContentType="number"
+              keyboardType="number-pad"
               maxLength={10}
               placeholder="Enter mobile number"
               placeholderTextColor={COLORS.lightergray}
@@ -343,8 +355,8 @@ const Info = () => {
           <Text style={styles.formtxt}>Father Mobile No.</Text>
           <View style={styles.txtbox}>
             <TextInput
-              textContentType='telephoneNumber'
-              keyboardType='number-pad'
+              textContentType="telephoneNumber"
+              keyboardType="number-pad"
               maxLength={10}
               placeholder="Enter mobile number"
               placeholderTextColor={COLORS.lightergray}
@@ -403,8 +415,8 @@ const Info = () => {
           <Text style={styles.formtxt}>Mother Mobile No.</Text>
           <View style={styles.txtbox}>
             <TextInput
-              textContentType='telephoneNumber'
-              keyboardType='number-pad'
+              textContentType="telephoneNumber"
+              keyboardType="number-pad"
               maxLength={10}
               placeholder="Enter mobile number"
               placeholderTextColor={COLORS.lightergray}
@@ -549,10 +561,10 @@ const Info = () => {
                 marginTop: 15,
                 borderRadius: 12,
                 justifyContent: 'center',
-                marginLeft: 16
+                marginLeft: 16,
                 //elevation: 3,
               }}
-              onPress={()=> console.log('Saved')}>
+              onPress={() => console.log('Saved')}>
               <Text
                 style={{
                   color: COLORS.white,

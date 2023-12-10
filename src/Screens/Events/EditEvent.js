@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -11,23 +11,23 @@ import {
   RefreshControl,
   Image,
 } from 'react-native';
-import { AutoGrowingTextInput } from 'react-native-autogrow-textinput';
+import {AutoGrowingTextInput} from 'react-native-autogrow-textinput';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import { paraGray } from '../../theme/styles/Base';
+import {paraGray} from '../../theme/styles/Base';
 import Spinner from 'react-native-loading-spinner-overlay';
-import { useSelector, useDispatch } from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import Url from '../../Config/Api/Url';
 import ImagePicker from 'react-native-image-crop-picker';
-import { COLORS } from '../../theme/Colors';
+import {COLORS} from '../../theme/Colors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const EditEvent = props => {
-  const { eventdata } = props.route.params;
+  const {eventdata} = props.route.params;
   const [loading, setLoading] = useState(false);
   const [load, setLoad] = useState(true);
-  const { roleid, schoolid, teacherid } = useSelector(state => state.userReducer);
+  const {roleid, schoolid, teacherid} = useSelector(state => state.userReducer);
   const [title, setTitle] = useState(eventdata.title);
   const [eventdesc, setEventdesc] = useState(eventdata.note);
   const [image, setImage] = useState([]);
@@ -35,17 +35,15 @@ const EditEvent = props => {
   const [inputValues, setInputValues] = useState([]);
   const [currentInputValue, setCurrentInputValue] = useState(null);
 
-
   useEffect(() => {
-    var data = JSON.parse(eventdata.participate_in)
+    var data = JSON.parse(eventdata.participate_in);
     var list = [];
     for (let index = 0; index < data.length; index++) {
       list.push([data[index]]);
     }
-    setInputValues([...list])
+    setInputValues([...list]);
     // setimagedata()
   }, []);
-
 
   // const setimagedata = () => {
   //   var datas = JSON.parse(eventdata.image)
@@ -77,7 +75,6 @@ const EditEvent = props => {
       '/' +
       tempDate.getFullYear();
     setText(fDate);
-
   };
 
   const showMode = currentMode => {
@@ -230,7 +227,7 @@ const EditEvent = props => {
         });
         setImage(imageList);
       })
-      .catch(e => console.log('Create Event Error => ', e.message))
+      .catch(e => console.log('Create Event Error => ', e.message));
     // ImagePicker.openPicker({
     //   width: 250,
     //   height: 250,
@@ -248,7 +245,10 @@ const EditEvent = props => {
     setEditImage(editimage.filter((o, i) => index !== i));
   };
 
-  const themedStyles = styless(primaryColor = COLORS.lightbackground, secondaryColor = COLORS.White,);
+  const themedStyles = styless(
+    (primaryColor = COLORS.lightbackground),
+    (secondaryColor = COLORS.White),
+  );
   const onDoneButtonPress = async () => {
     if (currentInputValue === null) {
       Keyboard.dismiss();
@@ -264,11 +264,11 @@ const EditEvent = props => {
         setCurrentInputValue(null);
       }
     }
-  }
-  const onRemoveValue = (value) => {
+  };
+  const onRemoveValue = value => {
     const filterInputValues = inputValues.filter(item => item !== value);
     setInputValues([...filterInputValues]);
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -280,17 +280,28 @@ const EditEvent = props => {
           //height: 30,
           justifyContent: 'center',
           paddingHorizontal: 15,
-          paddingBottom: 8 
+          paddingBottom: 8,
           //borderWidth: 1
         }}>
-        <View style={{justifyContent: 'center', alignItems: 'center', borderWidth: 0}}>
+        <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderWidth: 0,
+          }}>
           <Text
             style={[paraGray.largebold, {textAlign: 'center', marginTop: 16}]}>
             Edit Event
           </Text>
         </View>
       </View>
-      <View style={{paddingTop: 12, borderBottomWidth: 0.6, borderColor: COLORS.primary}}/>
+      <View
+        style={{
+          paddingTop: 12,
+          borderBottomWidth: 0.6,
+          borderColor: COLORS.primary,
+        }}
+      />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{marginTop: 16}}>
           <View>
@@ -307,22 +318,22 @@ const EditEvent = props => {
                 marginTop: 20,
                 paddingHorizontal: 20,
               }}
-              onPress={() => SelectImage()}
-            >
+              onPress={() => SelectImage()}>
               <AntDesign
                 style={{marginVertical: 5}}
                 name="pluscircle"
                 size={30}
                 color={COLORS.black}
               />
-              <Text 
+              <Text
                 style={{
-                  fontFamily: 'Montserrat-Medium', 
-                  color: COLORS.black, 
-                  fontSize: 15, 
-                  marginLeft: 16
-                }}
-              >Add Image(s) / Optional</Text>
+                  fontFamily: 'Montserrat-Medium',
+                  color: COLORS.black,
+                  fontSize: 15,
+                  marginLeft: 16,
+                }}>
+                Add Image(s) / Optional
+              </Text>
             </TouchableOpacity>
             {/* Selected Images Start*/}
             <View
@@ -337,8 +348,7 @@ const EditEvent = props => {
                 <TouchableOpacity
                   key={index}
                   style={{marginHorizontal: 10, marginLeft: 12}}
-                  onPress={() => removeItem(index)}
-                >
+                  onPress={() => removeItem(index)}>
                   <AntDesign
                     style={{alignSelf: 'flex-end'}}
                     name="closecircleo"
@@ -346,7 +356,12 @@ const EditEvent = props => {
                     color={COLORS.red}
                   />
                   <Image
-                    style={{flexDirection: 'row', height: 100, width: 100, borderRadius: 8}}
+                    style={{
+                      flexDirection: 'row',
+                      height: 100,
+                      width: 100,
+                      borderRadius: 8,
+                    }}
                     source={{uri: image.path}}
                   />
                 </TouchableOpacity>
@@ -421,7 +436,7 @@ const EditEvent = props => {
                   name="calendar-blank-outline"
                   size={26}
                   color={COLORS.primary}
-                // onPress={showDatepicker}
+                  // onPress={showDatepicker}
                 />
 
                 {show && (
@@ -435,7 +450,7 @@ const EditEvent = props => {
                   />
                 )}
               </TouchableOpacity>
-              <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+              <View style={{justifyContent: 'center', alignItems: 'center'}}>
                 <Text
                   style={{
                     marginTop: 15,
@@ -482,7 +497,7 @@ const EditEvent = props => {
                   name="calendar-blank-outline"
                   size={26}
                   color={COLORS.primary}
-                // onPress={showDatepickers}
+                  // onPress={showDatepickers}
                 />
 
                 {shows && (
@@ -499,9 +514,7 @@ const EditEvent = props => {
             </View>
           </View>
           <View style={{marginTop: 8}}>
-            <Text style={styles.formtxt}>
-              Date Of Event
-            </Text>
+            <Text style={styles.formtxt}>Date Of Event</Text>
             <TouchableOpacity
               style={{
                 flex: 1,
@@ -554,8 +567,14 @@ const EditEvent = props => {
               )}
             </TouchableOpacity>
             <View style={{marginTop: 8, paddingHorizontal: 4}}>
-              <Text style={[styles.formtxt, {paddingHorizontal: 16}]}>Select Participants</Text>
-              <View style={[themedStyles.inputOutlined, themedStyles.inputAndChipWrapper]}>
+              <Text style={[styles.formtxt, {paddingHorizontal: 16}]}>
+                Select Participants
+              </Text>
+              <View
+                style={[
+                  themedStyles.inputOutlined,
+                  themedStyles.inputAndChipWrapper,
+                ]}>
                 <TextInput
                   style={{
                     //marginLeft: 2,
@@ -569,7 +588,7 @@ const EditEvent = props => {
                     fontSize: 14,
                     fontFamily: 'Montserrat-Regular',
                   }}
-                  onChangeText={(value) => setCurrentInputValue(value)}
+                  onChangeText={value => setCurrentInputValue(value)}
                   value={currentInputValue}
                   blurOnSubmit={false}
                   returnKeyLabel="done"
@@ -578,7 +597,8 @@ const EditEvent = props => {
                 />
                 <View style={themedStyles.chipsContainer}>
                   {inputValues.map(value => (
-                    <TouchableOpacity key={value}
+                    <TouchableOpacity
+                      key={value}
                       style={[
                         themedStyles.chipContained,
                         themedStyles.chipWrapperSmall,
@@ -592,11 +612,7 @@ const EditEvent = props => {
                           themedStyles.chipIconWrapper,
                         ]}
                         onPress={() => onRemoveValue(value)}>
-                        <Icon
-                          name={'close'}
-                          size={15}
-                          color={COLORS.black}
-                        />
+                        <Icon name={'close'} size={15} color={COLORS.black} />
                       </TouchableOpacity>
                     </TouchableOpacity>
                   ))}
@@ -645,131 +661,132 @@ const EditEvent = props => {
 };
 
 export default EditEvent;
-const styless = (primaryColor, secondaryColor) => StyleSheet.create({
-  inputAndChipWrapper: {
-    padding: 8,
-    margin: 8,
-    marginHorizontal: 18,
-    marginTop: 15,
-  },
-  inputContained: {
-    backgroundColor: '#e0e0e0',
-    borderWidth: 1,
-    borderColor: 'transparent',
-    borderRadius: 4,
-  },
-  inputOutlined: {
-    backgroundColor: 'transparent',
-    borderColor: COLORS.primary,
-    borderWidth: 0.6,
-    borderRadius: 12,
-    height: 100,
-  },
-  inputStandard: {
-    backgroundColor: 'transparent',
-    borderBottomColor: '#e0e0e0',
-    borderWidth: 1,
-    borderLeftColor: 'transparent',
-    borderTopColor: 'transparent',
-    borderRightColor: 'transparent',
-  },
-  input: {
-    padding: 8,
-    fontSize: 20,
-  },
-  chipWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: -4,
-    marginHorizontal: 4,
-  },
-  chipWrapperLarge: {
-    height: 50,
-    borderRadius: 25,
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-  },
-  chipWrapperMedium: {
-    height: 40,
-    borderRadius: 20,
-    paddingVertical: 8,
-    paddingHorizontal: 8,
-  },
-  chipWrapperSmall: {
-    height: 35,
-    borderRadius: 17.5,
-    paddingVertical: 8,
-    paddingHorizontal: 8,
-  },
-  chipsContainer: {
-    //padding: 8,
-    flex: 1,
-    //borderWidth: 1,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-  chipContained: {
-    backgroundColor: primaryColor ? primaryColor : '#e0e0e0',
-    borderColor: 'transparent',
-    borderWidth: 1,
-  },
-  chipOutlined: {
-    backgroundColor: 'white',
-    borderColor: primaryColor ? primaryColor : '#bdbdbd',
-    borderWidth: 1,
-  },
-  chipIconWrapper: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'column',
-    marginLeft: 16,
-    borderWidth: 2,
-    borderColor: COLORS.white,
-    backgroundColor: COLORS.white,
-  },
-  iconWrapperLarge: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
-  },
-  iconWrapperMedium: {
-    width: 25,
-    height: 25,
-    borderRadius: 12.5,
-  },
-  iconWrapperSmall: {
-    width: 20,
-    height: 20,
-    borderRadius: 10,
-  },
-  iconWrapperContained: {
-    backgroundColor: primaryColor ? primaryColor : '#bdbdbd',
-    borderColor: 'transparent',
-    borderWidth: 1,
-  },
-  iconContained: {
-    color: secondaryColor ? secondaryColor : '#ffffff',
-  },
-  iconWrapperOutlined: {
-    backgroundColor: primaryColor ? primaryColor : '#bdbdbd',
-    borderColor: 'transparent',
-    borderWidth: 1,
-  },
-  chipText: {
-    color: COLORS.black,
-  },
-  chipTextLarge: {
-    fontSize: 18,
-  },
-  chipTextMedium: {
-    fontSize: 16,
-  },
-  chipTextSmall: {
-    fontSize: 12,
-    color: COLORS.black,
-  },
-});
+const styless = (primaryColor, secondaryColor) =>
+  StyleSheet.create({
+    inputAndChipWrapper: {
+      padding: 8,
+      margin: 8,
+      marginHorizontal: 18,
+      marginTop: 15,
+    },
+    inputContained: {
+      backgroundColor: '#e0e0e0',
+      borderWidth: 1,
+      borderColor: 'transparent',
+      borderRadius: 4,
+    },
+    inputOutlined: {
+      backgroundColor: 'transparent',
+      borderColor: COLORS.primary,
+      borderWidth: 0.6,
+      borderRadius: 12,
+      height: 100,
+    },
+    inputStandard: {
+      backgroundColor: 'transparent',
+      borderBottomColor: '#e0e0e0',
+      borderWidth: 1,
+      borderLeftColor: 'transparent',
+      borderTopColor: 'transparent',
+      borderRightColor: 'transparent',
+    },
+    input: {
+      padding: 8,
+      fontSize: 20,
+    },
+    chipWrapper: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      margin: -4,
+      marginHorizontal: 4,
+    },
+    chipWrapperLarge: {
+      height: 50,
+      borderRadius: 25,
+      paddingVertical: 12,
+      paddingHorizontal: 16,
+    },
+    chipWrapperMedium: {
+      height: 40,
+      borderRadius: 20,
+      paddingVertical: 8,
+      paddingHorizontal: 8,
+    },
+    chipWrapperSmall: {
+      height: 35,
+      borderRadius: 17.5,
+      paddingVertical: 8,
+      paddingHorizontal: 8,
+    },
+    chipsContainer: {
+      //padding: 8,
+      flex: 1,
+      //borderWidth: 1,
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+    },
+    chipContained: {
+      backgroundColor: primaryColor ? primaryColor : '#e0e0e0',
+      borderColor: 'transparent',
+      borderWidth: 1,
+    },
+    chipOutlined: {
+      backgroundColor: 'white',
+      borderColor: primaryColor ? primaryColor : '#bdbdbd',
+      borderWidth: 1,
+    },
+    chipIconWrapper: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      flexDirection: 'column',
+      marginLeft: 16,
+      borderWidth: 2,
+      borderColor: COLORS.white,
+      backgroundColor: COLORS.white,
+    },
+    iconWrapperLarge: {
+      width: 30,
+      height: 30,
+      borderRadius: 15,
+    },
+    iconWrapperMedium: {
+      width: 25,
+      height: 25,
+      borderRadius: 12.5,
+    },
+    iconWrapperSmall: {
+      width: 20,
+      height: 20,
+      borderRadius: 10,
+    },
+    iconWrapperContained: {
+      backgroundColor: primaryColor ? primaryColor : '#bdbdbd',
+      borderColor: 'transparent',
+      borderWidth: 1,
+    },
+    iconContained: {
+      color: secondaryColor ? secondaryColor : '#ffffff',
+    },
+    iconWrapperOutlined: {
+      backgroundColor: primaryColor ? primaryColor : '#bdbdbd',
+      borderColor: 'transparent',
+      borderWidth: 1,
+    },
+    chipText: {
+      color: COLORS.black,
+    },
+    chipTextLarge: {
+      fontSize: 18,
+    },
+    chipTextMedium: {
+      fontSize: 16,
+    },
+    chipTextSmall: {
+      fontSize: 12,
+      color: COLORS.black,
+    },
+  });
 const styles = StyleSheet.create({
   container: {
     flex: 1,

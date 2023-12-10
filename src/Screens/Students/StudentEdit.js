@@ -8,12 +8,9 @@ import {
   TextInput,
   Image,
   KeyboardAvoidingView,
-} from 'react-native';
-import {
-  FlatList,
-  ScrollView,
   TouchableOpacity,
-} from 'react-native-gesture-handler';
+} from 'react-native';
+import {FlatList, ScrollView} from 'react-native-gesture-handler';
 import {Avatar} from 'react-native-paper';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -27,11 +24,20 @@ import Url from '../../Config/Api/Url';
 import {useSelector, useDispatch} from 'react-redux';
 import FastImage from 'react-native-fast-image';
 import Spinner from 'react-native-loading-spinner-overlay';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 const StudentEdit = props => {
   const {studentdetail} = props.route.params;
   const [loading, setLoading] = useState(false);
   const [load, setLoad] = useState(true);
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [items, setItems] = useState([
+    {label: '9th', value: '9th'},
+    {label: '10th', value: '10th'},
+    {label: '11th', value: '11th'},
+    {label: '12th', value: '12th'},
+  ]);
   const dispatch = useDispatch();
   const {userinfo, userid, teacherid, schoolid, userimage} = useSelector(
     state => state.userReducer,
@@ -70,9 +76,12 @@ const StudentEdit = props => {
     studentdetail.aadharcard_no,
   );
 
-  const [items, setItems] = useState([
+  const [opens, setOpens] = useState(false);
+  const [values, setValues] = useState(null);
+  const [Genderitems, setGenderItems] = useState([
     {label: 'Male', value: 'Male'},
     {label: 'Female', value: 'Female'},
+    {label: 'Other', value: 'Other'},
   ]);
   const [getdata, setData] = useState([]);
 
@@ -126,7 +135,7 @@ const StudentEdit = props => {
       height: 200,
       cropping: true,
     }).then(image => {
-      // console.log(image);
+      console.log(image);
       setshowimage(true);
       setStudentImage(image.path);
     });
@@ -233,7 +242,7 @@ const StudentEdit = props => {
       setLoading(false);
     }
   };
-
+  console.log(studentimage.image);
   return (
     <KeyboardAvoidingView style={styles.container}>
       {loading == true && <Spinner visible={load} />}
@@ -258,6 +267,37 @@ const StudentEdit = props => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View>
           <TouchableOpacity
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+              //backgroundColor: '#C4C4C440',
+              backgroundColor: COLORS.bgColor,
+              width: '70%',
+              height: 80,
+              borderRadius: 16,
+              alignSelf: 'center',
+              marginTop: 20,
+
+              //paddingHorizontal: 20,
+            }}
+            onPress={SelectImage}>
+            {studentimage == null ? (
+              <FontAwesome5 name="user-alt" size={20} color="#000000" />
+            ) : (
+              //   <Avatar.Image size={50} source={{uri: studentdetail.image}} />
+              <FastImage
+                style={{width: 50, height: 50, borderRadius: 50}}
+                source={{
+                  uri: showimage
+                    ? studentimage
+                    : Url.student_IMG + studentimage,
+                }}
+              />
+            )}
+            <Text style={styles.label}>Add Profile Picture</Text>
+          </TouchableOpacity>
+          {/* <TouchableOpacity
             style={{
               flexDirection: 'row',
               alignItems: 'center',
@@ -286,13 +326,13 @@ const StudentEdit = props => {
               />
             )}
             <Text style={styles.label}>Add Profile Picture</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
 
-          <Text style={styles.formtxt}>Name:</Text>
+          <Text style={[styles.formtxt, {marginTop: 24}]}>Name:</Text>
           <View style={styles.txtbox}>
             <TextInput
               placeholder="ENTER NAME"
-              placeholderTextColor="#808080"
+              placeholderTextColor={COLORS.lightergray}
               value={studentname}
               onChangeText={value => {
                 setStudentName(value);
@@ -302,6 +342,7 @@ const StudentEdit = props => {
                 backgroundColor: '#FFFFFF',
                 width: '90%',
                 height: 40,
+                color: COLORS.black,
                 fontFamily: 'Montserrat-Regular',
               }}
             />
@@ -362,9 +403,9 @@ const StudentEdit = props => {
           </View>
 
           <Text style={styles.formtxt}>Stream:</Text>
-          <View style={{marginTop: 15, paddingHorizontal: 20}}>
-            <Dropdown
-              style={[styles.dropdown, isstreamFocus && {borderColor: 'blue'}]}
+          <View>
+            {/* <Dropdown
+              style={[styles.txtbox, {paddingHorizontal: 8}]}
               placeholderStyle={styles.placeholderStyle}
               selectedTextStyle={styles.selectedTextStyle}
               inputSearchStyle={styles.inputSearchStyle}
@@ -392,11 +433,33 @@ const StudentEdit = props => {
                 setStream(item.value);
                 setIsstreamFocus(false);
               }}
+            /> */}
+            <DropDownPicker
+              open={open}
+              value={value}
+              items={items}
+              setOpen={setOpen}
+              setValue={setValue}
+              setItems={setItems}
+              style={[styles.txtbox, {paddingHorizontal: 8}]}
+              placeholder={!isstreamFocus ? stream : '...'}
+              placeholderStyle={{color: COLORS.lightergray, paddingLeft: 4}}
+              dropDownDirection="TOP"
+              dropDownContainerStyle={{
+                width: '90%',
+                alignSelf: 'center',
+                borderColor: COLORS.primary,
+              }}
+              textStyle={{
+                fontSize: 13,
+                color: '#000000',
+                fontFamily: 'Montserrat-Regular',
+              }}
             />
           </View>
           <Text style={styles.formtxt}>Gender:</Text>
-          <View style={{marginTop: 15, paddingHorizontal: 20}}>
-            <Dropdown
+
+          {/* <Dropdown
               style={[styles.dropdown, isgenderFocus && {borderColor: 'blue'}]}
               placeholderStyle={styles.placeholderStyle}
               selectedTextStyle={styles.selectedTextStyle}
@@ -426,8 +489,30 @@ const StudentEdit = props => {
                 setStudentGender(item.value);
                 setIsgenderFocus(false);
               }}
-            />
-          </View>
+            /> */}
+          <DropDownPicker
+            open={opens}
+            value={values}
+            items={Genderitems}
+            setOpen={setOpens}
+            setValue={setValues}
+            setItems={setGenderItems}
+            style={[styles.txtbox, {paddingHorizontal: 8}]}
+            placeholder={!isgenderFocus ? studentgender : '...'}
+            placeholderStyle={{color: COLORS.lightergray, paddingLeft: 4}}
+            // dropDownDirection="Bottom"
+            dropDownContainerStyle={{
+              width: '90%',
+              alignSelf: 'center',
+              borderColor: COLORS.primary,
+            }}
+            textStyle={{
+              fontSize: 13,
+              color: '#000000',
+              fontFamily: 'Montserrat-Regular',
+            }}
+          />
+
           <Text style={styles.formtxt}>DOB:</Text>
           <View
             style={{
@@ -436,31 +521,34 @@ const StudentEdit = props => {
               backgroundColor: '#FFFFFF',
               width: '90%',
               height: 50,
-              borderColor: '#D3D3D3',
+              borderColor: COLORS.primary,
               paddingHorizontal: 0,
-              borderWidth: 2,
+              borderWidth: 0.8,
               marginTop: 15,
-              borderRadius: 10,
+              borderRadius: 12,
               alignSelf: 'center',
             }}>
             <TextInput
               placeholder="SELECT DOB"
-              placeholderTextColor="#808080"
+              placeholderTextColor={COLORS.lightergray}
               editable={false}
               value={studentdob}
               style={{
-                marginLeft: 2,
+                marginLeft: 8,
                 backgroundColor: '#FFFFFF',
                 width: '90%',
                 height: 40,
+                color: COLORS.black,
                 fontFamily: 'Montserrat-Regular',
+                paddingLeft: 4,
               }}
             />
 
             <MaterialCommunityIcons
               name="calendar-blank-outline"
               size={26}
-              color="#434b56"
+              color={COLORS.primary}
+              style={{marginLeft: -4}}
               onPress={showDatepicker}
             />
 
@@ -643,33 +731,34 @@ const StudentEdit = props => {
               }}
             />
           </View> */}
-          <View
+          {/* <View
             style={{
               flex: 1,
               flexDirection: 'row',
               justifyContent: 'center',
+              alignItems: 'center',
+              marginTop: 12,
               marginBottom: 60,
             }}>
             <TouchableOpacity
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                backgroundColor: '#FFFFFF',
-                width: '80%',
-                height: 60,
-                borderColor: '#000000',
+                backgroundColor: COLORS.red,
+                width: '62%',
+                height: 56,
+                borderColor: COLORS.red,
                 alignSelf: 'center',
-                borderWidth: 2,
+                borderWidth: 1.2,
                 marginTop: 15,
-                borderRadius: 10,
+                borderRadius: 12,
                 justifyContent: 'center',
-                elevation: 3,
               }}>
               <Text
                 style={{
-                  color: '#000000',
-                  fontSize: 12,
-                  fontFamily: 'Montserrat-Regular',
+                  color: COLORS.white,
+                  fontSize: 14,
+                  fontFamily: 'Montserrat-Medium',
                 }}>
                 Cancel
               </Text>
@@ -679,23 +768,86 @@ const StudentEdit = props => {
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                backgroundColor: '#000000',
-                width: '80%',
-                height: 60,
-                borderColor: '#D3D3D3',
+                backgroundColor: COLORS.primary,
+                width: '42%',
+                height: 56,
+                borderColor: COLORS.primary,
                 alignSelf: 'center',
-                borderWidth: 2,
+                borderWidth: 1.2,
                 marginTop: 15,
-                borderRadius: 10,
+                borderRadius: 12,
                 justifyContent: 'center',
-                elevation: 3,
+                marginLeft: 16,
+                //elevation: 3,
               }}
               onPress={Update}>
               <Text
                 style={{
-                  color: '#FFFFFF',
-                  fontSize: 12,
-                  fontFamily: 'Montserrat-Regular',
+                  color: COLORS.white,
+                  fontSize: 14,
+                  fontFamily: 'Montserrat-Medium',
+                }}>
+                Save
+              </Text>
+            </TouchableOpacity>
+          </View> */}
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+              alignSelf: 'center',
+              marginTop: 12,
+              marginBottom: 60,
+            }}>
+            <TouchableOpacity
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                backgroundColor: COLORS.red,
+                width: '42%',
+                height: 56,
+                borderColor: COLORS.red,
+                alignSelf: 'center',
+                borderWidth: 1.2,
+                marginTop: 15,
+                borderRadius: 12,
+                justifyContent: 'center',
+                //elevation: 3,
+              }}>
+              <Text
+                style={{
+                  color: COLORS.white,
+                  fontSize: 14,
+                  fontFamily: 'Montserrat-Medium',
+                }}>
+                Cancel
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                backgroundColor: COLORS.primary,
+                width: '42%',
+                height: 56,
+                borderColor: COLORS.primary,
+                alignSelf: 'center',
+                borderWidth: 1.2,
+                marginTop: 15,
+                borderRadius: 12,
+                justifyContent: 'center',
+                marginLeft: 16,
+                //elevation: 3,
+              }}
+              onPress={Update}>
+              <Text
+                style={{
+                  color: COLORS.white,
+                  fontSize: 14,
+                  fontFamily: 'Montserrat-Medium',
                 }}>
                 Save
               </Text>
@@ -729,19 +881,21 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     width: '90%',
     height: 50,
-    borderColor: '#D3D3D3',
+    paddingHorizontal: 4,
+    //borderColor: '#D3D3D3',
+    borderColor: COLORS.primary,
     alignSelf: 'center',
-    borderWidth: 2,
+    borderWidth: 0.8,
     marginTop: 15,
-    borderRadius: 10,
+    borderRadius: 12,
   },
   formtxt: {
-    marginTop: 10,
-    paddingHorizontal: 20,
+    marginTop: 14,
+    paddingHorizontal: 24,
     marginBottom: -10,
-    fontSize: 12,
-    fontFamily: 'Montserrat-Regular',
-    color: '#000000',
+    fontSize: 14,
+    fontFamily: 'Montserrat-Medium',
+    color: COLORS.black,
   },
   dropdown: {
     height: 50,

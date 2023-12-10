@@ -38,9 +38,10 @@ const paraGray = StyleSheet.create({
     opacity: 0.71,
   },
   darkpara: {
-    fontSize: 15,
+    fontSize: 14,
     color: '#000000',
-    fontFamily: 'Montserrat-Regular',
+    fontFamily: 'Montserrat-Medium',
+    //lineHeight: 18,
   },
   parahome: {
     fontSize: 25,

@@ -103,11 +103,15 @@ const Student = props => {
       </View>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
-        contentContainerStyle={{paddingVertical: 12}}
-      >
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+        contentContainerStyle={{paddingVertical: 12}}>
         <View style={{paddingHorizontal: 20, paddingVertical: 8}}>
-          <Text style={[paraGray.largebold, {fontSize: 16}]}> Results ({studentfilter?.length}) </Text>
+          <Text style={[paraGray.largebold, {fontSize: 16}]}>
+            {' '}
+            Results ({studentfilter?.length}){' '}
+          </Text>
         </View>
         {/* <View style={styles.search}>
                     <View
@@ -149,7 +153,7 @@ const Student = props => {
                   key={index}
                   onPress={() =>
                     props.navigation.navigate('StudentProfile', {
-                      student: studentfilter[index],
+                      studentdetail: studentfilter[index],
                     })
                   }>
                   <DataTable>
@@ -161,60 +165,87 @@ const Student = props => {
                         borderRadius: 15,
 
                       }}> */}
-                      <DataTable.Row style={{paddingVertical: 5, borderBottomWidth: 0}}>
-                        <DataTable.Cell>
-                          {student.photo == '' ? (
-                            <ImageBackground
-                              style={{
-                                backgroundColor: COLORS.black,
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                width: 45,
-                                height: 45,
-                                borderRadius: 30,
-                              }}>
-                              <FontAwesome5
-                                name="user-alt"
-                                size={25}
-                                color="#FFFFFF"
-                              />
-                            </ImageBackground>
-                          ) : (
-                            <FastImage
-                              style={{width: 50, height: 50, borderRadius: 50}}
-                              source={{uri: Url.student_IMG + student.photo}}
-                              backgroundColor={COLORS.black}
+                    <DataTable.Row
+                      style={{paddingVertical: 5, borderBottomWidth: 0}}>
+                      <DataTable.Cell>
+                        {student.photo == '' ? (
+                          <ImageBackground
+                            style={{
+                              backgroundColor: COLORS.black,
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                              width: 45,
+                              height: 45,
+                              borderRadius: 30,
+                            }}>
+                            <FontAwesome5
+                              name="user-alt"
+                              size={25}
+                              color="#FFFFFF"
                             />
-                          )}
-                        </DataTable.Cell>
-                        <DataTable.Cell style={{flex: 3.5}}>
-                          <View style={{}}>
-                            <View style={{flexDirection: 'row'}}>
-                              <Text style={[paraGray.darkpara, {color: COLORS.primary}]}>Name- </Text>
-                              <Text style={[paraGray.largebold, {fontSize: 14, color: COLORS.primary}]}>
-                                {student.student_name}
-                              </Text>
-                            </View>
-                            <View style={{flexDirection: 'row', paddingTop: 4}}>
-                              <Text style={[paraGray.darkpara, {color: COLORS.primary}]}>
-                                Class-{'  '}
-                              </Text>
-                              <Text style={[paraGray.largebold, {fontSize: 14, color: COLORS.primary}]}>
-                                {student.class_name}
-                              </Text>
-                            </View>
-                            <View style={{flexDirection: 'row', paddingTop: 4}}>
-                              <Text style={[paraGray.darkpara, {color: COLORS.primary}]}>
-                                RollNo-{' '}
-                              </Text>
-
-                              <Text style={[paraGray.largebold, {fontSize: 14, color: COLORS.primary}]}>
-                                {student.roll_no}
-                              </Text>
-                            </View>
+                          </ImageBackground>
+                        ) : (
+                          <FastImage
+                            style={{width: 50, height: 50, borderRadius: 50}}
+                            source={{uri: Url.student_IMG + student.photo}}
+                            backgroundColor={COLORS.black}
+                          />
+                        )}
+                      </DataTable.Cell>
+                      <DataTable.Cell style={{flex: 3.5}}>
+                        <View style={{}}>
+                          <View style={{flexDirection: 'row'}}>
+                            <Text
+                              style={[
+                                paraGray.darkpara,
+                                {color: COLORS.primary},
+                              ]}>
+                              Name-{' '}
+                            </Text>
+                            <Text
+                              style={[
+                                paraGray.largebold,
+                                {fontSize: 14, color: COLORS.primary},
+                              ]}>
+                              {student.student_name}
+                            </Text>
                           </View>
-                        </DataTable.Cell>
-                      </DataTable.Row>
+                          <View style={{flexDirection: 'row', paddingTop: 4}}>
+                            <Text
+                              style={[
+                                paraGray.darkpara,
+                                {color: COLORS.primary},
+                              ]}>
+                              Class-{'  '}
+                            </Text>
+                            <Text
+                              style={[
+                                paraGray.largebold,
+                                {fontSize: 14, color: COLORS.primary},
+                              ]}>
+                              {student.class_name}
+                            </Text>
+                          </View>
+                          <View style={{flexDirection: 'row', paddingTop: 4}}>
+                            <Text
+                              style={[
+                                paraGray.darkpara,
+                                {color: COLORS.primary},
+                              ]}>
+                              RollNo-{' '}
+                            </Text>
+
+                            <Text
+                              style={[
+                                paraGray.largebold,
+                                {fontSize: 14, color: COLORS.primary},
+                              ]}>
+                              {student.roll_no}
+                            </Text>
+                          </View>
+                        </View>
+                      </DataTable.Cell>
+                    </DataTable.Row>
                     {/* </Shadow> */}
                   </DataTable>
                 </TouchableOpacity>
@@ -227,7 +258,7 @@ const Student = props => {
                   key={index}
                   onPress={() =>
                     props.navigation.navigate('StudentProfile', {
-                      student: studentfilter[index],
+                      studentdetail: studentfilter[index],
                     })
                   }>
                   <DataTable>
@@ -239,60 +270,87 @@ const Student = props => {
                         borderRadius: 15,
                         backgroundColor: '#FFFFFF',
                       }}> */}
-                      <DataTable.Row style={{paddingVertical: 5, borderBottomWidth: 0}}>
-                        <DataTable.Cell>
-                          {student.photo == '' ? (
-                            <ImageBackground
-                              style={{
-                                backgroundColor: COLORS.black,
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                width: 45,
-                                height: 45,
-                                borderRadius: 30,
-                              }}>
-                              <FontAwesome5
-                                name="user-alt"
-                                size={25}
-                                color="#FFFFFF"
-                              />
-                            </ImageBackground>
-                          ) : (
-                            <FastImage
-                              style={{width: 50, height: 50, borderRadius: 50}}
-                              source={{uri: Url.student_IMG + student.photo}}
-                              backgroundColor={COLORS.black}
+                    <DataTable.Row
+                      style={{paddingVertical: 5, borderBottomWidth: 0}}>
+                      <DataTable.Cell>
+                        {student.photo == '' ? (
+                          <ImageBackground
+                            style={{
+                              backgroundColor: COLORS.black,
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                              width: 45,
+                              height: 45,
+                              borderRadius: 30,
+                            }}>
+                            <FontAwesome5
+                              name="user-alt"
+                              size={25}
+                              color="#FFFFFF"
                             />
-                          )}
-                        </DataTable.Cell>
-                        <DataTable.Cell style={{flex: 3.5, borderWidth: 0}}>
-                          <View>
-                            <View style={{flexDirection: 'row'}}>
-                              <Text style={[paraGray.darkpara, {color: COLORS.primary}]}>Name- </Text>
-                              <Text style={[paraGray.largebold, {fontSize: 14, color: COLORS.primary}]}>
-                                {student.student_name}
-                              </Text>
-                            </View>
-                            <View style={{flexDirection: 'row'}}>
-                              <Text style={[paraGray.darkpara, {color: COLORS.primary,}]}>
-                                Class-{'  '}
-                              </Text>
-                              <Text style={[paraGray.largebold, {fontSize: 14, color: COLORS.primary}]}>
-                                {student.class_name}
-                              </Text>
-                            </View>
-                            <View style={{flexDirection: 'row'}}>
-                              <Text style={[paraGray.darkpara, {color: COLORS.primary}]}>
-                                RollNo-{' '}
-                              </Text>
-
-                              <Text style={[paraGray.largebold, {fontSize: 14, color: COLORS.primary}]}>
-                                {student.roll_no}
-                              </Text>
-                            </View>
+                          </ImageBackground>
+                        ) : (
+                          <FastImage
+                            style={{width: 50, height: 50, borderRadius: 50}}
+                            source={{uri: Url.student_IMG + student.photo}}
+                            backgroundColor={COLORS.black}
+                          />
+                        )}
+                      </DataTable.Cell>
+                      <DataTable.Cell style={{flex: 3.5, borderWidth: 0}}>
+                        <View>
+                          <View style={{flexDirection: 'row'}}>
+                            <Text
+                              style={[
+                                paraGray.darkpara,
+                                {color: COLORS.primary},
+                              ]}>
+                              Name-{' '}
+                            </Text>
+                            <Text
+                              style={[
+                                paraGray.largebold,
+                                {fontSize: 14, color: COLORS.primary},
+                              ]}>
+                              {student.student_name}
+                            </Text>
                           </View>
-                        </DataTable.Cell>
-                      </DataTable.Row>
+                          <View style={{flexDirection: 'row'}}>
+                            <Text
+                              style={[
+                                paraGray.darkpara,
+                                {color: COLORS.primary},
+                              ]}>
+                              Class-{'  '}
+                            </Text>
+                            <Text
+                              style={[
+                                paraGray.largebold,
+                                {fontSize: 14, color: COLORS.primary},
+                              ]}>
+                              {student.class_name}
+                            </Text>
+                          </View>
+                          <View style={{flexDirection: 'row'}}>
+                            <Text
+                              style={[
+                                paraGray.darkpara,
+                                {color: COLORS.primary},
+                              ]}>
+                              RollNo-{' '}
+                            </Text>
+
+                            <Text
+                              style={[
+                                paraGray.largebold,
+                                {fontSize: 14, color: COLORS.primary},
+                              ]}>
+                              {student.roll_no}
+                            </Text>
+                          </View>
+                        </View>
+                      </DataTable.Cell>
+                    </DataTable.Row>
                     {/* </Shadow> */}
                   </DataTable>
                 </TouchableOpacity>
@@ -330,8 +388,7 @@ const Student = props => {
               paddingHorizontal: 16,
               elevation: 4,
             }}
-            onPress={() => props.navigation.navigate('Info')}
-          >
+            onPress={() => props.navigation.navigate('Info')}>
             <Feather name="plus" size={30} color="white" />
             {/* <Text style={[paraGray.largebold, {fontSize: 14, color: COLORS.white}]}> Create Event </Text> */}
           </TouchableOpacity>
