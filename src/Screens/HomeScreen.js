@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -11,19 +11,19 @@ import {
   Alert,
   RefreshControl,
   ScrollView,
-  Dimensions
+  Dimensions,
 } from 'react-native';
-import { Avatar, Modal } from 'react-native-paper';
+import {Avatar, Modal} from 'react-native-paper';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { useSelector, useDispatch } from 'react-redux';
-import { FlatList } from 'react-native-gesture-handler';
+import {useSelector, useDispatch} from 'react-redux';
+import {FlatList} from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { btnStyles, container, paraGray } from '../theme/styles/Base';
+import {btnStyles, container, paraGray} from '../theme/styles/Base';
 import {
   setShowModal,
   setuserName,
@@ -40,10 +40,11 @@ import {
   setAcademicyear,
   setOtherinfo,
 } from '../Redux/Actions/actions';
-import { COLORS } from '../theme/Colors';
-import { useFocusEffect } from '@react-navigation/native';
-import { NavigationActions, StackActions } from 'react-navigation';
+import {COLORS} from '../theme/Colors';
+import {useFocusEffect} from '@react-navigation/native';
+import {NavigationActions, StackActions} from 'react-navigation';
 import Search from '../Components/Search';
+import Attendance from '../Components/Attendance';
 
 const categoryList01 = [
   {
@@ -81,7 +82,7 @@ const categoryList01 = [
 
 const categoryList02 = [
   {
-    categoryHeading: 'My Activities'
+    categoryHeading: 'My Activities',
   },
   {
     id: '1',
@@ -115,8 +116,8 @@ const categoryList02 = [
 
 const HomeScreen = props => {
   const dispatch = useDispatch();
-  const { userinfo, userid, username, showmodal } = useSelector(
-    state => state.userReducer
+  const {userinfo, userid, username, showmodal} = useSelector(
+    state => state.userReducer,
   );
   const [loading, setLoading] = useState(false);
   const [load, setLoad] = useState(true);
@@ -208,7 +209,7 @@ const HomeScreen = props => {
             onPress: () => null,
             style: 'cancel',
           },
-          { text: 'YES', onPress: () => BackHandler.exitApp() },
+          {text: 'YES', onPress: () => BackHandler.exitApp()},
         ]);
         return true;
       };
@@ -232,8 +233,9 @@ const HomeScreen = props => {
       {loading == true && <Spinner visible={load} />}
       <ScrollView
         showsVerticalScrollIndicator={false}
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}
-      >
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
         <View>
           <StatusBar backgroundColor={'#fafef8'} barStyle={'dark-content'} />
           <View
@@ -246,11 +248,24 @@ const HomeScreen = props => {
               paddingBottom: 10,
               marginHorizontal: 8,
             }}>
-            <View style={{ flex: 1, marginHorizontal: 8, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-              <Text style={[paraGray.largebold, { fontSize: 18, paddingLeft: 4 }]}>
+            <View
+              style={{
+                flex: 1,
+                marginHorizontal: 8,
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}>
+              <Text
+                style={[paraGray.largebold, {fontSize: 18, paddingLeft: 4}]}>
                 👋 Hi, {username}
               </Text>
-              <Ionicons name="ios-exit-outline" size={28} color={COLORS.black} onPress={Logout}/>
+              <Ionicons
+                name="ios-exit-outline"
+                size={28}
+                color={COLORS.black}
+                onPress={Logout}
+              />
             </View>
             {/* <TouchableOpacity
               style={{
@@ -300,13 +315,45 @@ const HomeScreen = props => {
             filter={setStudentFilter}
           />
           <View style={[styles.categoryContainer, {borderWidth: 0}]}>
-            <ScrollView horizontal showsHorizontalScrollIndicator={false} pagingEnabled>
-              <View style={{flex: 1, marginRight: 16, paddingHorizontal: 8, width: Dimensions.get('screen').width/1.05, marginLeft: 4}}>
-                <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddinLeft: 8, marginLeft: 4}}>
-                  <Text style={[paraGray.largebold, {fontSize: 16}]}> {categoryList01[0].categoryHeading} </Text>
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              pagingEnabled>
+              <View
+                style={{
+                  flex: 1,
+                  marginRight: 16,
+                  paddingHorizontal: 8,
+                  width: Dimensions.get('screen').width / 1.05,
+                  marginLeft: 4,
+                }}>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    paddinLeft: 8,
+                    marginLeft: 4,
+                  }}>
+                  <Text style={[paraGray.largebold, {fontSize: 16}]}>
+                    {' '}
+                    {categoryList01[0].categoryHeading}{' '}
+                  </Text>
                   <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                    <Text style={{fontSize: 14, fontFamily: 'Montserrat-Medium', color: COLORS.secondary}}> Swipe Left</Text>
-                    <Ionicons name="chevron-forward" size={28} color={COLORS.secondary}/>
+                    <Text
+                      style={{
+                        fontSize: 14,
+                        fontFamily: 'Montserrat-Medium',
+                        color: COLORS.secondary,
+                      }}>
+                      {' '}
+                      Swipe Left
+                    </Text>
+                    <Ionicons
+                      name="chevron-forward"
+                      size={28}
+                      color={COLORS.secondary}
+                    />
                   </View>
                 </View>
                 <FlatList
@@ -345,12 +392,41 @@ const HomeScreen = props => {
                   )}
                 />
               </View>
-              <View style={{flex: 1, paddingRight: 12, paddingLeft: 4, width: Dimensions.get('screen').width/1.05, marginLeft: -12}}>
-                <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingRight: 8, marginLeft: 0}}>
-                  <Text style={[paraGray.largebold, {fontSize: 16}]}> {categoryList02[0].categoryHeading} </Text>
+              <View
+                style={{
+                  flex: 1,
+                  paddingRight: 12,
+                  paddingLeft: 4,
+                  width: Dimensions.get('screen').width / 1.05,
+                  marginLeft: -12,
+                }}>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    paddingRight: 8,
+                    marginLeft: 0,
+                  }}>
+                  <Text style={[paraGray.largebold, {fontSize: 16}]}>
+                    {' '}
+                    {categoryList02[0].categoryHeading}{' '}
+                  </Text>
                   <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                    <Ionicons name="chevron-back" size={28} color={COLORS.secondary}/>
-                    <Text style={{fontSize: 14, fontFamily: 'Montserrat-Medium', color: COLORS.secondary}}> Swipe Right</Text>
+                    <Ionicons
+                      name="chevron-back"
+                      size={28}
+                      color={COLORS.secondary}
+                    />
+                    <Text
+                      style={{
+                        fontSize: 14,
+                        fontFamily: 'Montserrat-Medium',
+                        color: COLORS.secondary,
+                      }}>
+                      {' '}
+                      Swipe Right
+                    </Text>
                   </View>
                 </View>
                 <FlatList
@@ -390,6 +466,14 @@ const HomeScreen = props => {
                 />
               </View>
             </ScrollView>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate('MyAttendance')}
+              style={{paddingBottom: 10}}>
+              <Attendance
+                attendance={false}
+                styles={{backgroundColor: 'white'}}
+              />
+            </TouchableOpacity>
           </View>
 
           {/* <View style={[styles.categoryContainer, { marginTop: 20 }]}>
@@ -706,12 +790,12 @@ const HomeScreen = props => {
           borderRadius: 5,
         }}>
         <TouchableOpacity
-          style={{ flex: 1, justifyContent: 'center', paddingLeft: 15 }}
+          style={{flex: 1, justifyContent: 'center', paddingLeft: 15}}
           onPress={() => props.navigation.navigate('Settings')}>
           <Text style={[paraGray.darkpara]}>Settings</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={{ flex: 1, justifyContent: 'center', paddingLeft: 15 }}
+          style={{flex: 1, justifyContent: 'center', paddingLeft: 15}}
           onPress={() =>
             //  alert('Feature Coming Soon')
             props.navigation.navigate('PayRoll')
@@ -719,7 +803,7 @@ const HomeScreen = props => {
           <Text style={[paraGray.darkpara]}>My Pay Roll</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={{ flex: 1, justifyContent: 'center', paddingLeft: 15 }}
+          style={{flex: 1, justifyContent: 'center', paddingLeft: 15}}
           onPress={() =>
             //  alert('Feature Coming Soon')
             props.navigation.navigate('TeacherAttendance')
@@ -734,9 +818,9 @@ const HomeScreen = props => {
           }}
         />
         <TouchableOpacity
-          style={{ flex: 1, justifyContent: 'center', paddingLeft: 15 }}
+          style={{flex: 1, justifyContent: 'center', paddingLeft: 15}}
           onPress={Logout}>
-          <Text style={[paraGray.darkpara, { color: COLORS.lightblack }]}>
+          <Text style={[paraGray.darkpara, {color: COLORS.lightblack}]}>
             Log Out
           </Text>
         </TouchableOpacity>

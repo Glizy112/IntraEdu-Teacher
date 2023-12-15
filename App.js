@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
-    View,
-    Text,
-    TextInput,
-    StyleSheet,
-    Image,
-    TouchableOpacity,
-    ImageBackground,
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  ImageBackground,
 } from 'react-native';
-import { Avatar } from 'react-native-paper';
+import {Avatar} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import FontAwesome5, { FA5Style } from 'react-native-vector-icons/FontAwesome5';
+import FontAwesome5, {FA5Style} from 'react-native-vector-icons/FontAwesome5';
 import Feather from 'react-native-vector-icons/Feather';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { DrawerContent } from './src/Screens/DrawerContent';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {DrawerContent} from './src/Screens/DrawerContent';
 import HomeScreen from './src/Screens/HomeScreen';
 import Student from './src/Screens/Students/Student';
 import Info from './src/Screens/Students/Info';
@@ -103,8 +103,8 @@ import HistoryLeaveDetailStudent from './src/Screens/StudentIntraclient/Leave/Hi
 import TestResultMcqs from './src/Screens/MCQs/TestResultMcqs';
 import Feeds from './src/Screens/Feeds/Feeds';
 import SignIn from './src/Screens/Login/SignIn';
-import { Provider } from 'react-redux';
-import { Store } from './src/Redux/Store/store';
+import {Provider} from 'react-redux';
+import {Store} from './src/Redux/Store/store';
 import Certificate from './src/Screens/Certificate/Certificate';
 import ProvideCertificate from './src/Screens/Certificate/ProvideCertificate';
 import StudyMaterial from './src/Screens/StudyMaterial/StudyMaterial';
@@ -119,15 +119,15 @@ import Gallery from './src/Screens/Gallery/Gallery';
 import ImageDetail from './src/Screens/Gallery/ImageDetail';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
-    setuserId,
-    setuserInfo,
-    setuserName,
-    setShowModal,
-    setuserImage,
+  setuserId,
+  setuserInfo,
+  setuserName,
+  setShowModal,
+  setuserImage,
 } from './src/Redux/Actions/actions';
-import { useSelector, useDispatch } from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import Splash from './src/Screens/Splash/Splash';
-import { COLORS } from './src/theme/Colors';
+import {COLORS} from './src/theme/Colors';
 import OnBoarding from './src/Screens/OnBoarding/OnBoarding';
 import Url from './src/Config/Api/Url';
 import LeaveRequest from './src/Screens/Leave/LeaveRequest';
@@ -224,20 +224,22 @@ import UserAssignmentDetail from './src/Screens/Assignments/UserAssignmentDetail
 import UpdateAss from './src/Screens/Assignments/UpdateAss';
 import EditEvent from './src/Screens/Events/EditEvent';
 import HistoryuserAssignmentDetail from './src/Screens/Assignments/HistoryuserAssignmentDetail';
-import { paraGray } from './src/theme/styles/Base';
+import {paraGray} from './src/theme/styles/Base';
 import CheckMPIN from './src/Screens/Security/MPIN/CheckMPIN';
 import ConfirmMPIN from './src/Screens/Security/MPIN/ConfirmMPIN';
+import MyAttendance from './src/Screens/Attendance/MyAttendance';
+import AttendanceHistory from './src/Screens/Attendance/AttendanceHistory';
 
 const HomeStack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 const Tab = createMaterialTopTabNavigator();
 const BottomStack = createBottomTabNavigator();
 
-function App({ navigation }) {
-    return (
-        <Provider store={Store}>
-            <NavigationContainer>
-                {/* <Drawer.Navigator drawerContent={props => <DrawerContent {...props} />}>
+function App({navigation}) {
+  return (
+    <Provider store={Store}>
+      <NavigationContainer>
+        {/* <Drawer.Navigator drawerContent={props => <DrawerContent {...props} />}>
           <Drawer.Screen
             name="HomeDrawer"
             component={BottomNavigator}
@@ -245,264 +247,263 @@ function App({ navigation }) {
           />
         </Drawer.Navigator> */}
 
-                <HomeStack.Navigator
-                    initialRouteName="Splash"
-                    screenOptions={{
-                        headerShown: false,
-                        // headerStyle: {
-                        //   elevation: 0, // Android
-                        // },
-                        // headerTintColor: 'black',
-                        // headerShadowVisible: false,
-                        // headerTitleStyle: {
-                        //   fontFamily: 'Montserrat-Regular',
-                        // },
-                        // title: 'Home',
-                        // headerLeft: () => (
-                        //   <View style={{flexDirection: 'row'}}>
-                        //     <Icon.Button
-                        //       name="ios-menu"
-                        //       size={25}
-                        //       color="black"
-                        //       backgroundColor="white"
-                        //       //onPress={() => navigation.openDrawer()}
-                        //     />
-                        //     {/* <Image
-                        //       source={require('./assets/white-logo.png')}
-                        //       resizeMode={'contain'}
-                        //       style={{width: 84, height: 84}}
-                        //     /> */}
-                        //   </View>
-                        // ),
-                    }}
-                >
-                    <HomeStack.Screen
-                        name="Splash"
-                        component={Splash}
-                        options={{
-                            animationEnabled: false,
-                            headerShown: false,
-                        }}
-                    />
+        <HomeStack.Navigator
+          initialRouteName="Splash"
+          screenOptions={{
+            headerShown: false,
+            // headerStyle: {
+            //   elevation: 0, // Android
+            // },
+            // headerTintColor: 'black',
+            // headerShadowVisible: false,
+            // headerTitleStyle: {
+            //   fontFamily: 'Montserrat-Regular',
+            // },
+            // title: 'Home',
+            // headerLeft: () => (
+            //   <View style={{flexDirection: 'row'}}>
+            //     <Icon.Button
+            //       name="ios-menu"
+            //       size={25}
+            //       color="black"
+            //       backgroundColor="white"
+            //       //onPress={() => navigation.openDrawer()}
+            //     />
+            //     {/* <Image
+            //       source={require('./assets/white-logo.png')}
+            //       resizeMode={'contain'}
+            //       style={{width: 84, height: 84}}
+            //     /> */}
+            //   </View>
+            // ),
+          }}>
+          <HomeStack.Screen
+            name="Splash"
+            component={Splash}
+            options={{
+              animationEnabled: false,
+              headerShown: false,
+            }}
+          />
 
-                    <HomeStack.Screen
-                        name="OnBoarding"
-                        component={OnBoarding}
-                        options={{
-                            animationEnabled: false,
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="SignIn"
-                        component={SignIn}
-                        options={{
-                            animationEnabled: false,
-                            headerShown: false,
-                        }}
-                    />
+          <HomeStack.Screen
+            name="OnBoarding"
+            component={OnBoarding}
+            options={{
+              animationEnabled: false,
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="SignIn"
+            component={SignIn}
+            options={{
+              animationEnabled: false,
+              headerShown: false,
+            }}
+          />
 
-                    <HomeStack.Screen
-                        name="ForgetPassword"
-                        component={ForgetPassword}
-                        options={{
-                            animationEnabled: false,
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="ForgetPasswordMail"
-                        component={ForgetPasswordMail}
-                        options={{
-                            title: 'Forget Password',
-                            animationEnabled: false,
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="ForgetPasswordNO"
-                        component={ForgetPasswordNO}
-                        options={{
-                            title: 'Forget Password',
-                            animationEnabled: false,
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="ChangePassword"
-                        component={ChangePassword}
-                        options={{
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="Bottomtabs"
-                        component={BottomNavigator}
-                    // options={{
-                    //   //title: 'IntraEdu',
-                    //   headerLeft: () => (
-                    //     <View style={{flexDirection: 'row'}}>
-                    //       <Icon.Button
-                    //         name="ios-menu"
-                    //         size={25}
-                    //         color="black"
-                    //         backgroundColor="white"
-                    //         onPress={() => navigation.openDrawer()}
-                    //       />
-                    //       <Image
-                    //         source={require('./assets/white-logo.png')}
-                    //         resizeMode={'contain'}
-                    //         style={{width: 84, height: 84}}
-                    //       />
-                    //     </View>
-                    //   ),
-                    //   headerRight: () => (
-                    //     <View style={{flexDirection: 'row'}}>
-                    //       <TouchableOpacity
-                    //         style={{marginTop: 5, marginRight: 16}}
-                    //         onPress={() => {
-                    //           // alert('Feature Coming Soon');
-                    //           navigation.navigate('Chat');
-                    //         }}>
-                    //         <ImageBackground
-                    //           style={{
-                    //             backgroundColor: COLORS.bg,
-                    //             justifyContent: 'center',
-                    //             alignItems: 'center',
-                    //             width: 35,
-                    //             height: 35,
-                    //             borderRadius: 20,
-                    //             borderWidth: 1,
-                    //             borderColor: COLORS.background,
-                    //           }}>
-                    //           <Feather
-                    //             style={{marginRight: 2, marginTop: 3}}
-                    //             name="send"
-                    //             size={22}
-                    //             color={COLORS.black}
-                    //           />
-                    //         </ImageBackground>
-                    //       </TouchableOpacity>
-                    //       <TouchableOpacity
-                    //         style={{
-                    //           marginRight: 4,
-                    //           justifyContent: 'center',
-                    //         }}
-                    //         onPress={() =>
-                    //           // alert('Feature Coming Soon')}
-                    //           navigation.navigate('Notification')
-                    //         }
-                    //       >
-                    //         <Feather
-                    //           style={{ marginTop: 8 }}
-                    //           name="bell"
-                    //           size={25}
-                    //           color={COLORS.black}
-                    //         />
-                    //         {Notify !== '0' && (
-                    //           <View
-                    //             style={{
-                    //               backgroundColor: COLORS.bluee,
-                    //               borderRadius: 20,
-                    //               height: 20,
-                    //               width: 20,
-                    //               justifyContent: 'center',
-                    //               alignItems: 'center',
-                    //               marginTop: -33,
-                    //               marginLeft: 10,
-                    //           }}>
-                    //             <Text
-                    //               style={[
-                    //                 paraGray.darkpara,
-                    //                 { color: COLORS.bg, fontSize: 10 },
-                    //               ]}
-                    //             >
-                    //               {Notify}
-                    //             </Text>
-                    //           </View>
-                    //         )}
-                    //       </TouchableOpacity>
-                    //       <TouchableOpacity
-                    //         style={{marginTop: 5}}
-                    //         onPress={() => {
-                    //           dispatch(setShowModal(!showmodal));
-                    //         }}>
-                    //         {userimage == null ? (
-                    //           <Avatar.Image
-                    //             size={35}
-                    //             source={require('./assets/user.jpg')}
-                    //           />
-                    //         ) : (
-                    //           <Avatar.Image
-                    //             source={{uri: Url.profile_IMG + userimage}}
-                    //             size={35}
-                    //             backgroundColor={COLORS.black}
-                    //           />
-                    //         )}
-                    //       </TouchableOpacity>
-                    //     </View>
-                    //   ),
-                    //   headerShadowVisible: false
-                    // }}
-                    />
+          <HomeStack.Screen
+            name="ForgetPassword"
+            component={ForgetPassword}
+            options={{
+              animationEnabled: false,
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="ForgetPasswordMail"
+            component={ForgetPasswordMail}
+            options={{
+              title: 'Forget Password',
+              animationEnabled: false,
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="ForgetPasswordNO"
+            component={ForgetPasswordNO}
+            options={{
+              title: 'Forget Password',
+              animationEnabled: false,
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="ChangePassword"
+            component={ChangePassword}
+            options={{
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="Bottomtabs"
+            component={BottomNavigator}
+            // options={{
+            //   //title: 'IntraEdu',
+            //   headerLeft: () => (
+            //     <View style={{flexDirection: 'row'}}>
+            //       <Icon.Button
+            //         name="ios-menu"
+            //         size={25}
+            //         color="black"
+            //         backgroundColor="white"
+            //         onPress={() => navigation.openDrawer()}
+            //       />
+            //       <Image
+            //         source={require('./assets/white-logo.png')}
+            //         resizeMode={'contain'}
+            //         style={{width: 84, height: 84}}
+            //       />
+            //     </View>
+            //   ),
+            //   headerRight: () => (
+            //     <View style={{flexDirection: 'row'}}>
+            //       <TouchableOpacity
+            //         style={{marginTop: 5, marginRight: 16}}
+            //         onPress={() => {
+            //           // alert('Feature Coming Soon');
+            //           navigation.navigate('Chat');
+            //         }}>
+            //         <ImageBackground
+            //           style={{
+            //             backgroundColor: COLORS.bg,
+            //             justifyContent: 'center',
+            //             alignItems: 'center',
+            //             width: 35,
+            //             height: 35,
+            //             borderRadius: 20,
+            //             borderWidth: 1,
+            //             borderColor: COLORS.background,
+            //           }}>
+            //           <Feather
+            //             style={{marginRight: 2, marginTop: 3}}
+            //             name="send"
+            //             size={22}
+            //             color={COLORS.black}
+            //           />
+            //         </ImageBackground>
+            //       </TouchableOpacity>
+            //       <TouchableOpacity
+            //         style={{
+            //           marginRight: 4,
+            //           justifyContent: 'center',
+            //         }}
+            //         onPress={() =>
+            //           // alert('Feature Coming Soon')}
+            //           navigation.navigate('Notification')
+            //         }
+            //       >
+            //         <Feather
+            //           style={{ marginTop: 8 }}
+            //           name="bell"
+            //           size={25}
+            //           color={COLORS.black}
+            //         />
+            //         {Notify !== '0' && (
+            //           <View
+            //             style={{
+            //               backgroundColor: COLORS.bluee,
+            //               borderRadius: 20,
+            //               height: 20,
+            //               width: 20,
+            //               justifyContent: 'center',
+            //               alignItems: 'center',
+            //               marginTop: -33,
+            //               marginLeft: 10,
+            //           }}>
+            //             <Text
+            //               style={[
+            //                 paraGray.darkpara,
+            //                 { color: COLORS.bg, fontSize: 10 },
+            //               ]}
+            //             >
+            //               {Notify}
+            //             </Text>
+            //           </View>
+            //         )}
+            //       </TouchableOpacity>
+            //       <TouchableOpacity
+            //         style={{marginTop: 5}}
+            //         onPress={() => {
+            //           dispatch(setShowModal(!showmodal));
+            //         }}>
+            //         {userimage == null ? (
+            //           <Avatar.Image
+            //             size={35}
+            //             source={require('./assets/user.jpg')}
+            //           />
+            //         ) : (
+            //           <Avatar.Image
+            //             source={{uri: Url.profile_IMG + userimage}}
+            //             size={35}
+            //             backgroundColor={COLORS.black}
+            //           />
+            //         )}
+            //       </TouchableOpacity>
+            //     </View>
+            //   ),
+            //   headerShadowVisible: false
+            // }}
+          />
 
-                    <HomeStack.Screen
-                        name="Student"
-                        component={Student}
-                        options={{
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="StudentProfile"
-                        component={StudentProfile}
-                        options={{
-                            title: 'Student Details',
+          <HomeStack.Screen
+            name="Student"
+            component={Student}
+            options={{
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="StudentProfile"
+            component={StudentProfile}
+            options={{
+              title: 'Student Details',
 
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="StudentEdit"
-                        component={StudentEdit}
-                        options={{
-                            title: 'Edit Details',
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="Info"
-                        component={Info}
-                        options={{
-                            title: 'Add Student',
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    {/* <HomeStack.Screen
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="StudentEdit"
+            component={StudentEdit}
+            options={{
+              title: 'Edit Details',
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="Info"
+            component={Info}
+            options={{
+              title: 'Add Student',
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          {/* <HomeStack.Screen
           name="TabScreen"
           component={TabScreen}
           options={{
@@ -514,1931 +515,1953 @@ function App({ navigation }) {
             headerTintColor: 'white',
           }}
         /> */}
-                    <HomeStack.Screen
-                        name="Document"
-                        component={Document}
-                        options={{
-                            title: 'Document',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="Assign"
-                        component={Assign}
-                        options={{
-                            title: "Book's Assign",
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="Collection"
-                        component={Collection}
-                        options={{
-                            title: 'Collection',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="HistoryLib"
-                        component={HistoryLib}
-                        options={{
-                            title: "Book's History",
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="HistoryDetail"
-                        component={HistoryDetail}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="Exam"
-                        component={Exam}
-                        options={{
-                            title: 'Exam',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="CreateTest"
-                        component={CreateTest}
-                        options={{
-                            title: 'CreateTest',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="ManageTest"
-                        component={ManageTest}
-                        options={{
-                            title: 'ManageTest',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="Event"
-                        component={Event}
-                        options={{
-                            title: 'Event',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="CreateEvent"
-                        component={CreateEvent}
-                        options={{
-                            title: 'Create Event',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="EditEvent"
-                        component={EditEvent}
-                        options={{
-                            title: 'Edit Event',
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="HistoryEvent"
-                        component={HistoryEvent}
-                        options={{
-                            title: "Event's History",
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="EventDetailHistory"
-                        component={EventDetailHistory}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="Library"
-                        component={Library}
-                        options={{
-                            title: 'Library',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="LeaveApp"
-                        component={LeaveApp}
-                        options={{
-                            title: 'Leave',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="HistoryLeave"
-                        component={HistoryLeave}
-                        options={{
-                            title: 'Leave',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="HistoryLeaveDetail"
-                        component={HistoryLeaveDetail}
-                        options={{
-                            title: 'Leave',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="Ptm"
-                        component={Ptm}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="CreateMeeting"
-                        component={CreateMeeting}
-                        options={{
-                            title: 'PTM',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="PTMHistory"
-                        component={PTMHistory}
-                        options={{
-                            title: 'History',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="PTMHistoryDetail"
-                        component={PTMHistoryDetail}
-                        options={{
-                            title: 'Exam',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="UpcomingPtm"
-                        component={UpcomingPtm}
-                        options={{
-                            title: 'UpcomingPTM',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="UpcomingDetailPtm"
-                        component={UpcomingDetailPtm}
-                        options={{
-                            title: 'UpcomingPTM',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="AttendancePtm"
-                        component={AttendancePtm}
-                        options={{
-                            title: 'Attendance',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="Announcement"
-                        component={Announcement}
-                        options={{
-                            title: 'Notice',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="HistoryAnnouncement"
-                        component={HistoryAnnouncement}
-                        options={{
-                            title: 'History',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="HistoryDetailAnn"
-                        component={HistoryDetailAnn}
-                        options={{
-                            title: 'History',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="CreateAnnouncement"
-                        component={CreateAnnouncement}
-                        options={{
-                            title: 'Create',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="Lecture"
-                        component={Lecture}
-                        options={{
-                            title: 'Lecture',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="CreateLecture"
-                        component={CreateLecture}
-                        options={{
-                            title: 'Lecture',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="LectureCarousel"
-                        component={LectureCarousel}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="UpComingLecture"
-                        component={UpComingLecture}
-                        options={{
-                            title: 'UpComingLecture',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="UpdateLecture"
-                        component={UpdateLecture}
-                        options={{
-                            title: 'UpComingLecture',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="UpComingDetailLecture"
-                        component={UpComingDetailLecture}
-                        options={{
-                            title: 'UpComingLecture',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="HistoryLecture"
-                        component={HistoryLecture}
-                        options={{
-                            title: 'History',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="LecHistory"
-                        component={LecHistory}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="TimeTable"
-                        component={TimeTable}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="Period"
-                        component={Period}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="TimeTableHistroy"
-                        component={TimeTableHistroy}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="PeriodHistory"
-                        component={PeriodHistory}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="McqTest"
-                        component={McqTest}
-                        options={{
-                            title: 'Test',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="CreateMcqTest"
-                        component={CreateMcqTest}
-                        options={{
-                            title: 'Test',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="EditTest"
-                        component={EditTest}
-                        options={{
-                            title: 'Test',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="SubmittedTest"
-                        component={SubmittedTest}
-                        options={{
-                            title: 'My Test',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="SubmittedDetailTest"
-                        component={SubmittedDetailTest}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="StudentTestDetail"
-                        component={StudentTestDetail}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="HistoryTest"
-                        component={HistoryTest}
-                        options={{
-                            title: 'History',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="HistoryDetailTest"
-                        component={HistoryDetailTest}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="TestResultMcqs"
-                        component={TestResultMcqs}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-
-                    <HomeStack.Screen
-                        name="AttendanceShow"
-                        component={AttendanceShow}
-                        options={{
-                            title: 'Attendance',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="TakeAttendance"
-                        component={TakeAttendance}
-                        options={{
-                            title: 'Attendance',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="HistoryAttendance"
-                        component={HistoryAttendance}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="HistoryAtten"
-                        component={HistoryAtten}
-                        options={{
-                            title: 'History',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="ReportAtten"
-                        component={ReportAtten}
-                        options={{
-                            title: 'Report',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="ExamAttendance"
-                        component={ExamAttendance}
-                        options={{
-                            title: 'Exam Attendance',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="TakeExamAttendance"
-                        component={TakeExamAttendance}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="ExamAttenReport"
-                        component={ExamAttenReport}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="MyClassRoomAtten"
-                        component={MyClassRoomAtten}
-                        options={{
-                            title: 'My Classroom Attendance',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="ClassSubject"
-                        component={ClassSubject}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="SubjectReport"
-                        component={SubjectReport}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="MySubjectAtten"
-                        component={MySubjectAtten}
-                        options={{
-                            title: 'My Subject Attendance',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-
-                    <HomeStack.Screen
-                        name="ReportAttendance"
-                        component={ReportAttendance}
-                        options={{
-                            title: 'History',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="Assignment"
-                        component={Assignment}
-                        options={{
-                            title: 'Assignment',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="CreateAss"
-                        component={CreateAss}
-                        options={{
-                            title: 'Create',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="UserAssignmentDetail"
-                        component={UserAssignmentDetail}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="UpdateAss"
-                        component={UpdateAss}
-                        options={{
-                            title: 'Edit Assignment',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="SubmittedAss"
-                        component={SubmittedAss}
-                        options={{
-                            title: 'My Assigment',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="SubmittedDetailAss"
-                        component={SubmittedDetailAss}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="HistoryAss"
-                        component={HistoryAss}
-                        options={{
-                            title: 'History',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="HistoryDetailAss"
-                        component={HistoryDetailAss}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="HistoryuserAssignmentDetail"
-                        component={HistoryuserAssignmentDetail}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="Youtube"
-                        component={Youtube}
-                        options={{
-                            title: 'Youtube',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="ShareYtube"
-                        component={ShareYtube}
-                        options={{
-                            title: 'Share',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="HistoryYtube"
-                        component={HistoryYtube}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="BookDetail"
-                        component={BookDetail}
-                        options={{
-                            title: "Book's Assign",
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="AssignBook"
-                        component={AssignBook}
-                        options={{
-                            title: "Book's Assign",
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="CollectionDetail"
-                        component={CollectionDetail}
-                        options={{
-                            title: 'Collection',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="FeesTransaction"
-                        component={FeesTransaction}
-                        options={{
-                            title: 'FeesTransaction',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="UserTrans"
-                        component={UserTrans}
-                        options={{
-                            title: 'FeesTransaction',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="FeesDetail"
-                        component={FeesDetail}
-                        options={{
-                            title: 'FeesTransaction',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="HistoryTrans"
-                        component={HistoryTrans}
-                        options={{
-                            title: 'History',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="HistoryTransDetail"
-                        component={HistoryTransDetail}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="FeeUserDetail"
-                        component={FeeUserDetail}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="StudentClient"
-                        component={StudentClient}
-                        options={{
-                            title: 'StudentClient',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="ApplyLeave"
-                        component={ApplyLeave}
-                        options={{
-                            title: 'Apply',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="LeaveStudent"
-                        component={LeaveStudent}
-                        options={{
-                            title: 'Leave Application',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="HistoryLeaveStudent"
-                        component={HistoryLeaveStudent}
-                        options={{
-                            title: 'History',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="HistoryLeaveDetailStudent"
-                        component={HistoryLeaveDetailStudent}
-                        options={{
-                            title: 'History',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="StudentLibrary"
-                        component={StudentLibrary}
-                        options={{
-                            title: 'Library',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="StudentBookAssigned"
-                        component={StudentBookAssigned}
-                        options={{
-                            title: "Book's Assign",
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="StudentLibHistory"
-                        component={StudentLibHistory}
-                        options={{
-                            title: 'History',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="LibraryBook"
-                        component={LibraryBook}
-                        options={{
-                            title: 'Library books',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="LibraryBookDetail"
-                        component={LibraryBookDetail}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="AddBook"
-                        component={AddBook}
-                        options={{
-                            title: 'Add Books',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="AddNewBook"
-                        component={AddNewBook}
-                        options={{
-                            title: 'Add Books',
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="AddBulkBook"
-                        component={AddBulkBook}
-                        options={{
-                            title: 'Bulk Add Books',
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="DownloadReport"
-                        component={DownloadReport}
-                        options={{
-                            title: 'Download Report',
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="AssignedUserDetail"
-                        component={AssignedUserDetail}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="PTMLecture"
-                        component={PTMLecture}
-                        options={{
-                            title: 'PTM/Lecture',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="UpcomingPtmLec"
-                        component={UpcomingPtmLec}
-                        options={{
-                            title: 'Upcoming',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="HistoryPtmLec"
-                        component={HistoryPtmLec}
-                        options={{
-                            title: 'History',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="StudentAttendance"
-                        component={StudentAttendance}
-                        options={{
-                            title: 'Attendance',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="StudentAttendanceShow"
-                        component={StudentAttendanceShow}
-                        options={{
-                            title: 'Attendance',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="StudentYoutube"
-                        component={StudentYoutube}
-                        options={{
-                            title: 'Youtube',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="StudentEvent"
-                        component={StudentEvent}
-                        options={{
-                            title: 'Event',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="StudentNewEvent"
-                        component={StudentNewEvent}
-                        options={{
-                            title: 'New Event',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="StudentEventDetail"
-                        component={StudentEventDetail}
-                        options={{
-                            title: 'New Event',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="Feeds"
-                        component={Feeds}
-                        options={{
-                            title: 'Feeds',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-
-                    <HomeStack.Screen
-                        name="Certificate"
-                        component={Certificate}
-                        options={{
-                            title: 'Certificate',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-
-                    <HomeStack.Screen
-                        name="ProvideCertificate"
-                        component={ProvideCertificate}
-                        options={{
-                            title: 'Provide Certificate',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="CertificateHistory"
-                        component={CertificateHistory}
-                        options={{
-                            title: 'History',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="CertificateHistoryDetail"
-                        component={CertificateHistoryDetail}
-                        options={{
-                            title: 'History',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="StudyMaterial"
-                        component={StudyMaterial}
-                        options={{
-                            title: 'Study Material',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="ShareVideo"
-                        component={ShareVideo}
-                        options={{
-                            title: 'Share Video',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                            headerRight: () => (
-                                <View style={{ flexDirection: 'row' }}>
-                                    <TouchableOpacity
-                                        style={{ marginTop: 5 }}
-                                        onPress={() => {
-                                            navigation.navigate('AddVideo');
-                                        }}>
-                                        <AntDesign name="pluscircle" size={25} color={COLORS.bg} />
-                                    </TouchableOpacity>
-                                </View>
-                            ),
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="AddVideo"
-                        component={AddVideo}
-                        options={{
-                            title: 'Post Video',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="ShareDocument"
-                        component={ShareDocument}
-                        options={{
-                            title: 'Share Document',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                            headerRight: () => (
-                                <View style={{ flexDirection: 'row' }}>
-                                    <TouchableOpacity
-                                        style={{ marginTop: 5 }}
-                                        onPress={() => {
-                                            navigation.navigate('AddDocument');
-                                        }}>
-                                        <AntDesign name="pluscircle" size={25} color={COLORS.bg} />
-                                    </TouchableOpacity>
-                                </View>
-                            ),
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="AddDocument"
-                        component={AddDocument}
-                        options={{
-                            title: 'Post Files  ',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="ShareImage"
-                        component={ShareImage}
-                        options={{
-                            title: 'Share Image',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                            headerRight: () => (
-                                <View style={{ flexDirection: 'row' }}>
-                                    <TouchableOpacity
-                                        style={{ marginTop: 5 }}
-                                        onPress={() => {
-                                            navigation.navigate('AddMaterialImage');
-                                        }}>
-                                        <AntDesign name="pluscircle" size={25} color={COLORS.bg} />
-                                    </TouchableOpacity>
-                                </View>
-                            ),
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="AddMaterialImage"
-                        component={AddMaterialImage}
-                        options={{
-                            title: 'Post Image',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="ShareLink"
-                        component={ShareLink}
-                        options={{
-                            title: 'Share Link',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                            headerRight: () => (
-                                <View style={{ flexDirection: 'row' }}>
-                                    <TouchableOpacity
-                                        style={{ marginTop: 5 }}
-                                        onPress={() => {
-                                            navigation.navigate('AddLink');
-                                        }}>
-                                        <AntDesign name="pluscircle" size={25} color={COLORS.bg} />
-                                    </TouchableOpacity>
-                                </View>
-                            ),
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="AddLink"
-                        component={AddLink}
-                        options={{
-                            title: 'Post Link',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="Result"
-                        component={Result}
-                        options={{
-                            title: 'Result',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="ClassRoomResult"
-                        component={ClassRoomResult}
-                        options={{
-                            title: 'My Classroom Result',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="ClassResult"
-                        component={ClassResult}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="MarksAllotement"
-                        component={MarksAllotement}
-                        options={{
-                            title: 'Give Marks',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="AllotementDetail"
-                        component={AllotementDetail}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="Request"
-                        component={Request}
-                        options={{
-                            title: 'Request Access',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="RequestAccess"
-                        component={RequestAccess}
-                        options={{
-                            title: 'Request Access',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="RequestDetail"
-                        component={RequestDetail}
-                        options={{
-                            title: 'Request Access',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="RequestHistory"
-                        component={RequestHistory}
-                        options={{
-                            title: 'History',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="RequestHistoryDetail"
-                        component={RequestHistoryDetail}
-                        options={{
-                            title: 'History',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="Gallery"
-                        component={Gallery}
-                        options={{
-                            title: 'Gallery',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                            headerRight: () => (
-                                <View style={{ flexDirection: 'row' }}>
-                                    <TouchableOpacity
-                                        style={{ marginTop: 5 }}
-                                        onPress={() => {
-                                            navigation.navigate('AddImage');
-                                        }}>
-                                        <AntDesign name="pluscircle" size={25} color={COLORS.bg} />
-                                    </TouchableOpacity>
-                                </View>
-                            ),
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="AddImage"
-                        component={AddImage}
-                        options={{
-                            title: 'New Post',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="ImageDetail"
-                        component={ImageDetail}
-                        options={{
-                            title: 'Gallery',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-
-                    <HomeStack.Screen
-                        name="LeaveRequest"
-                        component={LeaveRequest}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="Settings"
-                        component={Settings}
-                        options={{
-                            title: 'Settings',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="TeachersProfile"
-                        component={TeachersProfile}
-                        options={{
-                            title: 'My Profile',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="Security"
-                        component={Security}
-                        options={{
-                            title: 'Security',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="CreateMPIN"
-                        component={CreateMPIN}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="ChangeMPIN"
-                        component={ChangeMPIN}
-                        options={{
-                            title: 'Change MPIN',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="ConfirmMPIN"
-                        component={ConfirmMPIN}
-                        options={{
-                            title: 'Change MPIN',
-
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="MPINSet"
-                        component={MPINSet}
-                        options={{
-                            title: 'MPIN',
-                            headerShown: false,
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="MPINVerification"
-                        component={MPINVerification}
-                        options={{
-                            title: 'MPIN',
-                            headerShown: false,
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="MPINDisable"
-                        component={MPINDisable}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="ForgetPIN"
-                        component={ForgetPIN}
-                        options={{
-                            title: 'Forget MPIN',
-                            headerShown: false,
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="ForgetMPIN"
-                        component={ForgetMPIN}
-                        options={{
-                            title: 'Forget MPIN',
-                            headerShown: false,
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="Complaint"
-                        component={Complaint}
-                        options={{
-                            title: 'Complaint',
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="AssignComplaint"
-                        component={AssignComplaint}
-                        options={{
-                            title: 'Complaint',
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="CreateComplaint"
-                        component={CreateComplaint}
-                        options={{
-                            title: 'Complaint',
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="ComplaintHistory"
-                        component={ComplaintHistory}
-                        options={{
-                            title: 'History',
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="PayRoll"
-                        component={PayRoll}
-                        options={{
-                            title: 'Payroll',
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="SalarySlip"
-                        component={SalarySlip}
-                        options={{
-                            title: 'Salary Slip',
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="AdvanceSalary"
-                        component={AdvanceSalary}
-                        options={{
-                            title: 'Advance Salary',
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="Chat"
-                        component={Chat}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="ChatDetail"
-                        component={ChatDetail}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="PhoneCall"
-                        component={PhoneCall}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="VideoCall"
-                        component={VideoCall}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="UserDetails"
-                        component={UserDetails}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="Images"
-                        component={Images}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="GroupUserDetail"
-                        component={GroupUserDetail}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="UserProfile"
-                        component={UserProfile}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="AttendRegister"
-                        component={AttendRegister}
-                        options={{
-                            title: 'Attendance Register',
-                            headerStyle: {
-                                backgroundColor: 'black',
-                            },
-                            headerTintColor: 'white',
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="AttendRegisterDetail"
-                        component={AttendRegisterDetail}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="AttendRegisterHistory"
-                        component={AttendRegisterHistory}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="TeacherAttendance"
-                        component={TeacherAttendance}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="TeacherAbsent"
-                        component={TeacherAbsent}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="TeacherHoliday"
-                        component={TeacherHoliday}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="TeacherLeaveApply"
-                        component={TeacherLeaveApply}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="TeacherApplyHistory"
-                        component={TeacherApplyHistory}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="TeacherLeaveSuccess"
-                        component={TeacherLeaveSuccess}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="About"
-                        component={About}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="AddExperience"
-                        component={AddExperience}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="EditExperience"
-                        component={EditExperience}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="AddEducation"
-                        component={AddEducation}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="EditEducation"
-                        component={EditEducation}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="AddRewards"
-                        component={AddRewards}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="EditRewards"
-                        component={EditRewards}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="Admin"
-                        component={Admin}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="TeacherList"
-                        component={TeacherList}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                    <HomeStack.Screen
-                        name="Notification"
-                        component={Notification}
-                        options={{
-                            headerShown: false,
-                        }}
-                    />
-                </HomeStack.Navigator>
-
-            </NavigationContainer>
-        </Provider>
-    );
-
+          <HomeStack.Screen
+            name="Document"
+            component={Document}
+            options={{
+              title: 'Document',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="Assign"
+            component={Assign}
+            options={{
+              title: "Book's Assign",
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="Collection"
+            component={Collection}
+            options={{
+              title: 'Collection',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="HistoryLib"
+            component={HistoryLib}
+            options={{
+              title: "Book's History",
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="HistoryDetail"
+            component={HistoryDetail}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="Exam"
+            component={Exam}
+            options={{
+              title: 'Exam',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="CreateTest"
+            component={CreateTest}
+            options={{
+              title: 'CreateTest',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="ManageTest"
+            component={ManageTest}
+            options={{
+              title: 'ManageTest',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="Event"
+            component={Event}
+            options={{
+              title: 'Event',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="CreateEvent"
+            component={CreateEvent}
+            options={{
+              title: 'Create Event',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="EditEvent"
+            component={EditEvent}
+            options={{
+              title: 'Edit Event',
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="HistoryEvent"
+            component={HistoryEvent}
+            options={{
+              title: "Event's History",
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="EventDetailHistory"
+            component={EventDetailHistory}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="Library"
+            component={Library}
+            options={{
+              title: 'Library',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="LeaveApp"
+            component={LeaveApp}
+            options={{
+              title: 'Leave',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="HistoryLeave"
+            component={HistoryLeave}
+            options={{
+              title: 'Leave',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="HistoryLeaveDetail"
+            component={HistoryLeaveDetail}
+            options={{
+              title: 'Leave',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="Ptm"
+            component={Ptm}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="CreateMeeting"
+            component={CreateMeeting}
+            options={{
+              title: 'PTM',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="PTMHistory"
+            component={PTMHistory}
+            options={{
+              title: 'History',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="PTMHistoryDetail"
+            component={PTMHistoryDetail}
+            options={{
+              title: 'Exam',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="UpcomingPtm"
+            component={UpcomingPtm}
+            options={{
+              title: 'UpcomingPTM',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="UpcomingDetailPtm"
+            component={UpcomingDetailPtm}
+            options={{
+              title: 'UpcomingPTM',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="AttendancePtm"
+            component={AttendancePtm}
+            options={{
+              title: 'Attendance',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="Announcement"
+            component={Announcement}
+            options={{
+              title: 'Notice',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="HistoryAnnouncement"
+            component={HistoryAnnouncement}
+            options={{
+              title: 'History',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="HistoryDetailAnn"
+            component={HistoryDetailAnn}
+            options={{
+              title: 'History',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="CreateAnnouncement"
+            component={CreateAnnouncement}
+            options={{
+              title: 'Create',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="Lecture"
+            component={Lecture}
+            options={{
+              title: 'Lecture',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="CreateLecture"
+            component={CreateLecture}
+            options={{
+              title: 'Lecture',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="LectureCarousel"
+            component={LectureCarousel}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="UpComingLecture"
+            component={UpComingLecture}
+            options={{
+              title: 'UpComingLecture',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="UpdateLecture"
+            component={UpdateLecture}
+            options={{
+              title: 'UpComingLecture',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="UpComingDetailLecture"
+            component={UpComingDetailLecture}
+            options={{
+              title: 'UpComingLecture',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="HistoryLecture"
+            component={HistoryLecture}
+            options={{
+              title: 'History',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="LecHistory"
+            component={LecHistory}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="TimeTable"
+            component={TimeTable}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="Period"
+            component={Period}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="TimeTableHistroy"
+            component={TimeTableHistroy}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="PeriodHistory"
+            component={PeriodHistory}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="McqTest"
+            component={McqTest}
+            options={{
+              title: 'Test',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="CreateMcqTest"
+            component={CreateMcqTest}
+            options={{
+              title: 'Test',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="EditTest"
+            component={EditTest}
+            options={{
+              title: 'Test',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="SubmittedTest"
+            component={SubmittedTest}
+            options={{
+              title: 'My Test',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="SubmittedDetailTest"
+            component={SubmittedDetailTest}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="StudentTestDetail"
+            component={StudentTestDetail}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="HistoryTest"
+            component={HistoryTest}
+            options={{
+              title: 'History',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="HistoryDetailTest"
+            component={HistoryDetailTest}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="TestResultMcqs"
+            component={TestResultMcqs}
+            options={{
+              headerShown: false,
+            }}
+          />
+
+          <HomeStack.Screen
+            name="AttendanceShow"
+            component={AttendanceShow}
+            options={{
+              title: 'Attendance',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="TakeAttendance"
+            component={TakeAttendance}
+            options={{
+              title: 'Attendance',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="HistoryAttendance"
+            component={HistoryAttendance}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="HistoryAtten"
+            component={HistoryAtten}
+            options={{
+              title: 'History',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="ReportAtten"
+            component={ReportAtten}
+            options={{
+              title: 'Report',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="ExamAttendance"
+            component={ExamAttendance}
+            options={{
+              title: 'Exam Attendance',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="TakeExamAttendance"
+            component={TakeExamAttendance}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="ExamAttenReport"
+            component={ExamAttenReport}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="MyClassRoomAtten"
+            component={MyClassRoomAtten}
+            options={{
+              title: 'My Classroom Attendance',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="ClassSubject"
+            component={ClassSubject}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="SubjectReport"
+            component={SubjectReport}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="MySubjectAtten"
+            component={MySubjectAtten}
+            options={{
+              title: 'My Subject Attendance',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+
+          <HomeStack.Screen
+            name="ReportAttendance"
+            component={ReportAttendance}
+            options={{
+              title: 'History',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="Assignment"
+            component={Assignment}
+            options={{
+              title: 'Assignment',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="CreateAss"
+            component={CreateAss}
+            options={{
+              title: 'Create',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="UserAssignmentDetail"
+            component={UserAssignmentDetail}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="UpdateAss"
+            component={UpdateAss}
+            options={{
+              title: 'Edit Assignment',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="SubmittedAss"
+            component={SubmittedAss}
+            options={{
+              title: 'My Assigment',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="SubmittedDetailAss"
+            component={SubmittedDetailAss}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="HistoryAss"
+            component={HistoryAss}
+            options={{
+              title: 'History',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="HistoryDetailAss"
+            component={HistoryDetailAss}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="HistoryuserAssignmentDetail"
+            component={HistoryuserAssignmentDetail}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="Youtube"
+            component={Youtube}
+            options={{
+              title: 'Youtube',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="ShareYtube"
+            component={ShareYtube}
+            options={{
+              title: 'Share',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="HistoryYtube"
+            component={HistoryYtube}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="BookDetail"
+            component={BookDetail}
+            options={{
+              title: "Book's Assign",
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="AssignBook"
+            component={AssignBook}
+            options={{
+              title: "Book's Assign",
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="CollectionDetail"
+            component={CollectionDetail}
+            options={{
+              title: 'Collection',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="FeesTransaction"
+            component={FeesTransaction}
+            options={{
+              title: 'FeesTransaction',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="UserTrans"
+            component={UserTrans}
+            options={{
+              title: 'FeesTransaction',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="FeesDetail"
+            component={FeesDetail}
+            options={{
+              title: 'FeesTransaction',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="HistoryTrans"
+            component={HistoryTrans}
+            options={{
+              title: 'History',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="HistoryTransDetail"
+            component={HistoryTransDetail}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="FeeUserDetail"
+            component={FeeUserDetail}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="StudentClient"
+            component={StudentClient}
+            options={{
+              title: 'StudentClient',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="ApplyLeave"
+            component={ApplyLeave}
+            options={{
+              title: 'Apply',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="LeaveStudent"
+            component={LeaveStudent}
+            options={{
+              title: 'Leave Application',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="HistoryLeaveStudent"
+            component={HistoryLeaveStudent}
+            options={{
+              title: 'History',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="HistoryLeaveDetailStudent"
+            component={HistoryLeaveDetailStudent}
+            options={{
+              title: 'History',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="StudentLibrary"
+            component={StudentLibrary}
+            options={{
+              title: 'Library',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="StudentBookAssigned"
+            component={StudentBookAssigned}
+            options={{
+              title: "Book's Assign",
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="StudentLibHistory"
+            component={StudentLibHistory}
+            options={{
+              title: 'History',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="LibraryBook"
+            component={LibraryBook}
+            options={{
+              title: 'Library books',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="LibraryBookDetail"
+            component={LibraryBookDetail}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="AddBook"
+            component={AddBook}
+            options={{
+              title: 'Add Books',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="AddNewBook"
+            component={AddNewBook}
+            options={{
+              title: 'Add Books',
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="AddBulkBook"
+            component={AddBulkBook}
+            options={{
+              title: 'Bulk Add Books',
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="DownloadReport"
+            component={DownloadReport}
+            options={{
+              title: 'Download Report',
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="AssignedUserDetail"
+            component={AssignedUserDetail}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="PTMLecture"
+            component={PTMLecture}
+            options={{
+              title: 'PTM/Lecture',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="UpcomingPtmLec"
+            component={UpcomingPtmLec}
+            options={{
+              title: 'Upcoming',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="HistoryPtmLec"
+            component={HistoryPtmLec}
+            options={{
+              title: 'History',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="StudentAttendance"
+            component={StudentAttendance}
+            options={{
+              title: 'Attendance',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="StudentAttendanceShow"
+            component={StudentAttendanceShow}
+            options={{
+              title: 'Attendance',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="StudentYoutube"
+            component={StudentYoutube}
+            options={{
+              title: 'Youtube',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="StudentEvent"
+            component={StudentEvent}
+            options={{
+              title: 'Event',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="StudentNewEvent"
+            component={StudentNewEvent}
+            options={{
+              title: 'New Event',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="StudentEventDetail"
+            component={StudentEventDetail}
+            options={{
+              title: 'New Event',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="Feeds"
+            component={Feeds}
+            options={{
+              title: 'Feeds',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+
+          <HomeStack.Screen
+            name="Certificate"
+            component={Certificate}
+            options={{
+              title: 'Certificate',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+
+          <HomeStack.Screen
+            name="ProvideCertificate"
+            component={ProvideCertificate}
+            options={{
+              title: 'Provide Certificate',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="CertificateHistory"
+            component={CertificateHistory}
+            options={{
+              title: 'History',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="CertificateHistoryDetail"
+            component={CertificateHistoryDetail}
+            options={{
+              title: 'History',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="StudyMaterial"
+            component={StudyMaterial}
+            options={{
+              title: 'Study Material',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="ShareVideo"
+            component={ShareVideo}
+            options={{
+              title: 'Share Video',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+              headerRight: () => (
+                <View style={{flexDirection: 'row'}}>
+                  <TouchableOpacity
+                    style={{marginTop: 5}}
+                    onPress={() => {
+                      navigation.navigate('AddVideo');
+                    }}>
+                    <AntDesign name="pluscircle" size={25} color={COLORS.bg} />
+                  </TouchableOpacity>
+                </View>
+              ),
+            }}
+          />
+          <HomeStack.Screen
+            name="AddVideo"
+            component={AddVideo}
+            options={{
+              title: 'Post Video',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="ShareDocument"
+            component={ShareDocument}
+            options={{
+              title: 'Share Document',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+              headerRight: () => (
+                <View style={{flexDirection: 'row'}}>
+                  <TouchableOpacity
+                    style={{marginTop: 5}}
+                    onPress={() => {
+                      navigation.navigate('AddDocument');
+                    }}>
+                    <AntDesign name="pluscircle" size={25} color={COLORS.bg} />
+                  </TouchableOpacity>
+                </View>
+              ),
+            }}
+          />
+          <HomeStack.Screen
+            name="AddDocument"
+            component={AddDocument}
+            options={{
+              title: 'Post Files  ',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="ShareImage"
+            component={ShareImage}
+            options={{
+              title: 'Share Image',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+              headerRight: () => (
+                <View style={{flexDirection: 'row'}}>
+                  <TouchableOpacity
+                    style={{marginTop: 5}}
+                    onPress={() => {
+                      navigation.navigate('AddMaterialImage');
+                    }}>
+                    <AntDesign name="pluscircle" size={25} color={COLORS.bg} />
+                  </TouchableOpacity>
+                </View>
+              ),
+            }}
+          />
+          <HomeStack.Screen
+            name="AddMaterialImage"
+            component={AddMaterialImage}
+            options={{
+              title: 'Post Image',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="ShareLink"
+            component={ShareLink}
+            options={{
+              title: 'Share Link',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+              headerRight: () => (
+                <View style={{flexDirection: 'row'}}>
+                  <TouchableOpacity
+                    style={{marginTop: 5}}
+                    onPress={() => {
+                      navigation.navigate('AddLink');
+                    }}>
+                    <AntDesign name="pluscircle" size={25} color={COLORS.bg} />
+                  </TouchableOpacity>
+                </View>
+              ),
+            }}
+          />
+          <HomeStack.Screen
+            name="AddLink"
+            component={AddLink}
+            options={{
+              title: 'Post Link',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="Result"
+            component={Result}
+            options={{
+              title: 'Result',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="ClassRoomResult"
+            component={ClassRoomResult}
+            options={{
+              title: 'My Classroom Result',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="ClassResult"
+            component={ClassResult}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="MarksAllotement"
+            component={MarksAllotement}
+            options={{
+              title: 'Give Marks',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="AllotementDetail"
+            component={AllotementDetail}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="Request"
+            component={Request}
+            options={{
+              title: 'Request Access',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="RequestAccess"
+            component={RequestAccess}
+            options={{
+              title: 'Request Access',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="RequestDetail"
+            component={RequestDetail}
+            options={{
+              title: 'Request Access',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="RequestHistory"
+            component={RequestHistory}
+            options={{
+              title: 'History',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="RequestHistoryDetail"
+            component={RequestHistoryDetail}
+            options={{
+              title: 'History',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="Gallery"
+            component={Gallery}
+            options={{
+              title: 'Gallery',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+              headerRight: () => (
+                <View style={{flexDirection: 'row'}}>
+                  <TouchableOpacity
+                    style={{marginTop: 5}}
+                    onPress={() => {
+                      navigation.navigate('AddImage');
+                    }}>
+                    <AntDesign name="pluscircle" size={25} color={COLORS.bg} />
+                  </TouchableOpacity>
+                </View>
+              ),
+            }}
+          />
+          <HomeStack.Screen
+            name="AddImage"
+            component={AddImage}
+            options={{
+              title: 'New Post',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="ImageDetail"
+            component={ImageDetail}
+            options={{
+              title: 'Gallery',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+
+          <HomeStack.Screen
+            name="LeaveRequest"
+            component={LeaveRequest}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="Settings"
+            component={Settings}
+            options={{
+              title: 'Settings',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="TeachersProfile"
+            component={TeachersProfile}
+            options={{
+              title: 'My Profile',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="Security"
+            component={Security}
+            options={{
+              title: 'Security',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="CreateMPIN"
+            component={CreateMPIN}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="ChangeMPIN"
+            component={ChangeMPIN}
+            options={{
+              title: 'Change MPIN',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="ConfirmMPIN"
+            component={ConfirmMPIN}
+            options={{
+              title: 'Change MPIN',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="MPINSet"
+            component={MPINSet}
+            options={{
+              title: 'MPIN',
+              headerShown: false,
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="MPINVerification"
+            component={MPINVerification}
+            options={{
+              title: 'MPIN',
+              headerShown: false,
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="MPINDisable"
+            component={MPINDisable}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="ForgetPIN"
+            component={ForgetPIN}
+            options={{
+              title: 'Forget MPIN',
+              headerShown: false,
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="ForgetMPIN"
+            component={ForgetMPIN}
+            options={{
+              title: 'Forget MPIN',
+              headerShown: false,
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="Complaint"
+            component={Complaint}
+            options={{
+              title: 'Complaint',
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="AssignComplaint"
+            component={AssignComplaint}
+            options={{
+              title: 'Complaint',
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="CreateComplaint"
+            component={CreateComplaint}
+            options={{
+              title: 'Complaint',
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="ComplaintHistory"
+            component={ComplaintHistory}
+            options={{
+              title: 'History',
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="PayRoll"
+            component={PayRoll}
+            options={{
+              title: 'Payroll',
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="SalarySlip"
+            component={SalarySlip}
+            options={{
+              title: 'Salary Slip',
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="AdvanceSalary"
+            component={AdvanceSalary}
+            options={{
+              title: 'Advance Salary',
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="Chat"
+            component={Chat}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="ChatDetail"
+            component={ChatDetail}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="PhoneCall"
+            component={PhoneCall}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="VideoCall"
+            component={VideoCall}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="UserDetails"
+            component={UserDetails}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="Images"
+            component={Images}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="GroupUserDetail"
+            component={GroupUserDetail}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="UserProfile"
+            component={UserProfile}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="AttendRegister"
+            component={AttendRegister}
+            options={{
+              title: 'Attendance Register',
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="AttendRegisterDetail"
+            component={AttendRegisterDetail}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="AttendRegisterHistory"
+            component={AttendRegisterHistory}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="TeacherAttendance"
+            component={TeacherAttendance}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="MyAttendance"
+            component={MyAttendance}
+            options={{
+              title: 'Attendance',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="AttendanceHistory"
+            component={AttendanceHistory}
+            options={{
+              title: 'Attendance',
+
+              headerStyle: {
+                backgroundColor: 'black',
+              },
+              headerTintColor: 'white',
+            }}
+          />
+          <HomeStack.Screen
+            name="TeacherAbsent"
+            component={TeacherAbsent}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="TeacherHoliday"
+            component={TeacherHoliday}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="TeacherLeaveApply"
+            component={TeacherLeaveApply}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="TeacherApplyHistory"
+            component={TeacherApplyHistory}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="TeacherLeaveSuccess"
+            component={TeacherLeaveSuccess}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="About"
+            component={About}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="AddExperience"
+            component={AddExperience}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="EditExperience"
+            component={EditExperience}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="AddEducation"
+            component={AddEducation}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="EditEducation"
+            component={EditEducation}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="AddRewards"
+            component={AddRewards}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="EditRewards"
+            component={EditRewards}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="Admin"
+            component={Admin}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="TeacherList"
+            component={TeacherList}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <HomeStack.Screen
+            name="Notification"
+            component={Notification}
+            options={{
+              headerShown: false,
+            }}
+          />
+        </HomeStack.Navigator>
+      </NavigationContainer>
+    </Provider>
+  );
 }
 
 export default App;
@@ -2451,104 +2474,101 @@ export default App;
 //   );
 // }
 
-const BottomNavigator = ({ navigation }) => {
-    const dispatch = useDispatch();
-    const { username, userimage } = useSelector(
-        state => state.userReducer,
-    );
-    useEffect(() => {
-        StoreDatas();
-    }, []);
-    const StoreDatas = async () => {
-        try {
-            const user_Id = await AsyncStorage.getItem('user_id');
-            const user_name = await AsyncStorage.getItem('user_name');
-            const user_image = await AsyncStorage.getItem('user_image');
-            dispatch(setuserId(user_Id));
-            dispatch(setuserName(user_name));
-            dispatch(setuserImage(user_image));
-        } catch (error) {
-            console.log('Catch' + error);
-        }
-    };
+const BottomNavigator = ({navigation}) => {
+  const dispatch = useDispatch();
+  const {username, userimage} = useSelector(state => state.userReducer);
+  useEffect(() => {
+    StoreDatas();
+  }, []);
+  const StoreDatas = async () => {
+    try {
+      const user_Id = await AsyncStorage.getItem('user_id');
+      const user_name = await AsyncStorage.getItem('user_name');
+      const user_image = await AsyncStorage.getItem('user_image');
+      dispatch(setuserId(user_Id));
+      dispatch(setuserName(user_name));
+      dispatch(setuserImage(user_image));
+    } catch (error) {
+      console.log('Catch' + error);
+    }
+  };
 
-    return (
-        <BottomStack.Navigator
-            initialRouteName='Home'
-            screenOptions={{
-                //headerShown: false, 
-                // tabBarInactiveTintColor: 'green',
-                // tabBarActiveTintColor: 'red',
-                //title: `👋 Hi, ${username}`,
-                tabBarStyle: {
-                    paddingTop: 12,
-                    paddingBottom: 8,
-                    height: 56,
-                },
-                headerTitle: '',
-                headerStyle: { backgroundColor: '#FEFDF8', borderWidth: 0, elevation: 0 },
-                headerStatusBarHeight: 8,
-                headerLeft: () => (
-                    <View style={{ flexDirection: 'row', paddingLeft: 20 }}>
-                        {/* <Icon.Button
+  return (
+    <BottomStack.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        //headerShown: false,
+        // tabBarInactiveTintColor: 'green',
+        // tabBarActiveTintColor: 'red',
+        //title: `👋 Hi, ${username}`,
+        tabBarStyle: {
+          paddingTop: 12,
+          paddingBottom: 8,
+          height: 56,
+        },
+        headerTitle: '',
+        headerStyle: {backgroundColor: '#FEFDF8', borderWidth: 0, elevation: 0},
+        headerStatusBarHeight: 8,
+        headerLeft: () => (
+          <View style={{flexDirection: 'row', paddingLeft: 20}}>
+            {/* <Icon.Button
               name="ios-menu"
               size={25}
               color="black"
               backgroundColor="white"
               //onPress={() => navigation.openDrawer()}
             /> */}
-                        {/* <Text style={[paraGray.largebold, {fontSize: 14}]}>👋 Hi, {username}</Text> */}
-                        <Image
-                            source={require('./assets/Black_Blue_Logo.png')}
-                            resizeMode={'contain'}
-                            style={{ width: 64, height: 64 }}
-                        />
-                    </View>
-                ),
-                headerRight: () => (
-                    <View style={{ flexDirection: 'row' }}>
-                        <TouchableOpacity
-                            style={{ marginTop: 5, marginRight: 20 }}
-                            onPress={() => {
-                                // alert('Feature Coming Soon');
-                                navigation.navigate('Chat');
-                            }}>
-                            <ImageBackground
-                                style={{
-                                    backgroundColor: COLORS.bg,
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                    width: 35,
-                                    height: 35,
-                                    borderRadius: 20,
-                                    borderWidth: 1,
-                                    borderColor: COLORS.background,
-                                }}>
-                                <Feather
-                                    style={{ marginRight: 2, marginTop: 3 }}
-                                    name="send"
-                                    size={22}
-                                    color={COLORS.black}
-                                />
-                            </ImageBackground>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            style={{
-                                marginRight: 16,
-                                justifyContent: 'center',
-                            }}
-                            onPress={() =>
-                                // alert('Feature Coming Soon')}
-                                navigation.navigate('Notification')
-                            }
-                        >
-                            <Feather
-                                style={{ marginTop: 8 }}
-                                name="bell"
-                                size={25}
-                                color={COLORS.black}
-                            />
-                            {/* {Notify !== '0' && (
+            {/* <Text style={[paraGray.largebold, {fontSize: 14}]}>👋 Hi, {username}</Text> */}
+            <Image
+              source={require('./assets/Black_Blue_Logo.png')}
+              resizeMode={'contain'}
+              style={{width: 64, height: 64}}
+            />
+          </View>
+        ),
+        headerRight: () => (
+          <View style={{flexDirection: 'row'}}>
+            <TouchableOpacity
+              style={{marginTop: 5, marginRight: 20}}
+              onPress={() => {
+                // alert('Feature Coming Soon');
+                navigation.navigate('Chat');
+              }}>
+              <ImageBackground
+                style={{
+                  backgroundColor: COLORS.bg,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  width: 35,
+                  height: 35,
+                  borderRadius: 20,
+                  borderWidth: 1,
+                  borderColor: COLORS.background,
+                }}>
+                <Feather
+                  style={{marginRight: 2, marginTop: 3}}
+                  name="send"
+                  size={22}
+                  color={COLORS.black}
+                />
+              </ImageBackground>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                marginRight: 16,
+                justifyContent: 'center',
+              }}
+              onPress={() =>
+                // alert('Feature Coming Soon')}
+                navigation.navigate('Notification')
+              }>
+              <Feather
+                style={{marginTop: 8}}
+                name="bell"
+                size={25}
+                color={COLORS.black}
+              />
+              {/* {Notify !== '0' && (
                 <View
                   style={{
                     backgroundColor: COLORS.bluee,
@@ -2570,8 +2590,8 @@ const BottomNavigator = ({ navigation }) => {
                   </Text>
                 </View>
               )} */}
-                        </TouchableOpacity>
-                        {/* <TouchableOpacity
+            </TouchableOpacity>
+            {/* <TouchableOpacity
               style={{marginTop: 5}}
               onPress={() => {
                 dispatch(setShowModal(!showmodal));
@@ -2589,247 +2609,275 @@ const BottomNavigator = ({ navigation }) => {
                 />
               )}
             </TouchableOpacity> */}
-                    </View>
-                ),
-            }}
-        >
-            <BottomStack.Screen
-                name='Home'
-                component={HomeScreen}
-                options={{
-                    tabBarShowLabel: false,
-                    tabBarIcon: ({ focused }) => <AntDesign name="home" size={focused ? 28 : 26} color={focused ? COLORS.primary : COLORS.black} />,
-                    tabBarLabelStyle: { fontSize: 14, fontFamily: 'Montserrat-Medium' },
-                    tabBarLabel: ({ focused }) => (
-                        <Text style={{ color: focused ? COLORS.primary : COLORS.black }}> Home </Text>
-                    )
-                }}
+          </View>
+        ),
+      }}>
+      <BottomStack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          tabBarShowLabel: false,
+          tabBarIcon: ({focused}) => (
+            <AntDesign
+              name="home"
+              size={focused ? 28 : 26}
+              color={focused ? COLORS.primary : COLORS.black}
             />
-            <BottomStack.Screen
-                name='Students'
-                component={Student}
-                options={{
-                    tabBarShowLabel: false,
-                    tabBarIcon: ({ focused }) => <AntDesign name="contacts" size={focused ? 28 : 26} color={focused ? COLORS.primary : COLORS.black} />,
-                    tabBarLabelStyle: { fontSize: 14, fontFamily: 'Montserrat-Medium' },
-                    tabBarLabel: ({ focused }) => (
-                        <Text style={{ color: focused ? COLORS.primary : COLORS.black }}> Students </Text>
-                    )
-                }}
+          ),
+          tabBarLabelStyle: {fontSize: 14, fontFamily: 'Montserrat-Medium'},
+          tabBarLabel: ({focused}) => (
+            <Text style={{color: focused ? COLORS.primary : COLORS.black}}>
+              {' '}
+              Home{' '}
+            </Text>
+          ),
+        }}
+      />
+      <BottomStack.Screen
+        name="Students"
+        component={Student}
+        options={{
+          tabBarShowLabel: false,
+          tabBarIcon: ({focused}) => (
+            <AntDesign
+              name="contacts"
+              size={focused ? 28 : 26}
+              color={focused ? COLORS.primary : COLORS.black}
             />
-            <BottomStack.Screen
-                name='Events'
-                component={Event}
-                options={{
-                    tabBarShowLabel: false,
-                    tabBarIcon: ({ focused }) => <AntDesign name="staro" size={focused ? 28 : 26} color={focused ? COLORS.primary : COLORS.black} />,
-                    tabBarLabelStyle: { fontSize: 14, fontFamily: 'Montserrat-Medium' },
-                    tabBarLabel: ({ focused }) => (
-                        <Text style={{ color: focused ? COLORS.primary : COLORS.black }}> Events </Text>
-                    )
-                }}
+          ),
+          tabBarLabelStyle: {fontSize: 14, fontFamily: 'Montserrat-Medium'},
+          tabBarLabel: ({focused}) => (
+            <Text style={{color: focused ? COLORS.primary : COLORS.black}}>
+              {' '}
+              Students{' '}
+            </Text>
+          ),
+        }}
+      />
+      <BottomStack.Screen
+        name="Events"
+        component={Event}
+        options={{
+          tabBarShowLabel: false,
+          tabBarIcon: ({focused}) => (
+            <AntDesign
+              name="staro"
+              size={focused ? 28 : 26}
+              color={focused ? COLORS.primary : COLORS.black}
             />
-            <BottomStack.Screen
-                name='Profile'
-                component={Settings}
-                options={{
-                    tabBarIcon: ({ focused }) =>
-                        // <AntDesign name="user" size={24} color={COLORS.black}/>
-                        // { userimage === null ? (
-                        //   <Avatar.Image
-                        //     size={24}
-                        //     source={require('./assets/Attendance.png')}
-                        //   />
-                        // ) : (
-                        <Avatar.Image
-                            source={{ uri: Url.profile_IMG + userimage }}
-                            size={focused ? 30 : 28}
-                            backgroundColor={COLORS.black}
-                        />
-                    // )}
-                    ,
-                    tabBarShowLabel: false,
-                    tabBarLabelStyle: { fontSize: 14, fontFamily: 'Montserrat-Medium' },
-                    tabBarLabel: ({ focused }) => (
-                        <Text style={{ color: focused ? COLORS.primary : COLORS.black }}> Profile </Text>
-                    )
-                }}
+          ),
+          tabBarLabelStyle: {fontSize: 14, fontFamily: 'Montserrat-Medium'},
+          tabBarLabel: ({focused}) => (
+            <Text style={{color: focused ? COLORS.primary : COLORS.black}}>
+              {' '}
+              Events{' '}
+            </Text>
+          ),
+        }}
+      />
+      <BottomStack.Screen
+        name="Profile"
+        component={Settings}
+        options={{
+          tabBarIcon: ({focused}) => (
+            // <AntDesign name="user" size={24} color={COLORS.black}/>
+            // { userimage === null ? (
+            //   <Avatar.Image
+            //     size={24}
+            //     source={require('./assets/Attendance.png')}
+            //   />
+            // ) : (
+            <Avatar.Image
+              source={{uri: Url.profile_IMG + userimage}}
+              size={focused ? 30 : 28}
+              backgroundColor={COLORS.black}
             />
-        </BottomStack.Navigator>
-    );
-}
+          ),
+          // )}
+          tabBarShowLabel: false,
+          tabBarLabelStyle: {fontSize: 14, fontFamily: 'Montserrat-Medium'},
+          tabBarLabel: ({focused}) => (
+            <Text style={{color: focused ? COLORS.primary : COLORS.black}}>
+              {' '}
+              Profile{' '}
+            </Text>
+          ),
+        }}
+      />
+    </BottomStack.Navigator>
+  );
+};
 
-const HomeStackScreen = ({ navigation }) => {
-    // const dispatch = useDispatch();
+const HomeStackScreen = ({navigation}) => {
+  // const dispatch = useDispatch();
 
-    // const {userinfo, userid, username, showmodal, userimage} = useSelector(
-    //   state => state.userReducer,
-    // );
-    // useEffect(() => {
-    //   StoreDatas();
-    // }, []);
-    // const StoreDatas = async () => {
-    //   try {
-    //     const user_Id = await AsyncStorage.getItem('user_id');
-    //     const user_name = await AsyncStorage.getItem('user_name');
-    //     const user_image = await AsyncStorage.getItem('user_image');
-    //     dispatch(setuserId(user_Id));
-    //     dispatch(setuserName(user_name));
-    //     dispatch(setuserImage(user_image));
-    //   } catch (error) {
-    //     console.log('Catch' + error);
-    //   }
-    // };
+  // const {userinfo, userid, username, showmodal, userimage} = useSelector(
+  //   state => state.userReducer,
+  // );
+  // useEffect(() => {
+  //   StoreDatas();
+  // }, []);
+  // const StoreDatas = async () => {
+  //   try {
+  //     const user_Id = await AsyncStorage.getItem('user_id');
+  //     const user_name = await AsyncStorage.getItem('user_name');
+  //     const user_image = await AsyncStorage.getItem('user_image');
+  //     dispatch(setuserId(user_Id));
+  //     dispatch(setuserName(user_name));
+  //     dispatch(setuserImage(user_image));
+  //   } catch (error) {
+  //     console.log('Catch' + error);
+  //   }
+  // };
 
-    return (
-        <HomeStack.Navigator
-            initialRouteName="Splash"
-            screenOptions={{
-                headerStyle: {
-                    elevation: 0, // Android
-                },
-                headerTintColor: 'black',
+  return (
+    <HomeStack.Navigator
+      initialRouteName="Splash"
+      screenOptions={{
+        headerStyle: {
+          elevation: 0, // Android
+        },
+        headerTintColor: 'black',
 
-                headerTitleStyle: {
-                    fontFamily: 'Montserrat-Light',
-                },
-            }}>
-            <HomeStack.Screen
-                name="Splash"
-                component={Splash}
-                options={{
-                    animationEnabled: false,
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="OnBoarding"
-                component={OnBoarding}
-                options={{
-                    animationEnabled: false,
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="SignIn"
-                component={SignIn}
-                options={{
-                    animationEnabled: false,
-                    headerShown: false,
-                }}
-            />
+        headerTitleStyle: {
+          fontFamily: 'Montserrat-Light',
+        },
+      }}>
+      <HomeStack.Screen
+        name="Splash"
+        component={Splash}
+        options={{
+          animationEnabled: false,
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="OnBoarding"
+        component={OnBoarding}
+        options={{
+          animationEnabled: false,
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="SignIn"
+        component={SignIn}
+        options={{
+          animationEnabled: false,
+          headerShown: false,
+        }}
+      />
 
-            <HomeStack.Screen
-                name="ForgetPassword"
-                component={ForgetPassword}
-                options={{
-                    animationEnabled: false,
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="ForgetPasswordMail"
-                component={ForgetPasswordMail}
-                options={{
-                    title: 'Forget Password',
-                    animationEnabled: false,
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="ForgetPasswordNO"
-                component={ForgetPasswordNO}
-                options={{
-                    title: 'Forget Password',
-                    animationEnabled: false,
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="ChangePassword"
-                component={ChangePassword}
-                options={{
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                //name="Home"
-                name="klpd"
-                component={HomeScreen}
-                options={{
-                    //title: 'IntraEdu',
-                    headerLeft: () => (
-                        <View style={{ flexDirection: 'row' }}>
-                            <Icon.Button
-                                name="ios-menu"
-                                size={25}
-                                color="black"
-                                backgroundColor="white"
-                                onPress={() => navigation.openDrawer()}
-                            />
-                            {/* <Image
+      <HomeStack.Screen
+        name="ForgetPassword"
+        component={ForgetPassword}
+        options={{
+          animationEnabled: false,
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="ForgetPasswordMail"
+        component={ForgetPasswordMail}
+        options={{
+          title: 'Forget Password',
+          animationEnabled: false,
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="ForgetPasswordNO"
+        component={ForgetPasswordNO}
+        options={{
+          title: 'Forget Password',
+          animationEnabled: false,
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="ChangePassword"
+        component={ChangePassword}
+        options={{
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        //name="Home"
+        name="klpd"
+        component={HomeScreen}
+        options={{
+          //title: 'IntraEdu',
+          headerLeft: () => (
+            <View style={{flexDirection: 'row'}}>
+              <Icon.Button
+                name="ios-menu"
+                size={25}
+                color="black"
+                backgroundColor="white"
+                onPress={() => navigation.openDrawer()}
+              />
+              {/* <Image
                 source={require('./assets/white-logo.png')}
                 resizeMode={'contain'}
                 style={{width: 84, height: 84}}
               /> */}
-                        </View>
-                    ),
-                    headerRight: () => (
-                        <View style={{ flexDirection: 'row' }}>
-                            <TouchableOpacity
-                                style={{ marginTop: 5, marginRight: 16 }}
-                                onPress={() => {
-                                    // alert('Feature Coming Soon');
-                                    navigation.navigate('Chat');
-                                }}>
-                                <ImageBackground
-                                    style={{
-                                        backgroundColor: COLORS.bg,
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        width: 35,
-                                        height: 35,
-                                        borderRadius: 20,
-                                        borderWidth: 1,
-                                        borderColor: COLORS.background,
-                                    }}>
-                                    <Feather
-                                        style={{ marginRight: 2, marginTop: 3 }}
-                                        name="send"
-                                        size={22}
-                                        color={COLORS.black}
-                                    />
-                                </ImageBackground>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                style={{
-                                    marginRight: 4,
-                                    justifyContent: 'center',
-                                }}
-                                onPress={() =>
-                                    // alert('Feature Coming Soon')}
-                                    navigation.navigate('Notification')
-                                }
-                            >
-                                <Feather
-                                    style={{ marginTop: 8 }}
-                                    name="bell"
-                                    size={25}
-                                    color={COLORS.black}
-                                />
-                                {/* {Notify !== '0' && (
+            </View>
+          ),
+          headerRight: () => (
+            <View style={{flexDirection: 'row'}}>
+              <TouchableOpacity
+                style={{marginTop: 5, marginRight: 16}}
+                onPress={() => {
+                  // alert('Feature Coming Soon');
+                  navigation.navigate('Chat');
+                }}>
+                <ImageBackground
+                  style={{
+                    backgroundColor: COLORS.bg,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    width: 35,
+                    height: 35,
+                    borderRadius: 20,
+                    borderWidth: 1,
+                    borderColor: COLORS.background,
+                  }}>
+                  <Feather
+                    style={{marginRight: 2, marginTop: 3}}
+                    name="send"
+                    size={22}
+                    color={COLORS.black}
+                  />
+                </ImageBackground>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  marginRight: 4,
+                  justifyContent: 'center',
+                }}
+                onPress={() =>
+                  // alert('Feature Coming Soon')}
+                  navigation.navigate('Notification')
+                }>
+                <Feather
+                  style={{marginTop: 8}}
+                  name="bell"
+                  size={25}
+                  color={COLORS.black}
+                />
+                {/* {Notify !== '0' && (
                   <View
                     style={{
                       backgroundColor: COLORS.bluee,
@@ -2851,8 +2899,8 @@ const HomeStackScreen = ({ navigation }) => {
                     </Text>
                   </View>
                 )} */}
-                            </TouchableOpacity>
-                            {/* <TouchableOpacity
+              </TouchableOpacity>
+              {/* <TouchableOpacity
                 style={{marginTop: 5}}
                 onPress={() => {
                   dispatch(setShowModal(!showmodal));
@@ -2870,62 +2918,62 @@ const HomeStackScreen = ({ navigation }) => {
                   />
                 )}
               </TouchableOpacity> */}
-                        </View>
-                    ),
-                    headerShadowVisible: false
-                }}
-            />
+            </View>
+          ),
+          headerShadowVisible: false,
+        }}
+      />
 
-            {/* <HomeStack.Screen
+      {/* <HomeStack.Screen
                 name="Bottomtabs"
                 component={BottomNavigator}
             /> */}
 
-            <HomeStack.Screen
-                name="Student"
-                component={Student}
-                options={{
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="StudentProfile"
-                component={StudentProfile}
-                options={{
-                    title: 'Student Details',
+      <HomeStack.Screen
+        name="Student"
+        component={Student}
+        options={{
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="StudentProfile"
+        component={StudentProfile}
+        options={{
+          title: 'Student Details',
 
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="StudentEdit"
-                component={StudentEdit}
-                options={{
-                    title: 'Edit Details',
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="Info"
-                component={Info}
-                options={{
-                    title: 'Add Student',
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            {/* <HomeStack.Screen
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="StudentEdit"
+        component={StudentEdit}
+        options={{
+          title: 'Edit Details',
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="Info"
+        component={Info}
+        options={{
+          title: 'Add Student',
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      {/* <HomeStack.Screen
         name="TabScreen"
         component={TabScreen}
         options={{
@@ -2937,1915 +2985,1916 @@ const HomeStackScreen = ({ navigation }) => {
           headerTintColor: 'white',
         }}
       /> */}
-            <HomeStack.Screen
-                name="Document"
-                component={Document}
-                options={{
-                    title: 'Document',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="Assign"
-                component={Assign}
-                options={{
-                    title: "Book's Assign",
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="Collection"
-                component={Collection}
-                options={{
-                    title: 'Collection',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="HistoryLib"
-                component={HistoryLib}
-                options={{
-                    title: "Book's History",
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="HistoryDetail"
-                component={HistoryDetail}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="Exam"
-                component={Exam}
-                options={{
-                    title: 'Exam',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="CreateTest"
-                component={CreateTest}
-                options={{
-                    title: 'CreateTest',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="ManageTest"
-                component={ManageTest}
-                options={{
-                    title: 'ManageTest',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="Event"
-                component={Event}
-                options={{
-                    title: 'Event',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="CreateEvent"
-                component={CreateEvent}
-                options={{
-                    title: 'Create Event',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="EditEvent"
-                component={EditEvent}
-                options={{
-                    title: 'Edit Event',
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="HistoryEvent"
-                component={HistoryEvent}
-                options={{
-                    title: "Event's History",
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="EventDetailHistory"
-                component={EventDetailHistory}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="Library"
-                component={Library}
-                options={{
-                    title: 'Library',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="LeaveApp"
-                component={LeaveApp}
-                options={{
-                    title: 'Leave',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="HistoryLeave"
-                component={HistoryLeave}
-                options={{
-                    title: 'Leave',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="HistoryLeaveDetail"
-                component={HistoryLeaveDetail}
-                options={{
-                    title: 'Leave',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="Ptm"
-                component={Ptm}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="CreateMeeting"
-                component={CreateMeeting}
-                options={{
-                    title: 'PTM',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="PTMHistory"
-                component={PTMHistory}
-                options={{
-                    title: 'History',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="PTMHistoryDetail"
-                component={PTMHistoryDetail}
-                options={{
-                    title: 'Exam',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="UpcomingPtm"
-                component={UpcomingPtm}
-                options={{
-                    title: 'UpcomingPTM',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="UpcomingDetailPtm"
-                component={UpcomingDetailPtm}
-                options={{
-                    title: 'UpcomingPTM',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="AttendancePtm"
-                component={AttendancePtm}
-                options={{
-                    title: 'Attendance',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="Announcement"
-                component={Announcement}
-                options={{
-                    title: 'Notice',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="HistoryAnnouncement"
-                component={HistoryAnnouncement}
-                options={{
-                    title: 'History',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="HistoryDetailAnn"
-                component={HistoryDetailAnn}
-                options={{
-                    title: 'History',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="CreateAnnouncement"
-                component={CreateAnnouncement}
-                options={{
-                    title: 'Create',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="Lecture"
-                component={Lecture}
-                options={{
-                    title: 'Lecture',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="CreateLecture"
-                component={CreateLecture}
-                options={{
-                    title: 'Lecture',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="LectureCarousel"
-                component={LectureCarousel}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="UpComingLecture"
-                component={UpComingLecture}
-                options={{
-                    title: 'UpComingLecture',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="UpdateLecture"
-                component={UpdateLecture}
-                options={{
-                    title: 'UpComingLecture',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="UpComingDetailLecture"
-                component={UpComingDetailLecture}
-                options={{
-                    title: 'UpComingLecture',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="HistoryLecture"
-                component={HistoryLecture}
-                options={{
-                    title: 'History',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="LecHistory"
-                component={LecHistory}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="TimeTable"
-                component={TimeTable}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="Period"
-                component={Period}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="TimeTableHistroy"
-                component={TimeTableHistroy}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="PeriodHistory"
-                component={PeriodHistory}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="McqTest"
-                component={McqTest}
-                options={{
-                    title: 'Test',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="CreateMcqTest"
-                component={CreateMcqTest}
-                options={{
-                    title: 'Test',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="EditTest"
-                component={EditTest}
-                options={{
-                    title: 'Test',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="SubmittedTest"
-                component={SubmittedTest}
-                options={{
-                    title: 'My Test',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="SubmittedDetailTest"
-                component={SubmittedDetailTest}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="StudentTestDetail"
-                component={StudentTestDetail}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="HistoryTest"
-                component={HistoryTest}
-                options={{
-                    title: 'History',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="HistoryDetailTest"
-                component={HistoryDetailTest}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="TestResultMcqs"
-                component={TestResultMcqs}
-                options={{
-                    headerShown: false,
-                }}
-            />
-
-            <HomeStack.Screen
-                name="AttendanceShow"
-                component={AttendanceShow}
-                options={{
-                    title: 'Attendance',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="TakeAttendance"
-                component={TakeAttendance}
-                options={{
-                    title: 'Attendance',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="HistoryAttendance"
-                component={HistoryAttendance}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="HistoryAtten"
-                component={HistoryAtten}
-                options={{
-                    title: 'History',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="ReportAtten"
-                component={ReportAtten}
-                options={{
-                    title: 'Report',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="ExamAttendance"
-                component={ExamAttendance}
-                options={{
-                    title: 'Exam Attendance',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="TakeExamAttendance"
-                component={TakeExamAttendance}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="ExamAttenReport"
-                component={ExamAttenReport}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="MyClassRoomAtten"
-                component={MyClassRoomAtten}
-                options={{
-                    title: 'My Classroom Attendance',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="ClassSubject"
-                component={ClassSubject}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="SubjectReport"
-                component={SubjectReport}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="MySubjectAtten"
-                component={MySubjectAtten}
-                options={{
-                    title: 'My Subject Attendance',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-
-            <HomeStack.Screen
-                name="ReportAttendance"
-                component={ReportAttendance}
-                options={{
-                    title: 'History',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="Assignment"
-                component={Assignment}
-                options={{
-                    title: 'Assignment',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="CreateAss"
-                component={CreateAss}
-                options={{
-                    title: 'Create',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="UserAssignmentDetail"
-                component={UserAssignmentDetail}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="UpdateAss"
-                component={UpdateAss}
-                options={{
-                    title: 'Edit Assignment',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="SubmittedAss"
-                component={SubmittedAss}
-                options={{
-                    title: 'My Assigment',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="SubmittedDetailAss"
-                component={SubmittedDetailAss}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="HistoryAss"
-                component={HistoryAss}
-                options={{
-                    title: 'History',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="HistoryDetailAss"
-                component={HistoryDetailAss}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="HistoryuserAssignmentDetail"
-                component={HistoryuserAssignmentDetail}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="Youtube"
-                component={Youtube}
-                options={{
-                    title: 'Youtube',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="ShareYtube"
-                component={ShareYtube}
-                options={{
-                    title: 'Share',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="HistoryYtube"
-                component={HistoryYtube}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="BookDetail"
-                component={BookDetail}
-                options={{
-                    title: "Book's Assign",
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="AssignBook"
-                component={AssignBook}
-                options={{
-                    title: "Book's Assign",
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="CollectionDetail"
-                component={CollectionDetail}
-                options={{
-                    title: 'Collection',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="FeesTransaction"
-                component={FeesTransaction}
-                options={{
-                    title: 'FeesTransaction',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="UserTrans"
-                component={UserTrans}
-                options={{
-                    title: 'FeesTransaction',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="FeesDetail"
-                component={FeesDetail}
-                options={{
-                    title: 'FeesTransaction',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="HistoryTrans"
-                component={HistoryTrans}
-                options={{
-                    title: 'History',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="HistoryTransDetail"
-                component={HistoryTransDetail}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="FeeUserDetail"
-                component={FeeUserDetail}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="StudentClient"
-                component={StudentClient}
-                options={{
-                    title: 'StudentClient',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="ApplyLeave"
-                component={ApplyLeave}
-                options={{
-                    title: 'Apply',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="LeaveStudent"
-                component={LeaveStudent}
-                options={{
-                    title: 'Leave Application',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="HistoryLeaveStudent"
-                component={HistoryLeaveStudent}
-                options={{
-                    title: 'History',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="HistoryLeaveDetailStudent"
-                component={HistoryLeaveDetailStudent}
-                options={{
-                    title: 'History',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="StudentLibrary"
-                component={StudentLibrary}
-                options={{
-                    title: 'Library',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="StudentBookAssigned"
-                component={StudentBookAssigned}
-                options={{
-                    title: "Book's Assign",
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="StudentLibHistory"
-                component={StudentLibHistory}
-                options={{
-                    title: 'History',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="LibraryBook"
-                component={LibraryBook}
-                options={{
-                    title: 'Library books',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="LibraryBookDetail"
-                component={LibraryBookDetail}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="AddBook"
-                component={AddBook}
-                options={{
-                    title: 'Add Books',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="AddNewBook"
-                component={AddNewBook}
-                options={{
-                    title: 'Add Books',
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="AddBulkBook"
-                component={AddBulkBook}
-                options={{
-                    title: 'Bulk Add Books',
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="DownloadReport"
-                component={DownloadReport}
-                options={{
-                    title: 'Download Report',
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="AssignedUserDetail"
-                component={AssignedUserDetail}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="PTMLecture"
-                component={PTMLecture}
-                options={{
-                    title: 'PTM/Lecture',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="UpcomingPtmLec"
-                component={UpcomingPtmLec}
-                options={{
-                    title: 'Upcoming',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="HistoryPtmLec"
-                component={HistoryPtmLec}
-                options={{
-                    title: 'History',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="StudentAttendance"
-                component={StudentAttendance}
-                options={{
-                    title: 'Attendance',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="StudentAttendanceShow"
-                component={StudentAttendanceShow}
-                options={{
-                    title: 'Attendance',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="StudentYoutube"
-                component={StudentYoutube}
-                options={{
-                    title: 'Youtube',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="StudentEvent"
-                component={StudentEvent}
-                options={{
-                    title: 'Event',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="StudentNewEvent"
-                component={StudentNewEvent}
-                options={{
-                    title: 'New Event',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="StudentEventDetail"
-                component={StudentEventDetail}
-                options={{
-                    title: 'New Event',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="Feeds"
-                component={Feeds}
-                options={{
-                    title: 'Feeds',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-
-            <HomeStack.Screen
-                name="Certificate"
-                component={Certificate}
-                options={{
-                    title: 'Certificate',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-
-            <HomeStack.Screen
-                name="ProvideCertificate"
-                component={ProvideCertificate}
-                options={{
-                    title: 'Provide Certificate',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="CertificateHistory"
-                component={CertificateHistory}
-                options={{
-                    title: 'History',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="CertificateHistoryDetail"
-                component={CertificateHistoryDetail}
-                options={{
-                    title: 'History',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="StudyMaterial"
-                component={StudyMaterial}
-                options={{
-                    title: 'Study Material',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="ShareVideo"
-                component={ShareVideo}
-                options={{
-                    title: 'Share Video',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                    headerRight: () => (
-                        <View style={{ flexDirection: 'row' }}>
-                            <TouchableOpacity
-                                style={{ marginTop: 5 }}
-                                onPress={() => {
-                                    navigation.navigate('AddVideo');
-                                }}>
-                                <AntDesign name="pluscircle" size={25} color={COLORS.bg} />
-                            </TouchableOpacity>
-                        </View>
-                    ),
-                }}
-            />
-            <HomeStack.Screen
-                name="AddVideo"
-                component={AddVideo}
-                options={{
-                    title: 'Post Video',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="ShareDocument"
-                component={ShareDocument}
-                options={{
-                    title: 'Share Document',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                    headerRight: () => (
-                        <View style={{ flexDirection: 'row' }}>
-                            <TouchableOpacity
-                                style={{ marginTop: 5 }}
-                                onPress={() => {
-                                    navigation.navigate('AddDocument');
-                                }}>
-                                <AntDesign name="pluscircle" size={25} color={COLORS.bg} />
-                            </TouchableOpacity>
-                        </View>
-                    ),
-                }}
-            />
-            <HomeStack.Screen
-                name="AddDocument"
-                component={AddDocument}
-                options={{
-                    title: 'Post Files  ',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="ShareImage"
-                component={ShareImage}
-                options={{
-                    title: 'Share Image',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                    headerRight: () => (
-                        <View style={{ flexDirection: 'row' }}>
-                            <TouchableOpacity
-                                style={{ marginTop: 5 }}
-                                onPress={() => {
-                                    navigation.navigate('AddMaterialImage');
-                                }}>
-                                <AntDesign name="pluscircle" size={25} color={COLORS.bg} />
-                            </TouchableOpacity>
-                        </View>
-                    ),
-                }}
-            />
-            <HomeStack.Screen
-                name="AddMaterialImage"
-                component={AddMaterialImage}
-                options={{
-                    title: 'Post Image',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="ShareLink"
-                component={ShareLink}
-                options={{
-                    title: 'Share Link',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                    headerRight: () => (
-                        <View style={{ flexDirection: 'row' }}>
-                            <TouchableOpacity
-                                style={{ marginTop: 5 }}
-                                onPress={() => {
-                                    navigation.navigate('AddLink');
-                                }}>
-                                <AntDesign name="pluscircle" size={25} color={COLORS.bg} />
-                            </TouchableOpacity>
-                        </View>
-                    ),
-                }}
-            />
-            <HomeStack.Screen
-                name="AddLink"
-                component={AddLink}
-                options={{
-                    title: 'Post Link',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="Result"
-                component={Result}
-                options={{
-                    title: 'Result',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="ClassRoomResult"
-                component={ClassRoomResult}
-                options={{
-                    title: 'My Classroom Result',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="ClassResult"
-                component={ClassResult}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="MarksAllotement"
-                component={MarksAllotement}
-                options={{
-                    title: 'Give Marks',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="AllotementDetail"
-                component={AllotementDetail}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="Request"
-                component={Request}
-                options={{
-                    title: 'Request Access',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="RequestAccess"
-                component={RequestAccess}
-                options={{
-                    title: 'Request Access',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="RequestDetail"
-                component={RequestDetail}
-                options={{
-                    title: 'Request Access',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="RequestHistory"
-                component={RequestHistory}
-                options={{
-                    title: 'History',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="RequestHistoryDetail"
-                component={RequestHistoryDetail}
-                options={{
-                    title: 'History',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="Gallery"
-                component={Gallery}
-                options={{
-                    title: 'Gallery',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                    headerRight: () => (
-                        <View style={{ flexDirection: 'row' }}>
-                            <TouchableOpacity
-                                style={{ marginTop: 5 }}
-                                onPress={() => {
-                                    navigation.navigate('AddImage');
-                                }}>
-                                <AntDesign name="pluscircle" size={25} color={COLORS.bg} />
-                            </TouchableOpacity>
-                        </View>
-                    ),
-                }}
-            />
-            <HomeStack.Screen
-                name="AddImage"
-                component={AddImage}
-                options={{
-                    title: 'New Post',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="ImageDetail"
-                component={ImageDetail}
-                options={{
-                    title: 'Gallery',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-
-            <HomeStack.Screen
-                name="LeaveRequest"
-                component={LeaveRequest}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="Settings"
-                component={Settings}
-                options={{
-                    title: 'Settings',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="TeachersProfile"
-                component={TeachersProfile}
-                options={{
-                    title: 'My Profile',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="Security"
-                component={Security}
-                options={{
-                    title: 'Security',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="CreateMPIN"
-                component={CreateMPIN}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="ChangeMPIN"
-                component={ChangeMPIN}
-                options={{
-                    title: 'Change MPIN',
-
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="MPINSet"
-                component={MPINSet}
-                options={{
-                    title: 'MPIN',
-                    headerShown: false,
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="MPINVerification"
-                component={MPINVerification}
-                options={{
-                    title: 'MPIN',
-                    headerShown: false,
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="MPINDisable"
-                component={MPINDisable}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="ForgetPIN"
-                component={ForgetPIN}
-                options={{
-                    title: 'Forget MPIN',
-                    headerShown: false,
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="ForgetMPIN"
-                component={ForgetMPIN}
-                options={{
-                    title: 'Forget MPIN',
-                    headerShown: false,
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="Complaint"
-                component={Complaint}
-                options={{
-                    title: 'Complaint',
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="AssignComplaint"
-                component={AssignComplaint}
-                options={{
-                    title: 'Complaint',
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="CreateComplaint"
-                component={CreateComplaint}
-                options={{
-                    title: 'Complaint',
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="ComplaintHistory"
-                component={ComplaintHistory}
-                options={{
-                    title: 'History',
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="PayRoll"
-                component={PayRoll}
-                options={{
-                    title: 'Payroll',
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="SalarySlip"
-                component={SalarySlip}
-                options={{
-                    title: 'Salary Slip',
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="AdvanceSalary"
-                component={AdvanceSalary}
-                options={{
-                    title: 'Advance Salary',
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="Chat"
-                component={Chat}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="ChatDetail"
-                component={ChatDetail}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="PhoneCall"
-                component={PhoneCall}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="VideoCall"
-                component={VideoCall}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="UserDetails"
-                component={UserDetails}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="Images"
-                component={Images}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="GroupUserDetail"
-                component={GroupUserDetail}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="UserProfile"
-                component={UserProfile}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="AttendRegister"
-                component={AttendRegister}
-                options={{
-                    title: 'Attendance Register',
-                    headerStyle: {
-                        backgroundColor: 'black',
-                    },
-                    headerTintColor: 'white',
-                }}
-            />
-            <HomeStack.Screen
-                name="AttendRegisterDetail"
-                component={AttendRegisterDetail}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="AttendRegisterHistory"
-                component={AttendRegisterHistory}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="TeacherAttendance"
-                component={TeacherAttendance}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="TeacherAbsent"
-                component={TeacherAbsent}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="TeacherHoliday"
-                component={TeacherHoliday}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="TeacherLeaveApply"
-                component={TeacherLeaveApply}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="TeacherApplyHistory"
-                component={TeacherApplyHistory}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="TeacherLeaveSuccess"
-                component={TeacherLeaveSuccess}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="About"
-                component={About}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="AddExperience"
-                component={AddExperience}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="EditExperience"
-                component={EditExperience}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="AddEducation"
-                component={AddEducation}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="EditEducation"
-                component={EditEducation}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="AddRewards"
-                component={AddRewards}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="EditRewards"
-                component={EditRewards}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="Admin"
-                component={Admin}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="TeacherList"
-                component={TeacherList}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <HomeStack.Screen
-                name="Notification"
-                component={Notification}
-                options={{
-                    headerShown: false,
-                }}
-            />
-        </HomeStack.Navigator>
-    );
+      <HomeStack.Screen
+        name="Document"
+        component={Document}
+        options={{
+          title: 'Document',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="Assign"
+        component={Assign}
+        options={{
+          title: "Book's Assign",
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="Collection"
+        component={Collection}
+        options={{
+          title: 'Collection',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="HistoryLib"
+        component={HistoryLib}
+        options={{
+          title: "Book's History",
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="HistoryDetail"
+        component={HistoryDetail}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="Exam"
+        component={Exam}
+        options={{
+          title: 'Exam',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="CreateTest"
+        component={CreateTest}
+        options={{
+          title: 'CreateTest',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="ManageTest"
+        component={ManageTest}
+        options={{
+          title: 'ManageTest',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="Event"
+        component={Event}
+        options={{
+          title: 'Event',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="CreateEvent"
+        component={CreateEvent}
+        options={{
+          title: 'Create Event',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="EditEvent"
+        component={EditEvent}
+        options={{
+          title: 'Edit Event',
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="HistoryEvent"
+        component={HistoryEvent}
+        options={{
+          title: "Event's History",
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="EventDetailHistory"
+        component={EventDetailHistory}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="Library"
+        component={Library}
+        options={{
+          title: 'Library',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="LeaveApp"
+        component={LeaveApp}
+        options={{
+          title: 'Leave',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="HistoryLeave"
+        component={HistoryLeave}
+        options={{
+          title: 'Leave',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="HistoryLeaveDetail"
+        component={HistoryLeaveDetail}
+        options={{
+          title: 'Leave',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="Ptm"
+        component={Ptm}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="CreateMeeting"
+        component={CreateMeeting}
+        options={{
+          title: 'PTM',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="PTMHistory"
+        component={PTMHistory}
+        options={{
+          title: 'History',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="PTMHistoryDetail"
+        component={PTMHistoryDetail}
+        options={{
+          title: 'Exam',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="UpcomingPtm"
+        component={UpcomingPtm}
+        options={{
+          title: 'UpcomingPTM',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="UpcomingDetailPtm"
+        component={UpcomingDetailPtm}
+        options={{
+          title: 'UpcomingPTM',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="AttendancePtm"
+        component={AttendancePtm}
+        options={{
+          title: 'Attendance',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+
+      <HomeStack.Screen
+        name="Announcement"
+        component={Announcement}
+        options={{
+          title: 'Notice',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="HistoryAnnouncement"
+        component={HistoryAnnouncement}
+        options={{
+          title: 'History',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="HistoryDetailAnn"
+        component={HistoryDetailAnn}
+        options={{
+          title: 'History',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="CreateAnnouncement"
+        component={CreateAnnouncement}
+        options={{
+          title: 'Create',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="Lecture"
+        component={Lecture}
+        options={{
+          title: 'Lecture',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="CreateLecture"
+        component={CreateLecture}
+        options={{
+          title: 'Lecture',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="LectureCarousel"
+        component={LectureCarousel}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="UpComingLecture"
+        component={UpComingLecture}
+        options={{
+          title: 'UpComingLecture',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="UpdateLecture"
+        component={UpdateLecture}
+        options={{
+          title: 'UpComingLecture',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="UpComingDetailLecture"
+        component={UpComingDetailLecture}
+        options={{
+          title: 'UpComingLecture',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="HistoryLecture"
+        component={HistoryLecture}
+        options={{
+          title: 'History',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="LecHistory"
+        component={LecHistory}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="TimeTable"
+        component={TimeTable}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="Period"
+        component={Period}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="TimeTableHistroy"
+        component={TimeTableHistroy}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="PeriodHistory"
+        component={PeriodHistory}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="McqTest"
+        component={McqTest}
+        options={{
+          title: 'Test',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="CreateMcqTest"
+        component={CreateMcqTest}
+        options={{
+          title: 'Test',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="EditTest"
+        component={EditTest}
+        options={{
+          title: 'Test',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="SubmittedTest"
+        component={SubmittedTest}
+        options={{
+          title: 'My Test',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="SubmittedDetailTest"
+        component={SubmittedDetailTest}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="StudentTestDetail"
+        component={StudentTestDetail}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="HistoryTest"
+        component={HistoryTest}
+        options={{
+          title: 'History',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="HistoryDetailTest"
+        component={HistoryDetailTest}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="TestResultMcqs"
+        component={TestResultMcqs}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <HomeStack.Screen
+        name="AttendanceShow"
+        component={AttendanceShow}
+        options={{
+          title: 'Attendance',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="TakeAttendance"
+        component={TakeAttendance}
+        options={{
+          title: 'Attendance',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="HistoryAttendance"
+        component={HistoryAttendance}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="HistoryAtten"
+        component={HistoryAtten}
+        options={{
+          title: 'History',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="ReportAtten"
+        component={ReportAtten}
+        options={{
+          title: 'Report',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="ExamAttendance"
+        component={ExamAttendance}
+        options={{
+          title: 'Exam Attendance',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="TakeExamAttendance"
+        component={TakeExamAttendance}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="ExamAttenReport"
+        component={ExamAttenReport}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="MyClassRoomAtten"
+        component={MyClassRoomAtten}
+        options={{
+          title: 'My Classroom Attendance',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="ClassSubject"
+        component={ClassSubject}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="SubjectReport"
+        component={SubjectReport}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="MySubjectAtten"
+        component={MySubjectAtten}
+        options={{
+          title: 'My Subject Attendance',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+
+      <HomeStack.Screen
+        name="ReportAttendance"
+        component={ReportAttendance}
+        options={{
+          title: 'History',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="Assignment"
+        component={Assignment}
+        options={{
+          title: 'Assignment',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="CreateAss"
+        component={CreateAss}
+        options={{
+          title: 'Create',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="UserAssignmentDetail"
+        component={UserAssignmentDetail}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="UpdateAss"
+        component={UpdateAss}
+        options={{
+          title: 'Edit Assignment',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="SubmittedAss"
+        component={SubmittedAss}
+        options={{
+          title: 'My Assigment',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="SubmittedDetailAss"
+        component={SubmittedDetailAss}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="HistoryAss"
+        component={HistoryAss}
+        options={{
+          title: 'History',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="HistoryDetailAss"
+        component={HistoryDetailAss}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="HistoryuserAssignmentDetail"
+        component={HistoryuserAssignmentDetail}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="Youtube"
+        component={Youtube}
+        options={{
+          title: 'Youtube',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="ShareYtube"
+        component={ShareYtube}
+        options={{
+          title: 'Share',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="HistoryYtube"
+        component={HistoryYtube}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="BookDetail"
+        component={BookDetail}
+        options={{
+          title: "Book's Assign",
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="AssignBook"
+        component={AssignBook}
+        options={{
+          title: "Book's Assign",
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="CollectionDetail"
+        component={CollectionDetail}
+        options={{
+          title: 'Collection',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="FeesTransaction"
+        component={FeesTransaction}
+        options={{
+          title: 'FeesTransaction',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="UserTrans"
+        component={UserTrans}
+        options={{
+          title: 'FeesTransaction',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="FeesDetail"
+        component={FeesDetail}
+        options={{
+          title: 'FeesTransaction',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="HistoryTrans"
+        component={HistoryTrans}
+        options={{
+          title: 'History',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="HistoryTransDetail"
+        component={HistoryTransDetail}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="FeeUserDetail"
+        component={FeeUserDetail}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="StudentClient"
+        component={StudentClient}
+        options={{
+          title: 'StudentClient',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="ApplyLeave"
+        component={ApplyLeave}
+        options={{
+          title: 'Apply',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="LeaveStudent"
+        component={LeaveStudent}
+        options={{
+          title: 'Leave Application',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="HistoryLeaveStudent"
+        component={HistoryLeaveStudent}
+        options={{
+          title: 'History',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="HistoryLeaveDetailStudent"
+        component={HistoryLeaveDetailStudent}
+        options={{
+          title: 'History',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="StudentLibrary"
+        component={StudentLibrary}
+        options={{
+          title: 'Library',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="StudentBookAssigned"
+        component={StudentBookAssigned}
+        options={{
+          title: "Book's Assign",
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="StudentLibHistory"
+        component={StudentLibHistory}
+        options={{
+          title: 'History',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="LibraryBook"
+        component={LibraryBook}
+        options={{
+          title: 'Library books',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="LibraryBookDetail"
+        component={LibraryBookDetail}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="AddBook"
+        component={AddBook}
+        options={{
+          title: 'Add Books',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="AddNewBook"
+        component={AddNewBook}
+        options={{
+          title: 'Add Books',
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="AddBulkBook"
+        component={AddBulkBook}
+        options={{
+          title: 'Bulk Add Books',
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="DownloadReport"
+        component={DownloadReport}
+        options={{
+          title: 'Download Report',
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="AssignedUserDetail"
+        component={AssignedUserDetail}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="PTMLecture"
+        component={PTMLecture}
+        options={{
+          title: 'PTM/Lecture',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="UpcomingPtmLec"
+        component={UpcomingPtmLec}
+        options={{
+          title: 'Upcoming',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="HistoryPtmLec"
+        component={HistoryPtmLec}
+        options={{
+          title: 'History',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="StudentAttendance"
+        component={StudentAttendance}
+        options={{
+          title: 'Attendance',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="StudentAttendanceShow"
+        component={StudentAttendanceShow}
+        options={{
+          title: 'Attendance',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="StudentYoutube"
+        component={StudentYoutube}
+        options={{
+          title: 'Youtube',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="StudentEvent"
+        component={StudentEvent}
+        options={{
+          title: 'Event',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="StudentNewEvent"
+        component={StudentNewEvent}
+        options={{
+          title: 'New Event',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="StudentEventDetail"
+        component={StudentEventDetail}
+        options={{
+          title: 'New Event',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="Feeds"
+        component={Feeds}
+        options={{
+          title: 'Feeds',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+
+      <HomeStack.Screen
+        name="Certificate"
+        component={Certificate}
+        options={{
+          title: 'Certificate',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+
+      <HomeStack.Screen
+        name="ProvideCertificate"
+        component={ProvideCertificate}
+        options={{
+          title: 'Provide Certificate',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="CertificateHistory"
+        component={CertificateHistory}
+        options={{
+          title: 'History',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="CertificateHistoryDetail"
+        component={CertificateHistoryDetail}
+        options={{
+          title: 'History',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="StudyMaterial"
+        component={StudyMaterial}
+        options={{
+          title: 'Study Material',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="ShareVideo"
+        component={ShareVideo}
+        options={{
+          title: 'Share Video',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+          headerRight: () => (
+            <View style={{flexDirection: 'row'}}>
+              <TouchableOpacity
+                style={{marginTop: 5}}
+                onPress={() => {
+                  navigation.navigate('AddVideo');
+                }}>
+                <AntDesign name="pluscircle" size={25} color={COLORS.bg} />
+              </TouchableOpacity>
+            </View>
+          ),
+        }}
+      />
+      <HomeStack.Screen
+        name="AddVideo"
+        component={AddVideo}
+        options={{
+          title: 'Post Video',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="ShareDocument"
+        component={ShareDocument}
+        options={{
+          title: 'Share Document',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+          headerRight: () => (
+            <View style={{flexDirection: 'row'}}>
+              <TouchableOpacity
+                style={{marginTop: 5}}
+                onPress={() => {
+                  navigation.navigate('AddDocument');
+                }}>
+                <AntDesign name="pluscircle" size={25} color={COLORS.bg} />
+              </TouchableOpacity>
+            </View>
+          ),
+        }}
+      />
+      <HomeStack.Screen
+        name="AddDocument"
+        component={AddDocument}
+        options={{
+          title: 'Post Files  ',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="ShareImage"
+        component={ShareImage}
+        options={{
+          title: 'Share Image',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+          headerRight: () => (
+            <View style={{flexDirection: 'row'}}>
+              <TouchableOpacity
+                style={{marginTop: 5}}
+                onPress={() => {
+                  navigation.navigate('AddMaterialImage');
+                }}>
+                <AntDesign name="pluscircle" size={25} color={COLORS.bg} />
+              </TouchableOpacity>
+            </View>
+          ),
+        }}
+      />
+      <HomeStack.Screen
+        name="AddMaterialImage"
+        component={AddMaterialImage}
+        options={{
+          title: 'Post Image',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="ShareLink"
+        component={ShareLink}
+        options={{
+          title: 'Share Link',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+          headerRight: () => (
+            <View style={{flexDirection: 'row'}}>
+              <TouchableOpacity
+                style={{marginTop: 5}}
+                onPress={() => {
+                  navigation.navigate('AddLink');
+                }}>
+                <AntDesign name="pluscircle" size={25} color={COLORS.bg} />
+              </TouchableOpacity>
+            </View>
+          ),
+        }}
+      />
+      <HomeStack.Screen
+        name="AddLink"
+        component={AddLink}
+        options={{
+          title: 'Post Link',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="Result"
+        component={Result}
+        options={{
+          title: 'Result',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="ClassRoomResult"
+        component={ClassRoomResult}
+        options={{
+          title: 'My Classroom Result',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="ClassResult"
+        component={ClassResult}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="MarksAllotement"
+        component={MarksAllotement}
+        options={{
+          title: 'Give Marks',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="AllotementDetail"
+        component={AllotementDetail}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="Request"
+        component={Request}
+        options={{
+          title: 'Request Access',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="RequestAccess"
+        component={RequestAccess}
+        options={{
+          title: 'Request Access',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="RequestDetail"
+        component={RequestDetail}
+        options={{
+          title: 'Request Access',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="RequestHistory"
+        component={RequestHistory}
+        options={{
+          title: 'History',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="RequestHistoryDetail"
+        component={RequestHistoryDetail}
+        options={{
+          title: 'History',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="Gallery"
+        component={Gallery}
+        options={{
+          title: 'Gallery',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+          headerRight: () => (
+            <View style={{flexDirection: 'row'}}>
+              <TouchableOpacity
+                style={{marginTop: 5}}
+                onPress={() => {
+                  navigation.navigate('AddImage');
+                }}>
+                <AntDesign name="pluscircle" size={25} color={COLORS.bg} />
+              </TouchableOpacity>
+            </View>
+          ),
+        }}
+      />
+      <HomeStack.Screen
+        name="AddImage"
+        component={AddImage}
+        options={{
+          title: 'New Post',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="ImageDetail"
+        component={ImageDetail}
+        options={{
+          title: 'Gallery',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+
+      <HomeStack.Screen
+        name="LeaveRequest"
+        component={LeaveRequest}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="Settings"
+        component={Settings}
+        options={{
+          title: 'Settings',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="TeachersProfile"
+        component={TeachersProfile}
+        options={{
+          title: 'My Profile',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="Security"
+        component={Security}
+        options={{
+          title: 'Security',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="CreateMPIN"
+        component={CreateMPIN}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="ChangeMPIN"
+        component={ChangeMPIN}
+        options={{
+          title: 'Change MPIN',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="MPINSet"
+        component={MPINSet}
+        options={{
+          title: 'MPIN',
+          headerShown: false,
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="MPINVerification"
+        component={MPINVerification}
+        options={{
+          title: 'MPIN',
+          headerShown: false,
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="MPINDisable"
+        component={MPINDisable}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="ForgetPIN"
+        component={ForgetPIN}
+        options={{
+          title: 'Forget MPIN',
+          headerShown: false,
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="ForgetMPIN"
+        component={ForgetMPIN}
+        options={{
+          title: 'Forget MPIN',
+          headerShown: false,
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="Complaint"
+        component={Complaint}
+        options={{
+          title: 'Complaint',
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="AssignComplaint"
+        component={AssignComplaint}
+        options={{
+          title: 'Complaint',
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="CreateComplaint"
+        component={CreateComplaint}
+        options={{
+          title: 'Complaint',
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="ComplaintHistory"
+        component={ComplaintHistory}
+        options={{
+          title: 'History',
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="PayRoll"
+        component={PayRoll}
+        options={{
+          title: 'Payroll',
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="SalarySlip"
+        component={SalarySlip}
+        options={{
+          title: 'Salary Slip',
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="AdvanceSalary"
+        component={AdvanceSalary}
+        options={{
+          title: 'Advance Salary',
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="Chat"
+        component={Chat}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="ChatDetail"
+        component={ChatDetail}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="PhoneCall"
+        component={PhoneCall}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="VideoCall"
+        component={VideoCall}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="UserDetails"
+        component={UserDetails}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="Images"
+        component={Images}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="GroupUserDetail"
+        component={GroupUserDetail}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="UserProfile"
+        component={UserProfile}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="AttendRegister"
+        component={AttendRegister}
+        options={{
+          title: 'Attendance Register',
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="AttendRegisterDetail"
+        component={AttendRegisterDetail}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="AttendRegisterHistory"
+        component={AttendRegisterHistory}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="TeacherAttendance"
+        component={TeacherAttendance}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="TeacherAbsent"
+        component={TeacherAbsent}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="TeacherHoliday"
+        component={TeacherHoliday}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="TeacherLeaveApply"
+        component={TeacherLeaveApply}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="TeacherApplyHistory"
+        component={TeacherApplyHistory}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="TeacherLeaveSuccess"
+        component={TeacherLeaveSuccess}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="About"
+        component={About}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="AddExperience"
+        component={AddExperience}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="EditExperience"
+        component={EditExperience}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="AddEducation"
+        component={AddEducation}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="EditEducation"
+        component={EditEducation}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="AddRewards"
+        component={AddRewards}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="EditRewards"
+        component={EditRewards}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="Admin"
+        component={Admin}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="TeacherList"
+        component={TeacherList}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="Notification"
+        component={Notification}
+        options={{
+          headerShown: false,
+        }}
+      />
+    </HomeStack.Navigator>
+  );
 };
 
 //  -------------Student Tab bar-----------------
