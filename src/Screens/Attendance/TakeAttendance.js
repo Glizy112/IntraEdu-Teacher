@@ -605,56 +605,6 @@ const TakeAttendance = props => {
                           width: '50%',
                           marginTop: 2,
                         }}>
-                        <View style={{marginRight: 10}}>
-                          <Text
-                            style={[
-                              paraGray.darkpara,
-                              {
-                                fontSize: 11,
-                                color: '#97A7C3',
-                                textAlign: 'left',
-                              },
-                            ]}>
-                            Subject
-                          </Text>
-                          <Text
-                            style={[
-                              paraGray.darkpara,
-                              {
-                                fontSize: 12,
-                                color: 'black',
-                                textAlign: 'center',
-                                marginTop: 2,
-                              },
-                            ]}>
-                            English
-                          </Text>
-                        </View>
-                        <View style={{marginRight: 10}}>
-                          <Text
-                            style={[
-                              paraGray.darkpara,
-                              {
-                                fontSize: 11,
-                                color: '#97A7C3',
-                                textAlign: 'left',
-                              },
-                            ]}>
-                            Class
-                          </Text>
-                          <Text
-                            style={[
-                              paraGray.darkpara,
-                              {
-                                fontSize: 12,
-                                color: 'black',
-                                textAlign: 'center',
-                                marginTop: 2,
-                              },
-                            ]}>
-                            6th-A
-                          </Text>
-                        </View>
                         <View>
                           <Text
                             style={[
@@ -665,19 +615,7 @@ const TakeAttendance = props => {
                                 textAlign: 'left',
                               },
                             ]}>
-                            Roll NO
-                          </Text>
-                          <Text
-                            style={[
-                              paraGray.darkpara,
-                              {
-                                fontSize: 12,
-                                color: 'black',
-                                textAlign: 'center',
-                                marginTop: 2,
-                              },
-                            ]}>
-                            {item.roll_no}
+                            Roll NO- {item.roll_no}
                           </Text>
                         </View>
                       </View>
@@ -751,7 +689,7 @@ const TakeAttendance = props => {
                       //borderWidth: 1,
                       width: '90%',
                       alignSelf: 'center',
-                      marginBottom: 10,
+                      marginBottom: 3,
                     }}>
                     <View>
                       <View>
@@ -765,81 +703,19 @@ const TakeAttendance = props => {
                           justifyContent: 'space-between',
                           alignItems: 'center',
                           width: '50%',
-                          marginTop: 2,
+                          marginTop: 10,
                         }}>
-                        <View style={{marginRight: 10}}>
-                          <Text
-                            style={[
-                              paraGray.darkpara,
-                              {
-                                fontSize: 11,
-                                color: '#97A7C3',
-                                textAlign: 'left',
-                              },
-                            ]}>
-                            Subject
-                          </Text>
-                          <Text
-                            style={[
-                              paraGray.darkpara,
-                              {
-                                fontSize: 12,
-                                color: 'black',
-                                textAlign: 'center',
-                                marginTop: 2,
-                              },
-                            ]}>
-                            English
-                          </Text>
-                        </View>
-                        <View style={{marginRight: 10}}>
-                          <Text
-                            style={[
-                              paraGray.darkpara,
-                              {
-                                fontSize: 11,
-                                color: '#97A7C3',
-                                textAlign: 'left',
-                              },
-                            ]}>
-                            Class
-                          </Text>
-                          <Text
-                            style={[
-                              paraGray.darkpara,
-                              {
-                                fontSize: 12,
-                                color: 'black',
-                                textAlign: 'center',
-                                marginTop: 2,
-                              },
-                            ]}>
-                            6th-A
-                          </Text>
-                        </View>
                         <View>
                           <Text
                             style={[
                               paraGray.darkpara,
                               {
-                                fontSize: 11,
+                                fontSize: 12,
                                 color: '#97A7C3',
                                 textAlign: 'left',
                               },
                             ]}>
-                            Roll NO
-                          </Text>
-                          <Text
-                            style={[
-                              paraGray.darkpara,
-                              {
-                                fontSize: 12,
-                                color: 'black',
-                                textAlign: 'center',
-                                marginTop: 2,
-                              },
-                            ]}>
-                            {item.roll_no}
+                            Roll NO- {item.roll_no}
                           </Text>
                         </View>
                       </View>
