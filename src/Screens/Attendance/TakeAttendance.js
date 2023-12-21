@@ -9,6 +9,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Alert,
+  FlatList,
 } from 'react-native';
 import {RadioButton} from 'react-native-paper';
 import {useSelector, useDispatch} from 'react-redux';
@@ -25,12 +26,20 @@ import {COLORS} from '../../theme/Colors';
 import {paraGray} from '../../theme/styles/Base';
 import moment from 'moment';
 
+import {CheckBox} from '@rneui/themed';
+
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import {Item} from 'react-native-paper/lib/typescript/components/List/List';
+import Search from '../../Components/Search';
+//   return (
+
 const TakeAttendance = props => {
   const SENDER_NUMBER = '9082111479';
   const APIKEY = 'SGhrvzPsC3SW9RxcoLfEjEVVJrHOMA70';
   // const SENDER_NUMBER = '9824072880';
   const {subjectvalue, classvalue, sectionvalue, subjectname} =
     props.route.params;
+  //console.log('Params', props.route.params);
   const dispatch = useDispatch();
   const {userinfo, userid, username, showmodal, schoolid} = useSelector(
     state => state.userReducer,
@@ -41,7 +50,10 @@ const TakeAttendance = props => {
   const [getdata, setGetdata] = useState([]);
   const [date, setDate] = useState(null);
   const [time, setTime] = useState(null);
+  const [checked, setChecked] = useState(true);
+
   const [getAttendance, setAttendance] = useState([]);
+  const [studentFilter, setStudentFilter] = useState([]);
   const demo = [
     {phone: '9082111479', attend: 'P', name: 'Vikash'},
     // {phone: '9714288151', attend: 'P', name: 'Ayush'},
@@ -189,139 +201,702 @@ const TakeAttendance = props => {
     getapiData();
   }, []);
 
+  //     <View style={styles.container}>
+  //       {loading == true && <Spinner visible={load} />}
+  //       <ScrollView
+  //         showsVerticalScrollIndicator={false}
+  //         refreshControl={
+  //           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+  //         }>
+  //         <View style={styles.rowcontainer}>
+  //           <View>
+  //             <Text style={styles.rowTxt}>Present</Text>
+  //           </View>
+  //           <View
+  //             style={{
+  //               flex: 1,
+  //               justifyContent: 'center',
+  //               marginRight: 20,
+  //             }}>
+  //             <Text style={[styles.rowTxt, {textAlign: 'center'}]}>
+  //               Student Name
+  //             </Text>
+  //           </View>
+  //           <View>
+  //             <Text style={styles.rowTxt}>Absent</Text>
+  //           </View>
+  //         </View>
+
+  //         {getdata.map(
+  //           (user, index) =>
+  //             getAttendance.length > 0 && (
+  //               <View style={styles.dataview} key={index}>
+  //                 <View style={styles.radio}>
+  //                   <View
+  //                     style={{
+  //                       // flex: 1,
+  //                       alignItems: 'center',
+  //                       justifyContent: 'center',
+  //                     }}>
+  //                     <RadioButton
+  //                       status={
+  //                         getAttendance[index].attendance === 'P'
+  //                           ? 'checked'
+  //                           : 'unchecked'
+  //                       }
+  //                       onPress={() => {
+  //                         let list = [...getAttendance];
+  //                         var json_data = {
+  //                           id: user.studentId,
+  //                           status: 0,
+  //                           attendance: 'P',
+  //                         };
+  //                         list[index] = json_data;
+  //                         setAttendance(list);
+  //                       }}
+  //                     />
+  //                   </View>
+  //                   <View
+  //                     style={{
+  //                       flex: 1,
+  //                       justifyContent: 'center',
+  //                       alignItems: 'center',
+  //                     }}>
+  //                     <Text style={styles.datatxt}>{user.name}</Text>
+  //                   </View>
+  //                   <View
+  //                     style={{
+  //                       alignItems: 'center',
+  //                       justifyContent: 'center',
+  //                     }}>
+  //                     <RadioButton
+  //                       status={
+  //                         getAttendance[index].attendance === 'A'
+  //                           ? 'checked'
+  //                           : 'unchecked'
+  //                       }
+  //                       onPress={() => {
+  //                         let list = [...getAttendance];
+  //                         var json_data = {
+  //                           id: user.studentId,
+  //                           status: 0,
+  //                           attendance: 'A',
+  //                         };
+  //                         list[index] = json_data;
+  //                         setAttendance(list);
+  //                       }}
+  //                     />
+  //                   </View>
+  //                 </View>
+  //               </View>
+  //             ),
+  //         )}
+  //         {getdata != '' && (
+  //           <View>
+  //             <TouchableOpacity
+  //               style={{
+  //                 flexDirection: 'row',
+  //                 alignItems: 'center',
+  //                 backgroundColor: COLORS.bluee,
+  //                 width: '50%',
+  //                 height: 50,
+  //                 alignSelf: 'center',
+  //                 marginTop: '20%',
+  //                 marginBottom: 30,
+  //                 borderRadius: 22,
+  //                 justifyContent: 'center',
+  //               }}
+  //               onPress={() => {
+  //                 submitAttendance();
+  //               }}>
+  //               <Text
+  //                 style={{
+  //                   color: '#FFFFFF',
+  //                   fontSize: 15,
+  //                   fontFamily: 'Montserrat-SemiBold',
+  //                 }}>
+  //                 Submit Attendance
+  //               </Text>
+  //             </TouchableOpacity>
+  //           </View>
+  //         )}
+  //         {getdata == '' && loading == false && (
+  //           <View
+  //             style={{
+  //               flex: 1,
+  //               marginBottom: 80,
+  //               alignSelf: 'center',
+  //               marginTop: 100,
+  //             }}>
+  //             <Text style={[paraGray.darklarge, {textAlign: 'center'}]}>
+  //               NO Data Found
+  //             </Text>
+  //           </View>
+  //         )}
+  //       </ScrollView>
+  //     </View>
+  //   );
+
   return (
-    <View style={styles.container}>
-      {loading == true && <Spinner visible={load} />}
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }>
-        <View style={styles.rowcontainer}>
-          <View>
-            <Text style={styles.rowTxt}>Present</Text>
+    <View style={{flex: 1, backgroundColor: 'white'}}>
+      <ScrollView>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            height: 50,
+            justifyContent: 'space-between',
+
+            paddingHorizontal: 10,
+            borderBottomColor: '#275CE0',
+            borderBottomWidth: 1,
+          }}>
+          <View
+            style={{
+              alignItems: 'flex-start',
+            }}>
+            <TouchableOpacity
+              style={{
+                backgroundColor: COLORS.white,
+                borderRadius: 20,
+              }}
+              onPress={() =>
+                //   props.navigation.navigate('StudentEdit', {
+                //     studentdetail: studentdetail,
+                //   })
+                props.navigation.goBack()
+              }>
+              <Ionicons
+                style={{marginVertical: 5, paddingHorizontal: 7}}
+                name="arrow-back"
+                size={20}
+                color={COLORS.black}
+              />
+            </TouchableOpacity>
           </View>
           <View
             style={{
               flex: 1,
-              justifyContent: 'center',
-              marginRight: 20,
+              alignItems: 'center',
+              position: 'absolute',
+              left: 0,
+              right: 0,
             }}>
-            <Text style={[styles.rowTxt, {textAlign: 'center'}]}>
-              Student Name
+            <Text style={[paraGray.largebold, {fontSize: 16, color: 'black'}]}>
+              6th A | English
             </Text>
           </View>
-          <View>
-            <Text style={styles.rowTxt}>Absent</Text>
-          </View>
         </View>
+        <Search
+          getdata={getdata}
+          KEYS_TO_FILTERS={['name']}
+          filter={setStudentFilter}
+          mainViewStyle={{borderWidth: 1, borderColor: '#275CE0'}}
+          iconColor={'#385AB1'}
+          placeholder={'Search student name'}
+          placeholderTextColor={'rgba(0, 0, 0, 0.50)'}
+        />
+        <View style={{marginTop: 10}}>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              width: '90%',
+              alignSelf: 'center',
+            }}>
+            <View>
+              <Text
+                style={[
+                  paraGray.largebold,
+                  {fontSize: 12, color: 'rgba(0, 0, 0, 0.60)'},
+                ]}>
+                Filter By
+              </Text>
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}>
+              <Text
+                style={[
+                  paraGray.darkpara,
+                  {marginRight: 11, color: 'rgba(0, 0, 0, 0.60)'},
+                ]}>
+                Mark Present
+              </Text>
+              <Text style={[paraGray.darkpara, {color: 'rgba(0, 0, 0, 0.60)'}]}>
+                Mark Absent
+              </Text>
+            </View>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              width: '90%',
+              alignSelf: 'center',
+            }}>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+                //  alignSelf: 'flex-start',
 
-        {getdata.map(
-          (user, index) =>
-            getAttendance.length > 0 && (
-              <View style={styles.dataview} key={index}>
-                <View style={styles.radio}>
-                  <View
-                    style={{
-                      // flex: 1,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}>
-                    <RadioButton
-                      status={
-                        getAttendance[index].attendance === 'P'
-                          ? 'checked'
-                          : 'unchecked'
-                      }
-                      onPress={() => {
-                        let list = [...getAttendance];
-                        var json_data = {
-                          id: user.studentId,
-                          status: 0,
-                          attendance: 'P',
-                        };
-                        list[index] = json_data;
-                        setAttendance(list);
-                      }}
-                    />
-                  </View>
-                  <View
-                    style={{
-                      flex: 1,
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>
-                    <Text style={styles.datatxt}>{user.name}</Text>
-                  </View>
-                  <View
-                    style={{
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}>
-                    <RadioButton
-                      status={
-                        getAttendance[index].attendance === 'A'
-                          ? 'checked'
-                          : 'unchecked'
-                      }
-                      onPress={() => {
-                        let list = [...getAttendance];
-                        var json_data = {
-                          id: user.studentId,
-                          status: 0,
-                          attendance: 'A',
-                        };
-                        list[index] = json_data;
-                        setAttendance(list);
-                      }}
-                    />
-                  </View>
-                </View>
-              </View>
-            ),
-        )}
-        {getdata != '' && (
-          <View>
-            <TouchableOpacity
+                //              marginBottom: 60,
+              }}>
+              <TouchableOpacity
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  paddingHorizontal: 16,
+                  height: 32,
+                  borderColor: COLORS.primary,
+                  alignSelf: 'center',
+                  borderWidth: 1.2,
+                  marginTop: 15,
+                  borderRadius: 45,
+                  justifyContent: 'center',
+                }}>
+                <Text
+                  style={{
+                    color: COLORS.primary,
+                    fontSize: 14,
+                    fontFamily: 'Montserrat-Medium',
+                  }}>
+                  Present
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  paddingHorizontal: 16,
+                  height: 32,
+                  borderColor: COLORS.red,
+                  alignSelf: 'center',
+                  borderWidth: 1.2,
+                  marginTop: 15,
+                  borderRadius: 45,
+                  justifyContent: 'center',
+                  marginLeft: 16,
+                }}>
+                <Text
+                  style={{
+                    color: COLORS.red,
+                    fontSize: 14,
+                    fontFamily: 'Montserrat-Medium',
+                  }}>
+                  Absent
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <View
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                backgroundColor: COLORS.bluee,
-                width: '50%',
-                height: 50,
+
                 alignSelf: 'center',
-                marginTop: '20%',
-                marginBottom: 30,
-                borderRadius: 22,
-                justifyContent: 'center',
-              }}
-              onPress={() => {
-                submitAttendance();
+                width: '35%',
+                justifyContent: 'space-between',
               }}>
-              <Text
-                style={{
-                  color: '#FFFFFF',
-                  fontSize: 15,
-                  fontFamily: 'Montserrat-SemiBold',
-                }}>
-                Submit Attendance
-              </Text>
-            </TouchableOpacity>
+              <View
+                style={[
+                  paraGray.darkpara,
+                  {marginRight: 11, color: 'rgba(0, 0, 0, 0.60)'},
+                ]}>
+                <CheckBox
+                  checked={checked}
+                  onPress={() => setChecked(!checked)}
+                  // Use ThemeProvider to make change for all checkbox
+                  iconType="material-community"
+                  checkedIcon="checkbox-marked"
+                  uncheckedIcon="checkbox-blank-outline"
+                  uncheckedColor="#275CE0"
+                  checkedColor="#275CE0"
+                  size={30}
+                />
+              </View>
+              <View>
+                <CheckBox
+                  checked={checked}
+                  onPress={() => setChecked(!checked)}
+                  // Use ThemeProvider to make change for all checkbox
+                  iconType="material-community"
+                  checkedIcon="checkbox-marked"
+                  uncheckedIcon="checkbox-blank-outline"
+                  uncheckedColor="#E92020"
+                  checkedColor="#E92020"
+                  size={30}
+                />
+              </View>
+            </View>
           </View>
-        )}
-        {getdata == '' && loading == false && (
+
           <View
             style={{
-              flex: 1,
-              marginBottom: 80,
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              width: '90%',
               alignSelf: 'center',
-              marginTop: 100,
+              marginTop: 20,
             }}>
-            <Text style={[paraGray.darklarge, {textAlign: 'center'}]}>
-              NO Data Found
-            </Text>
+            <View>
+              <Text
+                style={[
+                  paraGray.largebold,
+                  {fontSize: 16, color: 'rgba(0, 0, 0, 0.60)'},
+                ]}>
+                All Students (40)
+              </Text>
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}>
+              <Text
+                style={[
+                  paraGray.darkpara,
+                  {marginRight: 11, color: 'rgba(0, 0, 0, 0.60)'},
+                ]}>
+                Mark Present
+              </Text>
+              <Text style={[paraGray.darkpara, {color: 'rgba(0, 0, 0, 0.60)'}]}>
+                Mark Absent
+              </Text>
+            </View>
           </View>
-        )}
+          {studentFilter.length > 0 && studentFilter ? (
+            <FlatList
+              showsVerticalScrollIndicator={false}
+              data={studentFilter}
+              keyExtractor={item => item.EnrollId}
+              renderItem={({item}) => (
+                <View>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      marginTop: 10,
+                      alignItems: 'center',
+                      // justifyContent: 'center',
+                      //alignSelf: 'center',
+                      //borderWidth: 1,
+                      width: '90%',
+                      alignSelf: 'center',
+                      marginBottom: 10,
+                    }}>
+                    <View>
+                      <View>
+                        <Text style={[paraGray.largebold, {fontSize: 14}]}>
+                          {item.name}
+                        </Text>
+                      </View>
+                      <View
+                        style={{
+                          flexDirection: 'row',
+                          justifyContent: 'space-between',
+                          alignItems: 'center',
+                          width: '50%',
+                          marginTop: 2,
+                        }}>
+                        <View style={{marginRight: 10}}>
+                          <Text
+                            style={[
+                              paraGray.darkpara,
+                              {
+                                fontSize: 11,
+                                color: '#97A7C3',
+                                textAlign: 'left',
+                              },
+                            ]}>
+                            Subject
+                          </Text>
+                          <Text
+                            style={[
+                              paraGray.darkpara,
+                              {
+                                fontSize: 12,
+                                color: 'black',
+                                textAlign: 'center',
+                                marginTop: 2,
+                              },
+                            ]}>
+                            English
+                          </Text>
+                        </View>
+                        <View style={{marginRight: 10}}>
+                          <Text
+                            style={[
+                              paraGray.darkpara,
+                              {
+                                fontSize: 11,
+                                color: '#97A7C3',
+                                textAlign: 'left',
+                              },
+                            ]}>
+                            Class
+                          </Text>
+                          <Text
+                            style={[
+                              paraGray.darkpara,
+                              {
+                                fontSize: 12,
+                                color: 'black',
+                                textAlign: 'center',
+                                marginTop: 2,
+                              },
+                            ]}>
+                            6th-A
+                          </Text>
+                        </View>
+                        <View>
+                          <Text
+                            style={[
+                              paraGray.darkpara,
+                              {
+                                fontSize: 11,
+                                color: '#97A7C3',
+                                textAlign: 'left',
+                              },
+                            ]}>
+                            Roll NO
+                          </Text>
+                          <Text
+                            style={[
+                              paraGray.darkpara,
+                              {
+                                fontSize: 12,
+                                color: 'black',
+                                textAlign: 'center',
+                                marginTop: 2,
+                              },
+                            ]}>
+                            {item.roll_no}
+                          </Text>
+                        </View>
+                      </View>
+                    </View>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        //borderWidth: 1,
+                        width: '35%',
+                        alignSelf: 'center',
+                      }}>
+                      <View
+                        style={[
+                          paraGray.darkpara,
+                          {marginRight: 11, color: 'rgba(0, 0, 0, 0.60)'},
+                        ]}>
+                        <CheckBox
+                          checked={checked}
+                          onPress={() => setChecked(!checked)}
+                          // Use ThemeProvider to make change for all checkbox
+                          iconType="material-community"
+                          checkedIcon="checkbox-marked"
+                          uncheckedIcon="checkbox-blank-outline"
+                          uncheckedColor="#275CE0"
+                          checkedColor="#275CE0"
+                          size={30}
+                        />
+                      </View>
+                      <View>
+                        <CheckBox
+                          checked={checked}
+                          onPress={() => setChecked(!checked)}
+                          // Use ThemeProvider to make change for all checkbox
+                          iconType="material-community"
+                          checkedIcon="checkbox-marked"
+                          uncheckedIcon="checkbox-blank-outline"
+                          uncheckedColor="#E92020"
+                          checkedColor="#E92020"
+                          size={30}
+                        />
+                      </View>
+                    </View>
+                  </View>
+                  <View
+                    style={{
+                      borderBottomWidth: 1,
+                      width: '100%',
+                      marginTop: 5,
+                      borderColor: '#97A7C3',
+                    }}></View>
+                </View>
+              )}
+            />
+          ) : (
+            <FlatList
+              showsVerticalScrollIndicator={false}
+              data={getdata}
+              keyExtractor={item => item.EnrollId}
+              renderItem={({item}) => (
+                <View>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      marginTop: 10,
+                      alignItems: 'center',
+                      // justifyContent: 'center',
+                      //alignSelf: 'center',
+                      //borderWidth: 1,
+                      width: '90%',
+                      alignSelf: 'center',
+                      marginBottom: 10,
+                    }}>
+                    <View>
+                      <View>
+                        <Text style={[paraGray.largebold, {fontSize: 14}]}>
+                          {item.name}
+                        </Text>
+                      </View>
+                      <View
+                        style={{
+                          flexDirection: 'row',
+                          justifyContent: 'space-between',
+                          alignItems: 'center',
+                          width: '50%',
+                          marginTop: 2,
+                        }}>
+                        <View style={{marginRight: 10}}>
+                          <Text
+                            style={[
+                              paraGray.darkpara,
+                              {
+                                fontSize: 11,
+                                color: '#97A7C3',
+                                textAlign: 'left',
+                              },
+                            ]}>
+                            Subject
+                          </Text>
+                          <Text
+                            style={[
+                              paraGray.darkpara,
+                              {
+                                fontSize: 12,
+                                color: 'black',
+                                textAlign: 'center',
+                                marginTop: 2,
+                              },
+                            ]}>
+                            English
+                          </Text>
+                        </View>
+                        <View style={{marginRight: 10}}>
+                          <Text
+                            style={[
+                              paraGray.darkpara,
+                              {
+                                fontSize: 11,
+                                color: '#97A7C3',
+                                textAlign: 'left',
+                              },
+                            ]}>
+                            Class
+                          </Text>
+                          <Text
+                            style={[
+                              paraGray.darkpara,
+                              {
+                                fontSize: 12,
+                                color: 'black',
+                                textAlign: 'center',
+                                marginTop: 2,
+                              },
+                            ]}>
+                            6th-A
+                          </Text>
+                        </View>
+                        <View>
+                          <Text
+                            style={[
+                              paraGray.darkpara,
+                              {
+                                fontSize: 11,
+                                color: '#97A7C3',
+                                textAlign: 'left',
+                              },
+                            ]}>
+                            Roll NO
+                          </Text>
+                          <Text
+                            style={[
+                              paraGray.darkpara,
+                              {
+                                fontSize: 12,
+                                color: 'black',
+                                textAlign: 'center',
+                                marginTop: 2,
+                              },
+                            ]}>
+                            {item.roll_no}
+                          </Text>
+                        </View>
+                      </View>
+                    </View>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        //borderWidth: 1,
+                        width: '35%',
+                        alignSelf: 'center',
+                      }}>
+                      <View
+                        style={[
+                          paraGray.darkpara,
+                          {marginRight: 11, color: 'rgba(0, 0, 0, 0.60)'},
+                        ]}>
+                        <CheckBox
+                          checked={checked}
+                          onPress={() => setChecked(!checked)}
+                          // Use ThemeProvider to make change for all checkbox
+                          iconType="material-community"
+                          checkedIcon="checkbox-marked"
+                          uncheckedIcon="checkbox-blank-outline"
+                          uncheckedColor="#275CE0"
+                          checkedColor="#275CE0"
+                          size={30}
+                        />
+                      </View>
+                      <View>
+                        <CheckBox
+                          checked={checked}
+                          onPress={() => setChecked(!checked)}
+                          // Use ThemeProvider to make change for all checkbox
+                          iconType="material-community"
+                          checkedIcon="checkbox-marked"
+                          uncheckedIcon="checkbox-blank-outline"
+                          uncheckedColor="#E92020"
+                          checkedColor="#E92020"
+                          size={30}
+                        />
+                      </View>
+                    </View>
+                  </View>
+                  <View
+                    style={{
+                      borderBottomWidth: 1,
+                      width: '100%',
+                      marginTop: 5,
+                      borderColor: '#97A7C3',
+                    }}></View>
+                </View>
+              )}
+            />
+          )}
+        </View>
       </ScrollView>
     </View>
   );

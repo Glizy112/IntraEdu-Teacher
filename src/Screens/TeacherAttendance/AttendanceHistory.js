@@ -8,7 +8,7 @@ import {paraGray} from '../../theme/styles/Base';
 
 const AttendanceHistory = () => {
   const [status, setStatus] = useState('Present');
-  console.log(status);
+
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <View

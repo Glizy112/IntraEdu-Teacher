@@ -227,8 +227,8 @@ import HistoryuserAssignmentDetail from './src/Screens/Assignments/HistoryuserAs
 import {paraGray} from './src/theme/styles/Base';
 import CheckMPIN from './src/Screens/Security/MPIN/CheckMPIN';
 import ConfirmMPIN from './src/Screens/Security/MPIN/ConfirmMPIN';
-import MyAttendance from './src/Screens/Attendance/MyAttendance';
-import AttendanceHistory from './src/Screens/Attendance/AttendanceHistory';
+import MyAttendance from './src/Screens/TeacherAttendance/MyAttendance';
+import AttendanceHistory from './src/Screens/TeacherAttendance/AttendanceHistory';
 
 const HomeStack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -1069,6 +1069,7 @@ function App({navigation}) {
               headerShown: false,
             }}
           />
+
           <HomeStack.Screen
             name="HistoryAtten"
             component={HistoryAtten}
@@ -2353,6 +2354,7 @@ function App({navigation}) {
               headerTintColor: 'white',
             }}
           />
+
           <HomeStack.Screen
             name="TeacherAbsent"
             component={TeacherAbsent}

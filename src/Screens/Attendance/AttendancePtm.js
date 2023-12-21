@@ -74,6 +74,7 @@ const AttendancePtm = props => {
         .then(result => {
           // console.log("data",result);
           setGetdata(result.data);
+          console.log('getData', result.data);
           // console.log('hi' + result.data);
           setLoading(false);
         });

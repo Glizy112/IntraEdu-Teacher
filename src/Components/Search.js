@@ -1,24 +1,37 @@
-import { View, Text, StyleSheet, TextInput } from 'react-native';
-import SearchInput, { createFilter } from 'react-native-search-filter';
+import {View, Text, StyleSheet, TextInput} from 'react-native';
+import SearchInput, {createFilter} from 'react-native-search-filter';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import React, { useState } from 'react';
-import { useEffect } from 'react';
-import { COLORS } from '../theme/Colors';
+import React, {useState} from 'react';
+import {useEffect} from 'react';
+import {COLORS} from '../theme/Colors';
 
-const Search = ({ KEYS_TO_FILTERS, getdata, filter }) => {
-    const [search, setSearch] = useState('');
+const Search = ({
+  KEYS_TO_FILTERS,
+  getdata,
+  filter,
+  containerStyle,
+  iconStyle,
+  mainViewStyle,
+  style,
+  placeholder,
+  iconColor,
+  placeholderTextColor,
+}) => {
+  const [search, setSearch] = useState('');
 
-    const searchUpdated = term => {
-        setSearch(term);
-    };
-    useEffect(() => {
-        filter(() => getdata.filter(createFilter(search, KEYS_TO_FILTERS)));
+  const searchUpdated = term => {
+    setSearch(term);
+  };
+  useEffect(() => {
+    filter(() => getdata.filter(createFilter(search, KEYS_TO_FILTERS)));
+  }, [search]);
 
-    }, [search]);
-
-    return (
-        <View style={styles.search}>
-            {/* <View
+  return (
+    <View
+      style={
+        containerStyle ? [styles.search, {containerStyle}] : styles.search
+      }>
+      {/* <View
                 style={{
                     flexDirection: 'row',
                     alignItems: 'center',
@@ -48,60 +61,95 @@ const Search = ({ KEYS_TO_FILTERS, getdata, filter }) => {
                 />
                 <Feather name="search" size={29} color="#000000" />
             </View> */}
-            <View
-                style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
+      <View
+        style={
+          mainViewStyle
+            ? [
+                {
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  backgroundColor: COLORS.white,
+                  width: '100%',
+                  height: 50,
+                  borderRadius: 12,
+                  paddingHorizontal: 4,
+                  elevation: 2,
+                },
+                mainViewStyle,
+              ]
+            : {
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                backgroundColor: COLORS.white,
+                width: '100%',
+                height: 50,
+                borderRadius: 12,
+                paddingHorizontal: 4,
+                elevation: 2,
+              }
+        }>
+        <TextInput
+          placeholder={placeholder ? placeholder : 'Search'}
+          placeholderTextColor={
+            placeholderTextColor ? placeholderTextColor : '#000000'
+          }
+          style={
+            style
+              ? [
+                  {
+                    marginLeft: 15,
                     backgroundColor: COLORS.white,
-                    width: '100%',
-                    height: 50,
-                    borderRadius: 12,
-                    paddingHorizontal: 4,
-                    elevation: 2,
-                }}>
-                <TextInput
-                    placeholder="Search"
-                    placeholderTextColor="#000000"
-                    style={{
-                        marginLeft: 15,
-                        backgroundColor: COLORS.white,
-                        width: '80%',
-                        height: 45,
-                        color: '#000000',
-                        fontFamily: 'Montserrat-Medium',
-                        fontSize: 16,
-                    }}
-                    onChangeText={term =>
-                        searchUpdated(term)
-                    }
-                />
-                <Ionicons 
-                    name="search-outline" 
-                    size={24} 
-                    color={COLORS.black} 
-                    style={{ 
-                        //transform: [{ rotate: '90deg' }], 
-                        marginRight: 10 
-                    }} 
-                />
-            </View>
-        </View>
-    );
+                    width: '80%',
+                    height: 45,
+                    color: '#000000',
+                    fontFamily: 'Montserrat-Medium',
+                    fontSize: 16,
+                  },
+                  style,
+                ]
+              : {
+                  marginLeft: 15,
+                  backgroundColor: COLORS.white,
+                  width: '80%',
+                  height: 45,
+                  color: '#000000',
+                  fontFamily: 'Montserrat-Medium',
+                  fontSize: 16,
+                }
+          }
+          onChangeText={term => searchUpdated(term)}
+        />
+        <Ionicons
+          name="search-outline"
+          size={24}
+          color={iconColor ? iconColor : COLORS.black}
+          style={
+            iconStyle
+              ? [{marginRight: 10}, iconStyle]
+              : {
+                  //transform: [{ rotate: '90deg' }],
+                  marginRight: 10,
+                }
+          }
+        />
+      </View>
+    </View>
+  );
 };
 
 export default Search;
 const styles = StyleSheet.create({
-    search: {
-        // height: 60,
-        width: '100%',
-        flexDirection: 'row',
-        alignItems: 'center',
-        paddingHorizontal: 20,
-        justifyContent: 'space-between',
-        borderWidth: 0,
-        borderColor: '#E4E4E4',
-        paddingBottom: 4,
-        marginTop: 10,
-    },
+  search: {
+    // height: 60,
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    justifyContent: 'space-between',
+    borderColor: '#E4E4E4',
+    paddingBottom: 4,
+    marginTop: 10,
+  },
 });

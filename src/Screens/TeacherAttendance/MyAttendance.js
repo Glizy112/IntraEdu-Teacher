@@ -192,7 +192,8 @@ const MyAttendance = ({navigation}) => {
               </View>
             </TouchableOpacity>
           </View>
-          <View
+          <TouchableOpacity
+            onPress={() => navigation.navigate('TeacherHoliday')}
             style={{
               borderWidth: 1,
               borderColor: '#D9D9D9',
@@ -236,7 +237,7 @@ const MyAttendance = ({navigation}) => {
                 <Ionicons name="arrow-forward" size={20} color={'black'} />
               </View>
             </View>
-          </View>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </View>
