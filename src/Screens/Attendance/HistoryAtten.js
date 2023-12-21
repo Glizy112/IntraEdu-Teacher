@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { dataIndexAttribute } from 'react-horizontal-scrolling-menu/dist/types/constants';
+import React, {useState, useEffect} from 'react';
+import {dataIndexAttribute} from 'react-horizontal-scrolling-menu/dist/types/constants';
 import {
   View,
   Text,
@@ -15,10 +15,10 @@ import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import StreamDropDown from '../DropDown/StreamDropDown';
 // import DateTimePicker from '@react-native-community/datetimepicker';
-import { Dropdown } from 'react-native-element-dropdown';
-import { useSelector, useDispatch } from 'react-redux';
+import {Dropdown} from 'react-native-element-dropdown';
+import {useSelector, useDispatch} from 'react-redux';
 import Url from '../../Config/Api/Url';
-import { COLORS } from '../../theme/Colors';
+import {COLORS} from '../../theme/Colors';
 import Spinner from 'react-native-loading-spinner-overlay';
 import DatePicker from 'react-native-modern-datepicker';
 
@@ -37,7 +37,7 @@ const HistoryAtten = props => {
   const [getsubdata, setGetsubdata] = useState([]);
   const [getstudentdata, setStudentdata] = useState([]);
   const [getsectiondata, setGetsectiondata] = useState([]);
-  const { userinfo, userid, username, showmodal, schoolid, teacherid } =
+  const {userinfo, userid, username, showmodal, schoolid, teacherid} =
     useSelector(state => state.userReducer);
   const [isFocus, setIsFocus] = useState(false);
   const [issectionFocus, setIssectionFocus] = useState(false);
@@ -127,7 +127,7 @@ const HistoryAtten = props => {
       const formData = new FormData();
       formData.append('school_id', schoolid);
       formData.append('teacher_id', teacherid);
-      console.log("Send Data ==> " + JSON.stringify(formData));
+      console.log('Send Data ==> ' + JSON.stringify(formData));
       let resp = await fetch(`${Url.get_all_class}`, {
         method: 'POST',
         headers: {
@@ -149,7 +149,6 @@ const HistoryAtten = props => {
     }
   };
   const getsectionData = async item => {
-
     try {
       const formData = new FormData();
       formData.append('school_id', schoolid);
@@ -252,10 +251,10 @@ const HistoryAtten = props => {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
-        <View style={{ marginTop: 20, paddingHorizontal: 15 }}>
+        <View style={{marginTop: 20, paddingHorizontal: 15}}>
           <Text style={styles.labeltxt}>Class</Text>
           <Dropdown
-            style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
+            style={[styles.dropdown, isFocus && {borderColor: 'blue'}]}
             placeholderStyle={styles.placeholderStyle}
             selectedTextStyle={styles.selectedTextStyle}
             inputSearchStyle={styles.inputSearchStyle}
@@ -284,20 +283,20 @@ const HistoryAtten = props => {
               setIsFocus(false);
               getsectionData(item);
             }}
-          // renderLeftIcon={() => (
-          //   <AntDesign
-          //     style={styles.icon}
-          //     color={isFocus ? 'blue' : 'black'}
-          //     name="Safety"
-          //     size={20}
-          //   />
-          // )}
+            // renderLeftIcon={() => (
+            //   <AntDesign
+            //     style={styles.icon}
+            //     color={isFocus ? 'blue' : 'black'}
+            //     name="Safety"
+            //     size={20}
+            //   />
+            // )}
           />
         </View>
-        <View style={{ paddingHorizontal: 15 }}>
+        <View style={{paddingHorizontal: 15}}>
           <Text style={styles.labeltxt}>Section</Text>
           <Dropdown
-            style={[styles.dropdown, issectionFocus && { borderColor: 'blue' }]}
+            style={[styles.dropdown, issectionFocus && {borderColor: 'blue'}]}
             placeholderStyle={styles.placeholderStyle}
             selectedTextStyle={styles.selectedTextStyle}
             inputSearchStyle={styles.inputSearchStyle}
@@ -328,10 +327,10 @@ const HistoryAtten = props => {
             }}
           />
         </View>
-        <View style={{ paddingHorizontal: 15, marginBottom: 10 }}>
+        <View style={{paddingHorizontal: 15, marginBottom: 10}}>
           <Text style={styles.labeltxt}>Subject</Text>
           <Dropdown
-            style={[styles.dropdown, issubjectFocus && { borderColor: 'blue' }]}
+            style={[styles.dropdown, issubjectFocus && {borderColor: 'blue'}]}
             placeholderStyle={styles.placeholderStyle}
             selectedTextStyle={styles.selectedTextStyle}
             inputSearchStyle={styles.inputSearchStyle}
@@ -362,10 +361,10 @@ const HistoryAtten = props => {
             }}
           />
         </View>
-        <View style={{ paddingHorizontal: 15, marginBottom: 0 }}>
+        <View style={{paddingHorizontal: 15, marginBottom: 0}}>
           <Text style={styles.labeltxt}>Student Name (optional)</Text>
           <Dropdown
-            style={[styles.dropdown, isstudentFocus && { borderColor: 'blue' }]}
+            style={[styles.dropdown, isstudentFocus && {borderColor: 'blue'}]}
             placeholderStyle={styles.placeholderStyle}
             selectedTextStyle={styles.selectedTextStyle}
             inputSearchStyle={styles.inputSearchStyle}
@@ -395,7 +394,7 @@ const HistoryAtten = props => {
             }}
           />
         </View>
-        <Text style={[styles.labeltxt, { marginLeft: 15, marginBottom: 0 }]}>
+        <Text style={[styles.labeltxt, {marginLeft: 15, marginBottom: 0}]}>
           Choose Month
         </Text>
         {/* <Text style={styles.formtxt}>From</Text> */}
@@ -432,7 +431,7 @@ const HistoryAtten = props => {
             name="calendar-blank-outline"
             size={26}
             color="#434b56"
-          // onPress={showDatepicker}
+            // onPress={showDatepicker}
           />
         </TouchableOpacity>
         {/* <Text style={styles.formtxt}>To</Text>

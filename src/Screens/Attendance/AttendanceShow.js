@@ -31,9 +31,9 @@ const AttendanceShow = props => {
   const [expandedReports, setExpandedReports] = React.useState(false);
   const [expandedExamAttendace, setExpandedExamAttendace] =
     React.useState(false);
-  const [openAttendanceClass, setOpenAttendanceClass] = useState(true);
-  const [openAttendanceSection, setOpenAttendanceSection] = useState(true);
-  const [openAttendanceSubject, setOpenAttendanceSubject] = useState(true);
+  const [openAttendanceClass, setOpenAttendanceClass] = useState(false);
+  const [openAttendanceSection, setOpenAttendanceSection] = useState(false);
+  const [openAttendanceSubject, setOpenAttendanceSubject] = useState(false);
   const [valueAttendanceClass, setValueAttendanceClass] = useState(null);
   const [valueAttendanceSection, setValueAttendanceSection] = useState(null);
   const [valueAttendanceSubject, setValueAttendanceSubject] = useState(null);
@@ -56,6 +56,59 @@ const AttendanceShow = props => {
     {label: '11th', value: '11th'},
     {label: '12th', value: '12th'},
   ]);
+
+  // Attendance History
+  const [openAttendanceHistoryClass, setOpenAttendanceHistoryClass] =
+    useState(false);
+  const [openAttendanceHistorySection, setOpenAttendanceHistorySection] =
+    useState(false);
+  const [openAttendanceHistorySubject, setOpenAttendanceHistorySubject] =
+    useState(false);
+  const [
+    openAttendanceHistoryStudentName,
+    setOpenAttendanceHistoryStudentName,
+  ] = useState(false);
+  const [valueAttendanceHistoryClass, setValueAttendanceHistoryClass] =
+    useState(null);
+  const [valueAttendanceHistorySection, setValueAttendanceHistorySection] =
+    useState(null);
+  const [valueAttendanceHistorySubject, setValueAttendanceHistorySubject] =
+    useState(null);
+  const [
+    valueAttendanceHistoryStudentName,
+    setValueAttendanceHistoryStudentName,
+  ] = useState(null);
+  const [itemsAttendanceHistoryClass, setItemsAttendanceHistoryClass] =
+    useState([
+      {label: '9th', value: '9th'},
+      {label: '10th', value: '10th'},
+      {label: '11th', value: '11th'},
+      {label: '12th', value: '12th'},
+    ]);
+  const [itemsAttendanceHistorySection, setItemsAttendanceHistorySection] =
+    useState([
+      {label: '9th', value: '9th'},
+      {label: '10th', value: '10th'},
+      {label: '11th', value: '11th'},
+      {label: '12th', value: '12th'},
+    ]);
+  const [ItemsAttendanceHistorySubject, setItemsAttendanceHistorySubject] =
+    useState([
+      {label: '9th', value: '9th'},
+      {label: '10th', value: '10th'},
+      {label: '11th', value: '11th'},
+      {label: '12th', value: '12th'},
+    ]);
+  const [
+    ItemsAttendanceHistoryStudentName,
+    setItemsAttendanceHistoryStudentName,
+  ] = useState([
+    {label: '9th', value: '9th'},
+    {label: '10th', value: '10th'},
+    {label: '11th', value: '11th'},
+    {label: '12th', value: '12th'},
+  ]);
+
   const [open, setOpen] = useState(true);
   const [value, setValue] = useState(null);
 
@@ -117,12 +170,13 @@ const AttendanceShow = props => {
     getapiData();
     getsectionData();
     getsubjectData();
+    getStudent();
 
     // console.log(date);
     // console.log("Tid"+teacherid)
     // console.log('Uid' + userid);
   }, []);
-
+  console.log(ItemsAttendanceHistoryStudentName);
   // --------APICall----------
 
   const getapiData = async () => {
@@ -149,6 +203,12 @@ const AttendanceShow = props => {
           // console.log("data",result);
           // setGetdata(result.data);
           setItemsAttendanceClass(
+            result.data.map(item => ({
+              label: item.class_name,
+              value: item.class_id,
+            })),
+          );
+          setItemsAttendanceHistoryClass(
             result.data.map(item => ({
               label: item.class_name,
               value: item.class_id,
@@ -196,6 +256,12 @@ const AttendanceShow = props => {
               value: item.section_id,
             })),
           );
+          setItemsAttendanceHistorySection(
+            result.data.map(item => ({
+              label: item.section_name,
+              value: item.section_id,
+            })),
+          );
           setLoading(false);
         });
     } catch (error) {
@@ -234,6 +300,19 @@ const AttendanceShow = props => {
               value: item.id,
             })),
           );
+          setItemsAttendanceHistorySubject(
+            result.data.map(item => ({
+              label: item.name,
+              value: item.id,
+            })),
+          );
+          console.log(
+            'Subject',
+            result.data.map(item => ({
+              label: item.name,
+              value: item.id,
+            })),
+          );
           setLoading(false);
         });
     } catch (error) {
@@ -241,22 +320,50 @@ const AttendanceShow = props => {
       setLoading(false);
     }
   };
+  // History Attendance
+  const getStudent = async () => {
+    setRefreshing(false);
+    setLoading(true);
+    try {
+      const formData = new FormData();
+      formData.append('school_id', schoolid);
+      formData.append('teacher_id', userid);
+      let resp = await fetch(`${Url.studentList}`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'multipart/form-data',
+        },
+        body: formData,
+      })
+        .then(response => {
+          // console.log('DATA' + JSON.stringify(response));
+          return response.json();
+        })
+        .then(result => {
+          // console.log(result);
+          setItemsAttendanceHistoryStudentName(
+            result.data.map(item => ({
+              label: item.student_name,
+              value: item.student_id,
+            })),
+          );
+
+          setLoading(false);
+        });
+    } catch (error) {
+      console.log('Student List Error => ' + error);
+      setLoading(false);
+    }
+  };
+
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
     getapiData();
     getsectionData();
     getsubjectData();
+    getStudent();
   }, []);
-  //   useEffect(() => {
-  //     if (getdata && getdata.length > 0) {
-  //       setItemsAttendanceClass(
-  //         getdata.map(item => ({
-  //           label: item.class_name,
-  //           value: item.class_id,
-  //         })),
-  //       );
-  //     }
-  //   }, [getdata]);
 
   return (
     <View style={styles.container}>
@@ -598,12 +705,12 @@ const AttendanceShow = props => {
                     Class
                   </Text>
                   <DropDown
-                    open={open}
-                    value={value}
-                    items={items}
-                    setOpen={setOpen}
-                    setValue={setValue}
-                    setItems={setItems}
+                    open={openAttendanceHistoryClass}
+                    value={valueAttendanceHistoryClass}
+                    items={itemsAttendanceHistoryClass}
+                    setOpen={setOpenAttendanceHistoryClass}
+                    setValue={setValueAttendanceHistoryClass}
+                    setItems={setItemsAttendanceHistoryClass}
                     containerStyle={{width: '100%'}}
                   />
                 </View>
@@ -613,12 +720,12 @@ const AttendanceShow = props => {
                     Section
                   </Text>
                   <DropDown
-                    open={open}
-                    value={value}
-                    items={items}
-                    setOpen={setOpen}
-                    setValue={setValue}
-                    setItems={setItems}
+                    open={openAttendanceHistorySection}
+                    value={valueAttendanceHistorySection}
+                    items={itemsAttendanceHistorySection}
+                    setOpen={setOpenAttendanceHistorySection}
+                    setValue={setValueAttendanceHistorySection}
+                    setItems={setItemsAttendanceHistorySection}
                     containerStyle={{width: '100%'}}
                   />
                 </View>
@@ -636,12 +743,12 @@ const AttendanceShow = props => {
                     Subject
                   </Text>
                   <DropDown
-                    open={open}
-                    value={value}
-                    items={items}
-                    setOpen={setOpen}
-                    setValue={setValue}
-                    setItems={setItems}
+                    open={openAttendanceHistorySubject}
+                    value={valueAttendanceHistorySubject}
+                    items={ItemsAttendanceHistorySubject}
+                    setOpen={setOpenAttendanceHistorySubject}
+                    setValue={setValueAttendanceHistorySubject}
+                    setItems={setItemsAttendanceHistorySubject}
                     containerStyle={{width: '100%'}}
                   />
                 </View>
@@ -718,16 +825,35 @@ const AttendanceShow = props => {
                   Student Name (optional)
                 </Text>
                 <DropDown
-                  open={open}
-                  value={value}
-                  items={items}
-                  setOpen={setOpen}
-                  setValue={setValue}
-                  setItems={setItems}
+                  open={openAttendanceHistoryStudentName}
+                  value={valueAttendanceHistoryStudentName}
+                  items={ItemsAttendanceHistoryStudentName}
+                  setOpen={setOpenAttendanceHistoryStudentName}
+                  setValue={setValueAttendanceHistoryStudentName}
+                  setItems={setItemsAttendanceHistoryStudentName}
                   containerStyle={{width: '100%'}}
                 />
               </View>
-              <TouchableOpacity style={{width: '100%'}}>
+              <TouchableOpacity
+                onPress={() =>
+                  props.navigation.navigate('HistoryAttendance', {
+                    classvalue: '12',
+                    sectionvalue: '14',
+                    //subjectvalue: valueAttendanceSubject,
+                    subjectvalue: '26',
+                    studentid: valueAttendanceHistoryStudentName,
+                    month: '01',
+                    //     classname: class_name,
+                    //   classvalue: classvalue,
+                    //   sectionname: section_name,
+                    //   sectionvalue: sectionvalue,
+                    //   subjectname: subject_name,
+                    //   subjectvalue: subjectvalue,
+                    //   studentid: student,
+                    //   month: text,
+                  })
+                }
+                style={{width: '100%'}}>
                 <Button
                   title="Show History "
                   styles={{width: '100%', paddingVertical: 15}}

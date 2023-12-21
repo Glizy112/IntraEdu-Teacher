@@ -57,6 +57,7 @@ const HistoryAttendance = props => {
   const [getdata, setData] = useState([]);
   const [attenddata, setattendData] = useState([]);
   const [studentFilter, setStudentFilter] = useState([]);
+
   const [checked, setChecked] = useState(true);
   const datas = [
     {id: '1', name: 'Vikash Yadav', date: '1/1/21', present: 'Present'},

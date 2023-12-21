@@ -90,7 +90,7 @@ const categoryList02 = [
     categoryIcon: <Ionicons name="today" size={30} color={COLORS.primary} />,
     categoryScreen: 'AttendanceShow',
     //categoryScreen: 'AttendancePtm',
-    categoryScreen: 'HistoryAtten',
+    //categoryScreen: 'HistoryAtten',
     //categoryScreen: 'MarkAttendance',
   },
   {
