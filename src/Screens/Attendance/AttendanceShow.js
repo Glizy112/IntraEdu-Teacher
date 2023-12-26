@@ -882,12 +882,16 @@ const AttendanceShow = props => {
                     alignSelf: 'center',
                   }}>
                   <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                    <FontAwesome5 name="clock" size={36} color={'#275CE0'} />
+                    <Ionicons
+                      name="document-text"
+                      size={36}
+                      color={'#275CE0'}
+                    />
                     <View style={{marginLeft: 20}}>
                       <Text
                         style={[
                           paraGray.parahome,
-                          {fontSize: 11, marginTop: 5},
+                          {fontSize: 16, marginTop: 5},
                         ]}>
                         Reports
                       </Text>
@@ -1086,9 +1090,9 @@ const AttendanceShow = props => {
                     alignSelf: 'center',
                   }}>
                   <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                    <FontAwesome5 name="clock" size={36} color={'#275CE0'} />
+                    <Ionicons name="clipboard" size={36} color={'#275CE0'} />
                     <View style={{marginLeft: 20}}>
-                      <Text style={[paraGray.parahome, {fontSize: 11}]}>
+                      <Text style={[paraGray.parahome, {fontSize: 16}]}>
                         Exam Attendance
                       </Text>
                       <Text

@@ -12,13 +12,16 @@ import {
 } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import {Dropdown} from 'react-native-element-dropdown';
+//import {Dropdown} from 'react-native-element-dropdown';
+import DropDown from '../../Components/DropDown';
+import FieldInputs from '../../Components/FieldInputs';
 import {paraGray} from '../../theme/styles/Base';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {useSelector, useDispatch} from 'react-redux';
 import Url from '../../Config/Api/Url';
 import {COLORS} from '../../theme/Colors';
 import Feather from 'react-native-vector-icons/Feather';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import {
   SelectMultipleButton,
   SelectMultipleGroupButton,
@@ -26,6 +29,15 @@ import {
 import _ from 'lodash';
 
 const CreateLecture = props => {
+  const [openStream, setOpenStream] = useState(false);
+  const [openSection, setOpenSection] = useState(false);
+  const [openSubject, setOpenSubject] = useState(false);
+  const [openLectureMode, setOpenLectureMode] = useState(false);
+  const [itemsStream, setItemsStream] = useState(null);
+  const [itemsSection, setItemsSection] = useState(null);
+  const [itemsSubject, setItemsSubject] = useState(null);
+  const [itemsLectureMode, setItemsLectureMode] = useState(null);
+
   const [radioSelectedData, setradioSelectedData] = useState('');
   const [loading, setLoading] = useState(false);
   const [load, setLoad] = useState(true);
@@ -300,11 +312,58 @@ const CreateLecture = props => {
         // }
       >
         <View>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              height: 50,
+              justifyContent: 'space-between',
+
+              paddingHorizontal: 10,
+              borderBottomColor: '#275CE0',
+              borderBottomWidth: 1,
+            }}>
+            <View
+              style={{
+                alignItems: 'flex-start',
+              }}>
+              <TouchableOpacity
+                style={{
+                  backgroundColor: COLORS.white,
+                  borderRadius: 20,
+                }}
+                onPress={() =>
+                  //   props.navigation.navigate('StudentEdit', {
+                  //     studentdetail: studentdetail,
+                  //   })
+                  props.navigation.goBack()
+                }>
+                <Ionicons
+                  style={{marginVertical: 5, paddingHorizontal: 7}}
+                  name="arrow-back"
+                  size={20}
+                  color={COLORS.black}
+                />
+              </TouchableOpacity>
+            </View>
+            <View
+              style={{
+                flex: 1,
+                alignItems: 'center',
+                position: 'absolute',
+                left: 0,
+                right: 0,
+              }}>
+              <Text style={[paraGray.largebold, {color: 'black'}]}>
+                Create Lecture
+              </Text>
+            </View>
+          </View>
           <View style={{marginTop: 15, paddingHorizontal: 20}}>
             <Text style={[paraGray.darkpara, {marginVertical: 10}]}>
               Stream
             </Text>
-            <Dropdown
+            {/* <Dropdown
               style={{
                 height: 50,
                 borderColor: isstreamFocus ? 'blue' : 'gray',
@@ -354,6 +413,23 @@ const CreateLecture = props => {
                 setIsstreamFocus(false);
                 getsectionData(item);
               }}
+            /> */}
+            <DropDown
+              open={openStream}
+              value={stream}
+              items={getdata.map(item => ({
+                label: item.class_name,
+                value: item.class_id,
+              }))}
+              setOpen={setOpenStream}
+              setItems={setItemsStream}
+              onSelectItem={item => {
+                // getsectionData(item);
+                setselectedStream(item);
+                setStream(item.value);
+                setIsstreamFocus(false);
+                getsectionData(item);
+              }}
             />
           </View>
         </View>
@@ -362,7 +438,7 @@ const CreateLecture = props => {
             <Text style={[paraGray.darkpara, {marginVertical: 10}]}>
               Section
             </Text>
-            <Dropdown
+            {/* <Dropdown
               style={{
                 height: 50,
                 borderColor: issectionFocus ? 'blue' : 'gray',
@@ -412,13 +488,30 @@ const CreateLecture = props => {
                 setIsSectionFocus(false);
                 getsubjectData(item);
               }}
+            /> */}
+            <DropDown
+              open={openSection}
+              value={section}
+              items={getsectiondata.map(item => ({
+                label: item.section_name,
+                value: item.section_id,
+                // subject: item.subject_id,
+              }))}
+              setOpen={setOpenSection}
+              setItems={setItemsSection}
+              onSelectItem={item => {
+                setSelectedSection(item);
+                setSection(item.value);
+                setIsSectionFocus(false);
+                getsubjectData(item);
+              }}
             />
           </View>
           <View style={{paddingHorizontal: 20}}>
             <Text style={[paraGray.darkpara, {marginVertical: 10}]}>
               Subject
             </Text>
-            <Dropdown
+            {/* <Dropdown
               style={{
                 height: 50,
                 borderColor: issubjectFocus ? 'blue' : 'gray',
@@ -468,13 +561,30 @@ const CreateLecture = props => {
                 setIssubjectFocus(false);
                 // setsubjectId(item.subject);
               }}
+            /> */}
+            <DropDown
+              open={openSubject}
+              value={subject}
+              items={getsubjectdata.map(item => ({
+                label: item.name,
+                value: item.id,
+                // subject: item.subject_id,
+              }))}
+              setOpen={setOpenSubject}
+              setItems={setItemsSubject}
+              onSelectItem={item => {
+                setSelectedSubject(item);
+                setsubject(item.value);
+                setIssubjectFocus(false);
+                // setsubjectId(item.subject);
+              }}
             />
           </View>
           <View style={{paddingHorizontal: 20}}>
             <Text style={[paraGray.darkpara, {marginVertical: 10}]}>
               Lecture Mode
             </Text>
-            <Dropdown
+            {/* <Dropdown
               style={{
                 height: 50,
                 borderColor: ismodeFocus ? 'blue' : 'gray',
@@ -524,11 +634,28 @@ const CreateLecture = props => {
                 setIsmodeFocus(false);
                 // setsubjectId(item.subject);
               }}
+            /> */}
+            <DropDown
+              open={openLectureMode}
+              value={lecmode}
+              items={items.map(item => ({
+                label: item.label,
+                value: item.value,
+                // subject: item.subject_id,
+              }))}
+              setOpen={setOpenLectureMode}
+              setItems={setItemsLectureMode}
+              onSelectItem={item => {
+                setSelectedMode(item);
+                setLecMode(item.value);
+                setIsmodeFocus(false);
+                // setsubjectId(item.subject);
+              }}
             />
           </View>
           <Text style={styles.formtxt}>Title:</Text>
-          <View style={styles.txtbox}>
-            <TextInput
+          <View>
+            {/* <TextInput
               placeholder="ENTER TITLE"
               placeholderTextColor="#808080"
               value={title}
@@ -541,9 +668,15 @@ const CreateLecture = props => {
                 fontSize: 13,
                 fontFamily: 'Montserrat-Regular',
               }}
+            /> */}
+            <FieldInputs
+              placeholder="ENTER TITLE"
+              value={title}
+              onChangeText={value => setTitle(value)}
+              styles={{width: '90%', alignSelf: 'center'}}
             />
           </View>
-          <Text style={styles.labeltxt}>Choose Timing</Text>
+          {/* <Text style={styles.labeltxt}>Choose Timing</Text> */}
           <Text style={styles.formtxt}>Date</Text>
           <TouchableOpacity
             style={{
@@ -552,11 +685,11 @@ const CreateLecture = props => {
               backgroundColor: '#FFFFFF',
               width: '90%',
               height: 50,
-              borderColor: '#C4C4C4',
+              borderColor: COLORS.primary,
               paddingHorizontal: 0,
               borderWidth: 1,
               marginTop: 15,
-              borderRadius: 5,
+              borderRadius: 12,
               alignSelf: 'center',
             }}
             onPress={showDatepicker}>
@@ -577,7 +710,8 @@ const CreateLecture = props => {
             <MaterialCommunityIcons
               name="calendar-blank-outline"
               size={26}
-              color="#434b56"
+              //color="#434b56"
+              color={COLORS.primary}
               onPress={showDatepicker}
             />
 
@@ -618,10 +752,12 @@ const CreateLecture = props => {
                 alignItems: 'center',
                 backgroundColor: '#FFFFFF',
                 height: 50,
-                borderColor: '#D3D3D3',
+                //borderColor: '#D3D3D3',
+                borderColor: COLORS.primary,
                 borderWidth: 1,
                 marginTop: 15,
-                borderRadius: 5,
+                // borderRadius: 5,
+                borderRadius: 12,
                 alignSelf: 'center',
                 marginHorizontal: 5,
                 paddingHorizontal: 3,
@@ -644,7 +780,8 @@ const CreateLecture = props => {
               <Feather
                 name="clock"
                 size={26}
-                color="#434b56"
+                //color="#434b56"
+                color={COLORS.primary}
                 onPress={showTimepicker}
               />
               {showclock && (
@@ -665,11 +802,13 @@ const CreateLecture = props => {
                 backgroundColor: '#FFFFFF',
                 flex: 1,
                 height: 50,
-                borderColor: '#D3D3D3',
+                //borderColor: '#D3D3D3',
                 paddingHorizontal: 3,
+                borderColor: COLORS.primary,
                 borderWidth: 1,
                 marginTop: 15,
-                borderRadius: 5,
+                //borderRadius: 5,
+                borderRadius: 12,
                 alignSelf: 'center',
                 marginHorizontal: 5,
               }}
@@ -691,7 +830,8 @@ const CreateLecture = props => {
               <Feather
                 name="clock"
                 size={26}
-                color="#434b56"
+                //color="#434b56"
+                color={COLORS.primary}
                 onPress={showTimepickers}
               />
 
@@ -712,12 +852,13 @@ const CreateLecture = props => {
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                backgroundColor: '#000000',
+                // backgroundColor: '#000000',
+                backgroundColor: COLORS.primary,
                 width: '80%',
                 height: 50,
                 borderColor: '#000000',
                 alignSelf: 'center',
-                borderWidth: 2,
+                //borderWidth: 2,
                 marginTop: 30,
                 marginBottom: 30,
                 borderRadius: 15,

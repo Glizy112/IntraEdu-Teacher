@@ -93,42 +93,276 @@ const CollectionDetail = props => {
   return (
     <View style={styles.container}>
       {loading == true && <Spinner visible={load} />}
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          //height: 30,
+          justifyContent: 'center',
+          paddingHorizontal: 15,
+          paddingBottom: 4,
+          borderBottomWidth: 1,
+          borderColor: COLORS.primary,
+        }}>
+        <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderWidth: 0,
+          }}>
+          <Text
+            style={[paraGray.largebold, {textAlign: 'center', marginTop: 16}]}>
+            Collection
+          </Text>
+        </View>
+      </View>
       <ScrollView>
-        <View style={{marginTop: 15}}>
-          <Text style={styles.txt}>Student Info</Text>
+        <View style={{marginTop: 25}}>
+          {/* <Text style={styles.txt}>Student Info</Text> */}
           <View
             style={{
               flex: 1,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
+
               marginRight: 20,
-              alignItems: 'flex-end',
+              alignItems: 'center',
             }}>
-            <Text style={styles.txt}>
-              Name:
-              <Text style={styles.datatxt}> {student.username}</Text>
-            </Text>
             {student.photo == null ? (
               <ImageBackground
                 style={{
                   backgroundColor: COLORS.black,
                   justifyContent: 'center',
                   alignItems: 'center',
-                  width: 45,
-                  height: 45,
+                  width: 75,
+                  height: 75,
                   borderRadius: 30,
                 }}>
                 <FontAwesome5 name="user-alt" size={25} color="#FFFFFF" />
               </ImageBackground>
             ) : (
               <Avatar.Image
-                size={50}
+                size={75}
                 source={{uri: Url.student_IMG + student.photo}}
                 backgroundColor={COLORS.black}
+                style={{marginBottom: 10}}
               />
             )}
           </View>
-          <Text style={styles.txt}>
+
+          <View
+            style={{
+              borderWidth: 1,
+              borderColor: COLORS.primary,
+              borderRadius: 12,
+              width: '85%',
+              //height: 242,
+              alignSelf: 'center',
+              justifyContent: 'center',
+              paddingVertical: 5,
+              // paddingHorizontal: 10,
+            }}>
+            <View>
+              <View style={[styles.mainViewContainer]}>
+                <View
+                  style={{
+                    width: '45%',
+                  }}>
+                  <View style={[styles.mainView, {marginTop: 12}]}>
+                    <Text
+                      style={[
+                        paraGray.darkpara,
+                        {fontSize: 15, color: COLORS.txtGray},
+                      ]}>
+                      Stream :
+                    </Text>
+                    <View style={styles.inputTextView}>
+                      <Text style={[paraGray.darkpara, styles.userText]}>
+                        {student.class_name}
+                      </Text>
+                    </View>
+                  </View>
+                  <View style={[styles.mainView]}>
+                    <Text
+                      style={[
+                        paraGray.darkpara,
+                        {fontSize: 15, color: COLORS.txtGray},
+                      ]}>
+                      {/* {Taken Book Stream} */}
+                      Book Stream :
+                    </Text>
+                    <View style={styles.inputTextView}>
+                      <Text style={[paraGray.darkpara, styles.userText]}>
+                        {student.class_name}
+                      </Text>
+                    </View>
+                  </View>
+                  <View style={styles.mainView}>
+                    <Text
+                      style={[
+                        paraGray.darkpara,
+                        {fontSize: 15, color: COLORS.txtGray},
+                      ]}>
+                      Degree
+                    </Text>
+                    <View style={styles.inputTextView}>
+                      <Text style={[paraGray.darkpara, styles.userText]}>
+                        {student.class_name}
+                      </Text>
+                    </View>
+                  </View>
+                  <View style={[styles.mainView]}>
+                    <Text
+                      style={[
+                        paraGray.darkpara,
+                        {fontSize: 15, color: COLORS.txtGray},
+                      ]}>
+                      ISBN No
+                    </Text>
+                    <View style={styles.inputTextView}>
+                      <Text style={[paraGray.darkpara, styles.userText]}>
+                        {student.class_name}
+                      </Text>
+                    </View>
+                  </View>
+                  <View style={styles.mainView}>
+                    <Text
+                      style={[
+                        paraGray.darkpara,
+                        {fontSize: 15, color: COLORS.txtGray},
+                      ]}>
+                      Book Code :
+                    </Text>
+                    <View style={styles.inputTextView}>
+                      <Text style={[paraGray.darkpara, styles.userText]}>
+                        {student.class_name}
+                      </Text>
+                    </View>
+                  </View>
+                  <View style={styles.mainView}>
+                    <Text
+                      style={[
+                        paraGray.darkpara,
+                        {fontSize: 15, color: COLORS.txtGray},
+                      ]}>
+                      Book Edition :
+                    </Text>
+                    <View style={styles.inputTextView}>
+                      <Text style={[paraGray.darkpara, styles.userText]}>
+                        {student.class_name}
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+                <View
+                  style={{
+                    //alignSelf: 'flex-start',
+                    width: '45%',
+                  }}>
+                  <View style={[styles.mainView, {marginTop: 12}]}>
+                    <Text
+                      style={[
+                        paraGray.darkpara,
+                        {fontSize: 15, color: COLORS.txtGray},
+                      ]}>
+                      Book Assigned :
+                    </Text>
+                    <View style={styles.inputTextView}>
+                      <Text style={[paraGray.darkpara, styles.userText]}>
+                        {student.class_name}
+                      </Text>
+                    </View>
+                  </View>
+                  <View style={styles.mainView}>
+                    <Text
+                      style={[
+                        paraGray.darkpara,
+                        {fontSize: 15, color: COLORS.txtGray},
+                      ]}>
+                      Publisher
+                    </Text>
+                    <View style={styles.inputTextView}>
+                      <Text style={[paraGray.darkpara, styles.userText]}>
+                        {student.class_name}
+                      </Text>
+                    </View>
+                  </View>
+
+                  <View style={styles.mainView}>
+                    <Text
+                      style={[
+                        paraGray.darkpara,
+                        {fontSize: 15, color: COLORS.txtGray},
+                      ]}>
+                      Aadhaar No.
+                    </Text>
+                    <View style={styles.inputTextView}>
+                      <Text style={[paraGray.darkpara, styles.userText]}>
+                        {student.class_name}
+                      </Text>
+                    </View>
+                  </View>
+                  <View style={[styles.mainView]}>
+                    <Text
+                      style={[
+                        paraGray.darkpara,
+                        {fontSize: 15, color: COLORS.txtGray},
+                      ]}>
+                      Taken :
+                    </Text>
+                    <View style={styles.inputTextView}>
+                      <Text style={[paraGray.darkpara, styles.userText]}>
+                        {student.class_name}
+                      </Text>
+                    </View>
+                  </View>
+                  <View style={styles.mainView}>
+                    <Text
+                      style={[
+                        paraGray.darkpara,
+                        {fontSize: 15, color: COLORS.txtGray},
+                      ]}>
+                      Return Date :
+                    </Text>
+                    <View style={styles.inputTextView}>
+                      <Text style={[paraGray.darkpara, styles.userText]}>
+                        {student.class_name}
+                      </Text>
+                    </View>
+                  </View>
+
+                  <View style={styles.mainView}>
+                    <Text
+                      style={[
+                        paraGray.darkpara,
+                        {fontSize: 15, color: COLORS.txtGray},
+                      ]}>
+                      Late Submission :
+                    </Text>
+                    <View style={styles.inputTextView}>
+                      <Text style={[paraGray.darkpara, styles.userText]}>
+                        {student.class_name}
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View
+                style={[styles.mainView, {width: '90%', alignSelf: 'center'}]}>
+                <Text
+                  style={[
+                    paraGray.darkpara,
+                    {fontSize: 15, color: COLORS.txtGray},
+                  ]}>
+                  Penalty :
+                </Text>
+                <View style={styles.inputTextView}>
+                  <Text style={[paraGray.darkpara, styles.userText]}>
+                    {student.penaltyamount}
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </View>
+          {/* <Text style={styles.txt}>
             Stream :<Text style={styles.datatxt}> {student.class_name}</Text>
           </Text>
           <Text style={styles.txt}>
@@ -171,7 +405,7 @@ const CollectionDetail = props => {
           <Text style={styles.txt}>
             Penalty :
             <Text style={styles.datatxt}> {student.penaltyamount}</Text>
-          </Text>
+          </Text> */}
           {penaltypaid == true && (
             <View>
               <Text
@@ -224,7 +458,14 @@ const CollectionDetail = props => {
           )}
         </View>
         <View
-          style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-end'}}>
+          style={{
+            //flex: 1,
+            flexDirection: 'row',
+            justifyContent: 'flex-end',
+
+            width: '95%',
+            marginTop: 10,
+          }}>
           <TouchableOpacity
             style={{
               height: 40,
@@ -270,7 +511,7 @@ const CollectionDetail = props => {
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                backgroundColor: COLORS.lightbackground,
+                backgroundColor: COLORS.primary,
                 width: '80%',
                 height: 45,
                 alignSelf: 'center',
@@ -297,12 +538,13 @@ const CollectionDetail = props => {
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                backgroundColor: COLORS.lightbackground,
+                backgroundColor: COLORS.red,
                 width: '80%',
                 height: 45,
                 alignSelf: 'center',
                 marginTop: 20,
                 marginBottom: 20,
+                borderRadius: 30,
                 justifyContent: 'center',
               }}
               onPress={() => {}}>
@@ -319,12 +561,13 @@ const CollectionDetail = props => {
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                backgroundColor: COLORS.lightbackground,
+                backgroundColor: '#0BAC00',
                 width: '80%',
                 height: 45,
                 alignSelf: 'center',
                 marginTop: 10,
                 marginBottom: 20,
+                borderRadius: 30,
                 justifyContent: 'center',
               }}
               onPress={() => setShowsettle(true)}>
@@ -423,7 +666,7 @@ const CollectionDetail = props => {
                     style={{
                       flexDirection: 'row',
                       alignItems: 'center',
-                      backgroundColor: COLORS.lightbackground,
+                      backgroundColor: COLORS.primary,
                       width: '95%',
                       height: 45,
                       alignSelf: 'center',
@@ -488,5 +731,19 @@ const styles = StyleSheet.create({
   datatxt: {
     fontSize: 12,
     fontFamily: 'Montserrat-SemiBold',
+  },
+  mainViewContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '90%',
+    alignSelf: 'center',
+    //marginVertical: 5,
+  },
+  mainView: {
+    alignSelf: 'center',
+    marginTop: 12,
+    width: 140,
+    heigth: 60,
+    backgroundColor: 'white',
   },
 });

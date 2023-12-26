@@ -81,7 +81,7 @@ const UpComingDetailLecture = props => {
           <View
             style={{
               flex: 1,
-              backgroundColor: COLORS.bg,
+              backgroundColor: COLORS.bgColor,
               borderRadius: 20,
               paddingHorizontal: 10,
               borderWidth: 1,
@@ -93,8 +93,12 @@ const UpComingDetailLecture = props => {
                 flexDirection: 'row',
                 justifyContent: 'center',
                 marginTop: 10,
+                justifyContent: 'space-between',
+                width: '95%',
+                alignSelf: 'center',
               }}>
               <Text style={[paraGray.darkpara]}>{subjects.subject_name}</Text>
+              <Text style={[paraGray.darkpara]}>{subjects.title}</Text>
             </View>
             <View
               style={{
@@ -126,8 +130,8 @@ const UpComingDetailLecture = props => {
                 </Text>
                 <Text
                   style={[
-                    paraGray.darkpara,
-                    {color: COLORS.section, marginLeft: 5},
+                    paraGray.largebold,
+                    {color: COLORS.black, marginLeft: 5, fontSize: 14},
                   ]}>
                   {subjects.class_name}
                 </Text>
@@ -148,7 +152,7 @@ const UpComingDetailLecture = props => {
                 <Text
                   style={[
                     paraGray.darkpara,
-                    {color: COLORS.section, marginLeft: 5},
+                    {color: COLORS.black, marginLeft: 5, fontSize: 14},
                   ]}>
                   {subjects.class_date}
                 </Text>
@@ -169,7 +173,7 @@ const UpComingDetailLecture = props => {
                 <Text
                   style={[
                     paraGray.darkpara,
-                    {color: COLORS.section, marginLeft: 5},
+                    {color: COLORS.black, marginLeft: 5, fontSize: 14},
                   ]}>
                   {subjects.start_time} - {subjects.end_time}
                 </Text>
@@ -206,7 +210,7 @@ const UpComingDetailLecture = props => {
                 <Text
                   style={[
                     paraGray.darkpara,
-                    {color: COLORS.section, marginLeft: 5},
+                    {color: COLORS.black, marginLeft: 5, fontSize: 14},
                   ]}>
                   {subjects.TotalStudent}Static
                 </Text>
@@ -227,10 +231,7 @@ const UpComingDetailLecture = props => {
                 <Text
                   style={[
                     paraGray.darkpara,
-                    {
-                      color: COLORS.section,
-                      marginLeft: 5,
-                    },
+                    {color: COLORS.black, marginLeft: 5, fontSize: 14},
                   ]}>
                   Not Started
                 </Text>
@@ -248,14 +249,16 @@ const UpComingDetailLecture = props => {
                   ]}>
                   Mode
                 </Text>
+                {console.log('class type', subjects.class_type)}
                 <Text
                   style={[
                     paraGray.darkpara,
                     {
                       color:
-                        subjects.class_type == 'offline'
+                        subjects.class_type !== 'Online'
                           ? COLORS.red
-                          : COLORS.section,
+                          : COLORS.black,
+                      fontSize: 14,
                       marginLeft: 5,
                     },
                   ]}>
@@ -313,7 +316,8 @@ const UpComingDetailLecture = props => {
                   justifyContent: 'center',
                   alignItems: 'center',
                   marginTop: 20,
-                  backgroundColor: COLORS.black,
+                  // backgroundColor: COLORS.black,
+                  backgroundColor: '#97A7C3',
                   borderRadius: 20,
                 }}
                 onPress={() => {
@@ -325,7 +329,7 @@ const UpComingDetailLecture = props => {
                 <Text
                   style={[
                     paraGray.whitepara,
-                    {marginVertical: 8, marginHorizontal: 10},
+                    {marginVertical: 8, marginHorizontal: 20},
                   ]}>
                   Edit Lecture
                 </Text>
@@ -339,7 +343,8 @@ const UpComingDetailLecture = props => {
                   justifyContent: 'center',
                   alignItems: 'center',
                   marginTop: 20,
-                  backgroundColor: COLORS.black,
+                  /// backgroundColor: COLORS.black,
+                  backgroundColor: COLORS.red,
                   borderRadius: 20,
                 }}
                 onPress={() => {
@@ -348,7 +353,7 @@ const UpComingDetailLecture = props => {
                 <Text
                   style={[
                     paraGray.whitepara,
-                    {marginVertical: 8, marginHorizontal: 10},
+                    {marginVertical: 8, marginHorizontal: 15},
                   ]}>
                   Cancel Lecture
                 </Text>

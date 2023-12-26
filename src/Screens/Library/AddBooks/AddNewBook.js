@@ -1,25 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
   KeyboardAvoidingView,
   TextInput,
   TouchableOpacity,
+  StyleSheet,
 } from 'react-native';
-import { COLORS } from '../../../theme/Colors';
-import { container } from '../../../theme/styles/Base';
-import { paraGray } from '../../../theme/styles/Base';
-import { ScrollView } from 'react-native-gesture-handler';
+import {COLORS} from '../../../theme/Colors';
+import {container} from '../../../theme/styles/Base';
+import {paraGray} from '../../../theme/styles/Base';
+import {ScrollView} from 'react-native-gesture-handler';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useSelector, useDispatch } from 'react-redux';
-import { Dropdown } from 'react-native-element-dropdown';
+import {useSelector, useDispatch} from 'react-redux';
+import {Dropdown} from 'react-native-element-dropdown';
 import Url from '../../../Config/Api/Url';
-import { ApiMethod } from '../../../Config/Api/ApiMethod';
+import {ApiMethod} from '../../../Config/Api/ApiMethod';
 import Spinner from 'react-native-loading-spinner-overlay';
-
-const AddNewBook = (props) => {
-  const { teacherid, schoolid, userid } = useSelector(state => state.userReducer);
+import FieldInputs from '../../../Components/FieldInputs';
+import DropDown from '../../../Components/DropDown';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+const AddNewBook = props => {
+  const {teacherid, schoolid, userid} = useSelector(state => state.userReducer);
   const [loading, setLoading] = useState(false);
   const [load, setLoad] = useState(true);
   const [bookname, setBookname] = useState();
@@ -33,6 +36,9 @@ const AddNewBook = (props) => {
   const [bookcode, setBookCode] = useState();
   const [stock, setStock] = useState();
   const [getdata, setdata] = useState([]);
+  const [openStream, setOpenStream] = useState(false);
+  const [valueStream, setValueStream] = useState('');
+  const [ItemsStream, setItemsStream] = useState(null);
 
   // --------Date-time Picker----------
   const [date, setDate] = useState(new Date());
@@ -74,11 +80,10 @@ const AddNewBook = (props) => {
     const formData = new FormData();
     formData.append('school_id', schoolid);
     formData.append('teacher_id', teacherid);
-    await ApiMethod(Url.get_all_class, formData)
-      .then(result => {
-        setdata(result.data);
-        setLoading(false);
-      });
+    await ApiMethod(Url.get_all_class, formData).then(result => {
+      setdata(result.data);
+      setLoading(false);
+    });
   };
 
   const addbookapi = async () => {
@@ -96,34 +101,80 @@ const AddNewBook = (props) => {
     formData.append('book_code', bookcode);
     formData.append('stock', stock);
     // console.log("Send Data===> ", JSON.stringify(formData));
-    await ApiMethod(Url.addBookByTeacher, formData)
-      .then(result => {
-        // console.log("Result Response==> ", result);
-        if (result != false) {
-          if (result.status == true) {
-            props.navigation.goBack();
-            setLoading(false);
-          } else {
-            alert('Retry');
-            setLoading(false);
-          }
+    await ApiMethod(Url.addBookByTeacher, formData).then(result => {
+      // console.log("Result Response==> ", result);
+      if (result != false) {
+        if (result.status == true) {
+          props.navigation.goBack();
+          setLoading(false);
+        } else {
+          alert('Retry');
+          setLoading(false);
         }
-        setLoading(false);
-      });
+      }
+      setLoading(false);
+    });
   };
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       {loading == true && <Spinner visible={load} />}
       <View style={container.container}>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            height: 50,
+            justifyContent: 'space-between',
+
+            paddingHorizontal: 10,
+            borderBottomColor: '#275CE0',
+            borderBottomWidth: 1,
+          }}>
+          <View
+            style={{
+              alignItems: 'flex-start',
+            }}>
+            <TouchableOpacity
+              style={{
+                backgroundColor: COLORS.white,
+                borderRadius: 20,
+              }}
+              onPress={() =>
+                //   props.navigation.navigate('StudentEdit', {
+                //     studentdetail: studentdetail,
+                //   })
+                props.navigation.goBack()
+              }>
+              <Ionicons
+                style={{marginVertical: 5, paddingHorizontal: 7}}
+                name="arrow-back"
+                size={20}
+                color={COLORS.black}
+              />
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              flex: 1,
+              alignItems: 'center',
+              position: 'absolute',
+              left: 0,
+              right: 0,
+            }}>
+            <Text style={[paraGray.largebold, {fontSize: 20, color: 'black'}]}>
+              Add Books
+            </Text>
+          </View>
+        </View>
         <KeyboardAvoidingView showsVerticalScrollIndicator={false}>
-          <View style={{ paddingHorizontal: 15, marginTop: 10 }}>
-            <View style={{ marginTop: 10 }}>
+          <View style={{paddingHorizontal: 15, marginTop: 10}}>
+            <View style={styles.mainView}>
               <Text
-                style={[paraGray.parahome, { fontSize: 12, marginBottom: 5 }]}>
+                style={[paraGray.parahome, {fontSize: 14, marginBottom: 5}]}>
                 Book Name :
               </Text>
-              <TextInput
+              {/* <TextInput
                 placeholder="ENTER Book Name HERE TO BE UPDATED...."
                 placeholderTextColor="#808080"
                 value={bookname}
@@ -135,14 +186,20 @@ const AddNewBook = (props) => {
                   borderColor: COLORS.lightbackground,
                   fontFamily: 'Montserrat-Regular',
                 }}
+              /> */}
+              <FieldInputs
+                styles={{marginTop: 5}}
+                value={bookname}
+                placeholder="ENTER Book Name HERE TO BE UPDATED...."
+                onChangeText={value => setBookname(value)}
               />
             </View>
-            <View style={{ marginTop: 10 }}>
+            <View style={styles.mainView}>
               <Text
-                style={[paraGray.parahome, { fontSize: 12, marginBottom: 5 }]}>
+                style={[paraGray.parahome, {fontSize: 14, marginBottom: 5}]}>
                 Stream :
               </Text>
-              <Dropdown
+              {/* <Dropdown
                 style={{
                   height: 50,
                   borderColor: isstreamFocus ? 'blue' : 'gray',
@@ -189,14 +246,29 @@ const AddNewBook = (props) => {
                   setStream(item.value);
                   setIsstreamFocus(false);
                 }}
+              /> */}
+              <DropDown
+                open={openStream}
+                value={valueStream}
+                items={getdata.map(item => ({
+                  label: item.class_name,
+                  value: item.class_id,
+                }))}
+                setOpen={setOpenStream}
+                setValue={setValueStream}
+                setItems={setItemsStream}
+                onSelectItem={item => {
+                  setStream(item.value);
+                  setIsstreamFocus(false);
+                }}
               />
             </View>
-            <View style={{ marginTop: 10 }}>
+            <View style={styles.mainView}>
               <Text
-                style={[paraGray.parahome, { fontSize: 12, marginBottom: 5 }]}>
+                style={[paraGray.parahome, {fontSize: 14, marginBottom: 5}]}>
                 Degree :
               </Text>
-              <TextInput
+              {/* <TextInput
                 placeholder="ENTER Degree Of The Book HERE"
                 placeholderTextColor="#808080"
                 value={degree}
@@ -208,14 +280,20 @@ const AddNewBook = (props) => {
                   borderColor: COLORS.lightbackground,
                   fontFamily: 'Montserrat-Regular',
                 }}
+              /> */}
+              <FieldInputs
+                styles={{marginTop: 5}}
+                value={degree}
+                onChangeText={value => setDegree(value)}
+                placeholder="ENTER Degree Of The Book HERE"
               />
             </View>
-            <View style={{ marginTop: 10 }}>
+            <View style={styles.mainView}>
               <Text
-                style={[paraGray.parahome, { fontSize: 12, marginBottom: 5 }]}>
+                style={[paraGray.parahome, {fontSize: 14, marginBottom: 5}]}>
                 Publisher :
               </Text>
-              <TextInput
+              {/* <TextInput
                 placeholder="ENTER Publisher Name"
                 placeholderTextColor="#808080"
                 value={publisher}
@@ -227,14 +305,20 @@ const AddNewBook = (props) => {
                   borderColor: COLORS.lightbackground,
                   fontFamily: 'Montserrat-Regular',
                 }}
+              /> */}
+              <FieldInputs
+                styles={{marginTop: 5}}
+                value={degree}
+                onChangeText={value => setPublisher(value)}
+                placeholder="ENTER Publisher Name"
               />
             </View>
-            <View style={{ marginTop: 10 }}>
+            <View style={styles.mainView}>
               <Text
-                style={[paraGray.parahome, { fontSize: 12, marginBottom: 5 }]}>
+                style={[paraGray.parahome, {fontSize: 14, marginBottom: 5}]}>
                 ISBN NO :
               </Text>
-              <TextInput
+              {/* <TextInput
                 placeholder="ENTER ISBN NO HERE"
                 placeholderTextColor="#808080"
                 value={isbnno}
@@ -246,11 +330,17 @@ const AddNewBook = (props) => {
                   borderColor: COLORS.lightbackground,
                   fontFamily: 'Montserrat-Regular',
                 }}
+              /> */}
+              <FieldInputs
+                styles={{marginTop: 5}}
+                value={isbnno}
+                onChangeText={value => setIbsnNo(value)}
+                placeholder="ENTER ISBN NO HERE"
               />
             </View>
-            <View style={{ marginTop: 10 }}>
+            <View style={styles.mainView}>
               <Text
-                style={[paraGray.parahome, { fontSize: 12, marginBottom: 5 }]}>
+                style={[paraGray.parahome, {fontSize: 14, marginBottom: 5}]}>
                 Book Edition :
               </Text>
               <TouchableOpacity
@@ -259,9 +349,11 @@ const AddNewBook = (props) => {
                   alignItems: 'center',
                   backgroundColor: '#FFFFFF',
                   height: 50,
-                  borderColor: COLORS.lightbackground,
-                  paddingHorizontal: 0,
-                  borderWidth: 1,
+                  //borderColor: COLORS.lightbackground,
+                  borderColor: '#275CE0',
+                  paddingHorizontal: 10,
+                  borderWidth: 0.6,
+                  borderRadius: 12,
                   marginTop: 5,
                   alignSelf: 'center',
                 }}
@@ -283,7 +375,7 @@ const AddNewBook = (props) => {
                 <MaterialCommunityIcons
                   name="calendar-blank-outline"
                   size={26}
-                  color="#434b56"
+                  color="#275CE0"
                   onPress={showDatepicker}
                 />
 
@@ -299,12 +391,12 @@ const AddNewBook = (props) => {
                 )}
               </TouchableOpacity>
             </View>
-            <View style={{ marginTop: 10 }}>
+            <View style={styles.mainView}>
               <Text
-                style={[paraGray.parahome, { fontSize: 12, marginBottom: 5 }]}>
+                style={[paraGray.parahome, {fontSize: 14, marginBottom: 5}]}>
                 Author :
               </Text>
-              <TextInput
+              {/* <TextInput
                 placeholder="ENTER Author Name"
                 placeholderTextColor="#808080"
                 value={author}
@@ -316,14 +408,20 @@ const AddNewBook = (props) => {
                   borderColor: COLORS.lightbackground,
                   fontFamily: 'Montserrat-Regular',
                 }}
+              /> */}
+              <FieldInputs
+                styles={{marginTop: 5}}
+                placeholder="ENTER Author Name"
+                value={author}
+                onChangeText={value => setAuthor(value)}
               />
             </View>
-            <View style={{ marginTop: 10 }}>
+            <View style={styles.mainView}>
               <Text
-                style={[paraGray.parahome, { fontSize: 12, marginBottom: 5 }]}>
+                style={[paraGray.parahome, {fontSize: 14, marginBottom: 5}]}>
                 Book Code :
               </Text>
-              <TextInput
+              {/* <TextInput
                 placeholder="ENTER Book Code"
                 placeholderTextColor="#808080"
                 value={bookcode}
@@ -335,14 +433,20 @@ const AddNewBook = (props) => {
                   borderColor: COLORS.lightbackground,
                   fontFamily: 'Montserrat-Regular',
                 }}
+              /> */}
+              <FieldInputs
+                styles={{marginTop: 5}}
+                placeholder="ENTER Book Code"
+                value={bookcode}
+                onChangeText={value => setBookCode(value)}
               />
             </View>
-            <View style={{ marginTop: 10 }}>
+            <View style={styles.mainView}>
               <Text
-                style={[paraGray.parahome, { fontSize: 12, marginBottom: 5 }]}>
+                style={[paraGray.parahome, {fontSize: 14, marginBottom: 5}]}>
                 Total Stock :
               </Text>
-              <TextInput
+              {/* <TextInput
                 placeholder="ENTER Total Stock"
                 placeholderTextColor="#808080"
                 value={stock}
@@ -354,27 +458,33 @@ const AddNewBook = (props) => {
                   borderColor: COLORS.lightbackground,
                   fontFamily: 'Montserrat-Regular',
                 }}
+              /> */}
+              <FieldInputs
+                styles={{marginTop: 5}}
+                placeholder="ENTER Total Stock"
+                value={stock}
+                onChangeText={value => setStock(value)}
               />
             </View>
           </View>
         </KeyboardAvoidingView>
+
         <View>
           <TouchableOpacity
             style={{
               flexDirection: 'row',
               alignItems: 'center',
-              backgroundColor: COLORS.lightbackground,
+              backgroundColor: COLORS.primary,
               width: '80%',
               height: 50,
-              borderColor: COLORS.lightbackground,
+              //borderColor: COLORS.lightbackground,
               alignSelf: 'center',
               marginTop: 20,
               marginBottom: 20,
               borderRadius: 20,
               justifyContent: 'center',
             }}
-            onPress={() => addbookapi()}
-          >
+            onPress={() => addbookapi()}>
             <Text
               style={{
                 color: '#FFFFFF',
@@ -391,3 +501,8 @@ const AddNewBook = (props) => {
 };
 
 export default AddNewBook;
+const styles = StyleSheet.create({
+  mainView: {
+    marginTop: 15,
+  },
+});

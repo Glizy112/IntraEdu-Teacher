@@ -13,10 +13,16 @@ const DropDown = ({
   style,
   dropDownContaineStyle,
   textStyle,
+  onSelectItem,
 }) => {
   return (
-    <View style={{marginTop: 5}}>
+    <View
+      style={{
+        marginTop: 5,
+        width: '100%',
+      }}>
       <DropDownPicker
+        onSelectItem={onSelectItem}
         open={open}
         value={value}
         items={items}

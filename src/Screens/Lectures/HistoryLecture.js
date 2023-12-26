@@ -121,6 +121,29 @@ const HistoryLecture = props => {
 
   return (
     <View style={[container.container]}>
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          //height: 30,
+          justifyContent: 'center',
+          paddingHorizontal: 15,
+          paddingBottom: 4,
+          borderBottomWidth: 1,
+          borderColor: COLORS.primary,
+        }}>
+        <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderWidth: 0,
+          }}>
+          <Text
+            style={[paraGray.largebold, {textAlign: 'center', marginTop: 16}]}>
+            History
+          </Text>
+        </View>
+      </View>
       {loading == true && <Spinner visible={load} />}
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -134,28 +157,34 @@ const HistoryLecture = props => {
             })
             .map((data, index) => (
               <View style={{flex: 1, paddingHorizontal: 10}} key={index}>
+                {console.log('data', data)}
                 <TouchableOpacity
                   style={{
                     flex: 1,
-                    backgroundColor: COLORS.bg,
+                    backgroundColor: COLORS.bgColor,
                     borderRadius: 10,
                     paddingHorizontal: 10,
                     borderWidth: 1,
                     borderColor: COLORS.border,
                     marginVertical: 10,
                   }}
-                  onPress={() => {
-                    props.navigation.navigate('LecHistory', {
-                      ptm: getdata[index],
-                    });
-                  }}>
+                  //   onPress={() => {
+                  //     props.navigation.navigate('LecHistory', {
+                  //       ptm: getdata[index],
+                  //     });
+                  //   }}
+                >
                   <View
                     style={{
                       flexDirection: 'row',
                       justifyContent: 'center',
+                      justifyContent: 'space-between',
                       marginTop: 10,
+                      width: '95%',
+                      alignSelf: 'center',
                     }}>
                     <Text style={[paraGray.darkpara]}>{data.subject_name}</Text>
+                    <Text style={[paraGray.darkpara]}>{data.title}</Text>
                   </View>
                   <View
                     style={{

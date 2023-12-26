@@ -9,6 +9,11 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 import SearchInput, {createFilter} from 'react-native-search-filter';
 import {useSelector, useDispatch} from 'react-redux';
 import {container, paraGray} from '../../theme/styles/Base';
@@ -17,7 +22,7 @@ import moment from 'moment';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Url from '../../Config/Api/Url';
 import Swiper from 'react-native-swiper';
-
+import {SwiperFlatList} from 'react-native-swiper-flatlist';
 const Lecture = props => {
   const [join, setjoin] = useState([]);
   const [getdata, setGetdata] = useState([]);
@@ -58,8 +63,8 @@ const Lecture = props => {
       times >= sub.start_time && times <= sub.end_time
         ? (join[index] = true)
         : (join[index] = false),
-        console.log("newList---> ",list);
-        setjoin(list);
+        console.log('newList---> ', list);
+      setjoin(list);
     });
     setLoading(false);
   };
@@ -103,19 +108,87 @@ const Lecture = props => {
     <View style={styles.container}>
       <View
         style={{
-          height: getdata.length < 1 && loading == false ? 0 : 180,
-          marginBottom: getdata.length < 1 && loading == false ? 10 : 0,
+          flexDirection: 'row',
+          alignItems: 'center',
+          height: 50,
+          justifyContent: 'space-between',
+
+          paddingHorizontal: 10,
+          borderBottomColor: '#275CE0',
+          borderBottomWidth: 1,
+        }}>
+        <View
+          style={{
+            alignItems: 'flex-start',
+          }}>
+          <TouchableOpacity
+            style={{
+              backgroundColor: COLORS.white,
+              borderRadius: 20,
+            }}
+            onPress={() =>
+              //   props.navigation.navigate('StudentEdit', {
+              //     studentdetail: studentdetail,
+              //   })
+              props.navigation.goBack()
+            }>
+            <Ionicons
+              style={{marginVertical: 5, paddingHorizontal: 7}}
+              name="arrow-back"
+              size={20}
+              color={COLORS.black}
+            />
+          </TouchableOpacity>
+        </View>
+        <View
+          style={{
+            flex: 1,
+            alignItems: 'center',
+            position: 'absolute',
+            left: 0,
+            right: 0,
+          }}>
+          <Text style={[paraGray.largebold, {color: 'black'}]}>Lecture</Text>
+        </View>
+      </View>
+      <View
+        style={{
+          height: getdata.length < 1 && loading == false ? 0 : 200,
+          marginBottom: getdata.length < 1 && loading == false ? 1 : 0,
         }}>
         {loading == true && <Spinner visible={load} />}
-        <Swiper
+
+        {/*
+ <Swiper
           height={180}
-          showsButtons={false}
           showsPagination={true}
+          horizontal={true}
+          loop={true}
+          onIndexChanged={item => console.log(item)}
+          renderPagination={(index, total, context) => {
+            return (
+              <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+                {Array.from(Array(total), (item, i) => (
+                  <View
+                    key={i}
+                    style={{
+                      width: 8,
+                      height: 8,
+                      borderRadius: 4,
+                      marginHorizontal: 5,
+                      backgroundColor: index === i ? 'blue' : 'gray', // Adjust active and inactive dot styles
+                    }}
+                  />
+                ))}
+              </View>
+            );
+          }}
           paginationStyle={{}}>
           {getdata
-            .filter(function (item) {
-              return item.status == 1;
-            })
+            // .filter(function (item) {
+            //   console.log(item.status);
+            //   return item.status == 1;
+            // })
             .map((sub, index) => (
               <View key={index}>
                 <TouchableOpacity
@@ -172,7 +245,7 @@ const Lecture = props => {
                     </Text>
                   </View>
                   {/* Show 5min before Lecture  */}
-                  {join[index] == true &&
+        {/* {join[index] == true &&
                     (sub.class_type == 'Online' ? (
                       <View
                         style={{
@@ -207,15 +280,15 @@ const Lecture = props => {
                           Take Attendance
                         </Text>
                       </View>
-                    ))}
-                  <View
+                    ))} */}
+        {/* <View
                     style={{
                       borderBottomWidth: 0.8,
                       borderBottomColor: COLORS.background,
                       marginBottom: 5,
                     }}
-                  />
-                  <View
+                  /> */}
+        {/* <View
                     style={{
                       flex: 1,
                       flexDirection: 'row',
@@ -229,13 +302,164 @@ const Lecture = props => {
                     {/* <Text style={[paraGray.darkpara, {color: COLORS.lightblack}]}>
                     {sub.peroid}
                   </Text> */}
-                  </View>
-                </TouchableOpacity>
-              </View>
-            ))}
-        </Swiper>
+        {/* </View> */}
+        {/* </TouchableOpacity>
+              </View> */}
+        {/* ))}
+        </Swiper> */}
+        <SwiperFlatList
+          style={{
+            backgroundColor: 'white',
+            flex: 1,
+
+            // height: hp('55%'),
+            // paddingVertical: 50,
+          }}
+          paginationStyle={{}}
+          paginationStyleItemActive={{width: 10, height: 10}}
+          paginationStyleItem={{width: 10, height: 10}}
+          data={getdata}
+          getCurrentIndex={item => console.log(item)}
+          // paginationStyle={{position: 'absolute', zIndex: 99}}
+          showPagination={true}
+          horizontal={true}
+          paginationActiveColor="blue"
+          renderItem={({item, index}) => (
+            <View
+              style={{
+                width: wp('100%'),
+                alignSelf: 'center',
+                //height: '40%',
+                paddingBottom: 30,
+              }}>
+              <TouchableOpacity
+                style={{
+                  //a1spectRatio: 800.1, // Adjust the aspect ratio to maintain card size
+                  width: '90%',
+                  height: '70%',
+                  borderColor: COLORS.border,
+                  borderWidth: 1,
+                  borderRadius: 10,
+
+                  justifyContent: 'center',
+                  paddingHorizontal: 10,
+                  alignSelf: 'center',
+                }}
+                onPress={() => {
+                  props.navigation.navigate('UpComingDetailLecture', {
+                    subjects: getdata[index],
+                  });
+                }}>
+                <View
+                  style={{
+                    flex: 1,
+
+                    // width: '100%',
+                    flexDirection: 'row',
+                    marginTop: 10,
+                    justifyContent: 'space-between',
+                  }}>
+                  <Text
+                    style={[
+                      paraGray.darkpara,
+                      {
+                        fontSize: 13,
+                      },
+                    ]}>
+                    {item.subject_name}
+                  </Text>
+                  <Text
+                    style={[
+                      paraGray.darkpara,
+                      {
+                        fontSize: 13,
+                      },
+                    ]}>
+                    {item.class_date}
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    flex: 1,
+                    marginTop: 5,
+                  }}>
+                  <Text
+                    style={{
+                      color: COLORS.lightblack,
+                      fontSize: 12,
+                      fontFamily: 'Montserrat-Regular',
+                    }}>
+                    {item.start_time} - {item.end_time}
+                  </Text>
+                </View>
+                {/* Show 5min before Lecture  */}
+                {join[index] == true &&
+                  (item.class_type == 'Online' ? (
+                    <View
+                      style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        justifyContent: 'flex-end',
+                      }}>
+                      <Text
+                        style={{
+                          color: COLORS.bluee,
+                          fontSize: 12,
+                          fontFamily: 'Montserrat-Regular',
+                          marginTop: -5,
+                        }}>
+                        Join
+                      </Text>
+                    </View>
+                  ) : (
+                    <View
+                      style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        justifyContent: 'flex-end',
+                      }}>
+                      <Text
+                        style={{
+                          color: COLORS.bluee,
+                          fontSize: 12,
+                          fontFamily: 'Montserrat-Regular',
+                          marginTop: -5,
+                        }}>
+                        Take Attendance
+                      </Text>
+                    </View>
+                  ))}
+                <View
+                  style={{
+                    borderBottomWidth: 0.8,
+                    borderBottomColor: COLORS.background,
+                    marginBottom: 5,
+                  }}
+                />
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    paddingBottom: 10,
+                  }}>
+                  <Text style={[paraGray.darkpara, {color: COLORS.lightblack}]}>
+                    {item.class_name}
+                  </Text>
+                  <Text style={[paraGray.darkpara, {color: COLORS.lightblack}]}>
+                    {item.title}
+                  </Text>
+                  {/* <Text style={[paraGray.darkpara, {color: COLORS.lightblack}]}>
+                {sub.peroid}
+              </Text> */}
+                </View>
+              </TouchableOpacity>
+            </View>
+          )}
+        />
       </View>
-      <TouchableOpacity
+
+      {/* <TouchableOpacity
         onPress={() => {
           props.navigation.navigate('CreateLecture');
         }}>
@@ -244,7 +468,7 @@ const Lecture = props => {
           <FontAwesome name="angle-right" size={25} color="#000000" />
         </View>
       </TouchableOpacity>
-      <View style={styles.divline} />
+      <View style={styles.divline} /> */}
       {/* <TouchableOpacity
         onPress={() => {
           props.navigation.navigate('UpComingLecture');
@@ -255,7 +479,7 @@ const Lecture = props => {
         </View>
       </TouchableOpacity>
       <View style={styles.divline} /> */}
-      <TouchableOpacity
+      {/* <TouchableOpacity
         onPress={() => {
           props.navigation.navigate('TimeTable');
         }}>
@@ -274,7 +498,115 @@ const Lecture = props => {
           <FontAwesome name="angle-right" size={25} color="#000000" />
         </View>
       </TouchableOpacity>
-      <View style={styles.divline} />
+      <View style={styles.divline} /> */}
+      <View style={{marginTop: 10}}>
+        <View
+          style={{
+            borderWidth: 1,
+            borderColor: '#275CE0',
+            width: '90%',
+            alignSelf: 'center',
+            borderRadius: 10,
+            height: 80,
+            justifyContent: 'center',
+            marginTop: 10,
+            marginBottom: 10,
+          }}>
+          <TouchableOpacity
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              width: '90%',
+              alignSelf: 'center',
+            }}
+            //onPress={() => props.navigation.navigate('AddBulkBook')}
+            onPress={() => props.navigation.navigate('CreateLecture')}>
+            <View>
+              <Text style={[paraGray.parahome, {fontSize: 14}]}>
+                Create Lecture
+              </Text>
+              <View style={{marginTop: 5}}>
+                <Text tyle={paraGray.darkpara}>
+                  View the attendance report for a recent examination
+                </Text>
+              </View>
+            </View>
+            <View style={{justifyContent: 'center', alignItems: 'center'}}>
+              <Ionicons name="arrow-forward" size={20} color={'#275CE0'} />
+            </View>
+          </TouchableOpacity>
+        </View>
+        <View
+          style={{
+            borderWidth: 1,
+            borderColor: '#275CE0',
+            width: '90%',
+            alignSelf: 'center',
+            borderRadius: 10,
+            height: 80,
+            justifyContent: 'center',
+            marginTop: 10,
+            marginBottom: 10,
+          }}>
+          <TouchableOpacity
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              width: '90%',
+              alignSelf: 'center',
+            }}
+            //onPress={() => props.navigation.navigate('AddBulkBook')}
+            onPress={() => props.navigation.navigate('TimeTable')}>
+            <View>
+              <Text style={[paraGray.parahome, {fontSize: 14}]}>
+                My Time Table
+              </Text>
+              <View style={{marginTop: 5}}>
+                <Text tyle={paraGray.darkpara}>
+                  View the attendance report for a recent examination
+                </Text>
+              </View>
+            </View>
+            <View style={{justifyContent: 'center', alignItems: 'center'}}>
+              <Ionicons name="arrow-forward" size={20} color={'#275CE0'} />
+            </View>
+          </TouchableOpacity>
+        </View>
+        <View
+          style={{
+            borderWidth: 1,
+            borderColor: '#275CE0',
+            width: '90%',
+            alignSelf: 'center',
+            borderRadius: 10,
+            height: 80,
+            justifyContent: 'center',
+            marginTop: 10,
+            marginBottom: 10,
+          }}>
+          <TouchableOpacity
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              width: '90%',
+              alignSelf: 'center',
+            }}
+            //onPress={() => props.navigation.navigate('AddBulkBook')}
+            onPress={() => props.navigation.navigate('HistoryLecture')}>
+            <View>
+              <Text style={[paraGray.parahome, {fontSize: 14}]}>History</Text>
+              <View style={{marginTop: 5}}>
+                <Text tyle={paraGray.darkpara}>
+                  View the attendance report for a recent examination
+                </Text>
+              </View>
+            </View>
+            <View style={{justifyContent: 'center', alignItems: 'center'}}>
+              <Ionicons name="arrow-forward" size={20} color={'#275CE0'} />
+            </View>
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   );
 };
