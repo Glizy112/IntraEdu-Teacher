@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -10,25 +10,31 @@ import {
   RefreshControl,
   Image,
 } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import {ScrollView} from 'react-native-gesture-handler';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Dropdown } from 'react-native-element-dropdown';
-import { paraGray } from '../../theme/styles/Base';
+import {Dropdown} from 'react-native-element-dropdown';
+import {paraGray} from '../../theme/styles/Base';
 import Spinner from 'react-native-loading-spinner-overlay';
-import { useSelector, useDispatch } from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import Url from '../../Config/Api/Url';
-import { AutoGrowingTextInput } from 'react-native-autogrow-textinput';
-import { COLORS } from '../../theme/Colors';
+import {AutoGrowingTextInput} from 'react-native-autogrow-textinput';
+import {COLORS} from '../../theme/Colors';
 import ImagePicker from 'react-native-image-crop-picker';
-import { ApiMethod } from '../../Config/Api/ApiMethod';
+import {ApiMethod} from '../../Config/Api/ApiMethod';
+import DropDown from '../../Components/DropDown';
+
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const AddMaterialImage = props => {
+  const [open, setOpen] = useState(false);
+  const [openSection, setOpenSection] = useState(false);
+  const [openSubject, setOpenSubject] = useState(false);
   const [loading, setLoading] = useState(false);
   const [load, setLoad] = useState(true);
   const [refreshing, setRefreshing] = React.useState(false);
-  const { teacherid, userid, schoolid } = useSelector(state => state.userReducer);
+  const {teacherid, userid, schoolid} = useSelector(state => state.userReducer);
   const [getdata, setdata] = useState([]);
   const [image, setImage] = useState([]);
   // <------------Select Stream-------------->
@@ -151,17 +157,26 @@ const AddMaterialImage = props => {
       maxFiles: 10,
       mediaType: 'any',
       includeBase64: false,
-
     })
       .then(response => {
-        response.map(image => {
-          imageList.push({
-            filename: image.filename,
-            path: image.path,
-            data: image.mime,
-          });
-        });
-        setImage(imageList);
+        if (image.length > 0) {
+          setImage(prevImages => [
+            ...prevImages,
+            ...response.map(imageData => ({
+              filename: imageData.filename,
+              path: imageData.path,
+              data: imageData.mime,
+            })),
+          ]);
+        } else {
+          setImage(
+            response.map(imageData => ({
+              filename: imageData.filename,
+              path: imageData.path,
+              data: imageData.mime,
+            })),
+          );
+        }
       })
       .catch(e => console.log('galleryerror => ', e.message));
 
@@ -174,6 +189,7 @@ const AddMaterialImage = props => {
     //   // setDp(image.path);
     //   setImage(image);
     // });
+    console.log('Image', image);
   };
   const removeItem = index => {
     setImage(image.filter((o, i) => index !== i));
@@ -232,17 +248,122 @@ const AddMaterialImage = props => {
   return (
     <View style={styles.container}>
       {loading == true && <Spinner visible={load} />}
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          height: 50,
+          justifyContent: 'space-between',
+
+          paddingHorizontal: 10,
+          borderBottomColor: '#275CE0',
+          borderBottomWidth: 1,
+        }}>
+        <View
+          style={{
+            alignItems: 'flex-start',
+          }}>
+          <TouchableOpacity
+            style={{
+              backgroundColor: COLORS.white,
+              borderRadius: 20,
+            }}
+            onPress={() =>
+              //   props.navigation.navigate('StudentEdit', {
+              //     studentdetail: studentdetail,
+              //   })
+              props.navigation.goBack()
+            }>
+            <Ionicons
+              style={{marginVertical: 5, paddingHorizontal: 7}}
+              name="arrow-back"
+              size={20}
+              color={COLORS.black}
+            />
+          </TouchableOpacity>
+        </View>
+        <View
+          style={{
+            flex: 1,
+            alignItems: 'center',
+            position: 'absolute',
+            left: 0,
+            right: 0,
+          }}>
+          <Text style={[paraGray.largebold, {color: 'black'}]}>Add Images</Text>
+        </View>
+      </View>
       <ScrollView
         showsVerticalScrollIndicator={false}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
         <View>
-          <View style={{ marginTop: 15, paddingHorizontal: 20 }}>
-            <Text style={[paraGray.darkpara, { marginVertical: 10 }]}>
+          <View>
+            <TouchableOpacity
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: COLORS.bgColor,
+                width: '80%',
+                height: 96,
+                borderRadius: 13,
+                alignSelf: 'center',
+                marginTop: 20,
+                paddingHorizontal: 20,
+              }}
+              onPress={SelectImage}>
+              <AntDesign
+                style={{marginVertical: 5}}
+                name="pluscircle"
+                size={30}
+                color={COLORS.black}
+              />
+              <Text
+                style={{
+                  fontFamily: 'Montserrat-Medium',
+                  color: COLORS.black,
+                  fontSize: 15,
+                  marginLeft: 16,
+                }}>
+                Add Image(s) / Optional
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            <View style={{flexDirection: 'row', marginTop: 10}}>
+              {image.map((imageUrl, index) => (
+                <TouchableOpacity
+                  key={index}
+                  style={{marginHorizontal: 15, marginLeft: 20}}
+                  onPress={() => removeItem(index)}>
+                  <AntDesign
+                    style={{alignSelf: 'flex-end', marginRight: 0}}
+                    name="closecircleo"
+                    size={16}
+                    color={COLORS.black}
+                  />
+                  <Image
+                    style={{
+                      flexDirection: 'row',
+                      height: 100,
+                      width: 100,
+                      borderWidth: 1,
+                      borderRadius: 10,
+                    }}
+                    resizeMode="cover"
+                    source={{uri: imageUrl.path}}
+                  />
+                </TouchableOpacity>
+              ))}
+            </View>
+          </ScrollView>
+          <View style={{marginTop: 15, paddingHorizontal: 20}}>
+            <Text style={[paraGray.darkpara, {marginVertical: 10}]}>
               Stream
             </Text>
-            <Dropdown
+            {/* <Dropdown
               style={{
                 height: 50,
                 borderColor: isstreamFocus ? 'blue' : 'gray',
@@ -292,15 +413,32 @@ const AddMaterialImage = props => {
                 setIsstreamFocus(false);
                 getsectionData(item);
               }}
+            /> */}
+            <DropDown
+              open={open}
+              setOpen={setOpen}
+              value={stream}
+              items={getdata.map(item => ({
+                label: item.class_name,
+                value: item.class_id,
+              }))}
+              placeholder="Select Stream"
+              onSelectItem={item => {
+                // getsectionData(item);
+                setselectedStream(item);
+                setStream(item.value);
+                setIsstreamFocus(false);
+                getsectionData(item);
+              }}
             />
           </View>
         </View>
         <View>
-          <View style={{ paddingHorizontal: 20 }}>
-            <Text style={[paraGray.darkpara, { marginVertical: 10 }]}>
+          <View style={{paddingHorizontal: 20}}>
+            <Text style={[paraGray.darkpara, {marginVertical: 10}]}>
               Section
             </Text>
-            <Dropdown
+            {/* <Dropdown
               style={{
                 height: 50,
                 borderColor: issectionFocus ? 'blue' : 'gray',
@@ -350,13 +488,30 @@ const AddMaterialImage = props => {
                 setIsSectionFocus(false);
                 getsubjectData(item);
               }}
+            /> */}
+            <DropDown
+              open={openSection}
+              setOpen={setOpenSection}
+              value={section}
+              items={getsectiondata.map(item => ({
+                label: item.section_name,
+                value: item.section_id,
+                subject: item.subject_id,
+              }))}
+              placeholder="Select Section"
+              onSelectItem={item => {
+                setSelectedSection(item);
+                setSection(item.value);
+                setIsSectionFocus(false);
+                getsubjectData(item);
+              }}
             />
           </View>
-          <View style={{ paddingHorizontal: 20 }}>
-            <Text style={[paraGray.darkpara, { marginVertical: 10 }]}>
+          <View style={{paddingHorizontal: 20}}>
+            <Text style={[paraGray.darkpara, {marginVertical: 10}]}>
               Subject
             </Text>
-            <Dropdown
+            {/* <Dropdown
               style={{
                 height: 50,
                 borderColor: issubjectFocus ? 'blue' : 'gray',
@@ -406,9 +561,25 @@ const AddMaterialImage = props => {
                 setIssubjectFocus(false);
                 // setsubjectId(item.subject);
               }}
+            /> */}
+            <DropDown
+              open={openSection}
+              setOpen={setOpenSection}
+              value={subject}
+              items={getsubjectdata.map(item => ({
+                label: item.name,
+                value: item.id,
+                // subject: item.subject_id,
+              }))}
+              placeholder="Select subject"
+              onSelectItem={item => {
+                setSelectedSubject(item);
+                setsubject(item.value);
+                setIssubjectFocus(false);
+              }}
             />
           </View>
-          <Text style={styles.formtxt}>ADD Image:</Text>
+          {/* <Text style={styles.formtxt}>ADD Image:</Text>
           <View
             style={{
               flex: 1,
@@ -424,18 +595,17 @@ const AddMaterialImage = props => {
               {image.map((image, index) => (
                 <TouchableOpacity
                   key={index}
-                  style={{ marginHorizontal: 10, marginVertical: 10 }}
-                  onPress={() => removeItem(index)}
-                >
+                  style={{marginHorizontal: 10, marginVertical: 10}}
+                  onPress={() => removeItem(index)}>
                   <AntDesign
-                    style={{ alignSelf: 'flex-end', marginRight: -2 }}
+                    style={{alignSelf: 'flex-end', marginRight: -2}}
                     name="closecircleo"
                     size={18}
                     color={COLORS.red}
                   />
                   <Image
-                    style={{ flexDirection: 'row', height: 80, width: 80 }}
-                    source={{ uri: image.path }}
+                    style={{flexDirection: 'row', height: 80, width: 80}}
+                    source={{uri: image.path}}
                   />
                 </TouchableOpacity>
               ))}
@@ -454,38 +624,66 @@ const AddMaterialImage = props => {
               }}
               onPress={SelectImage}>
               <AntDesign
-                style={{ marginVertical: 5 }}
+                style={{marginVertical: 5}}
                 name="pluscircle"
                 size={30}
                 color={COLORS.black}
               />
             </TouchableOpacity>
-          </View>
-          <Text style={styles.formtxt}>Title:</Text>
+          </View> */}
+          <Text
+            style={[
+              paraGray.darkpara,
+              {marginVertical: 10, width: '90%', alignSelf: 'center'},
+            ]}>
+            Title:
+          </Text>
           <AutoGrowingTextInput
             value={title}
             onChangeText={value => setTitle(value)}
-            style={styles.txtboxDesc}
-            placeholder={'ENTER TITLE'}
+            style={{
+              backgroundColor: 'transparent',
+              borderColor: COLORS.primary,
+              borderWidth: 0.6,
+              borderRadius: 12,
+              height: 80,
+              width: '90%',
+              alignSelf: 'center',
+            }}
+            placeholder={'  ENTER TITLE'}
           />
-          <Text style={styles.formtxt}>ADD Message:</Text>
+          <Text
+            style={[
+              paraGray.darkpara,
+              {marginVertical: 10, width: '90%', alignSelf: 'center'},
+            ]}>
+            ADD Message:
+          </Text>
           <AutoGrowingTextInput
             value={desc}
             onChangeText={e => setDesc(e)}
-            style={styles.txtboxDesc}
-            placeholder={'ADD MESSAGE'}
+            style={{
+              backgroundColor: 'transparent',
+              borderColor: COLORS.primary,
+              borderWidth: 0.6,
+              borderRadius: 12,
+              height: 80,
+              width: '90%',
+              alignSelf: 'center',
+            }}
+            placeholder={'  ADD MESSAGE'}
           />
           <View>
             <TouchableOpacity
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                backgroundColor: '#000000',
+                backgroundColor: COLORS.primary,
                 width: '80%',
                 height: 50,
                 borderColor: '#000000',
                 alignSelf: 'center',
-                borderWidth: 2,
+                //borderWidth: 2,
                 marginTop: '15%',
                 marginBottom: 30,
                 bottom: 0,
@@ -501,7 +699,7 @@ const AddMaterialImage = props => {
                   fontSize: 17,
                   fontFamily: 'Montserrat-SemiBold',
                 }}>
-                Share
+                Submit
               </Text>
             </TouchableOpacity>
           </View>

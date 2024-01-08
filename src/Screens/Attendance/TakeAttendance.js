@@ -339,7 +339,7 @@ const TakeAttendance = props => {
 
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View
           style={{
             flexDirection: 'row',
@@ -397,12 +397,14 @@ const TakeAttendance = props => {
           placeholderTextColor={'rgba(0, 0, 0, 0.50)'}
         />
         <View style={{marginTop: 10}}>
-          <View
+          {/* <View
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
               width: '90%',
               alignSelf: 'center',
+
+              flex: 1,
             }}>
             <View>
               <Text
@@ -422,28 +424,61 @@ const TakeAttendance = props => {
               <Text
                 style={[
                   paraGray.darkpara,
-                  {marginRight: 11, color: 'rgba(0, 0, 0, 0.60)'},
+                  {marginRight: 15, color: 'rgba(0, 0, 0, 0.60)'},
                 ]}>
-                Mark Present
+                All Present
               </Text>
               <Text style={[paraGray.darkpara, {color: 'rgba(0, 0, 0, 0.60)'}]}>
-                Mark Absent
+                All Absent
+              </Text>
+            </View>
+          </View> */}
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              width: '90%',
+              alignSelf: 'center',
+              alignItems: 'center',
+
+              marginTop: 10,
+            }}>
+            <Text
+              style={[
+                paraGray.largebold,
+                {fontSize: 12, color: 'rgba(0, 0, 0, 0.60)'},
+              ]}>
+              Filter By
+            </Text>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Text
+                style={[
+                  paraGray.darkpara,
+                  {marginRight: 25, color: 'rgba(0, 0, 0, 0.60)'},
+                ]}>
+                Present
+              </Text>
+              <Text style={[paraGray.darkpara, {color: 'rgba(0, 0, 0, 0.60)'}]}>
+                Absent
               </Text>
             </View>
           </View>
-          <View
+          {/* <View
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
               alignItems: 'center',
               width: '90%',
               alignSelf: 'center',
+
+              flex: 1,
             }}>
             <View
               style={{
                 flexDirection: 'row',
                 justifyContent: 'center',
                 alignItems: 'center',
+                //flex: 1,
                 //  alignSelf: 'flex-start',
 
                 //              marginBottom: 60,
@@ -500,8 +535,10 @@ const TakeAttendance = props => {
                 alignItems: 'center',
 
                 alignSelf: 'center',
-                width: '35%',
+                //width: '35%',
                 justifyContent: 'space-between',
+                marginTop: 10,
+                //flex: 1,
               }}>
               <View
                 style={[
@@ -534,6 +571,123 @@ const TakeAttendance = props => {
                 />
               </View>
             </View>
+          </View> */}
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              width: '95%',
+              alignSelf: 'flex-end',
+              //marginVertical: 10,
+              //borderWidth: 1,
+              // flex: 1,
+            }}>
+            <View
+              style={{
+                flexDirection: 'row',
+                // alignItems: 'flex-start',
+                //justifyContent: 'flex-start',
+
+                alignSelf: 'flex-start',
+                // alignContent: 'flex-start',
+
+                //height: '100%',
+              }}>
+              <TouchableOpacity
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  paddingHorizontal: 16,
+                  height: 32,
+                  borderColor: COLORS.primary,
+                  alignSelf: 'center',
+                  borderWidth: 1.2,
+                  borderRadius: 45,
+                  justifyContent: 'center',
+                  marginTop: 15,
+                  marginRight: 16,
+                }}>
+                <Text
+                  style={{
+                    color: COLORS.primary,
+                    fontSize: 14,
+                    fontFamily: 'Montserrat-Medium',
+                  }}>
+                  Present
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  paddingHorizontal: 16,
+                  height: 32,
+                  borderColor: COLORS.red,
+                  alignSelf: 'center',
+                  borderWidth: 1.2,
+                  borderRadius: 45,
+                  justifyContent: 'center',
+                  marginTop: 15,
+                }}>
+                <Text
+                  style={{
+                    color: COLORS.red,
+                    fontSize: 14,
+                    fontFamily: 'Montserrat-Medium',
+                  }}>
+                  Absent
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                // alignItems: 'flex-end',
+                alignSelf: 'center',
+                marginRight: 2,
+              }}>
+              <View
+                style={[
+                  paraGray.darkpara,
+                  {
+                    color: 'rgba(0, 0, 0, 0.60)',
+                    borderRadius: 50,
+                    overflow: 'hidden',
+                  },
+                ]}>
+                <CheckBox
+                  checked={checked}
+                  onPress={() => setChecked(!checked)}
+                  iconType="material-community"
+                  checkedIcon="checkbox-marked"
+                  uncheckedIcon="checkbox-blank-outline"
+                  uncheckedColor="#275CE0"
+                  checkedColor="#275CE0"
+                  size={30}
+                  wrapperStyle={{borderRadius: 100, overflow: 'hidden'}}
+                  style={{}}
+                />
+                <Text style={[paraGray.darkpara, {textAlign: 'center'}]}>
+                  All
+                </Text>
+              </View>
+              <View style={[paraGray.darkpara, {color: 'rgba(0, 0, 0, 0.60)'}]}>
+                <CheckBox
+                  checked={checked}
+                  onPress={() => setChecked(!checked)}
+                  iconType="material-community"
+                  checkedIcon="checkbox-marked"
+                  uncheckedIcon="checkbox-blank-outline"
+                  uncheckedColor="#E92020"
+                  checkedColor="#E92020"
+                  size={30}
+                />
+                <Text style={[paraGray.darkpara, {textAlign: 'center'}]}>
+                  All
+                </Text>
+              </View>
+            </View>
           </View>
 
           <View
@@ -543,6 +697,7 @@ const TakeAttendance = props => {
               width: '90%',
               alignSelf: 'center',
               marginTop: 20,
+              //borderWidth: 1,
             }}>
             <View>
               <Text
@@ -562,12 +717,12 @@ const TakeAttendance = props => {
               <Text
                 style={[
                   paraGray.darkpara,
-                  {marginRight: 11, color: 'rgba(0, 0, 0, 0.60)'},
+                  {marginRight: 25, color: 'rgba(0, 0, 0, 0.60)'},
                 ]}>
-                Mark Present
+                Present
               </Text>
               <Text style={[paraGray.darkpara, {color: 'rgba(0, 0, 0, 0.60)'}]}>
-                Mark Absent
+                Absent
               </Text>
             </View>
           </View>
@@ -586,7 +741,7 @@ const TakeAttendance = props => {
                       alignItems: 'center',
                       // justifyContent: 'center',
                       //alignSelf: 'center',
-                      //borderWidth: 1,
+                      // borderWidth: 1,
                       width: '90%',
                       alignSelf: 'center',
                       marginBottom: 10,
@@ -672,102 +827,177 @@ const TakeAttendance = props => {
               )}
             />
           ) : (
+            // <FlatList
+            //   showsVerticalScrollIndicator={false}
+            //   data={getdata}
+            //   keyExtractor={item => item.EnrollId}
+            //   renderItem={({item}) => (
+            //     <View>
+            //       <View
+            //         style={{
+            //           flexDirection: 'row',
+            //           justifyContent: 'space-between',
+            //           marginTop: 10,
+            //           alignItems: 'center',
+            //           // justifyContent: 'center',
+            //           //alignSelf: 'center',
+
+            //           width: '90%',
+            //           alignSelf: 'center',
+            //           marginBottom: 3,
+            //           flex: 1,
+            //         }}>
+            //         <View style={{borderWidth: 1}}>
+            //           <View>
+            //             <Text
+            //               style={[
+            //                 paraGray.largebold,
+            //                 {fontSize: 14, width: '40%'},
+            //               ]}>
+            //               {item.name}
+            //             </Text>
+            //           </View>
+            //           <View
+            //             style={{
+            //               flexDirection: 'row',
+            //               justifyContent: 'space-between',
+            //               alignItems: 'center',
+            //               // width: '50%',
+            //               marginTop: 10,
+            //             }}>
+            //             <View>
+            //               <Text
+            //                 style={[
+            //                   paraGray.darkpara,
+            //                   {
+            //                     fontSize: 12,
+            //                     color: '#97A7C3',
+            //                     textAlign: 'left',
+            //                   },
+            //                 ]}>
+            //                 Roll NO- {item.roll_no}
+            //               </Text>
+            //             </View>
+            //           </View>
+            //         </View>
+            //         <View
+            //           style={{
+            //             flexDirection: 'row',
+            //             justifyContent: 'space-between',
+            //             alignItems: 'center',
+            //             //borderWidth: 1,
+            //             // /width: '35%',
+            //             alignSelf: 'center',
+            //           }}>
+            //           <View
+            //             style={[
+            //               paraGray.darkpara,
+            //               {marginRight: 11, color: 'rgba(0, 0, 0, 0.60)'},
+            //             ]}>
+            //             <CheckBox
+            //               checked={checked}
+            //               onPress={() => setChecked(!checked)}
+            //               // Use ThemeProvider to make change for all checkbox
+            //               iconType="material-community"
+            //               checkedIcon="checkbox-marked"
+            //               uncheckedIcon="checkbox-blank-outline"
+            //               uncheckedColor="#275CE0"
+            //               checkedColor="#275CE0"
+            //               size={30}
+            //             />
+            //           </View>
+            //           <View>
+            //             <CheckBox
+            //               checked={checked}
+            //               onPress={() => setChecked(!checked)}
+            //               // Use ThemeProvider to make change for all checkbox
+            //               iconType="material-community"
+            //               checkedIcon="checkbox-marked"
+            //               uncheckedIcon="checkbox-blank-outline"
+            //               uncheckedColor="#E92020"
+            //               checkedColor="#E92020"
+            //               size={30}
+            //             />
+            //           </View>
+            //         </View>
+            //       </View>
+            //       <View
+            //         style={{
+            //           borderBottomWidth: 1,
+            //           width: '100%',
+            //           marginTop: 5,
+            //           borderColor: '#97A7C3',
+            //         }}></View>
+            //     </View>
+            //   )}
+            // />
             <FlatList
               showsVerticalScrollIndicator={false}
               data={getdata}
               keyExtractor={item => item.EnrollId}
               renderItem={({item}) => (
-                <View>
+                <View style={{marginVertical: 10}}>
                   <View
                     style={{
                       flexDirection: 'row',
-                      justifyContent: 'space-between',
-                      marginTop: 10,
                       alignItems: 'center',
-                      // justifyContent: 'center',
-                      //alignSelf: 'center',
-                      //borderWidth: 1,
-                      width: '90%',
+                      //  justifyContent: 'space-between',
+                      width: '100%',
                       alignSelf: 'center',
-                      marginBottom: 3,
                     }}>
-                    <View>
-                      <View>
-                        <Text style={[paraGray.largebold, {fontSize: 14}]}>
-                          {item.name}
-                        </Text>
-                      </View>
-                      <View
-                        style={{
-                          flexDirection: 'row',
-                          justifyContent: 'space-between',
-                          alignItems: 'center',
-                          width: '50%',
-                          marginTop: 10,
-                        }}>
-                        <View>
-                          <Text
-                            style={[
-                              paraGray.darkpara,
-                              {
-                                fontSize: 12,
-                                color: '#97A7C3',
-                                textAlign: 'left',
-                              },
-                            ]}>
-                            Roll NO- {item.roll_no}
-                          </Text>
-                        </View>
-                      </View>
+                    <View
+                      style={{
+                        flex: 1,
+                        //width: '90%',
+                        alignSelf: 'center',
+                        paddingLeft: 20,
+                      }}>
+                      <Text style={[paraGray.largebold, {fontSize: 14}]}>
+                        {item.name}
+                      </Text>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {fontSize: 12, color: '#97A7C3', marginTop: 5},
+                        ]}>
+                        Roll NO- {item.roll_no}
+                      </Text>
                     </View>
                     <View
                       style={{
                         flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        //borderWidth: 1,
-                        width: '35%',
-                        alignSelf: 'center',
                       }}>
-                      <View
-                        style={[
-                          paraGray.darkpara,
-                          {marginRight: 11, color: 'rgba(0, 0, 0, 0.60)'},
-                        ]}>
-                        <CheckBox
-                          checked={checked}
-                          onPress={() => setChecked(!checked)}
-                          // Use ThemeProvider to make change for all checkbox
-                          iconType="material-community"
-                          checkedIcon="checkbox-marked"
-                          uncheckedIcon="checkbox-blank-outline"
-                          uncheckedColor="#275CE0"
-                          checkedColor="#275CE0"
-                          size={30}
-                        />
-                      </View>
-                      <View>
-                        <CheckBox
-                          checked={checked}
-                          onPress={() => setChecked(!checked)}
-                          // Use ThemeProvider to make change for all checkbox
-                          iconType="material-community"
-                          checkedIcon="checkbox-marked"
-                          uncheckedIcon="checkbox-blank-outline"
-                          uncheckedColor="#E92020"
-                          checkedColor="#E92020"
-                          size={30}
-                        />
-                      </View>
+                      <CheckBox
+                        right={true}
+                        checked={checked}
+                        onPress={() => setChecked(!checked)}
+                        iconType="material-community"
+                        checkedIcon="checkbox-marked"
+                        uncheckedIcon="checkbox-blank-outline"
+                        uncheckedColor="#275CE0"
+                        checkedColor="#275CE0"
+                        size={30}
+                      />
+                      <CheckBox
+                        right={true}
+                        checked={checked}
+                        onPress={() => setChecked(!checked)}
+                        iconType="material-community"
+                        checkedIcon="checkbox-marked"
+                        uncheckedIcon="checkbox-blank-outline"
+                        uncheckedColor="#E92020"
+                        checkedColor="#E92020"
+                        size={30}
+                      />
                     </View>
                   </View>
                   <View
                     style={{
                       borderBottomWidth: 1,
-                      width: '100%',
-                      marginTop: 5,
                       borderColor: '#97A7C3',
-                    }}></View>
+                      marginTop: 5,
+                    }}
+                  />
                 </View>
               )}
             />

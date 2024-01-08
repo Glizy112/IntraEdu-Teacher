@@ -12,6 +12,8 @@ import {
   ImageBackground,
   Image,
   Linking,
+  FlatList,
+  Dimensions,
 } from 'react-native';
 import {List, Modal} from 'react-native-paper';
 import {COLORS} from '../../theme/Colors';
@@ -24,27 +26,336 @@ import SearchInput, {createFilter} from 'react-native-search-filter';
 import {useSelector, useDispatch} from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Url from '../../Config/Api/Url';
-import {useFocusEffect} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {createThumbnail} from 'react-native-create-thumbnail';
+import Moment from 'moment';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import FastImage from 'react-native-fast-image';
 
 const ShareVideo = props => {
+  const navigation = useNavigation();
   const dispatch = useDispatch();
   const {userinfo, userid, username, showmodal, userimage, schoolid} =
     useSelector(state => state.userReducer);
-  const [getdata, setData] = useState([]);
+  const [getdata, setData] = useState([
+    {
+      class_id: 'null',
+      created_at: '2023-04-27 15:39:01',
+      created_by: '0',
+      date: '0000-00-00',
+      id: '10',
+      image: null,
+      is_view_on_web: '0',
+      modified_at: '0000-00-00 00:00:00',
+      modified_by: '0',
+      notice: '',
+      role_id: '5',
+      school_id: '10',
+      section_id: 'null',
+      status: '1',
+      subject_id: 'null',
+      teacher_id: null,
+      title: '',
+    },
+    {
+      class_id: '12',
+      created_at: '2023-09-19 09:56:39',
+      created_by: '0',
+      date: '0000-00-00',
+      id: '13',
+      image: 'notice-1695117399-sms.jpg',
+      is_view_on_web: '0',
+      modified_at: '0000-00-00 00:00:00',
+      modified_by: '0',
+      notice: 'Testing',
+      role_id: '5',
+      school_id: '10',
+      section_id: '14',
+      status: '1',
+      subject_id: '26',
+      teacher_id: null,
+      title: 'Test notee',
+    },
+    {
+      class_id: '12',
+      created_at: '2023-09-19 10:20:37',
+      created_by: '0',
+      date: '0000-00-00',
+      id: '15',
+      image: 'notice-1695118837-sms.jpg',
+      is_view_on_web: '0',
+      modified_at: '0000-00-00 00:00:00',
+      modified_by: '0',
+      notice: 'Testing',
+      role_id: '5',
+      school_id: '10',
+      section_id: '14',
+      status: '1',
+      subject_id: '26',
+      teacher_id: null,
+      title: 'Test',
+    },
+    {
+      class_id: '12',
+      created_at: '2023-09-19 10:21:50',
+      created_by: '0',
+      date: '2019-09-23',
+      id: '16',
+      image: 'notice-1695118910-sms.jpg',
+      is_view_on_web: '0',
+      modified_at: '0000-00-00 00:00:00',
+      modified_by: '0',
+      notice: 'Testing',
+      role_id: '5',
+      school_id: '10',
+      section_id: '14',
+      status: '1',
+      subject_id: '26',
+      teacher_id: null,
+      title: 'Test',
+    },
+    {
+      class_id: 'null',
+      created_at: '2023-04-27 15:39:01',
+      created_by: '0',
+      date: '0000-00-00',
+      id: '10',
+      image: null,
+      is_view_on_web: '0',
+      modified_at: '0000-00-00 00:00:00',
+      modified_by: '0',
+      notice: '',
+      role_id: '5',
+      school_id: '10',
+      section_id: 'null',
+      status: '1',
+      subject_id: 'null',
+      teacher_id: null,
+      title: '',
+    },
+    {
+      class_id: '12',
+      created_at: '2023-09-19 09:56:39',
+      created_by: '0',
+      date: '0000-00-00',
+      id: '13',
+      image: 'notice-1695117399-sms.jpg',
+      is_view_on_web: '0',
+      modified_at: '0000-00-00 00:00:00',
+      modified_by: '0',
+      notice: 'Testing',
+      role_id: '5',
+      school_id: '10',
+      section_id: '14',
+      status: '1',
+      subject_id: '26',
+      teacher_id: null,
+      title: 'Test notee',
+    },
+    {
+      class_id: '12',
+      created_at: '2023-09-19 10:20:37',
+      created_by: '0',
+      date: '0000-00-00',
+      id: '15',
+      image: 'notice-1695118837-sms.jpg',
+      is_view_on_web: '0',
+      modified_at: '0000-00-00 00:00:00',
+      modified_by: '0',
+      notice: 'Testing',
+      role_id: '5',
+      school_id: '10',
+      section_id: '14',
+      status: '1',
+      subject_id: '26',
+      teacher_id: null,
+      title: 'Test',
+    },
+    {
+      class_id: '12',
+      created_at: '2023-09-19 10:21:50',
+      created_by: '0',
+      date: '2019-09-23',
+      id: '16',
+      image: 'notice-1695118910-sms.jpg',
+      is_view_on_web: '0',
+      modified_at: '0000-00-00 00:00:00',
+      modified_by: '0',
+      notice: 'Testing',
+      role_id: '5',
+      school_id: '10',
+      section_id: '14',
+      status: '1',
+      subject_id: '26',
+      teacher_id: null,
+      title: 'Test',
+    },
+    {
+      class_id: 'null',
+      created_at: '2023-04-27 15:39:01',
+      created_by: '0',
+      date: '0000-00-00',
+      id: '10',
+      image: null,
+      is_view_on_web: '0',
+      modified_at: '0000-00-00 00:00:00',
+      modified_by: '0',
+      notice: '',
+      role_id: '5',
+      school_id: '10',
+      section_id: 'null',
+      status: '1',
+      subject_id: 'null',
+      teacher_id: null,
+      title: '',
+    },
+    {
+      class_id: '12',
+      created_at: '2023-09-19 09:56:39',
+      created_by: '0',
+      date: '0000-00-00',
+      id: '13',
+      image: 'notice-1695117399-sms.jpg',
+      is_view_on_web: '0',
+      modified_at: '0000-00-00 00:00:00',
+      modified_by: '0',
+      notice: 'Testing',
+      role_id: '5',
+      school_id: '10',
+      section_id: '14',
+      status: '1',
+      subject_id: '26',
+      teacher_id: null,
+      title: 'Test notee',
+    },
+    {
+      class_id: '12',
+      created_at: '2023-09-19 10:20:37',
+      created_by: '0',
+      date: '0000-00-00',
+      id: '15',
+      image: 'notice-1695118837-sms.jpg',
+      is_view_on_web: '0',
+      modified_at: '0000-00-00 00:00:00',
+      modified_by: '0',
+      notice: 'Testing',
+      role_id: '5',
+      school_id: '10',
+      section_id: '14',
+      status: '1',
+      subject_id: '26',
+      teacher_id: null,
+      title: 'Test',
+    },
+    {
+      class_id: '12',
+      created_at: '2023-09-19 10:21:50',
+      created_by: '0',
+      date: '2019-09-23',
+      id: '16',
+      image: 'notice-1695118910-sms.jpg',
+      is_view_on_web: '0',
+      modified_at: '0000-00-00 00:00:00',
+      modified_by: '0',
+      notice: 'Testing',
+      role_id: '5',
+      school_id: '10',
+      section_id: '14',
+      status: '1',
+      subject_id: '26',
+      teacher_id: null,
+      title: 'Test',
+    },
+    {
+      class_id: 'null',
+      created_at: '2023-04-27 15:39:01',
+      created_by: '0',
+      date: '0000-00-00',
+      id: '10',
+      image: null,
+      is_view_on_web: '0',
+      modified_at: '0000-00-00 00:00:00',
+      modified_by: '0',
+      notice: '',
+      role_id: '5',
+      school_id: '10',
+      section_id: 'null',
+      status: '1',
+      subject_id: 'null',
+      teacher_id: null,
+      title: '',
+    },
+    {
+      class_id: '12',
+      created_at: '2023-09-19 09:56:39',
+      created_by: '0',
+      date: '0000-00-00',
+      id: '13',
+      image: 'notice-1695117399-sms.jpg',
+      is_view_on_web: '0',
+      modified_at: '0000-00-00 00:00:00',
+      modified_by: '0',
+      notice: 'Testing',
+      role_id: '5',
+      school_id: '10',
+      section_id: '14',
+      status: '1',
+      subject_id: '26',
+      teacher_id: null,
+      title: 'Test notee',
+    },
+    {
+      class_id: '12',
+      created_at: '2023-09-19 10:20:37',
+      created_by: '0',
+      date: '0000-00-00',
+      id: '15',
+      image: 'notice-1695118837-sms.jpg',
+      is_view_on_web: '0',
+      modified_at: '0000-00-00 00:00:00',
+      modified_by: '0',
+      notice: 'Testing',
+      role_id: '5',
+      school_id: '10',
+      section_id: '14',
+      status: '1',
+      subject_id: '26',
+      teacher_id: null,
+      title: 'Test',
+    },
+    {
+      class_id: '12',
+      created_at: '2023-09-19 10:21:50',
+      created_by: '0',
+      date: '2019-09-23',
+      id: '16',
+      image: 'notice-1695118910-sms.jpg',
+      is_view_on_web: '0',
+      modified_at: '0000-00-00 00:00:00',
+      modified_by: '0',
+      notice: 'Testing',
+      role_id: '5',
+      school_id: '10',
+      section_id: '14',
+      status: '1',
+      subject_id: '26',
+      teacher_id: null,
+      title: 'Test',
+    },
+  ]);
   const [getthumb, setthumb] = useState();
   const [loading, setLoading] = useState(false);
   const [load, setLoad] = useState(true);
   const [refreshing, setRefreshing] = React.useState(false);
 
-  useFocusEffect(
-    useCallback(() => {
-      getapiData();
-    }, []),
-  );
+  //   useFocusEffect(
+  //     useCallback(() => {
+  //       getapiData();
+  //     }, []),
+  //   );
 
   useEffect(() => {
-    getapiData();
+    // getapiData();
     thumb();
   }, []);
 
@@ -68,6 +379,7 @@ const ShareVideo = props => {
         })
         .then(result => {
           // console.log(result);
+          //console.log(result);
           setData(result.data);
           setLoading(false);
         });
@@ -87,7 +399,7 @@ const ShareVideo = props => {
   };
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
-    getapiData();
+    // getapiData();
   }, []);
 
   const handleClick = url => {
@@ -101,16 +413,65 @@ const ShareVideo = props => {
     });
   };
 
+  let deviceHeight = Dimensions.get('window').height;
+  let deviceWidth = Dimensions.get('window').width;
+
   return (
     <View style={[container.container]}>
       {loading == true && <Spinner visible={load} />}
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          height: 50,
+          justifyContent: 'space-between',
+
+          paddingHorizontal: 10,
+          borderBottomColor: '#275CE0',
+          borderBottomWidth: 1,
+        }}>
+        <View
+          style={{
+            alignItems: 'flex-start',
+          }}>
+          <TouchableOpacity
+            style={{
+              backgroundColor: COLORS.white,
+              borderRadius: 20,
+            }}
+            onPress={() =>
+              //   props.navigation.navigate('StudentEdit', {
+              //     studentdetail: studentdetail,
+              //   })
+              props.navigation.goBack()
+            }>
+            <Ionicons
+              style={{marginVertical: 5, paddingHorizontal: 7}}
+              name="arrow-back"
+              size={20}
+              color={COLORS.black}
+            />
+          </TouchableOpacity>
+        </View>
+        <View
+          style={{
+            flex: 1,
+            alignItems: 'center',
+            position: 'absolute',
+            left: 0,
+            right: 0,
+          }}>
+          <Text style={[paraGray.largebold, {color: 'black'}]}>Videos</Text>
+        </View>
+      </View>
       <ScrollView
         showsVerticalScrollIndicator={false}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
         <View style={{flex: 1, marginTop: 20, marginBottom: 20}}>
-          {getdata.map((data, index) => (
+          {/* flatlist use here  */}
+          {/* {getdata.map((data, index) => (
             <View
               style={{flex: 1, paddingHorizontal: 10, marginVertical: 10}}
               key={index}>
@@ -172,9 +533,158 @@ const ShareVideo = props => {
                 </View>
               </TouchableOpacity>
             </View>
-          ))}
+          ))} */}
+          <FlatList
+            numColumns={2} // Number of columns for the wrap effect
+            contentContainerStyle={{
+              flex: 1,
+              //paddingHorizontal: 15, // Adjust horizontal padding for spacing
+              paddingBottom: 20,
+              alignSelf: 'center',
+            }}
+            data={getdata}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({item: notice, index}) => (
+              <View
+                style={{
+                  marginVertical: 10,
+
+                  //flex: 1,
+                }}
+                key={index}>
+                <View
+                  style={{
+                    flex: 1,
+                    paddingHorizontal: 5,
+                  }}>
+                  <TouchableOpacity
+                    style={{
+                      height: deviceHeight / 4.8,
+
+                      width: deviceWidth / 2.3,
+
+                      borderWidth: 1,
+                      borderRadius: 10,
+                      borderColor: COLORS.skypurple,
+                      //backgroundColor: 'EEF2FD',
+                      backgroundColor: COLORS.skypurple,
+                      justifyContent: 'center',
+                    }}
+                    onPress={() => {
+                      // setAnnouncementData(getdata[index]);
+                      //   setShowModal(true);
+                      Linking.openURL('https://www.youtube.com');
+                    }}>
+                    <View
+                      style={{
+                        flex: 1,
+
+                        justifyContent: 'center',
+                      }}>
+                      {notice.image == null ? (
+                        <Image
+                          style={{
+                            height: '100%',
+                            width: '100%',
+                            borderTopLeftRadius: 10,
+                            borderTopRightRadius: 10,
+                          }}
+                          source={require('../../../assets/nullimage.png')}
+                        />
+                      ) : (
+                        <FastImage
+                          style={{
+                            height: '100%',
+
+                            width: '100%',
+                            // marginLeft: 10,
+                            borderTopLeftRadius: 10,
+                            borderTopRightRadius: 10,
+                          }}
+                          source={{
+                            uri: Url.notice_IMG + notice.image,
+                          }}
+                        />
+                      )}
+                    </View>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        marginTop: 10,
+                        alignItems: 'center',
+                        width: '90%',
+                        alignSelf: 'center',
+                      }}>
+                      <Text style={[paraGray.darkpara, {fontSize: 10}]}>
+                        Class- 5th A
+                      </Text>
+
+                      <View
+                        style={{
+                          height: 10,
+                          width: 1,
+                          backgroundColor: 'black',
+                          marginLeft: 5,
+                        }}
+                      />
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {fontSize: 10, marginLeft: 5},
+                        ]}>
+                        {/* {notice.created_at} */}
+                        Subject Name
+                      </Text>
+                    </View>
+
+                    <View>
+                      <Text
+                        style={[
+                          paraGray.largebold,
+                          {
+                            fontSize: 11,
+                            width: '90%',
+                            alignSelf: 'center',
+                            marginTop: 5,
+                          },
+                        ]}>
+                        Video Title
+                      </Text>
+                    </View>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        //   /marginTop: 5,
+                        justifyContent: 'space-between',
+                        width: '90%',
+
+                        alignSelf: 'center',
+                        alignItems: 'center',
+                        marginBottom: 5,
+                      }}>
+                      <Text
+                        numberOfLines={1}
+                        style={[
+                          paraGray.darkpara,
+                          {
+                            fontSize: 10,
+                            alignItems: 'center',
+                            width: '90%',
+                          },
+                        ]}>
+                        {/* {notice.created_at} */}
+                        This is a sample video desc...
+                      </Text>
+                      <Ionicons name="play-circle" size={24} color={'black'} />
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            )}
+          />
         </View>
-        {loading == false && getdata == '' && (
+
+        {loading == false && getdata?.length == 0 ? (
           <View
             style={{
               flex: 1,
@@ -187,7 +697,7 @@ const ShareVideo = props => {
               NO Data Found
             </Text>
           </View>
-        )}
+        ) : null}
       </ScrollView>
     </View>
   );

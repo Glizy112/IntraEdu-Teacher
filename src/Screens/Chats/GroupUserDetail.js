@@ -61,7 +61,9 @@ const GroupUserDetail = props => {
     }
     getapiData();
   }, []);
-
+  {
+    console.log('Sub', active);
+  }
   // --------APICall----------
 
   const getapiData = async () => {
@@ -576,6 +578,7 @@ const GroupUserDetail = props => {
                     </TouchableOpacity>
                   </View>
                 </View>
+
                 {subactive == '1' ? (
                   <GestureRecognizer onSwipeLeft={() => setSubActive('2')}>
                     <ScrollView

@@ -22,6 +22,8 @@ import Url from '../../Config/Api/Url';
 import {useSelector, useDispatch} from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
 import SearchInput, {createFilter} from 'react-native-search-filter';
+import Search from '../../Components/Search';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Chat = props => {
   const {userinfo, userid, username, showmodal, schoolid, teacherid} =
@@ -29,6 +31,7 @@ const Chat = props => {
   const [active, setActive] = useState('1');
   const [studentlist, setStudentList] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [searchData, setSearchData] = useState([]);
   const [load, setLoad] = useState(true);
   const [refreshing, setRefreshing] = React.useState(false);
   const users = [
@@ -300,17 +303,54 @@ const Chat = props => {
 
   return (
     <View style={[container.container]}>
-      <View style={{paddingHorizontal: 15, backgroundColor: COLORS.bg}}>
-        <Header
-          backgroundColor
-          navigation={props.navigation}
-          color={COLORS.black}
-          back
-          headerFirstName="Chats"
-          marginLeft
-        />
+      <View style={{backgroundColor: COLORS.bg}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            height: 50,
+            justifyContent: 'space-between',
+
+            paddingHorizontal: 10,
+            borderBottomColor: '#275CE0',
+            borderBottomWidth: 1,
+          }}>
+          <View
+            style={{
+              alignItems: 'flex-start',
+            }}>
+            <TouchableOpacity
+              style={{
+                backgroundColor: COLORS.white,
+                borderRadius: 20,
+              }}
+              onPress={() =>
+                //   props.navigation.navigate('StudentEdit', {
+                //     studentdetail: studentdetail,
+                //   })
+                props.navigation.goBack()
+              }>
+              <Ionicons
+                style={{marginVertical: 5, paddingHorizontal: 7}}
+                name="arrow-back"
+                size={20}
+                color={COLORS.black}
+              />
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              flex: 1,
+              alignItems: 'center',
+              position: 'absolute',
+              left: 0,
+              right: 0,
+            }}>
+            <Text style={[paraGray.largebold, {color: 'black'}]}>Chat</Text>
+          </View>
+        </View>
       </View>
-      <View style={styles.search}>
+      {/* <View style={styles.search}>
         <View
           style={{
             flexDirection: 'row',
@@ -354,6 +394,13 @@ const Chat = props => {
             <EvilIcons name="search" size={26} color={COLORS.bg} />
           </TouchableOpacity>
         </View>
+      </View> */}
+      <View style={{marginTop: 10, marginBottom: 20}}>
+        <Search
+          getdata={users}
+          KEYS_TO_FILTERS={KEYS_TO_FILTERS}
+          filter={setSearchData}
+        />
       </View>
       {loading == true && <Spinner visible={load} />}
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -389,7 +436,7 @@ const Chat = props => {
                     color: active == '1' ? COLORS.black : COLORS.background,
                   },
                 ]}>
-                Students
+                Chats
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -417,304 +464,642 @@ const Chat = props => {
           </View>
           {active == '1' ? (
             <View style={{marginTop: 5}}>
-              {filterdata.map(
-                (user, index) =>
-                  user.type !== 'group' && (
-                    <View key={index}>
-                      <TouchableOpacity
-                        style={{marginVertical: 5}}
-                        onPress={() =>
-                          props.navigation.navigate('ChatDetail', {
-                            user: users[index],
-                          })
-                        }>
-                        <View
-                          style={{
-                            flex: 1,
-                            flexDirection: 'row',
-                            marginTop: 15,
-                          }}>
-                          {user.photo == null ? (
-                            <Avatar.Image
-                              size={50}
-                              // source={require('../../../assets/user.jpg')}
-                              source={user.image}
-                              backgroundColor={COLORS.bg}
-                            />
-                          ) : (
-                            <Avatar.Image
-                              size={50}
-                              source={{uri: Url.student_IMG + user.photo}}
-                              backgroundColor={COLORS.black}
-                            />
-                          )}
-                          <View style={{flex: 1}}>
-                            <View style={{flex: 1, flexDirection: 'row'}}>
-                              <View
-                                style={{
-                                  flex: 1,
-                                  flexDirection: 'row',
-                                  marginRight: 10,
-                                }}>
-                                <Text
-                                  numberOfLines={1}
-                                  style={[
-                                    paraGray.parahome,
-                                    {
-                                      marginLeft: 10,
-                                      fontSize: 13,
-                                      color:
-                                        user.msg != '0'
-                                          ? COLORS.black
-                                          : COLORS.lightblack,
-                                    },
-                                  ]}>
-                                  {user.name}
-                                </Text>
+              {searchData && searchData.username
+                ? searchData.map(
+                    (user, index) =>
+                      user.type !== 'group' && (
+                        <View key={index}>
+                          <TouchableOpacity
+                            style={{marginVertical: 5}}
+                            onPress={() =>
+                              props.navigation.navigate('ChatDetail', {
+                                user: users[index],
+                              })
+                            }>
+                            <View
+                              style={{
+                                flex: 1,
+                                flexDirection: 'row',
+                                marginTop: 15,
+                              }}>
+                              {user.photo == null ? (
+                                <Avatar.Image
+                                  size={50}
+                                  // source={require('../../../assets/user.jpg')}
+                                  source={user.image}
+                                  backgroundColor={COLORS.bg}
+                                />
+                              ) : (
+                                <Avatar.Image
+                                  size={50}
+                                  source={{uri: Url.student_IMG + user.photo}}
+                                  backgroundColor={COLORS.black}
+                                />
+                              )}
+                              <View style={{flex: 1}}>
+                                <View style={{flex: 1, flexDirection: 'row'}}>
+                                  <View
+                                    style={{
+                                      flex: 1,
+                                      flexDirection: 'row',
+                                      marginRight: 10,
+                                    }}>
+                                    <Text
+                                      numberOfLines={1}
+                                      style={[
+                                        paraGray.parahome,
+                                        {
+                                          marginLeft: 10,
+                                          fontSize: 13,
+                                          color:
+                                            user.msg != '0'
+                                              ? COLORS.black
+                                              : COLORS.lightblack,
+                                        },
+                                      ]}>
+                                      {user.name}
+                                    </Text>
+                                    {/* <View
+                                      style={{
+                                        backgroundColor: COLORS.lightpurple,
+                                        justifyContent: 'center',
+                                        borderRadius: 10,
+                                        marginLeft: 10,
+                                        paddingHorizontal: 5,
+                                      }}>
+                                      {user.role == 'Parent' ? (
+                                        <Text
+                                          style={[
+                                            paraGray.darkpara,
+                                            {
+                                              color: COLORS.bluee,
+                                              fontSize: 11,
+                                            },
+                                          ]}>
+                                          {user.role}
+                                        </Text>
+                                      ) : (
+                                        <Text
+                                          style={[
+                                            paraGray.darkpara,
+                                            {
+                                              color: COLORS.bluee,
+                                              fontSize: 11,
+                                            },
+                                          ]}>
+                                          {user.class}
+                                        </Text>
+                                      )}
+                                    </View> */}
+                                  </View>
+                                  <View
+                                    style={{
+                                      flex: 1,
+                                      flexDirection: 'row',
+                                      justifyContent: 'flex-end',
+                                    }}>
+                                    <Text
+                                      style={[
+                                        paraGray.darkpara,
+                                        {color: '#4F4F4F', fontSize: 12},
+                                      ]}>
+                                      {user.time}
+                                    </Text>
+                                  </View>
+                                </View>
                                 <View
                                   style={{
-                                    backgroundColor: COLORS.lightpurple,
-                                    justifyContent: 'center',
-                                    borderRadius: 10,
-                                    marginLeft: 10,
+                                    flex: 1,
+                                    flexDirection: 'row',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center',
                                     paddingHorizontal: 5,
+                                    marginTop: 10,
                                   }}>
-                                  {user.role == 'Parent' ? (
-                                    <Text
-                                      style={[
-                                        paraGray.darkpara,
-                                        {
-                                          color: COLORS.bluee,
-                                          fontSize: 11,
-                                        },
-                                      ]}>
-                                      {user.role}
-                                    </Text>
+                                  <Text
+                                    numberOfLines={1}
+                                    style={[
+                                      paraGray.darkpara,
+                                      {
+                                        marginLeft: 5,
+                                        fontSize: 13,
+                                        marginTop: -10,
+                                        color:
+                                          user.msg != '0'
+                                            ? COLORS.black
+                                            : COLORS.lightblack,
+                                      },
+                                    ]}>
+                                    {user.content}
+                                  </Text>
+                                  {user.msg != '0' ? (
+                                    <View
+                                      style={{
+                                        backgroundColor: COLORS.bluee,
+                                        borderRadius: 20,
+                                        height: 25,
+                                        width: 25,
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        marginTop: -7,
+                                      }}>
+                                      <Text
+                                        style={[
+                                          paraGray.darkpara,
+                                          {color: COLORS.bg, fontSize: 12},
+                                        ]}>
+                                        {user.msg}
+                                      </Text>
+                                    </View>
                                   ) : (
-                                    <Text
-                                      style={[
-                                        paraGray.darkpara,
-                                        {
-                                          color: COLORS.bluee,
-                                          fontSize: 11,
-                                        },
-                                      ]}>
-                                      {user.class}
-                                    </Text>
+                                    <View
+                                      style={{
+                                        borderRadius: 20,
+                                        height: 25,
+                                        width: 25,
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        marginTop: -7,
+                                      }}>
+                                      <Text
+                                        style={[
+                                          paraGray.darkpara,
+                                          {color: COLORS.black, fontSize: 12},
+                                        ]}>
+                                        {/* {user.msg} */}
+                                      </Text>
+                                    </View>
                                   )}
                                 </View>
                               </View>
-                              <View
-                                style={{
-                                  flex: 1,
-                                  flexDirection: 'row',
-                                  justifyContent: 'flex-end',
-                                }}>
-                                <Text
-                                  style={[
-                                    paraGray.darkpara,
-                                    {color: '#4F4F4F', fontSize: 12},
-                                  ]}>
-                                  {user.time}
-                                </Text>
-                              </View>
                             </View>
+                          </TouchableOpacity>
+                          {/* <View
+                            style={{
+                              marginTop: 10,
+                              borderBottomColor: COLORS.background,
+                              borderBottomWidth: 1,
+                            }}
+                          /> */}
+                        </View>
+                      ),
+                  )
+                : filterdata.map(
+                    (user, index) =>
+                      user.type !== 'group' && (
+                        <View key={index}>
+                          <TouchableOpacity
+                            style={{marginVertical: 5}}
+                            onPress={() =>
+                              props.navigation.navigate('ChatDetail', {
+                                user: users[index],
+                              })
+                            }>
                             <View
                               style={{
                                 flex: 1,
                                 flexDirection: 'row',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                                paddingHorizontal: 5,
-                                marginTop: 10,
+                                marginTop: 15,
                               }}>
-                              <Text
-                                numberOfLines={1}
-                                style={[
-                                  paraGray.darkpara,
-                                  {
-                                    marginLeft: 5,
-                                    fontSize: 13,
-                                    marginTop: -10,
-                                    color:
-                                      user.msg != '0'
-                                        ? COLORS.black
-                                        : COLORS.lightblack,
-                                  },
-                                ]}>
-                                {user.content}
-                              </Text>
-                              {user.msg != '0' ? (
-                                <View
-                                  style={{
-                                    backgroundColor: COLORS.bluee,
-                                    borderRadius: 20,
-                                    height: 25,
-                                    width: 25,
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                    marginTop: -7,
-                                  }}>
-                                  <Text
-                                    style={[
-                                      paraGray.darkpara,
-                                      {color: COLORS.bg, fontSize: 12},
-                                    ]}>
-                                    {user.msg}
-                                  </Text>
-                                </View>
+                              {user.photo == null ? (
+                                <Avatar.Image
+                                  size={50}
+                                  // source={require('../../../assets/user.jpg')}
+                                  source={user.image}
+                                  backgroundColor={COLORS.bg}
+                                />
                               ) : (
+                                <Avatar.Image
+                                  size={50}
+                                  source={{uri: Url.student_IMG + user.photo}}
+                                  backgroundColor={COLORS.black}
+                                />
+                              )}
+                              <View style={{flex: 1}}>
                                 <View
                                   style={{
-                                    borderRadius: 20,
-                                    height: 25,
-                                    width: 25,
-                                    justifyContent: 'center',
+                                    flex: 1,
+                                    flexDirection: 'row',
                                     alignItems: 'center',
-                                    marginTop: -7,
+                                  }}>
+                                  <View
+                                    style={{
+                                      flex: 1,
+                                      flexDirection: 'row',
+                                      marginRight: 10,
+                                    }}>
+                                    <Text
+                                      numberOfLines={1}
+                                      style={[
+                                        paraGray.parahome,
+                                        {
+                                          marginLeft: 10,
+                                          fontSize: 13,
+                                          color:
+                                            user.msg != '0'
+                                              ? COLORS.black
+                                              : COLORS.lightblack,
+                                        },
+                                      ]}>
+                                      {user.name}
+                                    </Text>
+                                    {/*<View
+                                      style={{
+                                        backgroundColor: COLORS.lightpurple,
+                                        justifyContent: 'center',
+                                        borderRadius: 10,
+                                        marginLeft: 10,
+                                        paddingHorizontal: 5,
+                                      }}>
+                                       {user.role == 'Parent' ? (
+                                        <Text
+                                          style={[
+                                            paraGray.darkpara,
+                                            {
+                                              color: COLORS.bluee,
+                                              fontSize: 11,
+                                            },
+                                          ]}>
+                                          {user.role}
+                                        </Text>
+                                      ) : (
+                                        <Text
+                                          style={[
+                                            paraGray.darkpara,
+                                            {
+                                              color: COLORS.bluee,
+                                              fontSize: 11,
+                                            },
+                                          ]}>
+                                          {user.class}
+                                        </Text>
+                                      )} 
+                                        </View>*/}
+                                  </View>
+                                  <View
+                                    style={{
+                                      flex: 1,
+                                      flexDirection: 'row',
+                                      justifyContent: 'flex-end',
+                                    }}>
+                                    {/* <Text
+                                      style={[
+                                        paraGray.darkpara,
+                                        {color: '#4F4F4F', fontSize: 12},
+                                      ]}>
+                                      {user.time}
+                                    </Text> */}
+                                    {user.msg != '0' ? (
+                                      <View
+                                        style={{
+                                          backgroundColor: COLORS.primary,
+                                          borderRadius: 20,
+                                          height: 25,
+                                          width: 25,
+                                          justifyContent: 'center',
+                                          alignItems: 'center',
+                                          // marginTop: -7,
+                                        }}>
+                                        <Text
+                                          style={[
+                                            paraGray.darkpara,
+                                            {color: COLORS.bg, fontSize: 12},
+                                          ]}>
+                                          {user.msg}
+                                        </Text>
+                                      </View>
+                                    ) : (
+                                      <View
+                                        style={{
+                                          borderRadius: 20,
+                                          height: 25,
+                                          width: 25,
+                                          justifyContent: 'center',
+                                          alignItems: 'center',
+                                          marginTop: -7,
+                                        }}>
+                                        <Text
+                                          style={[
+                                            paraGray.darkpara,
+                                            {color: COLORS.black, fontSize: 12},
+                                          ]}>
+                                          {/* {user.msg} */}
+                                        </Text>
+                                      </View>
+                                    )}
+                                  </View>
+                                </View>
+                                <View
+                                  style={{
+                                    flex: 1,
+                                    flexDirection: 'row',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center',
+                                    paddingHorizontal: 5,
+                                    marginTop: 10,
                                   }}>
                                   <Text
+                                    numberOfLines={1}
                                     style={[
                                       paraGray.darkpara,
-                                      {color: COLORS.black, fontSize: 12},
+                                      {
+                                        marginLeft: 5,
+                                        fontSize: 13,
+
+                                        width: '70%',
+                                        marginTop: -10,
+                                        color:
+                                          user.msg != '0'
+                                            ? COLORS.black
+                                            : COLORS.lightblack,
+                                      },
                                     ]}>
-                                    {/* {user.msg} */}
+                                    {user.content}
                                   </Text>
+                                  {user.msg != '0' ? (
+                                    <View
+                                      style={{
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        //  marginTop: -7,
+                                      }}>
+                                      <Text
+                                        style={[
+                                          paraGray.darkpara,
+                                          {color: '#4F4F4F', fontSize: 12},
+                                        ]}>
+                                        {user.time}
+                                      </Text>
+                                    </View>
+                                  ) : (
+                                    <View
+                                      style={{
+                                        borderRadius: 20,
+                                        height: 25,
+                                        width: 25,
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        marginTop: -7,
+                                      }}>
+                                      <Text
+                                        style={[
+                                          paraGray.darkpara,
+                                          {color: COLORS.black, fontSize: 12},
+                                        ]}>
+                                        {/* {user.msg} */}
+                                      </Text>
+                                    </View>
+                                  )}
                                 </View>
-                              )}
+                              </View>
                             </View>
-                          </View>
+                          </TouchableOpacity>
+                          {/* <View
+                            style={{
+                              marginTop: 10,
+                              borderBottomColor: COLORS.background,
+                              borderBottomWidth: 1,
+                            }}
+                          /> */}
                         </View>
-                      </TouchableOpacity>
-                      <View
-                        style={{
-                          marginTop: 10,
-                          borderBottomColor: COLORS.background,
-                          borderBottomWidth: 1,
-                        }}
-                      />
-                    </View>
-                  ),
-              )}
+                      ),
+                  )}
             </View>
           ) : (
             <View style={{marginTop: 10}}>
-              {users.map(
-                (user, index) =>
-                  user.type == 'group' && (
-                    <View key={index}>
-                      <TouchableOpacity
-                        style={{marginVertical: 5}}
-                        onPress={() =>
-                          props.navigation.navigate('ChatDetail', {
-                            user: users[index],
-                          })
-                        }>
-                        <View
-                          style={{
-                            flex: 1,
-                            flexDirection: 'row',
-                            marginTop: 15,
-                          }}>
-                          <Avatar.Image size={45} source={user.image} />
-                          <View style={{flex: 1}}>
-                            <View style={{flex: 1, flexDirection: 'row'}}>
-                              <View
-                                style={{
-                                  flex: 1,
-                                  flexDirection: 'row',
-                                  marginRight: 10,
-                                }}>
-                                <Text
-                                  numberOfLines={1}
-                                  style={[
-                                    paraGray.parahome,
-                                    {
-                                      marginLeft: 10,
-                                      fontSize: 15,
-                                      color:
-                                        user.msg != '0'
-                                          ? COLORS.black
-                                          : COLORS.lightblack,
-                                    },
-                                  ]}>
-                                  {user.name}
-                                </Text>
-                              </View>
-                              <View
-                                style={{
-                                  flex: 1,
-                                  flexDirection: 'row',
-                                  justifyContent: 'flex-end',
-                                }}>
-                                <Text
-                                  style={[
-                                    paraGray.darkpara,
-                                    {color: '#4F4F4F'},
-                                  ]}>
-                                  {user.time}
-                                </Text>
-                              </View>
-                            </View>
+              {searchData == null
+                ? users.map(
+                    (user, index) =>
+                      user.type == 'group' && (
+                        <View key={index}>
+                          <TouchableOpacity
+                            style={{marginVertical: 5}}
+                            onPress={() =>
+                              props.navigation.navigate('ChatDetail', {
+                                user: users[index],
+                              })
+                            }>
                             <View
                               style={{
                                 flex: 1,
                                 flexDirection: 'row',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                                paddingHorizontal: 5,
-                                marginTop: 10,
+                                marginTop: 15,
                               }}>
-                              <Text
-                                numberOfLines={1}
-                                style={[
-                                  paraGray.darkpara,
-                                  {
-                                    marginLeft: 5,
-                                    fontSize: 13,
-                                    marginTop: -10,
-                                    color:
-                                      user.msg != '0'
-                                        ? COLORS.black
-                                        : COLORS.lightblack,
-                                  },
-                                ]}>
-                                {user.content}
-                              </Text>
-                              {user.msg != '0' && (
+                              <Avatar.Image size={45} source={user.image} />
+                              <View style={{flex: 1}}>
+                                <View style={{flex: 1, flexDirection: 'row'}}>
+                                  <View
+                                    style={{
+                                      flex: 1,
+                                      flexDirection: 'row',
+                                      marginRight: 10,
+                                    }}>
+                                    <Text
+                                      numberOfLines={1}
+                                      style={[
+                                        paraGray.parahome,
+                                        {
+                                          marginLeft: 10,
+                                          fontSize: 15,
+                                          color:
+                                            user.msg != '0'
+                                              ? COLORS.black
+                                              : COLORS.lightblack,
+                                        },
+                                      ]}>
+                                      {user.name}
+                                    </Text>
+                                  </View>
+                                  <View
+                                    style={{
+                                      flex: 1,
+                                      flexDirection: 'row',
+                                      justifyContent: 'flex-end',
+                                    }}>
+                                    <Text
+                                      style={[
+                                        paraGray.darkpara,
+                                        {color: '#4F4F4F'},
+                                      ]}>
+                                      {user.time}
+                                    </Text>
+                                  </View>
+                                </View>
                                 <View
                                   style={{
-                                    backgroundColor: COLORS.bluee,
-                                    borderRadius: 20,
-                                    height: 25,
-                                    width: 25,
-                                    justifyContent: 'center',
+                                    flex: 1,
+                                    flexDirection: 'row',
+                                    justifyContent: 'space-between',
                                     alignItems: 'center',
-                                    marginTop: -7,
+                                    paddingHorizontal: 5,
+                                    marginTop: 10,
                                   }}>
                                   <Text
+                                    numberOfLines={1}
                                     style={[
                                       paraGray.darkpara,
-                                      {color: COLORS.bg, fontSize: 12},
+                                      {
+                                        marginLeft: 5,
+                                        fontSize: 13,
+                                        marginTop: -10,
+                                        color:
+                                          user.msg != '0'
+                                            ? COLORS.black
+                                            : COLORS.lightblack,
+                                      },
                                     ]}>
-                                    {user.msg}
+                                    {user.content}
                                   </Text>
+                                  {user.msg != '0' && (
+                                    <View
+                                      style={{
+                                        backgroundColor: COLORS.bluee,
+                                        borderRadius: 20,
+                                        height: 25,
+                                        width: 25,
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        marginTop: -7,
+                                      }}>
+                                      <Text
+                                        style={[
+                                          paraGray.darkpara,
+                                          {color: COLORS.bg, fontSize: 12},
+                                        ]}>
+                                        {user.msg}
+                                      </Text>
+                                    </View>
+                                  )}
                                 </View>
-                              )}
+                              </View>
                             </View>
-                          </View>
+                          </TouchableOpacity>
+                          <View
+                            style={{
+                              marginTop: 10,
+                              borderBottomColor: COLORS.background,
+                              borderBottomWidth: 1,
+                            }}
+                          />
                         </View>
-                      </TouchableOpacity>
-                      <View
-                        style={{
-                          marginTop: 10,
-                          borderBottomColor: COLORS.background,
-                          borderBottomWidth: 1,
-                        }}
-                      />
-                    </View>
-                  ),
-              )}
+                      ),
+                  )
+                : searchData.map(
+                    (user, index) =>
+                      user.type == 'group' && (
+                        <View key={index}>
+                          <TouchableOpacity
+                            style={{marginVertical: 5}}
+                            onPress={() =>
+                              props.navigation.navigate('ChatDetail', {
+                                user: users[index],
+                              })
+                            }>
+                            <View
+                              style={{
+                                flex: 1,
+                                flexDirection: 'row',
+                                marginTop: 15,
+                              }}>
+                              <Avatar.Image size={45} source={user.image} />
+                              <View style={{flex: 1}}>
+                                <View style={{flex: 1, flexDirection: 'row'}}>
+                                  <View
+                                    style={{
+                                      flex: 1,
+                                      flexDirection: 'row',
+                                      marginRight: 10,
+                                    }}>
+                                    <Text
+                                      numberOfLines={1}
+                                      style={[
+                                        paraGray.parahome,
+                                        {
+                                          marginLeft: 10,
+                                          fontSize: 15,
+                                          color:
+                                            user.msg != '0'
+                                              ? COLORS.black
+                                              : COLORS.lightblack,
+                                        },
+                                      ]}>
+                                      {user.name}
+                                    </Text>
+                                  </View>
+                                  <View
+                                    style={{
+                                      flex: 1,
+                                      flexDirection: 'row',
+                                      justifyContent: 'flex-end',
+                                    }}>
+                                    <Text
+                                      style={[
+                                        paraGray.darkpara,
+                                        {color: '#4F4F4F'},
+                                      ]}>
+                                      {user.time}
+                                    </Text>
+                                  </View>
+                                </View>
+                                <View
+                                  style={{
+                                    flex: 1,
+                                    flexDirection: 'row',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center',
+                                    paddingHorizontal: 5,
+                                    marginTop: 10,
+                                  }}>
+                                  <Text
+                                    numberOfLines={1}
+                                    style={[
+                                      paraGray.darkpara,
+                                      {
+                                        marginLeft: 5,
+                                        fontSize: 13,
+                                        marginTop: -10,
+                                        color:
+                                          user.msg != '0'
+                                            ? COLORS.black
+                                            : COLORS.lightblack,
+                                      },
+                                    ]}>
+                                    {user.content}
+                                  </Text>
+                                  {user.msg != '0' && (
+                                    <View
+                                      style={{
+                                        backgroundColor: COLORS.bluee,
+                                        borderRadius: 20,
+                                        height: 25,
+                                        width: 25,
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        marginTop: -7,
+                                      }}>
+                                      <Text
+                                        style={[
+                                          paraGray.darkpara,
+                                          {color: COLORS.bg, fontSize: 12},
+                                        ]}>
+                                        {user.msg}
+                                      </Text>
+                                    </View>
+                                  )}
+                                </View>
+                              </View>
+                            </View>
+                          </TouchableOpacity>
+                          <View
+                            style={{
+                              marginTop: 10,
+                              borderBottomColor: COLORS.background,
+                              borderBottomWidth: 1,
+                            }}
+                          />
+                        </View>
+                      ),
+                  )}
             </View>
           )}
         </View>

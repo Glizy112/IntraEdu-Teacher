@@ -20,8 +20,14 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import {useSelector, useDispatch} from 'react-redux';
 import Url from '../../Config/Api/Url';
 import {AutoGrowingTextInput} from 'react-native-autogrow-textinput';
+import DropDown from '../../Components/DropDown';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import {COLORS} from '../../theme/Colors';
 
 const AddLink = props => {
+  const [open, setOpen] = useState(false);
+  const [openSection, setOpenSection] = useState(false);
+  const [openSubject, setOpenSubject] = useState(false);
   const [loading, setLoading] = useState(false);
   const [load, setLoad] = useState(true);
   const [refreshing, setRefreshing] = React.useState(false);
@@ -195,6 +201,51 @@ const AddLink = props => {
   return (
     <View style={styles.container}>
       {loading == true && <Spinner visible={load} />}
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          height: 50,
+          justifyContent: 'space-between',
+
+          paddingHorizontal: 10,
+          borderBottomColor: '#275CE0',
+          borderBottomWidth: 1,
+        }}>
+        <View
+          style={{
+            alignItems: 'flex-start',
+          }}>
+          <TouchableOpacity
+            style={{
+              backgroundColor: COLORS.white,
+              borderRadius: 20,
+            }}
+            onPress={() =>
+              //   props.navigation.navigate('StudentEdit', {
+              //     studentdetail: studentdetail,
+              //   })
+              props.navigation.goBack()
+            }>
+            <Ionicons
+              style={{marginVertical: 5, paddingHorizontal: 7}}
+              name="arrow-back"
+              size={20}
+              color={COLORS.black}
+            />
+          </TouchableOpacity>
+        </View>
+        <View
+          style={{
+            flex: 1,
+            alignItems: 'center',
+            position: 'absolute',
+            left: 0,
+            right: 0,
+          }}>
+          <Text style={[paraGray.largebold, {color: 'black'}]}>Add Links</Text>
+        </View>
+      </View>
       <ScrollView
         showsVerticalScrollIndicator={false}
         refreshControl={
@@ -205,7 +256,7 @@ const AddLink = props => {
             <Text style={[paraGray.darkpara, {marginVertical: 10}]}>
               Stream
             </Text>
-            <Dropdown
+            {/* <Dropdown
               style={{
                 height: 50,
                 borderColor: isstreamFocus ? 'blue' : 'gray',
@@ -255,6 +306,23 @@ const AddLink = props => {
                 setIsstreamFocus(false);
                 getsectionData(item);
               }}
+            /> */}
+            <DropDown
+              open={open}
+              setOpen={setOpen}
+              value={stream}
+              items={getdata.map(item => ({
+                label: item.class_name,
+                value: item.class_id,
+              }))}
+              placeholder="Select Stream"
+              onSelectItem={item => {
+                // getsectionData(item);
+                setselectedStream(item);
+                setStream(item.value);
+                setIsstreamFocus(false);
+                getsectionData(item);
+              }}
             />
           </View>
         </View>
@@ -263,7 +331,7 @@ const AddLink = props => {
             <Text style={[paraGray.darkpara, {marginVertical: 10}]}>
               Section
             </Text>
-            <Dropdown
+            {/* <Dropdown
               style={{
                 height: 50,
                 borderColor: issectionFocus ? 'blue' : 'gray',
@@ -313,13 +381,30 @@ const AddLink = props => {
                 setIsSectionFocus(false);
                 getsubjectData(item);
               }}
+            /> */}
+            <DropDown
+              open={openSection}
+              setOpen={setOpenSection}
+              value={section}
+              items={getsectiondata.map(item => ({
+                label: item.section_name,
+                value: item.section_id,
+                subject: item.subject_id,
+              }))}
+              placeholder="Select Section"
+              onSelectItem={item => {
+                setSelectedSection(item);
+                setSection(item.value);
+                setIsSectionFocus(false);
+                getsubjectData(item);
+              }}
             />
           </View>
           <View style={{paddingHorizontal: 20}}>
             <Text style={[paraGray.darkpara, {marginVertical: 10}]}>
               Subject
             </Text>
-            <Dropdown
+            {/* <Dropdown
               style={{
                 height: 50,
                 borderColor: issubjectFocus ? 'blue' : 'gray',
@@ -369,40 +454,98 @@ const AddLink = props => {
                 setIssubjectFocus(false);
                 // setsubjectId(item.subject);
               }}
+            /> */}
+            <DropDown
+              open={openSection}
+              setOpen={setOpenSection}
+              value={subject}
+              items={getsubjectdata.map(item => ({
+                label: item.name,
+                value: item.id,
+                // subject: item.subject_id,
+              }))}
+              placeholder="Select subject"
+              onSelectItem={item => {
+                setSelectedSubject(item);
+                setsubject(item.value);
+                setIssubjectFocus(false);
+              }}
             />
           </View>
-          <Text style={styles.formtxt}>Attach Link:</Text>
+          <Text
+            style={[
+              paraGray.darkpara,
+              {marginVertical: 10, width: '90%', alignSelf: 'center'},
+            ]}>
+            Attach Link:
+          </Text>
           <AutoGrowingTextInput
-            style={styles.txtboxDesc}
+            style={{
+              backgroundColor: 'transparent',
+              borderColor: COLORS.primary,
+              borderWidth: 0.6,
+              borderRadius: 12,
+              height: 80,
+              width: '90%',
+              alignSelf: 'center',
+            }}
             value={link}
             onChangeText={e => setLink(e)}
-            placeholder={'PASTE HERE...'}
+            placeholder={'  PASTE HERE...'}
           />
-          <Text style={styles.formtxt}>Title:</Text>
+          <Text
+            style={[
+              paraGray.darkpara,
+              {marginVertical: 10, width: '90%', alignSelf: 'center'},
+            ]}>
+            Title:
+          </Text>
           <AutoGrowingTextInput
             value={title}
             onChangeText={value => setTitle(value)}
-            style={styles.txtboxDesc}
-            placeholder={'ENTER TITLE'}
+            style={{
+              backgroundColor: 'transparent',
+              borderColor: COLORS.primary,
+              borderWidth: 0.6,
+              borderRadius: 12,
+              height: 80,
+              width: '90%',
+              alignSelf: 'center',
+            }}
+            placeholder={'  ENTER TITLE'}
           />
-          <Text style={styles.formtxt}>ADD Message:</Text>
+          <Text
+            style={[
+              paraGray.darkpara,
+              {marginVertical: 10, width: '90%', alignSelf: 'center'},
+            ]}>
+            ADD Message:
+          </Text>
           <AutoGrowingTextInput
             value={desc}
             onChangeText={e => setDesc(e)}
-            style={styles.txtboxDesc}
-            placeholder={'ADD MESSAGE'}
+            style={{
+              backgroundColor: 'transparent',
+              borderColor: COLORS.primary,
+              borderWidth: 0.6,
+              borderRadius: 12,
+              height: 80,
+              width: '90%',
+              alignSelf: 'center',
+            }}
+            placeholder={'  ADD MESSAGE'}
           />
           <View>
             <TouchableOpacity
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                backgroundColor: '#000000',
+                backgroundColor: COLORS.primary,
                 width: '80%',
                 height: 50,
                 borderColor: '#000000',
                 alignSelf: 'center',
-                borderWidth: 2,
+                // borderWidth: 2,
                 marginTop: '15%',
                 marginBottom: 30,
                 bottom: 0,
@@ -418,7 +561,7 @@ const AddLink = props => {
                   fontSize: 17,
                   fontFamily: 'Montserrat-SemiBold',
                 }}>
-                Share
+                Submit
               </Text>
             </TouchableOpacity>
           </View>

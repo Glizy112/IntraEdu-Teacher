@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -6,21 +6,31 @@ import {
   StyleSheet,
   StatusBar,
   TextInput,
+  TouchableOpacity,
+  Image,
+  Linking,
 } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+//import {TouchableOpacity} from 'react-native-gesture-handler';
 import SearchInput, {createFilter} from 'react-native-search-filter';
+import {COLORS} from '../../theme/Colors';
+import {paraGray} from '../../theme/styles/Base';
+import pdfIcon from '../../../assets/docIcon_pdf.png';
+import UserDetails from '../Chats/UserDetails';
 
-const Document = () => {
+import {SafeAreaView} from 'react-native-safe-area-context';
+
+const Document = props => {
   const datas = [
-    {id: '1', name: 'ABC'},
-    {id: '2', name: 'XYZ'},
+    {id: '1', name: 'Class Doubts-5th A', size: '500kb', stat: 'Unread'},
+    {id: '2', name: 'Group Assignment-5th A', size: '50kb', stat: 'Read'},
   ];
   //----------Search filter-------------
   const KEYS_TO_FILTERS = ['name'];
   const [state, setState] = useState({searchTerm: ''});
-
+  const [showPdf, setShowPdf] = useState(false);
   const filterDatas = datas.filter(
     createFilter(state.searchTerm, KEYS_TO_FILTERS),
   );
@@ -62,30 +72,155 @@ const Document = () => {
                     <Feather name="search" size={29} color="#000000" />
                 </View>
             </View> */}
-      {filterDatas.map((data, index) => (
-        <TouchableOpacity key={index}>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              backgroundColor: '#C4C4C440',
-              width: '90%',
-              height: 80,
-              borderRadius: 13,
-              alignSelf: 'center',
-              marginTop: 30,
-              justifyContent: 'space-between',
-              paddingHorizontal: 10,
-            }}>
-            <View>
-              {/* <Text style={{ color: '#000000', fontFamily: 'Montserrat-Regular', }}>gii</Text> */}
-              <Text style={styles.label}> {data.name}</Text>
-            </View>
 
-            <FontAwesome name="angle-right" size={25} color="#000000" />
-          </View>
-        </TouchableOpacity>
-      ))}
+      {props.userDetails ? null : (
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            //height: 30,
+            justifyContent: 'space-between',
+            paddingHorizontal: 15,
+            paddingTop: 8,
+            //paddingVertical: 12,
+            marginTop: 4,
+            //borderWidth: 1
+          }}>
+          <TouchableOpacity onPress={() => props.navigation.goBack()}>
+            <AntDesign name="arrowleft" size={24} color={COLORS.black} />
+          </TouchableOpacity>
+          <Text style={[paraGray.largebold, {textAlign: 'center'}]}>
+            {' '}
+            Documents{' '}
+          </Text>
+          <Text>Text</Text>
+          {/* </View> */}
+        </View>
+      )}
+      {props.userDetails ? null : (
+        <View
+          style={{
+            paddingTop: 12,
+            borderBottomWidth: 0.6,
+            borderColor: COLORS.primary,
+          }}
+        />
+      )}
+
+      <View
+        style={
+          props.mainViewStyle
+            ? [
+                {
+                  flex: 1,
+                  paddingTop: 32,
+                  paddingHorizontal: 16,
+                  backgroundColor: COLORS.white,
+                },
+                props.mainViewStyle,
+              ]
+            : {
+                flex: 1,
+                paddingTop: 32,
+                paddingHorizontal: 16,
+                backgroundColor: COLORS.white,
+              }
+        }>
+        {props.userDetails ? null : (
+          <Text style={[paraGray.largebold, {fontSize: 16}]}>
+            {' '}
+            Received Today{' '}
+          </Text>
+        )}
+        <View style={{marginTop: 4}}>
+          {filterDatas.map((data, index) => (
+            <TouchableOpacity
+              key={index}
+              onPress={() => {
+                Linking.openURL('https://www.orimi.com/pdf-test.pdf');
+                //   setShowPdf(true);
+                //console.log('Document CLicked');
+              }}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'flex-start',
+                  //backgroundColor: '#C4C4C440',
+                  backgroundColor: COLORS.bgColor,
+
+                  width: '100%',
+                  //height: 80,
+                  borderRadius: 16,
+                  //alignSelf: 'center',
+                  marginTop: 12,
+                  justifyContent: 'space-between',
+                  paddingHorizontal: 16,
+                  paddingVertical: 20,
+                  //elevation: 2,
+                }}>
+                {/* <View> */}
+                {/* <Text style={{ color: '#000000', fontFamily: 'Montserrat-Regular', }}>gii</Text> */}
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                  {/* <AntDesign name="paperclip" color={COLORS.primary} size={24}/> */}
+                  {props.userDetails ? (
+                    <Image
+                      source={require('../../../assets/docxIcon_word.png')}
+                      resizeMode="cover"
+                      style={{width: 40, height: 40}}
+                    />
+                  ) : (
+                    <Image
+                      source={require('../../../assets/docIcon_pdf.png')}
+                      resizeMode="cover"
+                      style={{width: 40, height: 40}}
+                    />
+                  )}
+                  <View style={{paddingLeft: 12}}>
+                    <Text style={styles.label}> {data.name}</Text>
+                    <Text
+                      style={[
+                        paraGray.darkpara,
+                        {paddingTop: 8, marginLeft: 2},
+                      ]}>
+                      {' '}
+                      {data.size}{' '}
+                    </Text>
+                  </View>
+                </View>
+                {/* </View> */}
+                <View style={{alignItems: 'flex-end'}}>
+                  <AntDesign
+                    name="eye"
+                    size={22}
+                    color={
+                      data.stat === 'Read' ? COLORS.primary : COLORS.txtGray
+                    }
+                  />
+                  <Text
+                    style={[
+                      paraGray.darkpara,
+                      {paddingTop: 4},
+                      data.stat === 'Read'
+                        ? {color: COLORS.primary}
+                        : {color: COLORS.txtGray},
+                    ]}>
+                    {' '}
+                    {data.stat}{' '}
+                  </Text>
+                  {/* <TouchableOpacity style={{backgroundColor: COLORS.bgColor, borderRadius: 16, padding: 6}}> 
+                    <Text style={paraGray.darkpara}> Mark as read </Text>
+                  </TouchableOpacity> */}
+                </View>
+              </View>
+            </TouchableOpacity>
+          ))}
+        </View>
+      </View>
     </View>
   );
 };
@@ -102,7 +237,7 @@ const styles = StyleSheet.create({
     color: 'black', // <-- The magic
     textAlign: 'center', // <-- The magic
     fontSize: 15,
-    paddingHorizontal: '5%',
+    //paddingHorizontal: '5%',
     fontFamily: 'Montserrat-SemiBold',
   },
   search: {

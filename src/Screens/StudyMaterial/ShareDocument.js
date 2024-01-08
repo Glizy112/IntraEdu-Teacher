@@ -12,6 +12,7 @@ import {
   ImageBackground,
   Image,
   Linking,
+  FlatList,
 } from 'react-native';
 import {List, Modal} from 'react-native-paper';
 import {COLORS} from '../../theme/Colors';
@@ -22,6 +23,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import Url from '../../Config/Api/Url';
 import {useFocusEffect} from '@react-navigation/native';
 
+import Document from '../Documents/Document';
 const ShareDocument = props => {
   const dispatch = useDispatch();
   const {userinfo, userid, username, showmodal, userimage, schoolid} =
@@ -96,7 +98,7 @@ const ShareDocument = props => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
         <View style={{flex: 1, marginTop: 20, marginBottom: 20}}>
-          {getdata.map((data, index) => (
+          {/* {getdata.map((data, index) => (
             <View
               style={{flex: 1, paddingHorizontal: 10, marginVertical: 10}}
               key={index}>
@@ -149,7 +151,8 @@ const ShareDocument = props => {
                 </View>
               </TouchableOpacity>
             </View>
-          ))}
+          ))} */}
+          <FlatList data={getdata} renderItem={({item}) => <Document />} />
         </View>
         {loading == false && getdata == '' && (
           <View

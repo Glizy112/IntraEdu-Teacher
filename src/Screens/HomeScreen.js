@@ -90,6 +90,24 @@ const categoryList01 = [
     categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary} />,
     categoryScreen: 'Lecture',
   },
+  {
+    id: '9',
+    categoryTitle: 'Announcement',
+    categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary} />,
+    categoryScreen: 'Announcement',
+  },
+  {
+    id: '8',
+    categoryTitle: 'StudyMaterial',
+    categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary} />,
+    categoryScreen: 'StudyMaterial',
+  },
+  {
+    id: '11',
+    categoryTitle: 'FeesTransaction',
+    categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary} />,
+    categoryScreen: 'FeesTransaction',
+  },
 ];
 
 const categoryList02 = [

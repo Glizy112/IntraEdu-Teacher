@@ -16,6 +16,7 @@ const Search = ({
   placeholder,
   iconColor,
   placeholderTextColor,
+  iconSize,
 }) => {
   const [search, setSearch] = useState('');
 
@@ -123,7 +124,7 @@ const Search = ({
         />
         <Ionicons
           name="search-outline"
-          size={24}
+          size={iconSize ? iconSize : 24}
           color={iconColor ? iconColor : COLORS.black}
           style={
             iconStyle

@@ -2,6 +2,7 @@ import {View, Text} from 'react-native';
 import React from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {COLORS} from '../theme/Colors';
+
 const DropDown = ({
   open,
   value,
@@ -36,6 +37,7 @@ const DropDown = ({
                   alignItems: 'center',
                   backgroundColor: '#FFFFFF',
                   width: '100%',
+
                   paddingHorizontal: 4,
                   //borderColor: '#D3D3D3',
                   borderColor: COLORS.primary,
@@ -60,6 +62,7 @@ const DropDown = ({
                   //marginTop: 15,
                   // paddingLeft: 12,
                   borderRadius: 12,
+
                   //height: 20,
                 },
               ]
