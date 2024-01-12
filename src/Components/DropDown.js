@@ -68,7 +68,12 @@ const DropDown = ({
               ]
         }
         placeholder={placeholder ? placeholder : ''}
-        placeholderStyle={{color: COLORS.lightergray, paddingLeft: 4}}
+        placeholderStyle={{
+          color: '#808080',
+          // paddingLeft: 4,
+          fontSize: 13,
+          fontFamily: 'Montserrat-Regular',
+        }}
         dropDownDirection="BOTTOM"
         dropDownContainerStyle={
           dropDownContaineStyle

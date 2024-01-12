@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
-  Button,
   StyleSheet,
   StatusBar,
   TextInput,
@@ -21,10 +20,13 @@ import Url from '../../Config/Api/Url';
 import {COLORS} from '../../theme/Colors';
 import {paraGray} from '../../theme/styles/Base';
 import FastImage from 'react-native-fast-image';
+import Search from '../../Components/Search';
+import Button from '../../Components/Button';
 
 const UserTrans = props => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const [searchData, setSearchData] = useState([]);
   const [load, setLoad] = useState(true);
   const [refreshing, setRefreshing] = React.useState(false);
   const {userinfo, userid, username, showmodal, schoolid, reload} = useSelector(
@@ -121,7 +123,7 @@ const UserTrans = props => {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
-        <View style={styles.search}>
+        {/* <View style={styles.search}>
           <View
             style={{
               flexDirection: 'row',
@@ -198,7 +200,320 @@ const UserTrans = props => {
               </DataTable>
             </TouchableOpacity>
           </View>
-        ))}
+        ))} */}
+        <Search
+          getdata={getdata}
+          KEYS_TO_FILTERS={KEYS_TO_FILTERS}
+          filter={setSearchData}
+        />
+        <View style={{flex: 1, marginTop: 10}}>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              width: '90%',
+              alignSelf: 'center',
+              marginTop: 20,
+            }}>
+            <View>
+              <Text
+                style={[
+                  paraGray.largebold,
+                  {fontSize: 16, color: 'rgba(0, 0, 0, 0.60)'},
+                ]}>
+                All Students (40)
+              </Text>
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                //justifyContent: 'space-between',
+                alignItems: 'center',
+                //width: '10%',
+                paddingLeft: -30,
+              }}>
+              <Text
+                style={[
+                  paraGray.darkpara,
+                  {marginRight: 11, color: 'rgba(0, 0, 0, 0.60)'},
+                ]}>
+                Student Details
+              </Text>
+              {/* <Text style={[paraGray.darkpara, {color: 'rgba(0, 0, 0, 0.60)'}]}>
+                Mark Absent
+              </Text> */}
+            </View>
+          </View>
+          {searchData.length > 0 && searchData
+            ? searchData.map((student, index) => (
+                <View
+                  key={index}
+                  style={{
+                    //height: 50,
+
+                    marginTop: 20,
+                    borderRadius: 5,
+                    // width: '90%',
+                    //width: '100%',
+                    //width:"100%"
+                    width: '100%',
+                    borderBottomWidth: 1,
+                    borderColor: '#97A7C3',
+
+                    alignSelf: 'center',
+                    paddingBottom: 10,
+                  }}>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+
+                      alignItems: 'center',
+                      //justifyContent: 'space-between',
+
+                      width: '90%',
+                      alignSelf: 'center',
+                    }}>
+                    {/*  */}
+                    {student.photo == '' ? (
+                      <ImageBackground
+                        style={{
+                          backgroundColor: COLORS.black,
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          width: 40,
+                          height: 40,
+                          borderRadius: 30,
+                        }}>
+                        <FontAwesome5
+                          name="user-alt"
+                          size={20}
+                          color="#FFFFFF"
+                        />
+                      </ImageBackground>
+                    ) : (
+                      <FastImage
+                        style={{width: 42, height: 42, borderRadius: 50}}
+                        source={{uri: Url.student_IMG + student.photo}}
+                        backgroundColor={COLORS.black}
+                      />
+                    )}
+                    <View style={{flexDirection: 'row'}}>
+                      <View
+                        style={{
+                          flexDirection: 'row',
+                          justifyContent: 'space-between',
+                          marginTop: 10,
+                          alignItems: 'center',
+                          // justifyContent: 'center',
+                          //alignSelf: 'center',
+                          //borderWidth: 1,
+                          width: '65%',
+                          alignSelf: 'center',
+                          marginBottom: 3,
+                          marginLeft: 10,
+                        }}>
+                        <View>
+                          <View>
+                            <Text style={[paraGray.largebold, {fontSize: 14}]}>
+                              {student.student_name}
+                            </Text>
+                          </View>
+                          <View
+                            style={{
+                              flexDirection: 'row',
+                              justifyContent: 'space-between',
+                              alignItems: 'center',
+                              // width: '50%',
+                              marginTop: 3,
+                            }}>
+                            <View>
+                              <Text
+                                style={[
+                                  paraGray.darkpara,
+                                  {
+                                    fontSize: 12,
+                                    color: '#97A7C3',
+                                    textAlign: 'left',
+                                  },
+                                ]}>
+                                Roll NO- {student.roll_no}
+                              </Text>
+                            </View>
+                          </View>
+                        </View>
+                      </View>
+                      <TouchableOpacity
+                        style={{
+                          alignItems: 'center',
+                          paddingHorizontal: 16,
+                          height: 32,
+                          // borderColor: COLORS.primary,
+                          backgroundColor: COLORS.primary,
+                          alignSelf: 'center',
+                          //borderWidth: 1.2,
+                          //marginTop: 15,
+                          borderRadius: 45,
+
+                          justifyContent: 'center',
+                        }}
+                        // onPress={() => {
+                        //   props.navigation.navigate('BookDetail', {
+                        //     student: getdata[index],
+                        //   });
+                        // }}
+                        onPress={() => {
+                          props.navigation.navigate('FeesDetail', {
+                            fees: studentfilter[index],
+                          });
+                        }}>
+                        <Text
+                          style={{
+                            color: 'white',
+                            fontSize: 14,
+                            fontFamily: 'Montserrat-Medium',
+                          }}>
+                          Details
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                </View>
+              ))
+            : getdata.map((student, index) => (
+                <View
+                  key={index}
+                  style={{
+                    //height: 50,
+
+                    marginTop: 20,
+                    borderRadius: 5,
+                    // width: '90%',
+                    //width: '100%',
+                    //width:"100%"
+                    width: '100%',
+                    borderBottomWidth: 1,
+                    borderColor: '#97A7C3',
+
+                    alignSelf: 'center',
+                    paddingBottom: 10,
+                  }}>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+
+                      alignItems: 'center',
+                      //justifyContent: 'space-between',
+
+                      width: '90%',
+                      alignSelf: 'center',
+                    }}>
+                    {/*  */}
+                    {student.photo == '' ? (
+                      <ImageBackground
+                        style={{
+                          backgroundColor: COLORS.black,
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          width: 40,
+                          height: 40,
+                          borderRadius: 30,
+                        }}>
+                        <FontAwesome5
+                          name="user-alt"
+                          size={20}
+                          color="#FFFFFF"
+                        />
+                      </ImageBackground>
+                    ) : (
+                      <FastImage
+                        style={{width: 42, height: 42, borderRadius: 50}}
+                        source={{uri: Url.student_IMG + student.photo}}
+                        backgroundColor={COLORS.black}
+                      />
+                    )}
+                    <View style={{flexDirection: 'row'}}>
+                      <View
+                        style={{
+                          flexDirection: 'row',
+                          justifyContent: 'space-between',
+                          marginTop: 10,
+                          alignItems: 'center',
+                          // justifyContent: 'center',
+                          //alignSelf: 'center',
+                          //borderWidth: 1,
+                          width: '65%',
+                          alignSelf: 'center',
+                          marginBottom: 3,
+                          marginLeft: 10,
+                        }}>
+                        <View>
+                          <View>
+                            <Text style={[paraGray.largebold, {fontSize: 14}]}>
+                              {student.student_name}
+                            </Text>
+                          </View>
+                          <View
+                            style={{
+                              flexDirection: 'row',
+                              justifyContent: 'space-between',
+                              alignItems: 'center',
+                              // width: '50%',
+                              marginTop: 3,
+                            }}>
+                            <View>
+                              <Text
+                                style={[
+                                  paraGray.darkpara,
+                                  {
+                                    fontSize: 12,
+                                    color: '#97A7C3',
+                                    textAlign: 'left',
+                                  },
+                                ]}>
+                                Roll NO- {student.roll_no}
+                              </Text>
+                            </View>
+                          </View>
+                        </View>
+                      </View>
+                      <TouchableOpacity
+                        style={{
+                          alignItems: 'center',
+                          paddingHorizontal: 16,
+                          height: 32,
+                          // borderColor: COLORS.primary,
+                          backgroundColor: COLORS.primary,
+                          alignSelf: 'center',
+                          //borderWidth: 1.2,
+                          //marginTop: 15,
+                          borderRadius: 45,
+
+                          justifyContent: 'center',
+                        }}
+                        // onPress={() => {
+                        //   props.navigation.navigate('BookDetail', {
+                        //     student: getdata[index],
+                        //   });
+                        // }}
+                        onPress={() => {
+                          props.navigation.navigate('FeesDetail', {
+                            fees: studentfilter[index],
+                          });
+                        }}>
+                        <Text
+                          style={{
+                            color: 'white',
+                            fontSize: 14,
+                            fontFamily: 'Montserrat-Medium',
+                          }}>
+                          Details
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                </View>
+              ))}
+        </View>
         {getdata == '' && loading == false && (
           <View
             style={{

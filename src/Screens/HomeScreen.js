@@ -108,6 +108,18 @@ const categoryList01 = [
     categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary} />,
     categoryScreen: 'FeesTransaction',
   },
+  {
+    id: '12',
+    categoryTitle: 'Certificate',
+    categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary} />,
+    categoryScreen: 'Certificate',
+  },
+  {
+    id: '7',
+    categoryTitle: 'Assignment',
+    categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary} />,
+    categoryScreen: 'Assignment',
+  },
 ];
 
 const categoryList02 = [

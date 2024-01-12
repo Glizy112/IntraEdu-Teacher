@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -9,17 +9,18 @@ import {
   TouchableOpacity,
   RefreshControl,
 } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import {ScrollView} from 'react-native-gesture-handler';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { Dropdown } from 'react-native-element-dropdown';
-import { paraGray } from '../../theme/styles/Base';
+import {Dropdown} from 'react-native-element-dropdown';
+import {paraGray} from '../../theme/styles/Base';
 import Spinner from 'react-native-loading-spinner-overlay';
-import { useSelector, useDispatch } from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import Url from '../../Config/Api/Url';
-import { AutoGrowingTextInput } from 'react-native-autogrow-textinput';
-import { ApiMethod } from '../../Config/Api/ApiMethod';
-
+import {AutoGrowingTextInput} from 'react-native-autogrow-textinput';
+import {ApiMethod} from '../../Config/Api/ApiMethod';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import {COLORS} from '../../theme/Colors';
 const ProvideCertificate = () => {
   // --------Date-time Picker----------
   const [date, setDate] = useState(new Date());
@@ -29,7 +30,7 @@ const ProvideCertificate = () => {
   const [loading, setLoading] = useState(false);
   const [load, setLoad] = useState(true);
   const [refreshing, setRefreshing] = React.useState(false);
-  const { teacherid, schoolid } = useSelector(state => state.userReducer);
+  const {teacherid, schoolid} = useSelector(state => state.userReducer);
   const [getdata, setdata] = useState([]);
   const [certidesc, setCertiDesc] = useState('');
   // <------------Select Stream-------------->
@@ -211,13 +212,14 @@ const ProvideCertificate = () => {
   return (
     <View style={styles.container}>
       {loading == true && <Spinner visible={load} />}
+
       <ScrollView
         showsVerticalScrollIndicator={false}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
-        <View style={{ marginTop: 15, paddingHorizontal: 20 }}>
-          <Text style={[paraGray.darkpara, { marginVertical: 10 }]}>Stream</Text>
+        <View style={{marginTop: 15, paddingHorizontal: 20}}>
+          <Text style={[paraGray.darkpara, {marginVertical: 10}]}>Stream</Text>
           <Dropdown
             style={{
               height: 50,
@@ -272,8 +274,8 @@ const ProvideCertificate = () => {
         </View>
         <View>
           <View>
-            <View style={{ paddingHorizontal: 20 }}>
-              <Text style={[paraGray.darkpara, { marginVertical: 10 }]}>
+            <View style={{paddingHorizontal: 20}}>
+              <Text style={[paraGray.darkpara, {marginVertical: 10}]}>
                 Section
               </Text>
               <Dropdown
@@ -328,8 +330,8 @@ const ProvideCertificate = () => {
                 }}
               />
             </View>
-            <View style={{ paddingHorizontal: 20 }}>
-              <Text style={[paraGray.darkpara, { marginVertical: 10 }]}>
+            <View style={{paddingHorizontal: 20}}>
+              <Text style={[paraGray.darkpara, {marginVertical: 10}]}>
                 Subject
               </Text>
               <Dropdown

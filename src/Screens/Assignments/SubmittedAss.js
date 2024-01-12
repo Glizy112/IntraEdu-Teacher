@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   RefreshControl,
   ScrollView,
+  FlatList,
 } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -20,8 +21,11 @@ import {COLORS} from '../../theme/Colors';
 import {paraGray} from '../../theme/styles/Base';
 import {useFocusEffect} from '@react-navigation/native';
 
+import Search from '../../Components/Search';
+
 const SubmittedAss = props => {
   const [loading, setLoading] = useState(false);
+  const [searchData, setSearchData] = useState([]);
   const [load, setLoad] = useState(true);
   const [refreshing, setRefreshing] = React.useState(false);
   const {userinfo, userid, username, showmodal, schoolid} = useSelector(
@@ -94,7 +98,7 @@ const SubmittedAss = props => {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
-        <View style={styles.search}>
+        {/* <View style={styles.search}>
           <View
             style={{
               flexDirection: 'row',
@@ -131,8 +135,523 @@ const SubmittedAss = props => {
               color="#000000"
             />
           </View>
-        </View>
+        </View> */}
+        <Search
+          KEYS_TO_FILTERS={KEYS_TO_FILTERS}
+          getdata={getdata}
+          filter={setSearchData}
+        />
         <View style={{flex: 1, marginTop: 20, marginBottom: 20}}>
+          {searchData && searchData.subject_name ? (
+            <FlatList
+              data={searchData}
+              style={{width: '95%', alignSelf: 'center'}}
+              keyExtractor={item => item.time}
+              renderItem={({item}) => (
+                <TouchableOpacity
+                  style={{
+                    flex: 1,
+                    backgroundColor: COLORS.bgColor,
+                    borderRadius: 20,
+                    paddingHorizontal: 10,
+                    borderWidth: 1,
+                    borderColor: COLORS.primary,
+                    marginVertical: 10,
+                  }}
+                  onPress={() => {
+                    props.navigation.navigate('SubmittedDetailAss', {
+                      //data: getdata[index],
+                      data: item,
+                    });
+                  }}>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      // justifyContent: 'center',
+                      alignItems: 'center',
+                      marginTop: 10,
+                    }}>
+                    <View
+                      style={{
+                        paddingLeft: 10,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {
+                            color: COLORS.primary,
+                            textAlign: 'left',
+                          },
+                        ]}>
+                        {item.subject_name}
+                      </Text>
+                    </View>
+                    <View style={{flex: 1}}>
+                      <TouchableOpacity
+                        style={{
+                          height: 30,
+                          width: 30,
+                          borderWidth: 1,
+                          borderRadius: 20,
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          alignSelf: 'flex-end',
+                          marginRight: 10,
+                          borderColor: COLORS.section,
+                        }}
+                        onPress={() =>
+                          props.navigation.navigate('UpdateAss', {
+                            data: item,
+                          })
+                        }>
+                        <MaterialCommunityIcons
+                          name="pencil"
+                          color={COLORS.black}
+                          size={20}
+                        />
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                  <View
+                    style={{
+                      flex: 1,
+                      borderBottomColor: COLORS.background,
+                      borderBottomWidth: 1,
+                      marginTop: 15,
+                    }}
+                  />
+                  <View
+                    style={{
+                      flex: 1,
+                      justifyContent: 'space-between',
+                      marginTop: 10,
+                      marginBottom: 10,
+                    }}>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        marginTop: 10,
+                        justifyContent: 'space-between',
+                      }}>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.lightblack, marginLeft: 5},
+                        ]}>
+                        Stream
+                      </Text>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.black, marginLeft: 5},
+                        ]}>
+                        {item.class_name}
+                      </Text>
+                    </View>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        marginTop: 10,
+                        justifyContent: 'space-between',
+                      }}>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.lightblack, marginLeft: 5},
+                        ]}>
+                        Assigment Created Date
+                      </Text>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.black, marginLeft: 5},
+                        ]}>
+                        {item.date}
+                      </Text>
+                    </View>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        marginTop: 10,
+                        justifyContent: 'space-between',
+                      }}>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.lightblack, marginLeft: 5},
+                        ]}>
+                        Assigment Created Timing
+                      </Text>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.black, marginLeft: 5},
+                        ]}>
+                        {item.time}
+                      </Text>
+                    </View>
+                  </View>
+                  <View
+                    style={{
+                      flex: 1,
+                      borderBottomColor: COLORS.background,
+                      borderBottomWidth: 1,
+                      marginTop: 10,
+                    }}
+                  />
+                  <View
+                    style={{
+                      flex: 1,
+                      justifyContent: 'space-between',
+                      marginTop: 5,
+                      marginBottom: 10,
+                    }}>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        marginTop: 10,
+                        justifyContent: 'space-between',
+                      }}>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.lightblack, marginLeft: 5},
+                        ]}>
+                        Last Submission Date
+                      </Text>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.black, marginLeft: 5},
+                        ]}>
+                        {item.deadline}
+                      </Text>
+                    </View>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        marginTop: 10,
+                        justifyContent: 'space-between',
+                      }}>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.lightblack, marginLeft: 5},
+                        ]}>
+                        Total Student
+                      </Text>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.black, marginLeft: 5},
+                        ]}>
+                        {item.total_student}
+                      </Text>
+                    </View>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        marginTop: 10,
+                        justifyContent: 'space-between',
+                      }}>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.lightblack, marginLeft: 5},
+                        ]}>
+                        Attendent
+                      </Text>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.black, marginLeft: 5},
+                        ]}>
+                        {item.attendent}
+                      </Text>
+                    </View>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        marginTop: 10,
+                        justifyContent: 'space-between',
+                      }}>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.lightblack, marginLeft: 5},
+                        ]}>
+                        Mode
+                      </Text>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.black, marginLeft: 5},
+                        ]}>
+                        {item.mode}
+                      </Text>
+                    </View>
+                  </View>
+                </TouchableOpacity>
+              )}
+            />
+          ) : (
+            <FlatList
+              data={filtersubjects}
+              style={{width: '95%', alignSelf: 'center'}}
+              keyExtractor={item => item.time}
+              renderItem={({item}) => (
+                <TouchableOpacity
+                  style={{
+                    flex: 1,
+                    backgroundColor: COLORS.bgColor,
+                    borderRadius: 20,
+                    paddingHorizontal: 10,
+                    borderWidth: 1,
+                    borderColor: COLORS.primary,
+                    marginVertical: 10,
+                  }}
+                  onPress={() => {
+                    props.navigation.navigate('SubmittedDetailAss', {
+                      //data: getdata[index],
+                      data: item,
+                    });
+                  }}>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      // justifyContent: 'center',
+                      alignItems: 'center',
+                      marginTop: 10,
+                    }}>
+                    <View
+                      style={{
+                        paddingLeft: 10,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {
+                            color: COLORS.primary,
+                            textAlign: 'left',
+                          },
+                        ]}>
+                        {item.subject_name}
+                      </Text>
+                    </View>
+                    <View style={{flex: 1}}>
+                      <TouchableOpacity
+                        style={{
+                          height: 30,
+                          width: 30,
+                          borderWidth: 1,
+                          borderRadius: 20,
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          alignSelf: 'flex-end',
+                          marginRight: 10,
+                          borderColor: COLORS.section,
+                        }}
+                        onPress={() =>
+                          props.navigation.navigate('UpdateAss', {
+                            data: item,
+                          })
+                        }>
+                        <MaterialCommunityIcons
+                          name="pencil"
+                          color={COLORS.black}
+                          size={20}
+                        />
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                  <View
+                    style={{
+                      flex: 1,
+                      borderBottomColor: COLORS.background,
+                      borderBottomWidth: 1,
+                      marginTop: 15,
+                    }}
+                  />
+                  <View
+                    style={{
+                      flex: 1,
+                      justifyContent: 'space-between',
+                      marginTop: 10,
+                      marginBottom: 10,
+                    }}>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        marginTop: 10,
+                        justifyContent: 'space-between',
+                      }}>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.lightblack, marginLeft: 5},
+                        ]}>
+                        Stream
+                      </Text>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.black, marginLeft: 5},
+                        ]}>
+                        {item.class_name}
+                      </Text>
+                    </View>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        marginTop: 10,
+                        justifyContent: 'space-between',
+                      }}>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.lightblack, marginLeft: 5},
+                        ]}>
+                        Assigment Created Date
+                      </Text>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.black, marginLeft: 5},
+                        ]}>
+                        {item.date}
+                      </Text>
+                    </View>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        marginTop: 10,
+                        justifyContent: 'space-between',
+                      }}>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.lightblack, marginLeft: 5},
+                        ]}>
+                        Assigment Created Timing
+                      </Text>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.black, marginLeft: 5},
+                        ]}>
+                        {item.time}
+                      </Text>
+                    </View>
+                  </View>
+                  <View
+                    style={{
+                      flex: 1,
+                      borderBottomColor: COLORS.background,
+                      borderBottomWidth: 1,
+                      marginTop: 10,
+                    }}
+                  />
+                  <View
+                    style={{
+                      flex: 1,
+                      justifyContent: 'space-between',
+                      marginTop: 5,
+                      marginBottom: 10,
+                    }}>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        marginTop: 10,
+                        justifyContent: 'space-between',
+                      }}>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.lightblack, marginLeft: 5},
+                        ]}>
+                        Last Submission Date
+                      </Text>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.black, marginLeft: 5},
+                        ]}>
+                        {item.deadline}
+                      </Text>
+                    </View>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        marginTop: 10,
+                        justifyContent: 'space-between',
+                      }}>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.lightblack, marginLeft: 5},
+                        ]}>
+                        Total Student
+                      </Text>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.black, marginLeft: 5},
+                        ]}>
+                        {item.total_student}
+                      </Text>
+                    </View>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        marginTop: 10,
+                        justifyContent: 'space-between',
+                      }}>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.lightblack, marginLeft: 5},
+                        ]}>
+                        Attendent
+                      </Text>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.black, marginLeft: 5},
+                        ]}>
+                        {item.attendent}
+                      </Text>
+                    </View>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        marginTop: 10,
+                        justifyContent: 'space-between',
+                      }}>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.lightblack, marginLeft: 5},
+                        ]}>
+                        Mode
+                      </Text>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {color: COLORS.black, marginLeft: 5},
+                        ]}>
+                        {item.mode}
+                      </Text>
+                    </View>
+                  </View>
+                </TouchableOpacity>
+              )}
+            />
+          )}
+          {/*
           {filtersubjects.map((data, index) => (
             <View style={{flex: 1, paddingHorizontal: 10}} key={index}>
               <TouchableOpacity
@@ -380,7 +899,7 @@ const SubmittedAss = props => {
                 </View>
               </TouchableOpacity>
             </View>
-          ))}
+          ))} */}
         </View>
       </ScrollView>
     </View>

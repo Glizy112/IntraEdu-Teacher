@@ -15,7 +15,8 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import DocumentPicker from 'react-native-document-picker';
-import {Dropdown} from 'react-native-element-dropdown';
+// import {Dropdown} from 'react-native-element-dropdown';
+import DropDown from '../../Components/DropDown';
 import {paraGray} from '../../theme/styles/Base';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -23,8 +24,13 @@ import {useSelector, useDispatch} from 'react-redux';
 import Url from '../../Config/Api/Url';
 import {AutoGrowingTextInput} from 'react-native-autogrow-textinput';
 import {COLORS} from '../../theme/Colors';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const CreateAss = props => {
+  const [openStream, setOpenStream] = useState(false);
+  const [openSection, setOpenSection] = useState(false);
+  const [openSubject, setOpenSubject] = useState(false);
+  const [openSubmissionMode, setOpenSubmissionMOde] = useState(false);
   const [loading, setLoading] = useState(false);
   const [load, setLoad] = useState(true);
   const [refreshing, setRefreshing] = React.useState(false);
@@ -266,18 +272,153 @@ const CreateAss = props => {
 
   return (
     <View style={styles.container}>
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          height: 50,
+          justifyContent: 'space-between',
+
+          paddingHorizontal: 10,
+          borderBottomColor: '#275CE0',
+          borderBottomWidth: 1,
+        }}>
+        <View
+          style={{
+            alignItems: 'flex-start',
+          }}>
+          <TouchableOpacity
+            style={{
+              backgroundColor: COLORS.white,
+              borderRadius: 20,
+            }}
+            onPress={() =>
+              //   props.navigation.navigate('StudentEdit', {
+              //     studentdetail: studentdetail,
+              //   })
+              props.navigation.goBack()
+            }>
+            <Ionicons
+              style={{marginVertical: 5, paddingHorizontal: 7}}
+              name="arrow-back"
+              size={20}
+              color={COLORS.black}
+            />
+          </TouchableOpacity>
+        </View>
+        <View
+          style={{
+            flex: 1,
+            alignItems: 'center',
+            position: 'absolute',
+            left: 0,
+            right: 0,
+          }}>
+          <Text style={[paraGray.largebold, {color: 'black'}]}>
+            Create Assigment
+          </Text>
+        </View>
+      </View>
       {loading == true && <Spinner visible={load} />}
+
       <ScrollView
+        style={{width: '90%', alignSelf: 'center'}}
         showsVerticalScrollIndicator={false}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
         <View>
-          <View style={{marginTop: 15, paddingHorizontal: 20}}>
+          <View>
+            {/* <TouchableOpacity
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                backgroundColor: '#C4C4C4',
+                width: '80%',
+                height: 50,
+                alignSelf: 'center',
+                marginTop: '8%',
+                marginBottom: 15,
+                bottom: 0,
+                borderRadius: 5,
+                justifyContent: 'center',
+              }}
+              onPress={selectFile}>
+              <Text
+                style={{
+                  color: '#000000',
+                  fontSize: 18,
+                  fontFamily: 'Montserrat-SemiBold',
+                }}>
+                Attach File
+                <MaterialCommunityIcons name="plus" size={20} />
+              </Text>
+            </TouchableOpacity> */}
+            <TouchableOpacity
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: COLORS.bgColor,
+                width: '80%',
+                height: 96,
+                borderRadius: 13,
+                alignSelf: 'center',
+                marginTop: 20,
+                paddingHorizontal: 20,
+              }}
+              onPress={selectFile}>
+              <AntDesign
+                style={{marginVertical: 5}}
+                name="pluscircle"
+                size={30}
+                color={COLORS.black}
+              />
+              <Text
+                style={{
+                  fontFamily: 'Montserrat-Medium',
+                  color: COLORS.black,
+                  fontSize: 15,
+                  marginLeft: 16,
+                }}>
+                Add File(s)
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              marginBottom: 20,
+              paddingHorizontal: 10,
+            }}>
+            {file.map((file, index) => (
+              // {/* {file != '' && ( */}
+              <TouchableOpacity
+                // key={index}
+                style={{marginHorizontal: 10, marginVertical: 10}}
+                onPress={() => removeItem(index)}
+                // onPress={() => setFile('')}
+              >
+                <AntDesign
+                  style={{alignSelf: 'flex-end', marginRight: 5}}
+                  name="closecircleo"
+                  size={20}
+                  color={COLORS.black}
+                />
+                <FontAwesome name="file-pdf-o" size={40} color={COLORS.red} />
+                <Text>{file.name}</Text>
+              </TouchableOpacity>
+              // )}
+            ))}
+          </View>
+
+          <View style={{marginTop: 0}}>
             <Text style={[paraGray.darkpara, {marginVertical: 10}]}>
               Stream
             </Text>
-            <Dropdown
+            {/* <Dropdown
               style={{
                 height: 50,
                 borderColor: isstreamFocus ? 'blue' : 'gray',
@@ -327,15 +468,33 @@ const CreateAss = props => {
                 setIsstreamFocus(false);
                 getsectionData(item);
               }}
+            /> */}
+            <DropDown
+              open={openStream}
+              setOpen={setOpenStream}
+              value={stream}
+              items={getdata.map(item => ({
+                label: item.class_name,
+                value: item.class_id,
+              }))}
+              style={{paddingHorizontal: 10}}
+              placeholder={'Select Stream'}
+              onSelectItem={item => {
+                // getsectionData(item);
+                setselectedStream(item);
+                setStream(item.value);
+                setIsstreamFocus(false);
+                getsectionData(item);
+              }}
             />
           </View>
         </View>
         <View>
-          <View style={{paddingHorizontal: 20}}>
+          <View style={{}}>
             <Text style={[paraGray.darkpara, {marginVertical: 10}]}>
               Section
             </Text>
-            <Dropdown
+            {/* <Dropdown
               style={{
                 height: 50,
                 borderColor: issectionFocus ? 'blue' : 'gray',
@@ -385,13 +544,31 @@ const CreateAss = props => {
                 setIsSectionFocus(false);
                 getsubjectData(item);
               }}
+            /> */}
+            <DropDown
+              open={openSection}
+              setOpen={setOpenSection}
+              value={section}
+              items={getsectiondata.map(item => ({
+                label: item.section_name,
+                value: item.section_id,
+                // subject: item.subject_id,
+              }))}
+              style={{paddingHorizontal: 10}}
+              placeholder={'Select Section'}
+              onSelectItem={item => {
+                setSelectedSection(item);
+                setSection(item.value);
+                setIsSectionFocus(false);
+                getsubjectData(item);
+              }}
             />
           </View>
-          <View style={{paddingHorizontal: 20}}>
+          <View style={{}}>
             <Text style={[paraGray.darkpara, {marginVertical: 10}]}>
               Subject
             </Text>
-            <Dropdown
+            {/* <Dropdown
               style={{
                 height: 50,
                 borderColor: issubjectFocus ? 'blue' : 'gray',
@@ -441,68 +618,32 @@ const CreateAss = props => {
                 setIssubjectFocus(false);
                 // setsubjectId(item.subject);
               }}
+            /> */}
+            <DropDown
+              open={openSubject}
+              setOpen={setOpenSubject}
+              value={section}
+              items={getsubjectdata.map(item => ({
+                label: item.name,
+                value: item.id,
+                // subject: item.subject_id,
+              }))}
+              style={{paddingHorizontal: 10}}
+              placeholder={'Select subject'}
+              onSelectItem={item => {
+                setSelectedSubject(item);
+                setsubject(item.value);
+                setIssubjectFocus(false);
+                // setsubjectId(item.subject);
+              }}
             />
           </View>
-          <View>
-            <TouchableOpacity
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                backgroundColor: '#C4C4C4',
-                width: '80%',
-                height: 50,
-                alignSelf: 'center',
-                marginTop: '8%',
-                marginBottom: 15,
-                bottom: 0,
-                borderRadius: 5,
-                justifyContent: 'center',
-              }}
-              onPress={selectFile}>
-              <Text
-                style={{
-                  color: '#000000',
-                  fontSize: 18,
-                  fontFamily: 'Montserrat-SemiBold',
-                }}>
-                Attach File
-                <MaterialCommunityIcons name="plus" size={20} />
-              </Text>
-            </TouchableOpacity>
-          </View>
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-              marginBottom: 20,
-              paddingHorizontal: 10,
-            }}>
-            {file.map((file, index) => (
-              // {/* {file != '' && ( */}
-              <TouchableOpacity
-                // key={index}
-                style={{marginHorizontal: 10, marginVertical: 10}}
-                onPress={() => removeItem(index)}
-                // onPress={() => setFile('')}
-              >
-                <AntDesign
-                  style={{alignSelf: 'flex-end', marginRight: 5}}
-                  name="closecircleo"
-                  size={20}
-                  color={COLORS.black}
-                />
-                <FontAwesome name="file-pdf-o" size={40} color={COLORS.red} />
-                <Text>{file.name}</Text>
-              </TouchableOpacity>
-              // )}
-            ))}
-          </View>
-          <View style={{paddingHorizontal: 20}}>
+
+          <View style={{}}>
             <Text style={[paraGray.darkpara, {marginVertical: 10}]}>
               Modes of Submission
             </Text>
-            <Dropdown
+            {/* <Dropdown
               style={{
                 height: 50,
                 borderColor: ismodeFocus ? 'blue' : 'gray',
@@ -551,16 +692,47 @@ const CreateAss = props => {
                 setIsmodeFocus(false);
                 // setsubjectId(item.subject);
               }}
+            /> */}
+            <DropDown
+              open={openSubmissionMode}
+              setOpen={setOpenSubmissionMOde}
+              value={lecmode}
+              items={items.map(item => ({
+                label: item.label,
+                value: item.value,
+              }))}
+              style={{paddingHorizontal: 10}}
+              placeholder={'Submission Mode'}
+              onSelectItem={item => {
+                setSelectedMode(item);
+                setLecMode(item.value);
+                setIsmodeFocus(false);
+                // setsubjectId(item.subject);
+              }}
             />
           </View>
-          <Text style={styles.formtxt}>ADD Message:</Text>
+          <Text style={[paraGray.darkpara, {marginVertical: 10}]}>
+            ADD Message:
+          </Text>
           <AutoGrowingTextInput
-            style={styles.txtboxDesc}
+            style={{
+              backgroundColor: 'transparent',
+              borderColor: COLORS.primary,
+              borderWidth: 0.6,
+              borderRadius: 12,
+              height: 80,
+              width: '100%',
+              alignSelf: 'center',
+              fontSize: 13,
+              //color: '#000000',
+              fontFamily: 'Montserrat-Regular',
+              paddingHorizontal: 15,
+            }}
             value={desc}
             onChangeText={value => setDesc(value)}
             placeholder={'Add Message'}
           />
-          <View style={{paddingHorizontal: 20}}>
+          <View style={{}}>
             <Text style={[paraGray.darkpara, {marginVertical: 10}]}>
               Date of Submission
             </Text>
@@ -570,11 +742,12 @@ const CreateAss = props => {
                 flexDirection: 'row',
                 alignItems: 'center',
                 backgroundColor: '#FFFFFF',
-                borderColor: '#C4C4C4',
-                borderWidth: 1,
-                borderRadius: 5,
+                //borderColor: '#C4C4C4',
+                borderColor: COLORS.primary,
+                borderWidth: 0.6,
+                borderRadius: 12,
                 alignSelf: 'center',
-                paddingHorizontal: 5,
+                paddingHorizontal: 10,
               }}
               onPress={showDatepicker}>
               <TextInput
@@ -592,7 +765,8 @@ const CreateAss = props => {
               <MaterialCommunityIcons
                 name="calendar-blank-outline"
                 size={26}
-                color="#434b56"
+                // color="#434b56"
+                color={COLORS.primary}
                 onPress={showDatepicker}
               />
 
@@ -614,12 +788,13 @@ const CreateAss = props => {
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                backgroundColor: '#000000',
+                // backgroundColor: '#000000',
+                backgroundColor: COLORS.primary,
                 width: '80%',
                 height: 50,
-                borderColor: '#000000',
+                // borderColor: '#000000',
                 alignSelf: 'center',
-                borderWidth: 2,
+                //borderWidth: 2,
                 marginTop: 30,
                 marginBottom: 30,
                 bottom: 0,

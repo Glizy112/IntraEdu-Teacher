@@ -10,7 +10,11 @@ import {
   ScrollView,
 } from 'react-native';
 import {DataTable, Avatar} from 'react-native-paper';
-
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import {COLORS} from '../../theme/Colors';
+import {paraGray} from '../../theme/styles/Base';
 const CertificateHistoryDetail = props => {
   const {events} = props.route.params;
 
@@ -48,72 +52,320 @@ const CertificateHistoryDetail = props => {
       rank: 'participated',
     },
   ];
+  const rankHolders = (RankNumber, studentName, Stream) => {
+    return (
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          marginTop: 15,
+          borderBottomWidth: 1,
+          paddingBottom: 10,
+          borderBottomColor: '#97A7C3',
+        }}>
+        <View
+          style={{
+            width: 64,
+            //padding: 12,
+            height: 64,
+            backgroundColor: '#F3D33F',
+            borderRadius: 50,
+            //alignSelf: 'center',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <Text style={[paraGray.largebold, {fontSize: 16}]}>{RankNumber}</Text>
+          <Text style={[paraGray.darkpara, {fontSize: 14}]}>Rank</Text>
+        </View>
 
+        <View style={{marginLeft: 10}}>
+          <Text style={paraGray.darkpara}>Student Name</Text>
+          <Text style={[paraGray.darkpara, {marginTop: 6}]}>
+            Stream-{Stream}
+          </Text>
+        </View>
+      </View>
+    );
+  };
+  const Participants = (RankNumber, studentName, Stream) => {
+    return (
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          marginTop: 15,
+          borderBottomWidth: 1,
+          paddingBottom: 10,
+
+          borderBottomColor: '#97A7C3',
+        }}>
+        <View
+          style={{
+            width: 64,
+            //padding: 12,
+            height: 64,
+            backgroundColor: '#EEF2FD',
+            borderRadius: 50,
+            //alignSelf: 'center',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <FontAwesome name="user" size={25} color={'black'} />
+        </View>
+
+        <View style={{marginLeft: 10}}>
+          <Text style={paraGray.darkpara}>Student Name</Text>
+          <Text style={[paraGray.darkpara, {marginTop: 6}]}>
+            Stream-{Stream}
+          </Text>
+        </View>
+      </View>
+    );
+  };
   return (
-    <ScrollView style={styles.container}>
-      <View>
-        <Text style={styles.subtxt}>{events.eventname}</Text>
+    <View style={styles.container}>
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          height: 50,
+          justifyContent: 'space-between',
+
+          paddingHorizontal: 10,
+          borderBottomColor: '#275CE0',
+          borderBottomWidth: 1,
+        }}>
+        <View
+          style={{
+            alignItems: 'flex-start',
+          }}>
+          <TouchableOpacity
+            style={{
+              backgroundColor: COLORS.white,
+              borderRadius: 20,
+            }}
+            onPress={() =>
+              //   props.navigation.navigate('StudentEdit', {
+              //     studentdetail: studentdetail,
+              //   })
+              props.navigation.goBack()
+            }>
+            <Ionicons
+              style={{marginVertical: 5, paddingHorizontal: 7}}
+              name="arrow-back"
+              size={20}
+              color={COLORS.black}
+            />
+          </TouchableOpacity>
+        </View>
+        <View
+          style={{
+            flex: 1,
+            alignItems: 'center',
+            position: 'absolute',
+            left: 0,
+            right: 0,
+          }}>
+          <Text style={[paraGray.largebold, {color: 'black'}]}>
+            Event Title
+          </Text>
+        </View>
       </View>
-      <View>
-        <Text style={styles.txt}>
-          Date:
-          <Text style={styles.datatxt}>{events.date}</Text>
-        </Text>
-        <Text style={styles.txt}>
-          Day:
-          <Text style={styles.datatxt}>{events.day}</Text>
-        </Text>
-      </View>
-      <View style={styles.divline} />
-      <DataTable>
-        <DataTable.Header
-          style={{marginTop: 10, borderBottomWidth: 0, marginBottom: -10}}>
-          <DataTable.Title>
-            <Text style={styles.tabletxt}>Events</Text>
-          </DataTable.Title>
-          <DataTable.Title style={{flex: 1.3}}>
-            <Text style={styles.tabletxt}>Students</Text>
-          </DataTable.Title>
-          <DataTable.Title>
-            <Text style={styles.tabletxt}>Stream</Text>
-          </DataTable.Title>
-          <DataTable.Title>
-            <Text style={styles.tabletxt}>rank No</Text>
-          </DataTable.Title>
-        </DataTable.Header>
-      </DataTable>
-      {students.map((student, index) => (
-        <DataTable key={index}>
-          <DataTable.Row style={{borderBottomWidth: 0}}>
-            <DataTable.Cell style={{flex: 1.2}}>
-              <Text style={{fontSize: 12, fontFamily: 'Montserrat-Regular'}}>
-                {student.eventname}
-              </Text>
-            </DataTable.Cell>
-            <DataTable.Cell style={{flex: 1.8, padding: 0}}>
-              <Text style={{fontSize: 12, fontFamily: 'Montserrat-Regular'}}>
-                {student.name}
-              </Text>
-            </DataTable.Cell>
-            <DataTable.Cell>
-              <Text style={{fontSize: 12, fontFamily: 'Montserrat-Regular'}}>
-                {student.stream}
-              </Text>
-            </DataTable.Cell>
-            <DataTable.Cell style={{flex: 1.2}}>
-              <Text
-                style={{
-                  fontSize: 12,
-                  fontFamily: 'Montserrat-Regular',
-                  textAlign: 'center',
-                }}>
-                {student.rank}
-              </Text>
-            </DataTable.Cell>
-          </DataTable.Row>
+      {/* <ScrollView>
+        <View>
+          <Text style={styles.subtxt}>{events.eventname}</Text>
+        </View>
+        <View>
+          <Text style={styles.txt}>
+            Date:
+            <Text style={styles.datatxt}>{events.date}</Text>
+          </Text>
+          <Text style={styles.txt}>
+            Day:
+            <Text style={styles.datatxt}>{events.day}</Text>
+          </Text>
+        </View>
+        <View style={styles.divline} />
+        <DataTable>
+          <DataTable.Header
+            style={{marginTop: 10, borderBottomWidth: 0, marginBottom: -10}}>
+            <DataTable.Title>
+              <Text style={styles.tabletxt}>Events</Text>
+            </DataTable.Title>
+            <DataTable.Title style={{flex: 1.3}}>
+              <Text style={styles.tabletxt}>Students</Text>
+            </DataTable.Title>
+            <DataTable.Title>
+              <Text style={styles.tabletxt}>Stream</Text>
+            </DataTable.Title>
+            <DataTable.Title>
+              <Text style={styles.tabletxt}>rank No</Text>
+            </DataTable.Title>
+          </DataTable.Header>
         </DataTable>
-      ))}
-    </ScrollView>
+        {students.map((student, index) => (
+          <DataTable key={index}>
+            <DataTable.Row style={{borderBottomWidth: 0}}>
+              <DataTable.Cell style={{flex: 1.2}}>
+                <Text style={{fontSize: 12, fontFamily: 'Montserrat-Regular'}}>
+                  {student.eventname}
+                </Text>
+              </DataTable.Cell>
+              <DataTable.Cell style={{flex: 1.8, padding: 0}}>
+                <Text style={{fontSize: 12, fontFamily: 'Montserrat-Regular'}}>
+                  {student.name}
+                </Text>
+              </DataTable.Cell>
+              <DataTable.Cell>
+                <Text style={{fontSize: 12, fontFamily: 'Montserrat-Regular'}}>
+                  {student.stream}
+                </Text>
+              </DataTable.Cell>
+              <DataTable.Cell style={{flex: 1.2}}>
+                <Text
+                  style={{
+                    fontSize: 12,
+                    fontFamily: 'Montserrat-Regular',
+                    textAlign: 'center',
+                  }}>
+                  {student.rank}
+                </Text>
+              </DataTable.Cell>
+            </DataTable.Row>
+          </DataTable>
+        ))}
+      </ScrollView> */}
+      <ScrollView>
+        <View style={{width: '90%', alignSelf: 'center'}}>
+          <Text style={[paraGray.largebold, {fontSize: 16, marginTop: 30}]}>
+            Event Details
+          </Text>
+          <View
+            style={{
+              //paddingHorizontal: 10,
+              // width: '90%',
+              paddingHorizontal: 15,
+              paddingBottom: 10,
+              borderRadius: 10,
+              marginTop: 15,
+              backgroundColor: '#EEF2FD',
+            }}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                marginTop: 20,
+              }}>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <FontAwesome5
+                  name="calendar-minus"
+                  size={22}
+                  color={COLORS.primary}
+                />
+
+                <Text
+                  style={[paraGray.largebold, {fontSize: 12, marginLeft: 6}]}>
+                  09-01-2024
+                </Text>
+              </View>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                }}>
+                <View style={{}}>
+                  <Text
+                    style={[
+                      paraGray.darkpara,
+                      {
+                        fontSize: 12,
+                        color: 'rgba(0, 0, 0, 0.60)',
+                        textAlign: 'center',
+                      },
+                    ]}>
+                    Tuesday
+                  </Text>
+                </View>
+              </View>
+            </View>
+            <View>
+              <Text
+                style={[
+                  paraGray.darkpara,
+                  {marginTop: 10, textAlign: 'justify'},
+                ]}>
+                This is the event description which is to be passed on from the
+                card on the main screen under the history section in
+                Certificates module.
+              </Text>
+            </View>
+          </View>
+          <View>
+            <View style={{marginTop: 40}}>
+              <Text style={[paraGray.largebold, {fontSize: 16}]}>
+                Event Results
+              </Text>
+            </View>
+            <View style={{marginTop: 20}}>
+              <Text style={[paraGray.darkpara, {fontSize: 14}]}>
+                Rank Holders
+              </Text>
+            </View>
+            {/* <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                marginTop: 15,
+                borderBottomWidth: 1,
+                paddingBottom: 10,
+                borderBottomColor: '#97A7C3',
+              }}>
+              <View
+                style={{
+                  width: 64,
+                  //padding: 12,
+                  height: 64,
+                  backgroundColor: '#F3D33F',
+                  borderRadius: 50,
+                  //alignSelf: 'center',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                <Text style={[paraGray.largebold, {fontSize: 16}]}>1st</Text>
+                <Text style={[paraGray.darkpara, {fontSize: 14}]}>Rank</Text>
+              </View>
+
+              <View style={{marginLeft: 10}}>
+                <Text style={paraGray.darkpara}>Student Name</Text>
+                <Text style={paraGray.darkpara}>Stream-Fy</Text>
+              </View>
+            </View> */}
+            {rankHolders('1st', 'studentName', 'Fy')}
+            {rankHolders('2st', 'studentName', 'Fy')}
+            {rankHolders('3st', 'studentName', 'Fy')}
+          </View>
+          <View>
+            <View style={{marginTop: 40}}>
+              <Text style={[paraGray.darkpara, {fontSize: 14}]}>
+                Participants
+              </Text>
+            </View>
+
+            {Participants('1st', 'studentName', 'Fy')}
+            {Participants('2nd', 'studentName', 'Fy')}
+            {Participants('3rd', 'studentName', 'Fy')}
+            <Text
+              style={[
+                paraGray.largebold,
+                {fontSize: 14, textAlign: 'right', marginVertical: 30},
+              ]}>
+              ViewAll
+            </Text>
+          </View>
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 

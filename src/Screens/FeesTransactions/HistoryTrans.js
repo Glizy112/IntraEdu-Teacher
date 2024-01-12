@@ -16,7 +16,6 @@ import SearchInput, {createFilter} from 'react-native-search-filter';
 import {container, paraGray} from '../../theme/styles/Base';
 
 const HistoryTrans = props => {
-  
   // --------Date-time Picker----------
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
