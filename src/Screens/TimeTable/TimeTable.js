@@ -868,9 +868,9 @@ const TimeTable = props => {
           <AntDesign name="arrowleft" size={24} color={COLORS.black}/>
         </TouchableOpacity>
         <Text style={[paraGray.largebold, {textAlign: 'center'}]}> My Timetable </Text>
-        <TouchableOpacity onPress={()=> props.navigation.navigate("TimeTableHistroy")}>
+        {/* <TouchableOpacity onPress={()=> props.navigation.navigate("TimeTableHistroy")}>
           <Ionicons name="time-sharp" size={26} color={COLORS.black}/>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
       <View style={{paddingTop: 12, borderBottomWidth: 0.6, borderColor: COLORS.primary}}/>
 
