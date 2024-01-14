@@ -126,12 +126,6 @@ const categoryList01 = [
     categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary} />,
     categoryScreen: 'Certificate',
   },
-  {
-    id: '13',
-    categoryTitle: 'Complaint',
-    categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary} />,
-    categoryScreen: 'Complaint',
-  },
 ];
 
 const categoryList02 = [
