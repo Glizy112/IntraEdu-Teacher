@@ -136,7 +136,7 @@ const TeachersProfile = props => {
                 alignSelf: 'center',
               }}
             >
-              <View>
+              <View style={{marginTop: 12}}>
                 {userimage == null ? (
                   <ImageBackground
                     style={{

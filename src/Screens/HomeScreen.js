@@ -16,6 +16,7 @@ import {
 import { Avatar, Modal } from 'react-native-paper';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import Fontisto from 'react-native-vector-icons/Fontisto';
@@ -77,6 +78,60 @@ const categoryList01 = [
     categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary} />,
     categoryScreen: 'Gallery',
   },
+  {
+    id: '5',
+    categoryTitle: 'Library',
+    categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary} />,
+    categoryScreen: 'Library',
+  },
+  {
+    id: '6',
+    categoryTitle: 'Lecture',
+    categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary} />,
+    categoryScreen: 'Lecture',
+  },
+  {
+    id: '7',
+    categoryTitle: 'Assignment',
+    categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary} />,
+    categoryScreen: 'Assignment',
+  },
+  {
+    id: '8',
+    categoryTitle: 'StudyMaterial',
+    categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary} />,
+    categoryScreen: 'StudyMaterial',
+  },
+  {
+    id: '9',
+    categoryTitle: 'Announcement',
+    categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary} />,
+    categoryScreen: 'Announcement',
+  },
+  {
+    id: '10',
+    categoryTitle: 'Lecture',
+    categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary} />,
+    categoryScreen: 'Lecture',
+  },
+  {
+    id: '11',
+    categoryTitle: 'FeesTransaction',
+    categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary} />,
+    categoryScreen: 'FeesTransaction',
+  },
+  {
+    id: '12',
+    categoryTitle: 'Certificate',
+    categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary} />,
+    categoryScreen: 'Certificate',
+  },
+  {
+    id: '13',
+    categoryTitle: 'Complaint',
+    categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary} />,
+    categoryScreen: 'Complaint',
+  },
 ];
 
 const categoryList02 = [
@@ -85,9 +140,9 @@ const categoryList02 = [
   },
   {
     id: '1',
-    categoryTitle: 'Mark Attendance',
-    categoryIcon: <Ionicons name="today" size={30} color={COLORS.primary} />,
-    categoryScreen: 'AttendanceShow',
+    categoryTitle: 'My Time Table',
+    categoryIcon: <MaterialCommunityIcons name="timetable" size={30} color={COLORS.primary} />,
+    categoryScreen: 'TimeTable',
   },
   {
     id: '2',
@@ -110,6 +165,12 @@ const categoryList02 = [
     categoryTitle: 'Gallery',
     categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary} />,
     categoryScreen: 'Gallery',
+  },
+  {
+    id: '5',
+    categoryTitle: 'My Attendance',
+    categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary} />,
+    categoryScreen: 'TeacherAttendance',
   },
 ];
 
@@ -191,7 +252,22 @@ const HomeScreen = props => {
       dispatch(setuserPhone(user_phone));
       dispatch(setRoleId(user_role_id));
       dispatch(setOtherinfo(user_other_info));
-      console.log('Username===>' + user_name);
+      //console.log('Username===>' + user_name);
+      console.log('User Data=> ', 
+      {
+        user_Id: user_Id, 
+        teacher_Id: teacher_Id, 
+        academic_year_id: academic_year_id, 
+        user_name: user_name,
+        school_id: school_id,
+        user_email: user_email,
+        user_image: user_image,
+        user_dob: user_dob,
+        user_present_address: user_present_address,
+        user_phone: user_phone,
+        user_role_id: user_role_id,
+        user_other_info: user_other_info,
+      });
       setLoading(false);
     } catch (error) {
       console.log('Catch' + error);
@@ -345,7 +421,7 @@ const HomeScreen = props => {
                   )}
                 />
               </View>
-              <View style={{flex: 1, paddingRight: 12, paddingLeft: 4, width: Dimensions.get('screen').width/1.05, marginLeft: -12}}>
+              <View style={{flex: 1, paddingRight: 16, paddingLeft: 4, width: Dimensions.get('screen').width/1.05, marginLeft: -12}}>
                 <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingRight: 8, marginLeft: 0}}>
                   <Text style={[paraGray.largebold, {fontSize: 16}]}> {categoryList02[0].categoryHeading} </Text>
                   <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -358,7 +434,7 @@ const HomeScreen = props => {
                   data={categoryList02.slice(1)}
                   keyExtractor={item => item.id}
                   numColumns={2}
-                  contentContainerStyle={{alignSelf: 'center', paddingRight: 8}}
+                  contentContainerStyle={{alignSelf: 'center', paddingRight: 10}}
                   renderItem={({item}) => (
                     <TouchableOpacity
                       key={item.id}

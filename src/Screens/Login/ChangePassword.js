@@ -29,7 +29,7 @@ const ChangePassword = props => {
   const change = async () => {
     setLoading(true);
     if (newpassword !== checkpassword) {
-      alert('New Password And Confirm Password Are not Same');
+      alert('New password and confirmed password are not same.');
       setLoading(false);
     } else {
       const formData = new FormData();
@@ -73,22 +73,38 @@ const ChangePassword = props => {
   return (
     <View style={container.container}>
       {loading == true && <Spinner visible={load} />}
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          paddingHorizontal: 15,
+          paddingTop: 16,
+        }}>
+        <TouchableOpacity onPress={()=> props.navigation.goBack()}>
+          <AntDesign name="arrowleft" size={24} color={COLORS.black}/>
+        </TouchableOpacity>
+        <Text style={[paraGray.largebold, {textAlign: 'center'}]}> Change Password </Text>
+        <Text>Text</Text>
+      </View>
+      <View style={{paddingTop: 12, borderBottomWidth: 0.6, borderColor: COLORS.primary}}/>
       <ScrollView>
         <View
           style={{
             flex: 1,
             paddingHorizontal: 15,
             paddingBottom: 30,
-          }}>
-          <View style={{marginTop: 50}}>
+          }}
+        >
+          <View style={{marginTop: 50, alignItems: 'center'}}>
             <View
               style={{
                 width: '100%',
-                heigth: 150,
+                //heigth: 150,
                 backgroundColor: 'white',
-                marginBottom: 25,
+                marginBottom: 16,
               }}>
-              <Text style={[paraGray.darkpara, {color: COLORS.label}]}>
+              <Text style={[paraGray.darkpara, {color: '#97A7C3D6'}]}>
                 Old Password
               </Text>
               <TextInput
@@ -96,10 +112,14 @@ const ChangePassword = props => {
                 value={oldpassword}
                 onChangeText={value => setOldPassword(value)}
                 style={[
-                  paraGray.darklarge,
+                  paraGray.darkpara,
                   {
-                    borderBottomColor: COLORS.bottom,
-                    borderBottomWidth: 1,
+                    paddingHorizontal: 12,
+                    height: 48,
+                    borderColor: COLORS.primary,
+                    borderWidth: 0.8,
+                    borderRadius: 12,
+                    marginTop: 8,
                     //   width: '90%',
                   },
                 ]}
@@ -110,9 +130,9 @@ const ChangePassword = props => {
                 width: '100%',
                 heigth: 150,
                 backgroundColor: 'white',
-                marginBottom: 25,
+                marginBottom: 16,
               }}>
-              <Text style={[paraGray.darkpara, {color: COLORS.label}]}>
+              <Text style={[paraGray.darkpara, {color: '#97A7C3D6'}]}>
                 New Password
               </Text>
               <TextInput
@@ -120,10 +140,14 @@ const ChangePassword = props => {
                 value={newpassword}
                 onChangeText={value => setNewPassword(value)}
                 style={[
-                  paraGray.darklarge,
+                  paraGray.darkpara,
                   {
-                    borderBottomColor: COLORS.bottom,
-                    borderBottomWidth: 1,
+                    paddingHorizontal: 12,
+                    height: 48,
+                    borderColor: COLORS.primary,
+                    borderWidth: 0.8,
+                    borderRadius: 12,
+                    marginTop: 8,
                     //   width: '90%',
                   },
                 ]}
@@ -134,9 +158,9 @@ const ChangePassword = props => {
                 width: '100%',
                 heigth: 150,
                 backgroundColor: 'white',
-                marginBottom: 25,
+                marginBottom: 16,
               }}>
-              <Text style={[paraGray.darkpara, {color: COLORS.label}]}>
+              <Text style={[paraGray.darkpara, {color: '#97A7C3D6'}]}>
                 Re-Enter Password
               </Text>
               <TextInput
@@ -144,10 +168,14 @@ const ChangePassword = props => {
                 value={checkpassword}
                 onChangeText={value => setCheckPassword(value)}
                 style={[
-                  paraGray.darklarge,
+                  paraGray.darkpara,
                   {
-                    borderBottomColor: COLORS.bottom,
-                    borderBottomWidth: 1,
+                    paddingHorizontal: 12,
+                    height: 48,
+                    borderColor: COLORS.primary,
+                    borderWidth: 0.8,
+                    borderRadius: 12,
+                    marginTop: 8,
                     //   width: '90%',
                   },
                 ]}
@@ -156,19 +184,15 @@ const ChangePassword = props => {
 
             <TouchableOpacity
               style={{
-                flex: 1,
-                flexDirection: 'row',
-                backgroundColor: COLORS.active,
-                borderRadius: 15,
+                width: '70%',
+                height: 50,
                 justifyContent: 'center',
-                alignItems: 'center',
-
-                // paddingBottom: 10,
-                marginBottom: 10,
-                marginHorizontal: 20,
+                backgroundColor: COLORS.primary,
+                borderRadius: 12,
+                marginTop: 12,
               }}
               onPress={change}>
-              <Text style={[paraGray.whitelarge, {marginVertical: 12}]}>
+              <Text style={[paraGray.largebold, {textAlign: 'center', fontSize: 14, color: COLORS.white, marginVertical: 12}]}>
                 CHANGE PASSWORD
               </Text>
             </TouchableOpacity>
@@ -177,13 +201,15 @@ const ChangePassword = props => {
             style={{
               flex: 1,
               flexDirection: 'row',
-              marginTop: 10,
+              marginTop: 32,
+              alignSelf: 'center',
+              alignItems: 'baseline',
             }}
             onPress={() => {
               props.navigation.navigate('ForgetPassword');
             }}>
-            <AntDesign name="lock" size={20} color={COLORS.active} />
-            <Text style={[paraGray.darkpara, {textAlign: 'center'}]}>
+            <AntDesign name="lock" size={24} color={COLORS.primary} />
+            <Text style={[paraGray.darkpara, {fontSize: 16, textAlign: 'center'}]}>
               Forgot Password?
             </Text>
           </TouchableOpacity>

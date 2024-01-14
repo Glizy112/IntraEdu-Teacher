@@ -138,7 +138,7 @@ const ChatDetail = props => {
               user: user,
             })
           }>
-          {user.image == null ? (
+          {user.image !== null ? (
             <Avatar.Image
               size={35}
               source={require('../../../assets/user.jpg')}
@@ -270,7 +270,7 @@ const ChatDetail = props => {
               width: '95%',
               borderRadius: 10,
             }}>
-            {user.image == null ? (
+            {user.image !== null ? (
               <Avatar.Image
                 style={{marginTop: 10, marginLeft: 5, marginBottom: 10}}
                 size={35}
@@ -326,7 +326,7 @@ const ChatDetail = props => {
               width: '95%',
               borderRadius: 10,
             }}>
-            {user.image == null ? (
+            {user.image !== null ? (
               <Avatar.Image
                 style={{marginTop: 10, marginBottom: 10, marginRight: 5}}
                 size={35}

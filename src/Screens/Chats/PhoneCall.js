@@ -43,7 +43,7 @@ const PhoneCall = props => {
   return (
     <View style={container.container}>
       <View style={{paddingTop: '30%', alignItems: 'center'}}>
-        {user.image == null ? (
+        {user.image !== null ? (
           <Avatar.Image
             size={120}
             source={require('../../../assets/user.jpg')}

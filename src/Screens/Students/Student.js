@@ -76,7 +76,7 @@ const Student = props => {
           return response.json();
         })
         .then(result => {
-          // console.log(result);
+          console.log("Student List Data-> \n", result);
           setGetdata(result.data);
           setStudentFilter(result.data);
           setLoading(false);

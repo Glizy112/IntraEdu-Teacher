@@ -56,6 +56,17 @@ const ComplaintHistory = props => {
     setState({searchTerm: term});
   };
 
+  const filteredComplaints = [
+    {
+      student_name: 'Ahil akhil pathan',
+      class_name: 'Fifth',
+      title: 'Complaint One',
+      created_at: '10-01-2024',
+      description: 'This is the sample description of a complaint.',
+      action_note: 'This is the action note for the complaint.'
+    }
+  ]
+
   useEffect(() => {
     getapiData();
   }, []);
@@ -143,7 +154,7 @@ const ComplaintHistory = props => {
           </View>
         </View>
         <View style={{flex: 1, marginTop: 20, marginBottom: 20}}>
-          {filterleaves.map((data, index) => (
+          {filteredComplaints.map((data, index) => (
             <View style={{flex: 1, paddingHorizontal: 10}} key={index}>
               <List.Section>
                 <View
@@ -232,7 +243,7 @@ const ComplaintHistory = props => {
             </View>
           ))}
         </View>
-        {loading == false && getdata == '' && (
+        {/* {loading == false && getdata == '' && (
           <View
             style={{
               flex: 1,
@@ -245,7 +256,7 @@ const ComplaintHistory = props => {
               NO Data Found
             </Text>
           </View>
-        )}
+        )} */}
       </ScrollView>
     </View>
   );
