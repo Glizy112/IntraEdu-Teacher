@@ -868,9 +868,11 @@ const TimeTable = props => {
           <AntDesign name="arrowleft" size={24} color={COLORS.black}/>
         </TouchableOpacity>
         <Text style={[paraGray.largebold, {textAlign: 'center'}]}> My Timetable </Text>
-        {/* <TouchableOpacity onPress={()=> props.navigation.navigate("TimeTableHistroy")}>
-          <Ionicons name="time-sharp" size={26} color={COLORS.black}/>
-        </TouchableOpacity> */}
+        <TouchableOpacity 
+        //onPress={()=> props.navigation.navigate("TimeTableHistroy")}
+        >
+          <Ionicons name="time-sharp" size={26} color={COLORS.white}/>
+        </TouchableOpacity>
       </View>
       <View style={{paddingTop: 12, borderBottomWidth: 0.6, borderColor: COLORS.primary}}/>
 
@@ -984,8 +986,8 @@ const TimeTable = props => {
                         paddingHorizontal: 12, 
                         paddingBottom: 2, 
                         borderRadius: 10, 
-                        backgroundColor: COLORS.white,
-                        elevation: 2,
+                        backgroundColor: COLORS.bgColor,
+                        //elevation: 2,
                       }}
                       onPress={()=> {  
                         setLoading(true); 
