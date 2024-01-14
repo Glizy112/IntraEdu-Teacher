@@ -40,7 +40,7 @@ const TimePickerInput =(props)=> {
     <TouchableOpacity
       //key={item.id}
       style={[styles.timePickerContainer, {marginLeft: props.leftMargin}]}
-      onPress={props.showTimePicker}>
+      onPress={props.showHistory==false ? props.showTimePicker : null}>
       <TextInput
         placeholder={props.inputName}
         placeholderTextColor="#808080"
@@ -65,6 +65,130 @@ const TimePickerInput =(props)=> {
   );
 }
 
+// const LectureHistory =(props)=> {
+//   return(
+//     <ScrollView style={{flex: 1, width: '100%'}}>
+//       <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 16, width: '100%'}}>
+//         <View style={{flexDirection: 'row', alignItems: 'center',}}>
+//           <Text style={[paraGray.largebold, {fontSize: 18}]}> {props.item.periodNo} Period  |  {props.item.className} Class </Text>
+//         </View>
+//         <Pressable onPress={props.exitModal}>
+//           <Ionicons name="close" size={28} color={COLORS.black}/>
+//         </Pressable>
+//       </View>
+//       <View style={{width: '100%', height: '100%', alignItems: 'flex-start'}}>
+//         <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%', marginTop: 20}}>
+//           <View>
+//             <Text style={[paraGray.darkpara, {fontSize: 16, opacity: 0.6, color: COLORS.gray1}]}> Subject </Text>
+//             <Text style={[paraGray.darkpara, {fontSize: 16, marginTop: 4, color: COLORS.secondary}]}> {props.item.subject} </Text>
+//           </View>
+//           <View style={{alignItems: 'flex-end'}}>
+//             <Text style={[paraGray.darkpara, {fontSize: 16, opacity: 0.6, color: COLORS.gray1}]}> Date </Text>
+//             <Text style={[paraGray.darkpara, {fontSize: 16, marginTop: 4, color: COLORS.secondary}]}> {(props.item.date)} </Text>
+//           </View>
+//           {/* <View>
+//             <Text style={[paraGray.darkpara, {fontSize: 16, opacity: 0.6, textAlign: 'right', color: COLORS.gray1}]}> Class </Text>
+//             <Text style={[paraGray.largebold, {fontSize: 16, marginTop: 4, color: COLORS.secondary}]}> {props.item.className} </Text>
+//           </View> */}
+//         </View>
+//         {/* <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 16, width: '100%'}}>
+//           <View>
+//             <Text style={[paraGray.darkpara, {fontSize: 16, opacity: 0.6, color: COLORS.gray1}]}> Date </Text>
+//             <Text style={[paraGray.largebold, {fontSize: 16, marginTop: 4, color: COLORS.secondary}]}> {(props.item.date)} </Text>
+//           </View>
+//           <View style={{alignItems: 'flex-end'}}>
+//             <Text style={[paraGray.darkpara, {fontSize: 16, opacity: 0.6, textAlign: 'right', color: COLORS.gray1}]}> Period </Text>
+//             <Text style={[paraGray.largebold, {fontSize: 16, marginTop: 4, color: COLORS.secondary}]}> {props.item.periodNo} </Text>
+//           </View>
+//         </View> */}
+//         <View style={{flexDirection: 'row', marginTop: 24, justifyContent: 'space-between', borderWidth: 0}}>
+//           <TimePickerInput 
+//             inputName="From" 
+//             date={fromDate} 
+//             mode={fromMode} 
+//             onChange={handleFromChange}
+//             showTimePicker={showFromTimePicker}
+//             show={fromShow}
+//             text={fromText}
+//             //showFromInput={showFromDateInput}
+//             leftMargin={0}
+//           />
+//           <TimePickerInput 
+//             inputName="To" 
+//             date={toDate} 
+//             mode={toMode} 
+//             onChange={handleToChange}
+//             showTimePicker={showToTimePicker}
+//             show={toShow}
+//             text={toText}
+//             //showToInput={props.showToDateInput}
+//             leftMargin={12}
+//           />
+//         </View>
+//         <View style={{flexDirection: 'column', marginTop: 16}}>
+//           <Text style={paraGray.darkpara}> Lecture Mode </Text>
+//           <DropDownPicker
+//             open={dropdownOpen}
+//             value={dropdownVal}
+//             items={
+//               ['Offline', 'Online'].map(item=> ({
+//                 label: item,
+//                 value: item,
+//               }))
+//             }
+//             setOpen={setDropdownOpen}
+//             setValue={setDropdownVal}
+//             placeholder="Select Mode"
+//             multiple={false}
+//             min={0}
+//             max={5}
+//             style={{
+//               alignSelf: 'center',
+//               backgroundColor: COLORS.white,
+//               borderColor: COLORS.primary,
+//               marginTop: 10,
+//               borderRadius: 12,
+//               borderWidth: 0.6,
+//             }}
+//             textStyle={{
+//               fontSize: 13,
+//               fontFamily: 'Montserrat-Regular',
+//             }}
+//             dropDownContainerStyle={{
+//               alignSelf: 'center',
+//               backgroundColor: COLORS.white,
+//               borderColor: COLORS.primary,
+//             }}
+//           />
+//         </View>
+//         <View style={{flexDirection: 'column', marginTop: 16, width: '100%'}}>
+//           <Text style={paraGray.darkpara}> Divert Lecture </Text>
+//           <TextInput
+//             placeholder='Enter teacher name'
+//             placeholderTextColor="#000000"
+//             value={divertInputText}
+//             //editable={false}
+//             style={{
+//               width: '100%',
+//               //alignSelf: 'center', 
+//               paddingHorizontal: 12,
+//               backgroundColor: COLORS.white,
+//               borderColor: COLORS.primary,
+//               marginTop: 10,
+//               borderRadius: 12,
+//               borderWidth: 0.6,
+//               fontSize: 13,
+//               fontFamily: 'Montserrat-Regular',
+//               color: COLORS.black,
+//             }}
+//             onChangeText={(text)=> setDivertInputText(text)}
+//           />
+//         </View>
+//       </View>
+//     </ScrollView>
+//   )
+// }
+
 const TimeTableForm =(props)=> {
 
   const navigation = useNavigation();
@@ -81,6 +205,7 @@ const TimeTableForm =(props)=> {
   const [toMode, setToMode] = useState('time');
   const [toText, setToText] = useState('');
   const [divertInputText, setDivertInputText] = useState('');
+  const [showHistory, setShowHistory] = useState(false);
 
   const handleFromChange = (selectedDate) => {
     const currentDate = selectedDate?.nativeEvent?.timestamp || fromDate;
@@ -159,26 +284,37 @@ const TimeTableForm =(props)=> {
 
   return (
     <KeyboardAvoidingView style={{flexDirection: 'column', width: '100%', height: '100%', alignItems: 'flex-start', paddingHorizontal: 20}}>
+      <ScrollView style={{flex: 1, width: '100%'}}>
       <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 16, width: '100%'}}>
         <View style={{flexDirection: 'row', alignItems: 'center',}}>
           <Text style={[paraGray.largebold, {fontSize: 18}]}> {props.item.periodNo} Period  |  {props.item.className} Class </Text>
         </View>
-        <Pressable onPress={props.exitModal}>
-          <Ionicons name="close" size={28} color={COLORS.black}/>
-        </Pressable>
+        {showHistory==true ? 
+          <Pressable onPress={()=> setShowHistory(false)}>
+            <Ionicons name="close-outline" size={28} color={COLORS.gray1}/>
+          </Pressable>
+          :
+          <Pressable onPress={props.exitModal}>
+            <Ionicons name="close" size={28} color={COLORS.black}/>
+          </Pressable>
+        }
       </View>
       <View style={{width: '100%', height: '100%', alignItems: 'flex-start'}}>
         <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%', marginTop: 20}}>
           <View>
             <Text style={[paraGray.darkpara, {fontSize: 16, opacity: 0.6, color: COLORS.gray1}]}> Subject </Text>
-            <Text style={[paraGray.largebold, {fontSize: 16, marginTop: 4, color: COLORS.secondary}]}> {props.item.subject} </Text>
+            <Text style={[paraGray.darkpara, {fontSize: 16, marginTop: 4, color: COLORS.secondary}]}> {props.item.subject} </Text>
           </View>
-          <View>
+          <View style={{alignItems: 'flex-end'}}>
+            <Text style={[paraGray.darkpara, {fontSize: 16, opacity: 0.6, color: COLORS.gray1}]}> Date </Text>
+            <Text style={[paraGray.darkpara, {fontSize: 16, marginTop: 4, color: COLORS.secondary}]}> {(props.item.date)} </Text>
+          </View>
+          {/* <View>
             <Text style={[paraGray.darkpara, {fontSize: 16, opacity: 0.6, textAlign: 'right', color: COLORS.gray1}]}> Class </Text>
             <Text style={[paraGray.largebold, {fontSize: 16, marginTop: 4, color: COLORS.secondary}]}> {props.item.className} </Text>
-          </View>
+          </View> */}
         </View>
-        <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 16, width: '100%'}}>
+        {/* <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 16, width: '100%'}}>
           <View>
             <Text style={[paraGray.darkpara, {fontSize: 16, opacity: 0.6, color: COLORS.gray1}]}> Date </Text>
             <Text style={[paraGray.largebold, {fontSize: 16, marginTop: 4, color: COLORS.secondary}]}> {(props.item.date)} </Text>
@@ -187,8 +323,8 @@ const TimeTableForm =(props)=> {
             <Text style={[paraGray.darkpara, {fontSize: 16, opacity: 0.6, textAlign: 'right', color: COLORS.gray1}]}> Period </Text>
             <Text style={[paraGray.largebold, {fontSize: 16, marginTop: 4, color: COLORS.secondary}]}> {props.item.periodNo} </Text>
           </View>
-        </View>
-        <View style={{flexDirection: 'row', marginTop: 16, justifyContent: 'space-between', borderWidth: 0}}>
+        </View> */}
+        <View style={{flexDirection: 'row', marginTop: 24, justifyContent: 'space-between', borderWidth: 0}}>
           <TimePickerInput 
             inputName="From" 
             date={fromDate} 
@@ -196,7 +332,8 @@ const TimeTableForm =(props)=> {
             onChange={handleFromChange}
             showTimePicker={showFromTimePicker}
             show={fromShow}
-            text={fromText}
+            showHistory={showHistory}
+            text={showHistory==true ? '10:00' : fromText}
             //showFromInput={showFromDateInput}
             leftMargin={0}
           />
@@ -207,54 +344,72 @@ const TimeTableForm =(props)=> {
             onChange={handleToChange}
             showTimePicker={showToTimePicker}
             show={toShow}
-            text={toText}
+            showHistory={showHistory}
+            text={showHistory==true ? '11:00' : toText}
             //showToInput={props.showToDateInput}
             leftMargin={12}
           />
         </View>
-        <View style={{flexDirection: 'column', marginTop: 16}}>
+        <View style={{width: '100%', flexDirection: 'column', marginTop: 16}}>
           <Text style={paraGray.darkpara}> Lecture Mode </Text>
-          <DropDownPicker
-            open={dropdownOpen}
-            value={dropdownVal}
-            items={
-              ['Offline', 'Online'].map(item=> ({
-                label: item,
-                value: item,
-              }))
-            }
-            setOpen={setDropdownOpen}
-            setValue={setDropdownVal}
-            placeholder="Select Mode"
-            multiple={false}
-            min={0}
-            max={5}
-            style={{
-              alignSelf: 'center',
-              backgroundColor: COLORS.white,
-              borderColor: COLORS.primary,
-              marginTop: 10,
-              borderRadius: 12,
-              borderWidth: 0.6,
-            }}
-            textStyle={{
-              fontSize: 13,
-              fontFamily: 'Montserrat-Regular',
-            }}
-            dropDownContainerStyle={{
-              alignSelf: 'center',
-              backgroundColor: COLORS.white,
-              borderColor: COLORS.primary,
-            }}
-          />
+          {showHistory==true ? 
+            <View 
+              style={{
+                width: '100%',
+                alignSelf: 'center',
+                backgroundColor: COLORS.white,
+                borderColor: COLORS.primary,
+                marginTop: 10,
+                borderRadius: 10,
+                borderWidth: 0.6,
+                padding: 12,
+              }}
+            >
+              <Text style={{fontSize: 13, fontFamily: 'Montserrat-Regular', color: COLORS.black}}>Taken Online</Text>
+            </View>
+            :
+            <DropDownPicker
+              open={dropdownOpen}
+              value={dropdownVal}
+              items={
+                ['Offline', 'Online'].map(item=> ({
+                  label: item,
+                  value: item,
+                }))
+              }
+              setOpen={setDropdownOpen}
+              setValue={setDropdownVal}
+              placeholder="Select Mode"
+              multiple={false}
+              min={0}
+              max={5}
+              style={{
+                alignSelf: 'center',
+                backgroundColor: COLORS.white,
+                borderColor: COLORS.primary,
+                marginTop: 10,
+                borderRadius: 12,
+                borderWidth: 0.6,
+              }}
+              textStyle={{
+                fontSize: 13,
+                fontFamily: 'Montserrat-Regular',
+              }}
+              dropDownContainerStyle={{
+                alignSelf: 'center',
+                backgroundColor: COLORS.white,
+                borderColor: COLORS.primary,
+              }}
+            />
+          }
         </View>
         <View style={{flexDirection: 'column', marginTop: 16, width: '100%'}}>
           <Text style={paraGray.darkpara}> Divert Lecture </Text>
           <TextInput
             placeholder='Enter teacher name'
             placeholderTextColor="#000000"
-            value={divertInputText}
-            //editable={false}
+            value={showHistory==true ? 'Diverted to Sheela Yadav' : divertInputText}
+            editable={showHistory==true ? false : true}
             style={{
               width: '100%',
               //alignSelf: 'center', 
@@ -271,67 +426,138 @@ const TimeTableForm =(props)=> {
             onChangeText={(text)=> setDivertInputText(text)}
           />
         </View>
-        <TouchableOpacity 
+        {showHistory==true ? 
+        <View 
           style={{
-            alignSelf: 'center', 
-            marginTop: 20, 
+            width: '100%', 
+            marginTop: 16,
+            padding: 12, 
+            alignItems: 'center', 
+            borderRadius: 10, 
             borderWidth: 0.6, 
-            borderColor: COLORS.txtGray, 
-            borderRadius: 20, 
-            padding: 10
+            borderColor: COLORS.primary,
+            backgroundColor: COLORS.bgColor,
           }}
-          //onPress={()=> navigation.navigate('TakeAttendance')}
         >
-          <Text style={paraGray.darkpara}>Take Attendance</Text>
-        </TouchableOpacity>
-        <View style={{flexDirection: 'row', marginTop: 24, width: '100%', justifyContent: 'space-between'}}>
-          <TouchableOpacity
+          <View style={{width: '100%', flexDirection: 'row', justifyContent: 'space-between'}}>
+            <Text style={[paraGray.darkpara, {color: COLORS.gray1}]}> Total Time </Text>
+            <Text style={[paraGray.darkpara, {color: COLORS.secondary}]}> 60 minutes </Text>
+          </View>
+          <View style={{width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginTop: 12}}>
+            <Text style={[paraGray.darkpara, {color: COLORS.gray1}]}> Total Attendants </Text>
+            <Text style={[paraGray.darkpara, {color: COLORS.secondary}]}> 50 </Text>
+          </View>
+          <View style={{width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginTop: 12}}>
+            <Text style={[paraGray.darkpara, {color: COLORS.gray1}]}> Lecture Taken By </Text>
+            <Text style={[paraGray.darkpara, {color: COLORS.secondary}]}> Sheela Yadav </Text>
+          </View>
+        </View>
+        :
+        <View style={{flexDirection: 'row', width: '100%', marginTop: 32, alignItems: 'center', justifyContent: 'space-around'}}>
+          <TouchableOpacity 
             style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              backgroundColor: COLORS.red,
-              width: '40%',
-              height: 48,
-              borderColor: COLORS.red,
-              alignSelf: 'center',
-              borderRadius: 12,
-              justifyContent: 'center',
+              //alignSelf: 'center', 
+              //marginTop: 32, 
+              borderWidth: 0.6, 
+              borderColor: COLORS.black, 
+              borderRadius: 24, 
+              padding: 12
             }}
+            onPress={()=> navigation.navigate('AttendancePtm')}
           >
-            <Text
-              style={{
-                color: COLORS.white,
-                fontSize: 14,
-                fontFamily: 'Montserrat-Medium',
-              }}>
-              Cancel
-            </Text>
+            <Text style={paraGray.darkpara}>Take Attendance</Text>
           </TouchableOpacity>
-          <TouchableOpacity
+          <TouchableOpacity 
             style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              backgroundColor: COLORS.primary,
-              width: '55%',
-              height: 48,
-              alignSelf: 'center',
-              justifyContent: 'center',
-              //marginBottom: 30,
-              borderRadius: 12,
+              //alignSelf: 'center', 
+              //marginTop: 16, 
+              borderWidth: 0.6, 
+              borderColor: COLORS.secondary, 
+              borderRadius: 24, 
+              padding: 12
             }}
-            //onPress={() => Create()}
+            onPress={()=> setShowHistory(true)}
           >
-            <Text
-              style={{
-                color: COLORS.white,
-                fontSize: 14,
-                fontFamily: 'Montserrat-Medium',
-              }}>
-              Save
-            </Text>
+            <Text style={[paraGray.darkpara, {color: COLORS.primary}]}>Lecture History</Text>
           </TouchableOpacity>
         </View>
+        }
+        {showHistory==true ? 
+          <TouchableOpacity
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              backgroundColor: COLORS.secondary,
+              width: '80%',
+              height: 56,
+              borderColor: COLORS.primary,
+              alignSelf: 'center',
+              borderRadius: 12,
+              justifyContent: 'center',
+              marginTop: 24,
+            }}
+            onPress={()=> setShowHistory(false)}
+          >
+            <Text
+              style={{
+                color: COLORS.white,
+                fontSize: 14,
+                fontFamily: 'Montserrat-Medium',
+              }}>
+              Go Back
+            </Text>
+          </TouchableOpacity>
+        :
+          <View style={{flexDirection: 'row', marginTop: 32, width: '100%', justifyContent: 'space-between'}}>
+            <TouchableOpacity
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                backgroundColor: COLORS.red,
+                width: '46%',
+                height: 56,
+                borderColor: COLORS.red,
+                alignSelf: 'center',
+                borderRadius: 12,
+                justifyContent: 'center',
+              }}
+            >
+              <Text
+                style={{
+                  color: COLORS.white,
+                  fontSize: 14,
+                  fontFamily: 'Montserrat-Medium',
+                }}>
+                Cancel
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                backgroundColor: COLORS.primary,
+                width: '50%',
+                height: 56,
+                alignSelf: 'center',
+                justifyContent: 'center',
+                //marginBottom: 30,
+                borderRadius: 12,
+              }}
+              //onPress={() => Create()}
+            >
+              <Text
+                style={{
+                  color: COLORS.white,
+                  fontSize: 14,
+                  fontFamily: 'Montserrat-Medium',
+                }}>
+                Save
+              </Text>
+            </TouchableOpacity>
+          </View>
+        }
       </View>
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 }
@@ -684,7 +910,7 @@ const TimeTable = props => {
               <Agenda
                 //horizontal
                 //displayLoadingIndicator
-                //theme={{reservationsBackgroundColor: 'white', agendaDayTextColor: 'black', agendaTodayColor: COLORS.primary, selectedDayBackgroundColor: COLORS.primary, selectedDayTextColor: COLORS.white, todayDotColor: COLORS.primary, todayTextColor: COLORS.primary, dotColor: COLORS.primary}}
+                theme={{reservationsBackgroundColor: 'white', agendaDayTextColor: 'black', agendaTodayColor: COLORS.primary, selectedDayBackgroundColor: COLORS.primary, selectedDayTextColor: COLORS.white, todayDotColor: COLORS.primary, todayTextColor: COLORS.primary, dotColor: COLORS.primary}}
                 initialScrollIndex={10}
                 //topDay={'14/12/2023'}
                 //showOnlySelectedDayItems
@@ -955,13 +1181,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     flex: 1,
     height: 40,
-    fontSize: 14,
-    fontFamily: 'Montserrat-Medium',
-    color: '#000000',
+    fontSize: 13,
+    fontFamily: 'Montserrat-Regular',
+    color: COLORS.black,
   },
   modal: {
     margin: 'auto', 
-    height: '90%', 
+    height: '70%', 
     width: '100%', 
     backgroundColor: COLORS.white, 
     position: 'absolute', 
