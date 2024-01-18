@@ -16,7 +16,7 @@ import {btnStyles, container, paraGray} from '../theme/styles/Base';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Feather from 'react-native-vector-icons/Feather';
 import {Header} from '../Components/Header';
-
+import Ionicons from 'react-native-vector-icons/Ionicons';
 const Notification = props => {
   const [activeButton, setActiveButon] = useState(1);
 
@@ -41,7 +41,8 @@ const Notification = props => {
     },
     {
       id: '4',
-      title: 'Mendelian Genetics & Mechanisms of Heredity',
+      // title: 'Mendelian Genetics & Mechanisms of Heredity',
+      title: 'Webinar is live join now',
       content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
       time: '50 min ago',
     },
@@ -49,15 +50,62 @@ const Notification = props => {
 
   return (
     <View style={[container.container]}>
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          height: 50,
+          justifyContent: 'space-between',
+
+          paddingHorizontal: 10,
+          borderBottomColor: '#275CE0',
+          borderBottomWidth: 1,
+        }}>
+        <View
+          style={{
+            alignItems: 'flex-start',
+          }}>
+          <TouchableOpacity
+            style={{
+              backgroundColor: COLORS.white,
+              borderRadius: 20,
+            }}
+            onPress={() =>
+              //   props.navigation.navigate('StudentEdit', {
+              //     studentdetail: studentdetail,
+              //   })
+              props.navigation.goBack()
+            }>
+            <Ionicons
+              style={{marginVertical: 5, paddingHorizontal: 7}}
+              name="arrow-back"
+              size={20}
+              color={COLORS.black}
+            />
+          </TouchableOpacity>
+        </View>
+        <View
+          style={{
+            flex: 1,
+            alignItems: 'center',
+            position: 'absolute',
+            left: 0,
+            right: 0,
+          }}>
+          <Text style={[paraGray.largebold, {color: 'black'}]}>
+            Notification
+          </Text>
+        </View>
+      </View>
       <View style={{paddingHorizontal: 15, backgroundColor: COLORS.black}}>
-        <Header
+        {/* <Header
           backgroundColor
           navigation={props.navigation}
           color={COLORS.bg}
           back
           headerFirstName="Notification"
           marginLeft
-        />
+        /> */}
       </View>
       <View
         style={{
@@ -115,7 +163,6 @@ const Notification = props => {
                 <TouchableOpacity>
                   <View
                     style={{
-                      flex: 1,
                       flexDirection: 'row',
                       marginTop: 10,
                       alignItems: 'center',
@@ -126,23 +173,30 @@ const Notification = props => {
                         source={require('../../assets/user1.png')}
                       />
                     </View>
-                    <Text
-                      style={[
-                        paraGray.darkpara,
-                        {
-                          flex: 1,
-                          alignSelf: 'center',
-                          justifyContent: 'center',
-                          fontSize: 15,
-                        },
-                      ]}>
-                      {notify.title}
-                    </Text>
+                    <View>
+                      <Text
+                        numberOfLines={1}
+                        ellipsizeMode="tail"
+                        style={[
+                          paraGray.darkpara,
+                          {
+                            alignSelf: 'center',
+                            justifyContent: 'center',
+                            fontSize: 15,
+                            //width: '%',
+                          },
+                        ]}>
+                        {notify.title}
+                      </Text>
+                      <Text
+                        style={[
+                          paraGray.darkpara,
+                          {fontSize: 12, marginTop: 2},
+                        ]}>
+                        {notify.time}
+                      </Text>
+                    </View>
                   </View>
-                  <Text
-                    style={[paraGray.darkpara, {marginLeft: 52, fontSize: 15}]}>
-                    {notify.time}
-                  </Text>
                 </TouchableOpacity>
                 <View
                   style={{

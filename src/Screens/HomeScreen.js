@@ -120,6 +120,12 @@ const categoryList01 = [
     categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary} />,
     categoryScreen: 'Assignment',
   },
+  {
+    id: '13',
+    categoryTitle: 'Complaint',
+    categoryIcon: <Ionicons name="albums" size={30} color={COLORS.primary} />,
+    categoryScreen: 'Complaint',
+  },
 ];
 
 const categoryList02 = [
@@ -130,10 +136,10 @@ const categoryList02 = [
     id: '1',
     categoryTitle: 'Mark Attendance',
     categoryIcon: <Ionicons name="today" size={30} color={COLORS.primary} />,
-    //categoryScreen: 'AttendanceShow',
-    categoryScreen: 'AttendancePtm',
+    categoryScreen: 'AttendanceShow',
+    //categoryScreen: 'AttendancePtm',
     //categoryScreen: 'HistoryAtten',
-    //categoryScreen: 'MarkAttendance',
+    // categoryScreen: 'MarkAttendance',
   },
   {
     id: '2',

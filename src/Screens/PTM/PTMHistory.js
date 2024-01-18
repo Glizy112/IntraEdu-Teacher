@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -10,15 +10,15 @@ import {
   ScrollView,
   RefreshControl,
 } from 'react-native';
-import { List, Modal } from 'react-native-paper';
-import { COLORS } from '../../theme/Colors';
-import { container, paraGray } from '../../theme/styles/Base';
+import {List, Modal} from 'react-native-paper';
+import {COLORS} from '../../theme/Colors';
+import {container, paraGray} from '../../theme/styles/Base';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Feather from 'react-native-vector-icons/Feather';
-import SearchInput, { createFilter } from 'react-native-search-filter';
-import { useSelector, useDispatch } from 'react-redux';
+import SearchInput, {createFilter} from 'react-native-search-filter';
+import {useSelector, useDispatch} from 'react-redux';
 import {
   setuserId,
   setuserInfo,
@@ -31,13 +31,20 @@ import Url from '../../Config/Api/Url';
 
 const PTMHistory = props => {
   const dispatch = useDispatch();
-  const { userinfo, userid, username, showmodal, userimage, schoolid, teacherid } =
-    useSelector(state => state.userReducer);
+  const {
+    userinfo,
+    userid,
+    username,
+    showmodal,
+    userimage,
+    schoolid,
+    teacherid,
+  } = useSelector(state => state.userReducer);
   const [getdata, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [load, setLoad] = useState(true);
   const [refreshing, setRefreshing] = React.useState(false);
- 
+
   useEffect(() => {
     getapiData();
   }, []);
@@ -85,17 +92,19 @@ const PTMHistory = props => {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
-        <View style={{ flex: 1, marginTop: 20, marginBottom: 20 }}>
+        <View style={{flex: 1, marginTop: 20, marginBottom: 20}}>
           {getdata.map((data, index) => (
-            <View style={{ flex: 1, paddingHorizontal: 10 }} key={index}>
+            <View style={{flex: 1, paddingHorizontal: 10}} key={index}>
               <TouchableOpacity
                 style={{
                   flex: 1,
-                  backgroundColor: COLORS.bg,
+                  // backgroundColor: COLORS.bg,
+                  backgroundColor: COLORS.bgColor,
                   borderRadius: 10,
                   paddingHorizontal: 10,
-                  borderWidth: 1,
-                  borderColor: COLORS.border,
+                  borderWidth: 0.6,
+                  borderColor: COLORS.primary,
+                  //borderColor: COLORS.border,
                   marginVertical: 10,
                 }}
                 onPress={() => {
@@ -135,14 +144,14 @@ const PTMHistory = props => {
                     <Text
                       style={[
                         paraGray.darkpara,
-                        { color: COLORS.lightblack, marginLeft: 5 },
+                        {color: COLORS.lightblack, marginLeft: 5},
                       ]}>
                       Stream
                     </Text>
                     <Text
                       style={[
                         paraGray.darkpara,
-                        { color: COLORS.section, marginLeft: 5 },
+                        {color: COLORS.black, marginLeft: 5},
                       ]}>
                       {data.class_name}
                     </Text>
@@ -156,14 +165,14 @@ const PTMHistory = props => {
                     <Text
                       style={[
                         paraGray.darkpara,
-                        { color: COLORS.lightblack, marginLeft: 5 },
+                        {color: COLORS.lightblack, marginLeft: 5},
                       ]}>
                       PTM Date
                     </Text>
                     <Text
                       style={[
                         paraGray.darkpara,
-                        { color: COLORS.section, marginLeft: 5 },
+                        {color: COLORS.black, marginLeft: 5},
                       ]}>
                       {data.ptm_date}
                     </Text>
@@ -177,14 +186,14 @@ const PTMHistory = props => {
                     <Text
                       style={[
                         paraGray.darkpara,
-                        { color: COLORS.lightblack, marginLeft: 5 },
+                        {color: COLORS.lightblack, marginLeft: 5},
                       ]}>
                       PTM Timing
                     </Text>
                     <Text
                       style={[
                         paraGray.darkpara,
-                        { color: COLORS.section, marginLeft: 5 },
+                        {color: COLORS.black, marginLeft: 5},
                       ]}>
                       {data.ptm_time} - {data.end_time}
                     </Text>
@@ -214,14 +223,14 @@ const PTMHistory = props => {
                     <Text
                       style={[
                         paraGray.darkpara,
-                        { color: COLORS.lightblack, marginLeft: 5 },
+                        {color: COLORS.lightblack, marginLeft: 5},
                       ]}>
                       Total Student
                     </Text>
                     <Text
                       style={[
                         paraGray.darkpara,
-                        { color: COLORS.section, marginLeft: 5 },
+                        {color: COLORS.black, marginLeft: 5},
                       ]}>
                       {data.student[0].total_student}
                     </Text>
@@ -235,7 +244,7 @@ const PTMHistory = props => {
                     <Text
                       style={[
                         paraGray.darkpara,
-                        { color: COLORS.lightblack, marginLeft: 5 },
+                        {color: COLORS.lightblack, marginLeft: 5},
                       ]}>
                       Attendent
                     </Text>
@@ -246,7 +255,7 @@ const PTMHistory = props => {
                           color:
                             data.Attendent == 'Cancelled'
                               ? COLORS.red
-                              : COLORS.section,
+                              : COLORS.black,
                           marginLeft: 5,
                         },
                       ]}>
@@ -262,7 +271,7 @@ const PTMHistory = props => {
                     <Text
                       style={[
                         paraGray.darkpara,
-                        { color: COLORS.lightblack, marginLeft: 5 },
+                        {color: COLORS.lightblack, marginLeft: 5},
                       ]}>
                       Mode
                     </Text>
@@ -271,9 +280,7 @@ const PTMHistory = props => {
                         paraGray.darkpara,
                         {
                           color:
-                            data.mode != 'Online'
-                              ? COLORS.red
-                              : COLORS.section,
+                            data.mode != 'Online' ? COLORS.red : COLORS.primary,
                           marginLeft: 5,
                         },
                       ]}>

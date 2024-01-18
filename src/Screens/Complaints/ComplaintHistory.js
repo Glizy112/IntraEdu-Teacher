@@ -19,6 +19,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import Feather from 'react-native-vector-icons/Feather';
 import SearchInput, {createFilter} from 'react-native-search-filter';
 import {useSelector, useDispatch} from 'react-redux';
+import {ListItem} from '@rneui/themed';
 import {
   setuserId,
   setuserInfo,
@@ -28,6 +29,7 @@ import {
 } from '../../Redux/Actions/actions';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Url from '../../Config/Api/Url';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const ComplaintHistory = props => {
   const dispatch = useDispatch();
@@ -44,7 +46,7 @@ const ComplaintHistory = props => {
   const [loading, setLoading] = useState(false);
   const [load, setLoad] = useState(true);
   const [refreshing, setRefreshing] = React.useState(false);
-
+  const [showDetails, setShowDetails] = useState(false);
   //----------Search filter-------------
   const KEYS_TO_FILTERS = ['student_name', 'leave_from'];
   const [state, setState] = useState({searchTerm: ''});
@@ -110,11 +112,14 @@ const ComplaintHistory = props => {
               flexDirection: 'row',
               alignbooks: 'center',
               backgroundColor: '#FFFFFF',
+
               width: '100%',
+              //paddingBottom: 10,
               height: 50,
               borderColor: '#D3D3D3',
               paddingHorizontal: 0,
               borderWidth: 2,
+              borderWidth: 1,
               marginTop: 15,
               borderRadius: 10,
             }}>
@@ -143,6 +148,216 @@ const ComplaintHistory = props => {
           </View>
         </View>
         <View style={{flex: 1, marginTop: 20, marginBottom: 20}}>
+          <View
+            style={{
+              width: '95%',
+              alignSelf: 'center',
+            }}>
+            <List.Section style={{}}>
+              <View
+                style={{
+                  // backgroundColor: COLORS.bg,
+                  backgroundColor: COLORS.bgColor,
+                  borderRadius: 10,
+                  paddingHorizontal: 10,
+                  //borderWidth: 2,
+                  // borderWidth: 0.6,
+                  //borderColor: COLORS.background,
+                  borderColor: COLORS.primary,
+                }}>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    marginTop: 10,
+                  }}>
+                  <Text style={[paraGray.darkpara, {fontSize: 16}]}>
+                    {/* {data.student_name} */}
+                    kasdjoasjoi
+                  </Text>
+                  <Text
+                    style={[
+                      paraGray.darkpara,
+                      {color: COLORS.section, fontSize: 16},
+                    ]}>
+                    {/* {data.class_name} */}
+                    fifth
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    marginTop: 10,
+                  }}>
+                  <Text
+                    style={[
+                      paraGray.darkpara,
+                      {color: COLORS.primary, fontSize: 16},
+                    ]}>
+                    {/* {data.title} */}
+                    History
+                  </Text>
+                  <Text
+                    style={[
+                      paraGray.darkpara,
+                      {color: COLORS.section, fontSize: 16},
+                    ]}>
+                    {/* {data.created_at} */}
+                    12/03/10
+                  </Text>
+                </View>
+
+                <ListItem.Accordion
+                  containerStyle={{
+                    backgroundColor: 'white',
+                    //borderWidth: 0.4,
+                    // borderColor: '#275CE0',
+                    //height: 80,
+                    // paddingVertical: 15,
+                    // marginTop: 15,
+                    borderRadius: 16,
+                    // marginBottom: 15,
+                  }}
+                  style={
+                    showDetails
+                      ? {
+                          backgroundColor: 'white',
+
+                          borderTopLeftRadius: 16,
+                          borderTopRightRadius: 16,
+                          marginTop: 10,
+                        }
+                      : {
+                          backgroundColor: 'white',
+
+                          borderRadius: 16,
+                          marginBottom: 10,
+                          marginTop: 10,
+                        }
+                  }
+                  content={
+                    <ListItem.Content style={{}}>
+                      <View
+                        style={{
+                          flexDirection: 'row',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          width: '100%',
+
+                          //alignSelf: 'center',
+                        }}>
+                        <View style={{flexDirection: 'row'}}>
+                          <View>
+                            <Text style={[paraGray.parahome, {fontSize: 14}]}>
+                              {showDetails ? 'Details' : 'ViewDetail'}
+                            </Text>
+                          </View>
+                        </View>
+                      </View>
+                    </ListItem.Content>
+                  }
+                  icon={
+                    <View
+                      style={{
+                        backgroundColor: 'rgba(39, 92, 224, 0.15)',
+                        borderRadius: 50,
+                        alignItems: 'center',
+                        alignSelf: 'center',
+                        // width: 32,
+                        // height: 32,
+                        padding: 3,
+                      }}>
+                      <Ionicons name="chevron-down" size={20} color={'black'} />
+                    </View>
+                  }
+                  isExpanded={showDetails}
+                  onPress={() => {
+                    setShowDetails(!showDetails);
+                  }}>
+                  <ScrollView
+                    contentContainerStyle={{
+                      // borderWidth: 1,
+                      marginTop: -15,
+                      borderBottomLeftRadius: 16,
+                      borderBottomRightRadius: 16,
+                    }}
+                    style={{
+                      borderRadius: 16,
+                      backgroundColor: 'white',
+                      marginBottom: 10,
+                    }}>
+                    <ListItem
+                      style={{
+                        borderRadius: 16,
+                        paddingBottom: 10,
+                      }}>
+                      <ListItem.Content style={{}}>
+                        <View style={{}}>
+                          <View
+                            style={{
+                              width: '100%',
+                              alignSelf: 'center',
+                              borderRadius: 16,
+                            }}>
+                            <Text
+                              style={[
+                                paraGray.largebold,
+                                {color: COLORS.red, fontSize: 14},
+                              ]}>
+                              Complaint :
+                            </Text>
+                            <View
+                              style={{
+                                flex: 1,
+                                marginLeft: 20,
+                                marginBottom: 10,
+                                marginTop: 5,
+                              }}>
+                              <Text
+                                style={[
+                                  paraGray.darkpara,
+                                  {color: COLORS.lightbblack},
+                                ]}>
+                                {/* {data.description} */}
+                                asjsaijdoisadioajsoidjsaoj asjd oisajd jasjd
+                              </Text>
+                            </View>
+                            {true && (
+                              <View>
+                                <Text
+                                  style={[
+                                    paraGray.largebold,
+                                    {color: COLORS.primary, fontSize: 14},
+                                  ]}>
+                                  Parents Reply :
+                                </Text>
+                                <View
+                                  style={{
+                                    flex: 1,
+                                    marginLeft: 20,
+                                    marginVertical: 5,
+                                  }}>
+                                  <Text
+                                    style={[
+                                      paraGray.darkpara,
+                                      {color: COLORS.lightbblack},
+                                    ]}>
+                                    {/* {data.action_note} */}
+                                    Yes
+                                  </Text>
+                                </View>
+                              </View>
+                            )}
+                          </View>
+                        </View>
+                      </ListItem.Content>
+                    </ListItem>
+                  </ScrollView>
+                </ListItem.Accordion>
+              </View>
+            </List.Section>
+          </View>
           {filterleaves.map((data, index) => (
             <View style={{flex: 1, paddingHorizontal: 10}} key={index}>
               <List.Section>
@@ -163,7 +378,8 @@ const ComplaintHistory = props => {
                     }}>
                     <Text style={[paraGray.darkpara]}>{data.student_name}</Text>
                     <Text style={[paraGray.darkpara, {color: COLORS.section}]}>
-                      {data.class_name}
+                      {/* {data.class_name} */}
+                      fifth
                     </Text>
                   </View>
                   <View
@@ -173,10 +389,12 @@ const ComplaintHistory = props => {
                       marginTop: 10,
                     }}>
                     <Text style={[paraGray.darkpara, {color: COLORS.bluee}]}>
-                      {data.title}
+                      {/* {data.title} */}
+                      History
                     </Text>
                     <Text style={[paraGray.darkpara, {color: COLORS.section}]}>
-                      {data.created_at}
+                      {/* {data.created_at} */}
+                      12/03/10
                     </Text>
                   </View>
                   <List.Accordion
@@ -198,7 +416,8 @@ const ComplaintHistory = props => {
                           paraGray.darkpara,
                           {color: COLORS.lightbblack},
                         ]}>
-                        {data.description}
+                        {/* {data.description} */}
+                        asjsaijdoisadioajsoidjsaoj asjd oisajd jasjd
                       </Text>
                     </View>
                     {data.action_note != null && (
@@ -221,7 +440,8 @@ const ComplaintHistory = props => {
                               paraGray.darkpara,
                               {color: COLORS.lightbblack},
                             ]}>
-                            {data.action_note}
+                            {/* {data.action_note} */}
+                            Yes
                           </Text>
                         </View>
                       </View>

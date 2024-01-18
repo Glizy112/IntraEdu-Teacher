@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -12,19 +12,24 @@ import {
 } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { Dropdown } from 'react-native-element-dropdown';
-import { useSelector, useDispatch } from 'react-redux';
+import {Dropdown} from 'react-native-element-dropdown';
+import {useSelector, useDispatch} from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
-import { paraGray } from '../../theme/styles/Base';
+import {paraGray} from '../../theme/styles/Base';
 import Feather from 'react-native-vector-icons/Feather';
 import Url from '../../Config/Api/Url';
-
-import { COLORS } from '../../theme/Colors';
-
+import DropDown from '../../Components/DropDown';
+import {COLORS} from '../../theme/Colors';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 const CreateMeeting = props => {
-  const { teacherid, schoolid, userid } = useSelector(state => state.userReducer);
+  const {teacherid, schoolid, userid} = useSelector(state => state.userReducer);
   // <--------Drop Down---------->
   const [isstreamFocus, setIsstreamFocus] = useState(false);
+  const [openStream, setOpenStream] = useState(false);
+  const [openSection, setOpenSection] = useState(false);
+  const [openSubject, setOpenSubject] = useState(false);
+  const [openSelectMode, setOpenSelectMode] = useState(false);
+
   const [stream, setStream] = useState(null);
   const [isstudentFocus, setIsstudentFocus] = useState(false);
   const [student, setStudent] = useState(null);
@@ -47,8 +52,8 @@ const CreateMeeting = props => {
   const [load, setLoad] = useState(true);
   const [refreshing, setRefreshing] = React.useState(false);
   const [items, setItems] = useState([
-    { label: 'Online', value: 'Online' },
-    { label: 'Offline', value: 'Offline' },
+    {label: 'Online', value: 'Online'},
+    {label: 'Offline', value: 'Offline'},
   ]);
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -169,7 +174,6 @@ const CreateMeeting = props => {
     }
   };
   const getsectionData = async item => {
-   
     try {
       const formData = new FormData();
       formData.append('school_id', schoolid);
@@ -279,14 +283,61 @@ const CreateMeeting = props => {
   return (
     <View style={styles.container}>
       {loading == true && <Spinner visible={load} />}
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          height: 50,
+          justifyContent: 'space-between',
+
+          paddingHorizontal: 10,
+          borderBottomColor: '#275CE0',
+          borderBottomWidth: 1,
+        }}>
+        <View
+          style={{
+            alignItems: 'flex-start',
+          }}>
+          <TouchableOpacity
+            style={{
+              backgroundColor: COLORS.white,
+              borderRadius: 20,
+            }}
+            onPress={() =>
+              //   props.navigation.navigate('StudentEdit', {
+              //     studentdetail: studentdetail,
+              //   })
+              props.navigation.goBack()
+            }>
+            <Ionicons
+              style={{marginVertical: 5, paddingHorizontal: 7}}
+              name="arrow-back"
+              size={20}
+              color={COLORS.black}
+            />
+          </TouchableOpacity>
+        </View>
+        <View
+          style={{
+            flex: 1,
+            alignItems: 'center',
+            position: 'absolute',
+            left: 0,
+            right: 0,
+          }}>
+          <Text style={[paraGray.largebold, {color: 'black'}]}>
+            Create Meeting
+          </Text>
+        </View>
+      </View>
       <ScrollView
         showsVerticalScrollIndicator={false}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
-        <View style={{ marginTop: 15, paddingHorizontal: 20 }}>
-          <Text style={[paraGray.darkpara, { marginVertical: 10 }]}>Stream</Text>
-          <Dropdown
+        <View style={{marginTop: 15, paddingHorizontal: 20}}>
+          <Text style={[paraGray.darkpara, {marginVertical: 5}]}>Stream</Text>
+          {/* <Dropdown
             style={{
               height: 50,
               borderColor: isstreamFocus ? 'blue' : 'gray',
@@ -334,11 +385,26 @@ const CreateMeeting = props => {
               setIsstreamFocus(false);
               getsectionData(item);
             }}
+          /> */}
+          <DropDown
+            open={openStream}
+            setOpen={setOpenStream}
+            items={getdata.map(item => ({
+              label: item.class_name,
+              value: item.class_id,
+            }))}
+            placeholder={'Select Stream'}
+            value={stream}
+            onSelectItem={item => {
+              setStream(item.value);
+              setIsstreamFocus(false);
+              getsectionData(item);
+            }}
           />
         </View>
-        <View style={{ paddingHorizontal: 20 }}>
-          <Text style={[paraGray.darkpara, { marginVertical: 10 }]}>Section</Text>
-          <Dropdown
+        <View style={{marginTop: 10, paddingHorizontal: 20}}>
+          <Text style={[paraGray.darkpara, {marginVertical: 5}]}>Section</Text>
+          {/* <Dropdown
             style={{
               height: 50,
               borderColor: issectionFocus ? 'blue' : 'gray',
@@ -388,13 +454,30 @@ const CreateMeeting = props => {
               setIsSectionFocus(false);
               // getsubjectData(item);
             }}
+          /> */}
+          <DropDown
+            open={openSection}
+            setOpen={setOpenSection}
+            items={getsectiondata.map(item => ({
+              label: item.section_name,
+              value: item.section_id,
+              // subject: item.subject_id,
+            }))}
+            placeholder={'Select Section'}
+            value={section}
+            onSelectItem={item => {
+              setSelectedSection(item);
+              setSection(item.value);
+              setIsSectionFocus(false);
+              // getsubjectData(item);
+            }}
           />
         </View>
-        <View style={{ marginTop: 15, paddingHorizontal: 20 }}>
-          <Text style={[paraGray.darkpara, { marginVertical: 10 }]}>
+        <View style={{marginTop: 10, paddingHorizontal: 20}}>
+          <Text style={[paraGray.darkpara, {marginVertical: 5}]}>
             Select Student (Optional)
           </Text>
-          <Dropdown
+          {/* <Dropdown
             style={{
               height: 50,
               borderColor: isstudentFocus ? 'blue' : 'gray',
@@ -441,13 +524,27 @@ const CreateMeeting = props => {
               setStudent(item.value);
               setIsstudentFocus(false);
             }}
+          /> */}
+          <DropDown
+            open={openSubject}
+            setOpen={setOpenSubject}
+            items={getstudentdata.map(item => ({
+              label: item.student_name,
+              value: item.student_id,
+            }))}
+            placeholder={'Select Student'}
+            value={student}
+            onSelectItem={item => {
+              setStudent(item.value);
+              setIsstudentFocus(false);
+            }}
           />
         </View>
-        <View style={{ marginTop: 15, paddingHorizontal: 20 }}>
-          <Text style={[paraGray.darkpara, { marginVertical: 10 }]}>
+        <View style={{marginTop: 10, paddingHorizontal: 20}}>
+          <Text style={[paraGray.darkpara, {marginVertical: 5}]}>
             Select Mode
           </Text>
-          <Dropdown
+          {/* <Dropdown
             style={{
               height: 50,
               borderColor: ismodeFocus ? 'blue' : 'gray',
@@ -494,10 +591,30 @@ const CreateMeeting = props => {
               setLecMode(item.value);
               setIsmodeFocus(false);
             }}
+          /> */}
+          <DropDown
+            open={openSelectMode}
+            setOpen={setOpenSelectMode}
+            items={items.map(item => ({
+              label: item.label,
+              value: item.value,
+            }))}
+            placeholder={'Select Mode'}
+            value={lecmode}
+            onSelectItem={item => {
+              setLecMode(item.value);
+              setIsmodeFocus(false);
+            }}
           />
         </View>
         <View>
-          <Text style={styles.formtxt}>Title:</Text>
+          <Text
+            style={[
+              paraGray.darkpara,
+              {width: '90%', alignSelf: 'center', marginTop: 10},
+            ]}>
+            Title:
+          </Text>
           <View style={styles.txtbox}>
             <TextInput
               placeholder="ENTER TITLE"
@@ -515,8 +632,14 @@ const CreateMeeting = props => {
             />
           </View>
         </View>
-        <Text style={styles.labeltxt}>Choose Timing</Text>
-        <Text style={styles.formtxt}>Date</Text>
+        {/* <Text style={styles.labeltxt}>Choose Timing</Text> */}
+        <Text
+          style={[
+            paraGray.darkpara,
+            {width: '90%', alignSelf: 'center', marginTop: 10},
+          ]}>
+          Date
+        </Text>
         <TouchableOpacity
           style={{
             flexDirection: 'row',
@@ -524,11 +647,13 @@ const CreateMeeting = props => {
             backgroundColor: '#FFFFFF',
             width: '90%',
             height: 50,
-            borderColor: '#D3D3D3',
+            //borderColor: '#D3D3D3',
+            borderColor: COLORS.primary,
             paddingHorizontal: 0,
-            borderWidth: 1,
-            marginTop: 15,
-            borderRadius: 10,
+            borderWidth: 0.6,
+            //marginTop: 15,
+            marginVertical: 8,
+            borderRadius: 12,
             alignSelf: 'center',
           }}
           onPress={showDatepicker}>
@@ -549,7 +674,8 @@ const CreateMeeting = props => {
           <MaterialCommunityIcons
             name="calendar-blank-outline"
             size={26}
-            color="#434b56"
+            //color="#434b56"
+            color={COLORS.primary}
             onPress={showDatepicker}
           />
 
@@ -571,9 +697,15 @@ const CreateMeeting = props => {
             flexDirection: 'row',
             justifyContent: 'space-between',
             marginTop: 5,
+            marginTop: 10,
+            alignSelf: 'center',
+            width: '90%',
           }}>
-          <Text style={[styles.formtxt, { flex: 1 }]}>From:</Text>
-          <Text style={[styles.formtxt, { flex: 1, marginLeft: -25 }]}>To:</Text>
+          <Text style={[paraGray.darkpara, {width: '50%'}]}>From:</Text>
+          <Text
+            style={[paraGray.darkpara, {width: '50%', alignSelf: 'center'}]}>
+            To:
+          </Text>
         </View>
         <View
           style={{
@@ -589,10 +721,12 @@ const CreateMeeting = props => {
               alignItems: 'center',
               backgroundColor: '#FFFFFF',
               height: 50,
-              borderColor: '#D3D3D3',
-              borderWidth: 1,
+              //borderColor: '#D3D3D3',
+              borderColor: COLORS.primary,
+              //borderWidth: 1,
+              borderWidth: 0.6,
               marginTop: 15,
-              borderRadius: 5,
+              borderRadius: 12,
               alignSelf: 'center',
               marginHorizontal: 5,
               paddingHorizontal: 3,
@@ -615,7 +749,8 @@ const CreateMeeting = props => {
             <Feather
               name="clock"
               size={26}
-              color="#434b56"
+              //color="#434b56"
+              color={COLORS.primary}
               onPress={showTimepicker}
             />
             {showclock && (
@@ -636,11 +771,13 @@ const CreateMeeting = props => {
               backgroundColor: '#FFFFFF',
               flex: 1,
               height: 50,
-              borderColor: '#D3D3D3',
+              //borderColor: '#D3D3D3',
+              borderColor: COLORS.primary,
               paddingHorizontal: 3,
-              borderWidth: 1,
+              borderWidth: 0.6,
               marginTop: 15,
-              borderRadius: 5,
+              //borderRadius: 5,
+              borderRadius: 12,
               alignSelf: 'center',
               marginHorizontal: 5,
             }}
@@ -662,7 +799,8 @@ const CreateMeeting = props => {
             <Feather
               name="clock"
               size={26}
-              color="#434b56"
+              // color="#434b56"
+              color={COLORS.primary}
               onPress={showTimepickers}
             />
 
@@ -683,7 +821,8 @@ const CreateMeeting = props => {
             style={{
               flexDirection: 'row',
               alignItems: 'center',
-              backgroundColor: COLORS.lightbackground,
+              //backgroundColor: COLORS.lightbackground,
+              backgroundColor: COLORS.primary,
               width: '80%',
               height: 50,
               alignSelf: 'center',
@@ -721,11 +860,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     width: '90%',
     height: 50,
-    borderColor: '#D3D3D3',
+    //borderColor: '#D3D3D3',
+    borderColor: COLORS.primary,
     alignSelf: 'center',
-    borderWidth: 1,
-    marginTop: 15,
-    borderRadius: 5,
+    borderWidth: 0.6,
+    //marginTop: 15,
+    marginVertical: 8,
+    borderRadius: 12,
   },
   txtboxDesc: {
     flexDirection: 'row',
