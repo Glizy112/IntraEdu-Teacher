@@ -6,7 +6,8 @@ import {paraGray} from '../../../theme/styles/Base';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const TakeExamAttendance = props => {
-  const {classnumber} = props.route.params;
+  // const {classnumber} = props.route.params;
+  const classnumber = 12;
   return (
     <View style={{flex: 1}}>
       <View style={{paddingHorizontal: 15, backgroundColor: COLORS.black}}>

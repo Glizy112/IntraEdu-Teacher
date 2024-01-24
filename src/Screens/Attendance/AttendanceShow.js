@@ -34,6 +34,10 @@ const AttendanceShow = props => {
   const [openAttendanceClass, setOpenAttendanceClass] = useState(false);
   const [openAttendanceSection, setOpenAttendanceSection] = useState(false);
   const [openAttendanceSubject, setOpenAttendanceSubject] = useState(false);
+  const [openReportclass, setOpenReportClass] = useState(false);
+  const [openReportSection, setOpenReportSection] = useState(false);
+  const [openReportSubject, setOpenReportSubject] = useState(false);
+  const [openReportAttendance, setOpenReportAttendance] = useState(false);
   const [valueAttendanceClass, setValueAttendanceClass] = useState(null);
   const [valueAttendanceSection, setValueAttendanceSection] = useState(null);
   const [valueAttendanceSubject, setValueAttendanceSubject] = useState(null);
@@ -550,8 +554,7 @@ const AttendanceShow = props => {
               setExpandedTakeAttendace(!expandedTakeAttendace);
             }}>
             <ScrollView>
-              <ListItem>
-                <ListItem.Content style={{}}>
+              {/* <ListItem.Content style={{}}>
                   <View style={{flexDirection: 'row', width: '100%'}}>
                     <View style={{flex: 1, paddingRight: 10}}>
                       <Text
@@ -569,7 +572,13 @@ const AttendanceShow = props => {
                         setValue={setValueAttendanceClass}
                         setItems={setItemsAttendanceClass}
                         style={{borderWidth: 1}}
-                        containerStyle={{width: '100%'}}
+                        containerStyle={{
+                          width: '100%',
+                          paddingBottom: 100,
+                          position: 'relative',
+                          zIndex: 100,
+                        }}
+                        dropDownDirectionValue={'BOTTOM'}
                       />
                     </View>
                     <View style={{flex: 1, paddingLeft: 10}}>
@@ -587,7 +596,9 @@ const AttendanceShow = props => {
                         setOpen={setOpenAttendanceSection}
                         setValue={setValueAttendanceSection}
                         setItems={setItemsAttendanceSection}
-                        containerStyle={{width: '100%'}}
+                        containerStyle={{
+                          width: '100%',
+                        }}
                       />
                     </View>
                   </View>
@@ -625,8 +636,82 @@ const AttendanceShow = props => {
                       }}
                     />
                   </TouchableOpacity>
-                </ListItem.Content>
-              </ListItem>
+                </ListItem.Content> */}
+              <ListItem.Content style={{}}>
+                <View style={{flexDirection: 'row', width: '100%'}}>
+                  <View style={{flex: 1, paddingRight: 10, zIndex: 10}}>
+                    <Text
+                      style={[paraGray.header, {color: 'black', fontSize: 14}]}>
+                      Class
+                    </Text>
+                    <DropDown
+                      open={openAttendanceClass}
+                      value={valueAttendanceClass}
+                      items={itemsAttendanceClass}
+                      setOpen={setOpenAttendanceClass}
+                      setValue={setValueAttendanceClass}
+                      setItems={setItemsAttendanceClass}
+                      style={{borderWidth: 1}}
+                      containerStyle={{
+                        width: '100%',
+
+                        position: 'relative', // or 'absolute' based on your layout
+                      }}
+                      dropDownDirectionValue={'BOTTOM'}
+                    />
+                  </View>
+                  <View style={{flex: 1, paddingLeft: 10}}>
+                    <Text
+                      style={[paraGray.header, {color: 'black', fontSize: 14}]}>
+                      Section
+                    </Text>
+                    <DropDown
+                      open={openAttendanceSection}
+                      value={valueAttendanceSection}
+                      items={itemsAttendanceSection}
+                      setOpen={setOpenAttendanceSection}
+                      setValue={setValueAttendanceSection}
+                      setItems={setItemsAttendanceSection}
+                      containerStyle={{
+                        width: '100%',
+                      }}
+                    />
+                  </View>
+                </View>
+                <View style={{width: '100%', marginTop: 10, zIndex: 5}}>
+                  <Text
+                    style={[paraGray.header, {color: 'black', fontSize: 14}]}>
+                    Subject
+                  </Text>
+                  <DropDown
+                    open={openAttendanceSubject}
+                    value={valueAttendanceSubject}
+                    items={ItemsAttendanceSubject}
+                    setOpen={setOpenAttendanceSubject}
+                    setValue={setValueAttendanceSubject}
+                    setItems={setItemsAttendanceSubject}
+                    containerStyle={{width: '100%'}}
+                  />
+                </View>
+                <TouchableOpacity
+                  style={{width: '100%', zIndex: 3}}
+                  onPress={() =>
+                    props.navigation.navigate('TakeAttendance', {
+                      classvalue: valueAttendanceClass,
+                      sectionvalue: valueAttendanceSection,
+                      subjectvalue: valueAttendanceSubject,
+                      subjectname: valueAttendanceSubject,
+                    })
+                  }>
+                  <Button
+                    title="Mark Attendance "
+                    styles={{
+                      width: '100%',
+                      paddingVertical: 15,
+                    }}
+                  />
+                </TouchableOpacity>
+              </ListItem.Content>
             </ScrollView>
           </ListItem.Accordion>
           <ListItem.Accordion
@@ -711,6 +796,7 @@ const AttendanceShow = props => {
                     setOpen={setOpenAttendanceHistoryClass}
                     setValue={setValueAttendanceHistoryClass}
                     setItems={setItemsAttendanceHistoryClass}
+                    dropDownDirectionValue={'TOP'}
                     containerStyle={{width: '100%'}}
                   />
                 </View>
@@ -726,6 +812,7 @@ const AttendanceShow = props => {
                     setOpen={setOpenAttendanceHistorySection}
                     setValue={setValueAttendanceHistorySection}
                     setItems={setItemsAttendanceHistorySection}
+                    dropDownDirectionValue={'TOP'}
                     containerStyle={{width: '100%'}}
                   />
                 </View>
@@ -749,6 +836,7 @@ const AttendanceShow = props => {
                     setOpen={setOpenAttendanceHistorySubject}
                     setValue={setValueAttendanceHistorySubject}
                     setItems={setItemsAttendanceHistorySubject}
+                    dropDownDirectionValue={'TOP'}
                     containerStyle={{width: '100%'}}
                   />
                 </View>
@@ -831,6 +919,7 @@ const AttendanceShow = props => {
                   setOpen={setOpenAttendanceHistoryStudentName}
                   setValue={setValueAttendanceHistoryStudentName}
                   setItems={setItemsAttendanceHistoryStudentName}
+                  dropDownDirectionValue={'TOP'}
                   containerStyle={{width: '100%'}}
                 />
               </View>
@@ -945,10 +1034,11 @@ const AttendanceShow = props => {
                     Class
                   </Text>
                   <DropDown
-                    open={open}
+                    open={openReportclass}
                     value={value}
                     items={items}
-                    setOpen={setOpen}
+                    dropDownDirectionValue={'TOP'}
+                    setOpen={setOpenReportClass}
                     setValue={setValue}
                     setItems={setItems}
                     containerStyle={{width: '100%'}}
@@ -960,10 +1050,11 @@ const AttendanceShow = props => {
                     Section
                   </Text>
                   <DropDown
-                    open={open}
+                    open={openReportSection}
                     value={value}
                     items={items}
-                    setOpen={setOpen}
+                    dropDownDirectionValue={'TOP'}
+                    setOpen={setOpenReportSection}
                     setValue={setValue}
                     setItems={setItems}
                     containerStyle={{width: '100%'}}
@@ -978,10 +1069,10 @@ const AttendanceShow = props => {
                     Subject
                   </Text>
                   <DropDown
-                    open={open}
+                    open={openReportSubject}
                     value={value}
                     items={items}
-                    setOpen={setOpen}
+                    setOpen={setOpenReportSubject}
                     setValue={setValue}
                     setItems={setItems}
                     containerStyle={{width: '100%'}}
@@ -993,10 +1084,10 @@ const AttendanceShow = props => {
                     Attendance Type
                   </Text>
                   <DropDown
-                    open={open}
+                    open={openReportAttendance}
                     value={value}
                     items={items}
-                    setOpen={setOpen}
+                    setOpen={setOpenReportAttendance}
                     setValue={setValue}
                     setItems={setItems}
                     containerStyle={{width: '100%'}}
@@ -1171,6 +1262,11 @@ const AttendanceShow = props => {
                   justifyContent: 'center',
                 }}>
                 <TouchableOpacity
+                  onPress={() =>
+                    props.navigation.navigate('ExamAttenReport', {
+                      classnumber: 102,
+                    })
+                  }
                   style={{
                     flexDirection: 'row',
                     justifyContent: 'space-between',
@@ -1248,6 +1344,7 @@ const AttendanceShow = props => {
                   marginBottom: 20,
                 }}>
                 <TouchableOpacity
+                  onPress={() => props.navigation.navigate('MyClassRoomAtten')}
                   style={{
                     flexDirection: 'row',
                     justifyContent: 'space-between',

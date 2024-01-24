@@ -15,6 +15,7 @@ const DropDown = ({
   dropDownContaineStyle,
   textStyle,
   onSelectItem,
+  dropDownDirectionValue,
 }) => {
   return (
     <View
@@ -24,6 +25,9 @@ const DropDown = ({
       }}>
       <DropDownPicker
         onSelectItem={onSelectItem}
+        dropDownDirection={
+          dropDownDirectionValue ? dropDownDirectionValue : 'BOTTOM'
+        }
         open={open}
         value={value}
         items={items}
@@ -45,6 +49,7 @@ const DropDown = ({
                   borderWidth: 0.8,
                   //marginTop: 15,
                   borderRadius: 12,
+
                   //paddingHorizontal: 8,
                 },
                 style,
@@ -74,7 +79,7 @@ const DropDown = ({
           fontSize: 13,
           fontFamily: 'Montserrat-Regular',
         }}
-        dropDownDirection="BOTTOM"
+        //dropDownDirection="BOTTOM"
         dropDownContainerStyle={
           dropDownContaineStyle
             ? [
