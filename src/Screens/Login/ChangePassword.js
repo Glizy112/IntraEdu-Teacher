@@ -99,7 +99,7 @@ const ChangePassword = props => {
           <View style={{marginTop: 50, alignItems: 'center'}}>
             <View
               style={{
-                width: '100%',
+                width: '98%',
                 //heigth: 150,
                 backgroundColor: 'white',
                 marginBottom: 16,
@@ -127,7 +127,7 @@ const ChangePassword = props => {
             </View>
             <View
               style={{
-                width: '100%',
+                width: '98%',
                 heigth: 150,
                 backgroundColor: 'white',
                 marginBottom: 16,
@@ -155,7 +155,7 @@ const ChangePassword = props => {
             </View>
             <View
               style={{
-                width: '100%',
+                width: '98%',
                 heigth: 150,
                 backgroundColor: 'white',
                 marginBottom: 16,
